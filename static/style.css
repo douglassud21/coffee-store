@@ -1,0 +1,452 @@
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f3ed;
+    color: #452712;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header {
+    background-color: #452712;
+    color: #ffffff;
+    padding: 20px 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: #ffffff;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #f5c58a;
+}
+
+
+/* =========================
+   ELEMENTOS GERAIS
+========================= */
+
+main {
+    flex: 1;
+}
+
+.subtitle {
+    display: block;
+    color: #e26c05;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.6;
+}
+
+
+/* =========================
+   PÁGINA INICIAL
+========================= */
+
+.hero {
+    min-height: 500px;
+    padding: 70px 8%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-content p {
+    font-size: 18px;
+    color: #6b5747;
+    margin-bottom: 30px;
+}
+
+.hero-image {
+    width: 300px;
+    height: 300px;
+
+    background-color: #fce6c8;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 120px;
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn-reserva,
+.btn-voltar {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-reserva {
+    background-color: #e26c05;
+    color: #ffffff;
+}
+
+.btn-reserva:hover {
+    background-color: #b95300;
+}
+
+.btn-voltar {
+    background-color: #ddd0c2;
+    color: #452712;
+}
+
+.btn-voltar:hover {
+    background-color: #c9b9a8;
+}
+
+
+/* =========================
+   SEÇÃO SOBRE
+========================= */
+
+.sobre {
+    background-color: #ffffff;
+    padding: 60px 8%;
+
+    display: flex;
+    gap: 50px;
+}
+
+.sobre-content {
+    flex: 1;
+}
+
+.sobre-content p {
+    color: #6b5747;
+}
+
+.beneficios {
+    flex: 1;
+
+    display: flex;
+    gap: 20px;
+}
+
+.beneficio {
+    background-color: #fce6c8;
+    padding: 25px;
+    border-radius: 8px;
+    flex: 1;
+}
+
+.beneficio span {
+    font-size: 35px;
+}
+
+.beneficio h3 {
+    margin: 15px 0 10px;
+}
+
+.beneficio p {
+    font-size: 14px;
+    color: #6b5747;
+}
+
+
+/* =========================
+   PÁGINA DE RESERVA
+========================= */
+
+.reserva {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 25px;
+}
+
+.reserva-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.reserva-header p {
+    color: #6b5747;
+}
+
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.form-reserva {
+    background-color: #ffffff;
+    padding: 35px;
+    border-radius: 10px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+
+    border: 1px solid #d5c7b8;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e26c05;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+
+/* =========================
+   BOTÕES DO FORMULÁRIO
+========================= */
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+
+/* =========================
+   CONFIRMAÇÃO
+========================= */
+
+.confirmacao {
+    max-width: 650px;
+    margin: 70px auto;
+    padding: 0 25px;
+
+    text-align: center;
+}
+
+.confirmacao-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 25px;
+
+    border-radius: 50%;
+
+    background-color: #e26c05;
+    color: #ffffff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.mensagem {
+    color: #6b5747;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   DETALHES DA RESERVA
+========================= */
+
+.reserva-detalhes {
+    background-color: #ffffff;
+
+    border-radius: 10px;
+    padding: 25px;
+
+    text-align: left;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.detalhe {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detalhe:last-child {
+    border-bottom: none;
+}
+
+.detalhe-label {
+    display: block;
+    color: #8a7868;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.detalhe strong {
+    font-size: 16px;
+}
+
+
+/* =========================
+   AÇÕES DA CONFIRMAÇÃO
+========================= */
+
+.confirmacao-acoes {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+
+/* =========================
+   RODAPÉ
+========================= */
+
+footer {
+    background-color: #452712;
+    color: #ffffff;
+
+    text-align: center;
+
+    padding: 20px;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 8%;
+    }
+
+    .hero-image {
+        width: 220px;
+        height: 220px;
+        font-size: 80px;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .sobre {
+        flex-direction: column;
+    }
+
+    .beneficios {
+        flex-direction: column;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions a,
+    .form-actions button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .confirmacao-acoes {
+        flex-direction: column;
+    }
+
+    .confirmacao-acoes a {
+        width: 100%;
+    }
+
+}

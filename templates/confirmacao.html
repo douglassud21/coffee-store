@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reserva Confirmada | Café & Sabor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+
+        <div class="logo">
+            ☕ Café & Sabor
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/reserva">Nova reserva</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Conteúdo principal -->
+    <main>
+
+        <section class="confirmacao">
+
+            <div class="confirmacao-icon">
+                ✓
+            </div>
+
+            <span class="subtitle">
+                RESERVA CONFIRMADA
+            </span>
+
+            <h1>
+                Tudo certo, {{ nome }}!
+            </h1>
+
+            <p class="mensagem">
+                Sua reserva foi registrada com sucesso.
+                Confira os detalhes abaixo.
+            </p>
+
+
+            <!-- Detalhes da reserva -->
+            <div class="reserva-detalhes">
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Nome
+                    </span>
+
+                    <strong>
+                        {{ nome }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Data
+                    </span>
+
+                    <strong>
+                        {{ data }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Horário
+                    </span>
+
+                    <strong>
+                        {{ horario }}
+                    </strong>
+
+                </div>
+
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Número de pessoas
+                    </span>
+
+                    <strong>
+                        {{ pessoas }}
+                    </strong>
+
+                </div>
+
+
+                {% if observacao %}
+
+                <div class="detalhe observacao">
+
+                    <span class="detalhe-label">
+                        Observação
+                    </span>
+
+                    <strong>
+                        {{ observacao }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Ações -->
+            <div class="confirmacao-acoes">
+
+                <a href="/" class="btn-voltar">
+                    Voltar para o início
+                </a>
+
+                <a href="/reserva" class="btn-reserva">
+                    Fazer nova reserva
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Rodapé -->
+    <footer>
+
+        <p>
+            © 2026 Café & Sabor — Sistema de Reservas
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

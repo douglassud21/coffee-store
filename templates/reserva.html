@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservar Mesa | Café & Sabor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+
+        <div class="logo">
+            ☕ Café & Sabor
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/reserva">Reservar mesa</a>
+        </nav>
+
+    </header>
+
+
+    <!-- Conteúdo principal -->
+    <main>
+
+        <section class="reserva">
+
+            <div class="reserva-header">
+
+                <span class="subtitle">RESERVA</span>
+
+                <h1>
+                    Reserve sua mesa
+                </h1>
+
+                <p>
+                    Preencha os dados abaixo para realizar
+                    sua reserva na Café & Sabor.
+                </p>
+
+            </div>
+
+
+            <!-- Formulário -->
+            <form action="/confirmacao" method="POST" class="form-reserva">
+
+                <!-- Nome -->
+                <div class="form-group">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite seu nome"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Data -->
+                <div class="form-group">
+
+                    <label for="data">
+                        Data da reserva
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data"
+                        name="data"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Horário -->
+                <div class="form-group">
+
+                    <label for="horario">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        id="horario"
+                        name="horario"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Número de pessoas -->
+                <div class="form-group">
+
+                    <label for="pessoas">
+                        Número de pessoas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="pessoas"
+                        name="pessoas"
+                        min="1"
+                        max="20"
+                        placeholder="Ex.: 4"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Observações -->
+                <div class="form-group">
+
+                    <label for="observacao">
+                        Observações
+                    </label>
+
+                    <textarea
+                        id="observacao"
+                        name="observacao"
+                        rows="4"
+                        placeholder="Alguma observação sobre sua reserva?"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Botões -->
+                <div class="form-actions">
+
+                    <a href="/" class="btn-voltar">
+                        Voltar
+                    </a>
+
+                    <button type="submit" class="btn-reserva">
+                        Confirmar reserva
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- Rodapé -->
+    <footer>
+
+        <p>
+            © 2026 Café & Sabor — Sistema de Reservas
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
