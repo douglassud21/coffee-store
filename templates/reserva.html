@@ -12,7 +12,6 @@
 
 <body>
 
-    <!-- Cabeçalho -->
     <header>
 
         <div class="logo">
@@ -22,19 +21,21 @@
         <nav>
             <a href="/">Início</a>
             <a href="/reserva">Reservar mesa</a>
+            <a href="/reservas">Ver reservas</a>
         </nav>
 
     </header>
 
 
-    <!-- Conteúdo principal -->
     <main>
 
         <section class="reserva">
 
             <div class="reserva-header">
 
-                <span class="subtitle">RESERVA</span>
+                <span class="subtitle">
+                    RESERVA
+                </span>
 
                 <h1>
                     Reserve sua mesa
@@ -48,10 +49,31 @@
             </div>
 
 
-            <!-- Formulário -->
-            <form action="/confirmacao" method="POST" class="form-reserva">
+            <!-- ==========================================
+                 MENSAGEM DE ERRO
+            =========================================== -->
+
+            {% if erro %}
+
+            <div class="mensagem-erro">
+                ❌ {{ erro }}
+            </div>
+
+            {% endif %}
+
+
+            <!-- ==========================================
+                 FORMULÁRIO
+            =========================================== -->
+
+            <form
+                action="/confirmacao"
+                method="POST"
+                class="form-reserva"
+            >
 
                 <!-- Nome -->
+
                 <div class="form-group">
 
                     <label for="nome">
@@ -70,6 +92,7 @@
 
 
                 <!-- Data -->
+
                 <div class="form-group">
 
                     <label for="data">
@@ -87,6 +110,7 @@
 
 
                 <!-- Horário -->
+
                 <div class="form-group">
 
                     <label for="horario">
@@ -104,6 +128,7 @@
 
 
                 <!-- Número de pessoas -->
+
                 <div class="form-group">
 
                     <label for="pessoas">
@@ -124,6 +149,7 @@
 
 
                 <!-- Observações -->
+
                 <div class="form-group">
 
                     <label for="observacao">
@@ -141,13 +167,20 @@
 
 
                 <!-- Botões -->
+
                 <div class="form-actions">
 
-                    <a href="/" class="btn-voltar">
+                    <a
+                        href="/"
+                        class="btn-voltar"
+                    >
                         Voltar
                     </a>
 
-                    <button type="submit" class="btn-reserva">
+                    <button
+                        type="submit"
+                        class="btn-reserva"
+                    >
                         Confirmar reserva
                     </button>
 
@@ -160,7 +193,6 @@
     </main>
 
 
-    <!-- Rodapé -->
     <footer>
 
         <p>

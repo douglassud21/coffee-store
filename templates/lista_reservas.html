@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Reservas | Café & Sabor</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            ☕ Café & Sabor
+        </div>
+
+        <nav>
+            <a href="/">Início</a>
+            <a href="/reserva">Reservar mesa</a>
+            <a href="/reservas">Ver reservas</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="lista-reservas">
+
+            <div class="reserva-header">
+
+                <span class="subtitle">
+                    GERENCIAMENTO
+                </span>
+
+                <h1>
+                    Reservas da cafeteria
+                </h1>
+
+                <p>
+                    Consulte e gerencie as reservas realizadas.
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 CAMPO DE BUSCA
+            =========================================== -->
+
+            <form action="/reservas" method="GET" class="form-busca">
+
+                <input
+                    type="text"
+                    name="busca"
+                    placeholder="Pesquisar por nome..."
+                    value="{{ busca }}"
+                >
+
+                <button type="submit" class="btn-reserva">
+                    🔎 Buscar
+                </button>
+
+            </form>
+
+
+            <!-- ==========================================
+                 TABELA DE RESERVAS
+            =========================================== -->
+
+            {% if reservas %}
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Pessoas</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for reserva in reservas %}
+
+                        <tr>
+
+                            <td>
+                                {{ reserva.id }}
+                            </td>
+
+                            <td>
+                                {{ reserva.nome }}
+                            </td>
+
+                            <td>
+                                {{ reserva.data }}
+                            </td>
+
+                            <td>
+                                {{ reserva.horario }}
+                            </td>
+
+                            <td>
+                                {{ reserva.pessoas }}
+                            </td>
+
+                            <td>
+
+                                {% if reserva.status == "Confirmada" %}
+
+                                    <span class="status confirmada">
+                                        {{ reserva.status }}
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status concluida">
+                                        {{ reserva.status }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    action="/mudar-status/{{ reserva.id }}"
+                                    method="POST"
+                                >
+
+                                    <button
+                                        type="submit"
+                                        class="btn-status"
+                                    >
+                                        Mudar Status
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+                <div class="sem-reservas">
+
+                    {% if busca %}
+
+                        <p>
+                            Nenhuma reserva encontrada para
+                            "<strong>{{ busca }}</strong>".
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            Ainda não existem reservas cadastradas.
+                        </p>
+
+                    {% endif %}
+
+                    <a href="/reserva" class="btn-reserva">
+                        Fazer uma reserva
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ==========================================
+                 VOLTAR
+            =========================================== -->
+
+            <div class="acoes-lista">
+
+                <a href="/" class="btn-voltar">
+                    Voltar para o início
+                </a>
+
+                <a href="/reserva" class="btn-reserva">
+                    Nova reserva
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Café & Sabor — Sistema de Reservas
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
