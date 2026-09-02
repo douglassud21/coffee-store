@@ -1,13 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Reservar Mesa | Café & Sabor</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -144,6 +148,45 @@
                         placeholder="Ex.: 4"
                         required
                     >
+
+                </div>
+
+
+                <!-- Categoria -->
+
+                <div class="form-group">
+
+                    <label for="categoria">
+                        Categoria da reserva
+                    </label>
+
+                    <select
+                        id="categoria"
+                        name="categoria"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option value="Café da manhã">
+                            Café da manhã
+                        </option>
+
+                        <option value="Almoço">
+                            Almoço
+                        </option>
+
+                        <option value="Jantar">
+                            Jantar
+                        </option>
+
+                        <option value="Comemoração">
+                            Comemoração
+                        </option>
+
+                    </select>
 
                 </div>
 

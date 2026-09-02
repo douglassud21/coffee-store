@@ -109,6 +109,12 @@ p {
     align-items: center;
     gap: 18px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.card-metrica:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
 }
 
 .card-metrica .icone {
@@ -301,19 +307,23 @@ p {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 12px;
     border: 1px solid #d5c7b8;
     border-radius: 6px;
     font-size: 16px;
     font-family: inherit;
+    background-color: #ffffff;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: #e26c05;
+    box-shadow: 0 0 0 2px rgba(226, 108, 5, 0.1);
 }
 
 .form-group textarea {
@@ -391,6 +401,7 @@ p {
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 850px;
 }
 
 th {
@@ -407,6 +418,10 @@ td {
 
 tbody tr:hover {
     background-color: #f8f3ed;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
 }
 
 
@@ -445,6 +460,7 @@ tbody tr:hover {
     border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
+    transition: 0.3s;
 }
 
 .btn-status:hover {
@@ -586,6 +602,8 @@ footer {
 
     nav {
         gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .metricas {
@@ -652,4 +670,11 @@ footer {
         width: 100%;
     }
 
+    .card-metrica {
+        padding: 20px;
+    }
+
+    .lista-reservas {
+        margin: 40px auto;
+    }
 }

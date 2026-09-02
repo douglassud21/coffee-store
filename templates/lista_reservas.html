@@ -1,13 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Reservas | Café & Sabor</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 
 <body>
@@ -57,7 +61,7 @@
                 <input
                     type="text"
                     name="busca"
-                    placeholder="Pesquisar por nome..."
+                    placeholder="Pesquisar por nome ou categoria..."
                     value="{{ busca }}"
                 >
 
@@ -81,13 +85,23 @@
                     <thead>
 
                         <tr>
+
                             <th>ID</th>
+
                             <th>Nome</th>
+
+                            <th>Categoria</th>
+
                             <th>Data</th>
+
                             <th>Horário</th>
+
                             <th>Pessoas</th>
+
                             <th>Status</th>
+
                             <th>Ação</th>
+
                         </tr>
 
                     </thead>
@@ -105,6 +119,10 @@
 
                             <td>
                                 {{ reserva.nome }}
+                            </td>
+
+                            <td>
+                                {{ reserva.categoria }}
                             </td>
 
                             <td>

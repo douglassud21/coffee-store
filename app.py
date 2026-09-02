@@ -59,6 +59,7 @@ def confirmacao():
     data = request.form.get("data", "").strip()
     horario = request.form.get("horario", "").strip()
     pessoas = request.form.get("pessoas", "").strip()
+    categoria = request.form.get("categoria", "").strip()
     observacao = request.form.get("observacao", "").strip()
 
     # ==========================================
@@ -66,7 +67,7 @@ def confirmacao():
     # ==========================================
 
     # Campos obrigatórios
-    if not nome or not data or not horario or not pessoas:
+    if not nome or not data or not horario or not pessoas or not categoria:
         return render_template(
             "reserva.html",
             erro="Preencha todos os campos obrigatórios."
@@ -113,6 +114,7 @@ def confirmacao():
         "data": data,
         "horario": horario,
         "pessoas": pessoas,
+        "categoria": categoria,
         "observacao": observacao,
         "status": "Confirmada"
     }
@@ -130,6 +132,7 @@ def confirmacao():
         data=data,
         horario=horario,
         pessoas=pessoas,
+        categoria=categoria,
         observacao=observacao
     )
 
@@ -144,12 +147,13 @@ def listar_reservas():
     # Recebe o texto da busca
     busca = request.args.get("busca", "").strip().lower()
 
-    # Se houver busca, filtra pelo nome
+    # Busca por nome OU categoria
     if busca:
 
         reservas_filtradas = [
             reserva for reserva in reservas
             if busca in reserva["nome"].lower()
+            or busca in reserva["categoria"].lower()
         ]
 
     else:
