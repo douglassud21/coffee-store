@@ -3,54 +3,111 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+    name="description"
+    content="Faça sua reserva no Café & Sabor."
+>
+
 <title>Reservar Mesa | Café & Sabor</title>
 
 <link
     rel="stylesheet"
     href="{{ url_for('static', filename='style.css') }}"
 >
-```
+
 
 </head>
 
 <body>
 
-```
-<header>
 
-    <div class="logo">
-        ☕ Café & Sabor
+<!-- ==========================================
+     CABEÇALHO
+=========================================== -->
+
+<header class="header">
+
+    <div class="header-container">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{{ url_for('routes.index') }}"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                ☕
+            </span>
+
+            <span class="logo-text">
+                Café <span>&</span> Sabor
+            </span>
+
+        </a>
+
+
+        <!-- NAVEGAÇÃO -->
+
+        <nav class="nav">
+
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="nav-link"
+            >
+                Início
+            </a>
+
+            <a
+                href="{{ url_for('routes.reserva') }}"
+                class="nav-link active"
+            >
+                Reservar mesa
+            </a>
+
+            <a
+                href="{{ url_for('routes.listar_reservas') }}"
+                class="nav-link"
+            >
+                Ver reservas
+            </a>
+
+        </nav>
+
+
     </div>
-
-    <nav>
-        <a href="{{ url_for('routes.index') }}">
-            Início
-        </a>
-
-        <a href="{{ url_for('routes.reserva') }}">
-            Reservar mesa
-        </a>
-
-        <a href="{{ url_for('routes.listar_reservas') }}">
-            Ver reservas
-        </a>
-    </nav>
 
 </header>
 
 
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+=========================================== -->
+
 <main>
 
+
     <section class="reserva">
+
+
+        <!-- ======================================
+             CABEÇALHO DA RESERVA
+        ======================================= -->
 
         <div class="reserva-header">
 
             <span class="subtitle">
-                RESERVA
+                ☕ FAÇA SUA RESERVA
             </span>
 
             <h1>
@@ -58,29 +115,37 @@
             </h1>
 
             <p>
-                Preencha os dados abaixo para realizar
-                sua reserva na Café & Sabor.
+                Preencha os dados abaixo e garanta
+                seu momento especial no Café & Sabor.
             </p>
 
         </div>
 
 
-        <!-- ==========================================
+        <!-- ======================================
              MENSAGEM DE ERRO
-        =========================================== -->
+        ======================================= -->
 
         {% if erro %}
 
         <div class="mensagem-erro">
-            ❌ {{ erro }}
+
+            <span>
+                ⚠
+            </span>
+
+            <span>
+                {{ erro }}
+            </span>
+
         </div>
 
         {% endif %}
 
 
-        <!-- ==========================================
+        <!-- ======================================
              FORMULÁRIO
-        =========================================== -->
+        ======================================= -->
 
         <form
             action="{{ url_for('routes.confirmacao') }}"
@@ -88,161 +153,255 @@
             class="form-reserva"
         >
 
-            <!-- Nome -->
 
-            <div class="form-group">
+            <!-- ==================================
+                 INFORMAÇÕES PESSOAIS
+            =================================== -->
 
-                <label for="nome_completo">
-                    Nome completo
-                </label>
+            <div class="form-section">
 
-                <input
-                    type="text"
-                    id="nome_completo"
-                    name="nome_completo"
-                    placeholder="Digite seu nome completo"
-                    maxlength="150"
-                    required
-                >
+                <div class="form-section-header">
 
-            </div>
+                    <span class="form-section-icon">
+                        👤
+                    </span>
 
+                    <div>
 
-            <!-- Telefone -->
+                        <h2>
+                            Seus dados
+                        </h2>
 
-            <div class="form-group">
+                        <p>
+                            Informe seus dados para identificarmos sua reserva.
+                        </p>
 
-                <label for="telefone">
-                    Telefone
-                </label>
+                    </div>
 
-                <input
-                    type="tel"
-                    id="telefone"
-                    name="telefone"
-                    placeholder="(11) 99999-9999"
-                    maxlength="15"
-                    required
-                >
-
-            </div>
+                </div>
 
 
-            <!-- Data -->
+                <!-- NOME -->
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label for="data">
-                    Data da reserva
-                </label>
+                    <label for="nome_completo">
+                        Nome completo
+                    </label>
 
-                <input
-                    type="date"
-                    id="data"
-                    name="data"
-                    required
-                >
+                    <input
+                        type="text"
+                        id="nome_completo"
+                        name="nome_completo"
+                        placeholder="Digite seu nome completo"
+                        maxlength="150"
+                        autocomplete="name"
+                        required
+                    >
 
-            </div>
+                </div>
 
 
-            <!-- Horário -->
+                <!-- TELEFONE -->
 
-            <div class="form-group">
+                <div class="form-group">
 
-                <label for="horario">
-                    Horário
-                </label>
+                    <label for="telefone">
+                        Telefone
+                    </label>
 
-                <input
-                    type="time"
-                    id="horario"
-                    name="horario"
-                    required
-                >
+                    <input
+                        type="tel"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="(11) 99999-9999"
+                        maxlength="15"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
 
             </div>
 
 
-            <!-- Número de pessoas -->
+            <!-- ==================================
+                 INFORMAÇÕES DA RESERVA
+            =================================== -->
 
-            <div class="form-group">
+            <div class="form-section">
 
-                <label for="quantidade_pessoas">
-                    Número de pessoas
-                </label>
+                <div class="form-section-header">
 
-                <input
-                    type="number"
-                    id="quantidade_pessoas"
-                    name="quantidade_pessoas"
-                    min="1"
-                    max="20"
-                    placeholder="Ex.: 4"
-                    required
-                >
+                    <span class="form-section-icon">
+                        📅
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Detalhes da reserva
+                        </h2>
+
+                        <p>
+                            Escolha quando você deseja visitar nossa cafeteria.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATA -->
+
+                <div class="form-group">
+
+                    <label for="data">
+                        Data da reserva
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data"
+                        name="data"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- HORÁRIO -->
+
+                <div class="form-group">
+
+                    <label for="horario">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        id="horario"
+                        name="horario"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- NÚMERO DE PESSOAS -->
+
+                <div class="form-group">
+
+                    <label for="quantidade_pessoas">
+                        Número de pessoas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidade_pessoas"
+                        name="quantidade_pessoas"
+                        min="1"
+                        max="20"
+                        placeholder="Ex.: 4"
+                        required
+                    >
+
+                    <small class="campo-ajuda">
+                        Aceitamos reservas para até 20 pessoas.
+                    </small>
+
+                </div>
+
+
+                <!-- CATEGORIA -->
+
+                <div class="form-group">
+
+                    <label for="categoria_reserva">
+                        Categoria da reserva
+                    </label>
+
+                    <select
+                        id="categoria_reserva"
+                        name="categoria_reserva"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option value="Café da manhã">
+                            ☕ Café da manhã
+                        </option>
+
+                        <option value="Almoço">
+                            🍽️ Almoço
+                        </option>
+
+                        <option value="Jantar">
+                            🌙 Jantar
+                        </option>
+
+                        <option value="Comemoração">
+                            🎉 Comemoração
+                        </option>
+
+                    </select>
+
+                </div>
 
             </div>
 
 
-            <!-- Categoria -->
+            <!-- ==================================
+                 OBSERVAÇÕES
+            =================================== -->
 
-            <div class="form-group">
+            <div class="form-section">
 
-                <label for="categoria_reserva">
-                    Categoria da reserva
-                </label>
+                <div class="form-section-header">
 
-                <select
-                    id="categoria_reserva"
-                    name="categoria_reserva"
-                    required
-                >
+                    <span class="form-section-icon">
+                        💬
+                    </span>
 
-                    <option value="">
-                        Selecione uma categoria
-                    </option>
+                    <div>
 
-                    <option value="Café da manhã">
-                        Café da manhã
-                    </option>
+                        <h2>
+                            Alguma observação?
+                        </h2>
 
-                    <option value="Almoço">
-                        Almoço
-                    </option>
+                        <p>
+                            Conte-nos se existe algum detalhe especial.
+                        </p>
 
-                    <option value="Jantar">
-                        Jantar
-                    </option>
+                    </div>
 
-                    <option value="Comemoração">
-                        Comemoração
-                    </option>
-
-                </select>
-
-            </div>
+                </div>
 
 
-            <!-- Observações -->
+                <div class="form-group">
 
-            <div class="form-group">
+                    <label for="observacoes">
+                        Observações
+                    </label>
 
-                <label for="observacoes">
-                    Observações
-                </label>
+                    <textarea
+                        id="observacoes"
+                        name="observacoes"
+                        rows="4"
+                        placeholder="Ex.: Gostaria de uma mesa próxima à janela..."
+                    ></textarea>
 
-                <textarea
-                    id="observacoes"
-                    name="observacoes"
-                    rows="4"
-                    placeholder="Alguma observação sobre sua reserva?"
-                ></textarea>
+                </div>
 
             </div>
 
 
-            <!-- Botões -->
+            <!-- ==================================
+                 AÇÕES
+            =================================== -->
 
             <div class="form-actions">
 
@@ -250,33 +409,101 @@
                     href="{{ url_for('routes.index') }}"
                     class="btn-voltar"
                 >
-                    Voltar
+                    ← Voltar
                 </a>
+
 
                 <button
                     type="submit"
                     class="btn-reserva"
                 >
+
                     Confirmar reserva
+
+                    <span class="btn-arrow">
+                        →
+                    </span>
+
                 </button>
 
             </div>
 
+
+            <!-- ==================================
+                 AVISO
+            =================================== -->
+
+            <div class="form-notice">
+
+                <span>
+                    🔒
+                </span>
+
+                <p>
+                    Seus dados serão utilizados apenas
+                    para o gerenciamento da sua reserva.
+                </p>
+
+            </div>
+
+
         </form>
 
+
     </section>
+
 
 </main>
 
 
-<footer>
+<!-- ==========================================
+     RODAPÉ
+=========================================== -->
 
-    <p>
-        © 2026 Café & Sabor — Sistema de Reservas
-    </p>
+<footer class="footer">
+
+    <div class="footer-container">
+
+
+        <div class="footer-logo">
+
+            <span>
+                ☕
+            </span>
+
+            <strong>
+                Café & Sabor
+            </strong>
+
+        </div>
+
+
+        <p>
+            © 2026 Café & Sabor — Sistema de Reservas
+        </p>
+
+
+        <div class="footer-links">
+
+            <a href="{{ url_for('routes.index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('routes.reserva') }}">
+                Reservar
+            </a>
+
+            <a href="{{ url_for('routes.listar_reservas') }}">
+                Reservas
+            </a>
+
+        </div>
+
+
+    </div>
 
 </footer>
-```
+
 
 </body>
 

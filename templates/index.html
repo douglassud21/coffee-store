@@ -1,87 +1,235 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
 
-    <title>Café & Sabor</title>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+<meta
+    name="description"
+    content="Café & Sabor — Cafeteria e sistema de reservas"
+>
+
+<title>Café & Sabor | Sistema de Reservas</title>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
+
 
 </head>
-
 
 <body>
 
 
-    <!-- ==========================================
-         CABEÇALHO
-    =========================================== -->
+<!-- ==========================================
+     CABEÇALHO
+=========================================== -->
 
-    <header>
+<header class="header">
 
-        <div class="logo">
-            ☕ Café & Sabor
-        </div>
+    <div class="header-container">
+
+        <a
+            href="{{ url_for('routes.index') }}"
+            class="logo"
+        >
+            <span class="logo-icon">☕</span>
+
+            <span class="logo-text">
+                Café <span>&</span> Sabor
+            </span>
+        </a>
 
 
-        <nav>
+        <nav class="nav">
 
-            <a href="{{ url_for('routes.index') }}">
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="nav-link active"
+            >
                 Início
             </a>
 
-            <a href="{{ url_for('routes.reserva') }}">
+            <a
+                href="{{ url_for('routes.reserva') }}"
+                class="nav-link"
+            >
                 Reservar mesa
             </a>
 
-            <a href="{{ url_for('routes.listar_reservas') }}">
+            <a
+                href="{{ url_for('routes.listar_reservas') }}"
+                class="nav-link"
+            >
                 Ver reservas
             </a>
 
         </nav>
 
-    </header>
+    </div>
+
+</header>
+
+
+<!-- ==========================================
+     CONTEÚDO PRINCIPAL
+=========================================== -->
+
+<main>
 
 
     <!-- ==========================================
-         CONTEÚDO PRINCIPAL
+         HERO
     =========================================== -->
 
-    <main>
+    <section class="hero">
+
+        <div class="hero-container">
+
+            <div class="hero-content">
+
+                <span class="subtitle">
+                    ☕ BEM-VINDO À CAFÉ & SABOR
+                </span>
+
+                <h1>
+                    Seu momento especial
+                    começa com um
+                    <span>bom café.</span>
+                </h1>
+
+                <p>
+                    Desfrute de cafés especiais, doces deliciosos
+                    e um ambiente aconchegante para compartilhar
+                    bons momentos.
+                </p>
 
 
-        <!-- ==========================================
-             CARDS DE MÉTRICAS
-        =========================================== -->
+                <div class="hero-actions">
 
-        <section class="metricas">
+                    <a
+                        href="{{ url_for('routes.reserva') }}"
+                        class="btn-reserva"
+                    >
+                        <span>Fazer uma reserva</span>
+                        <span class="btn-arrow">→</span>
+                    </a>
+
+                    <a
+                        href="{{ url_for('routes.listar_reservas') }}"
+                        class="btn-secondary"
+                    >
+                        Ver reservas
+                    </a>
+
+                </div>
 
 
-            <!-- Total de reservas -->
+                <div class="hero-info">
+
+                    <div class="hero-info-item">
+
+                        <span class="hero-info-icon">
+                            ✓
+                        </span>
+
+                        <span>
+                            Atendimento especial
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-info-item">
+
+                        <span class="hero-info-icon">
+                            ✓
+                        </span>
+
+                        <span>
+                            Ambiente aconchegante
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <div class="coffee-decoration coffee-1">
+                    ✦
+                </div>
+
+                <div class="coffee-decoration coffee-2">
+                    ✦
+                </div>
+
+                <div class="coffee-circle">
+
+                    <div class="coffee-cup">
+                        ☕
+                    </div>
+
+                </div>
+
+                <div class="hero-badge">
+
+                    <span class="badge-icon">
+                        ★
+                    </span>
+
+                    <div>
+                        <strong>
+                            Café especial
+                        </strong>
+
+                        <small>
+                            Feito com carinho
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         MÉTRICAS
+    =========================================== -->
+
+    <section class="metricas">
+
+        <div class="metricas-container">
+
+
+            <!-- TOTAL DE RESERVAS -->
 
             <div class="card-metrica">
 
-                <span class="icone">
+                <div class="icone">
                     📋
-                </span>
+                </div>
 
-
-                <div>
+                <div class="metrica-content">
 
                     <span class="metrica-titulo">
                         Total de reservas
                     </span>
-
 
                     <strong>
                         {{ total_reservas }}
@@ -92,21 +240,19 @@
             </div>
 
 
-            <!-- Reservas confirmadas -->
+            <!-- RESERVAS CONFIRMADAS -->
 
             <div class="card-metrica">
 
-                <span class="icone">
-                    ✅
-                </span>
+                <div class="icone">
+                    ✓
+                </div>
 
-
-                <div>
+                <div class="metrica-content">
 
                     <span class="metrica-titulo">
                         Reservas confirmadas
                     </span>
-
 
                     <strong>
                         {{ reservas_confirmadas }}
@@ -117,21 +263,19 @@
             </div>
 
 
-            <!-- Total de pessoas -->
+            <!-- TOTAL DE PESSOAS -->
 
             <div class="card-metrica">
 
-                <span class="icone">
+                <div class="icone">
                     👥
-                </span>
+                </div>
 
-
-                <div>
+                <div class="metrica-content">
 
                     <span class="metrica-titulo">
                         Pessoas reservadas
                     </span>
-
 
                     <strong>
                         {{ total_pessoas }}
@@ -142,80 +286,40 @@
             </div>
 
 
-        </section>
+        </div>
+
+    </section>
 
 
-        <!-- ==========================================
-             HERO
-        =========================================== -->
+    <!-- ==========================================
+         SOBRE
+    =========================================== -->
 
-        <section class="hero">
+    <section class="sobre">
 
-
-            <div class="hero-content">
-
-                <span class="subtitle">
-                    BEM-VINDO À CAFETERIA
-                </span>
-
-
-                <h1>
-                    Seu momento especial começa com um bom café.
-                </h1>
-
-
-                <p>
-
-                    Desfrute de cafés especiais, doces deliciosos
-                    e um ambiente aconchegante para compartilhar
-                    bons momentos.
-
-                </p>
-
-
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="btn-reserva"
-                >
-                    Fazer uma reserva
-                </a>
-
-            </div>
-
-
-            <div class="hero-image">
-                ☕
-            </div>
-
-
-        </section>
-
-
-        <!-- ==========================================
-             SOBRE
-        =========================================== -->
-
-        <section class="sobre">
+        <div class="sobre-container">
 
 
             <div class="sobre-content">
 
                 <span class="subtitle">
-                    SOBRE NÓS
+                    NOSSA CAFETERIA
                 </span>
 
-
                 <h2>
-                    Um espaço feito para você
+                    Um espaço feito
+                    <span>para você.</span>
                 </h2>
 
-
                 <p>
-
                     Nossa cafeteria oferece um ambiente confortável
                     para encontros, reuniões ou simplesmente para
                     aproveitar seu café favorito.
+                </p>
 
+                <p>
+                    Aqui, cada detalhe foi pensado para transformar
+                    uma simples pausa em um momento especial.
                 </p>
 
             </div>
@@ -228,83 +332,172 @@
             <div class="beneficios">
 
 
-                <!-- Cafés -->
+                <!-- CAFÉS -->
 
                 <div class="beneficio">
 
-                    <span>
+                    <div class="beneficio-icon">
                         ☕
-                    </span>
+                    </div>
 
-                    <h3>
-                        Cafés especiais
-                    </h3>
+                    <div>
 
-                    <p>
-                        Bebidas preparadas com carinho e qualidade.
-                    </p>
+                        <h3>
+                            Cafés especiais
+                        </h3>
+
+                        <p>
+                            Bebidas preparadas com carinho,
+                            qualidade e muito sabor.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                <!-- Doces -->
+                <!-- DOCES -->
 
                 <div class="beneficio">
 
-                    <span>
+                    <div class="beneficio-icon">
                         🍰
-                    </span>
+                    </div>
 
-                    <h3>
-                        Doces deliciosos
-                    </h3>
+                    <div>
 
-                    <p>
-                        Opções para acompanhar seu café.
-                    </p>
+                        <h3>
+                            Doces deliciosos
+                        </h3>
+
+                        <p>
+                            Opções perfeitas para acompanhar
+                            seu café favorito.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
-                <!-- Ambiente -->
+                <!-- AMBIENTE -->
 
                 <div class="beneficio">
 
-                    <span>
+                    <div class="beneficio-icon">
                         🪑
-                    </span>
+                    </div>
 
-                    <h3>
-                        Ambiente aconchegante
-                    </h3>
+                    <div>
 
-                    <p>
-                        Um espaço confortável para seus momentos.
-                    </p>
+                        <h3>
+                            Ambiente aconchegante
+                        </h3>
+
+                        <p>
+                            Um espaço confortável para aproveitar
+                            cada momento.
+                        </p>
+
+                    </div>
 
                 </div>
 
 
             </div>
 
+        </div>
 
-        </section>
-
-
-    </main>
+    </section>
 
 
     <!-- ==========================================
-         RODAPÉ
+         CHAMADA PARA RESERVA
     =========================================== -->
 
-    <footer>
+    <section class="cta">
+
+        <div class="cta-container">
+
+            <div>
+
+                <span class="cta-subtitle">
+                    SEU LUGAR ESTÁ ESPERANDO
+                </span>
+
+                <h2>
+                    Que tal tomar um café com a gente?
+                </h2>
+
+                <p>
+                    Faça sua reserva e venha viver uma experiência
+                    especial no Café & Sabor.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('routes.reserva') }}"
+                class="btn-cta"
+            >
+                Reservar minha mesa
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- ==========================================
+     RODAPÉ
+=========================================== -->
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-logo">
+
+            <span>
+                ☕
+            </span>
+
+            <strong>
+                Café & Sabor
+            </strong>
+
+        </div>
+
 
         <p>
             © 2026 Café & Sabor — Sistema de Reservas
         </p>
 
-    </footer>
+
+        <div class="footer-links">
+
+            <a href="{{ url_for('routes.index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('routes.reserva') }}">
+                Reservar
+            </a>
+
+            <a href="{{ url_for('routes.listar_reservas') }}">
+                Reservas
+            </a>
+
+        </div>
+
+    </div>
+
+</footer>
 
 
 </body>

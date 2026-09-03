@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -5,7 +6,15 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Confirmação da sua reserva no Café & Sabor."
+    >
 
     <title>Reserva Confirmada | Café & Sabor</title>
 
@@ -24,25 +33,61 @@
          CABEÇALHO
     =========================================== -->
 
-    <header>
+    <header class="header">
 
-        <div class="logo">
-            ☕ Café & Sabor
+        <div class="header-container">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="logo"
+            >
+
+                <span class="logo-icon">
+                    ☕
+                </span>
+
+                <span class="logo-text">
+                    Café <span>&</span> Sabor
+                </span>
+
+            </a>
+
+
+            <!-- NAVEGAÇÃO -->
+
+            <nav class="nav">
+
+                <a
+                    href="{{ url_for('routes.index') }}"
+                    class="nav-link"
+                >
+                    Início
+                </a>
+
+                <a
+                    href="{{ url_for('routes.reserva') }}"
+                    class="nav-link"
+                >
+                    Reservar mesa
+                </a>
+
+                <a
+                    href="{{ url_for('routes.listar_reservas') }}"
+                    class="nav-link"
+                >
+                    Ver reservas
+                </a>
+
+            </nav>
+
+
         </div>
 
-        <nav>
-
-            <a href="{{ url_for('routes.index') }}">
-                Início
-            </a>
-
-            <a href="{{ url_for('routes.reserva') }}">
-                Nova reserva
-            </a>
-
-        </nav>
-
     </header>
+
 
 
     <!-- ==========================================
@@ -54,29 +99,28 @@
         <section class="confirmacao">
 
 
-            <!-- Ícone de confirmação -->
+            <!-- ÍCONE DE CONFIRMAÇÃO -->
 
             <div class="confirmacao-icon">
                 ✓
             </div>
 
 
-            <span class="subtitle">
-                RESERVA CONFIRMADA
-            </span>
+            <!-- TÍTULO -->
 
+            <span class="subtitle">
+                ✓ RESERVA CONFIRMADA
+            </span>
 
             <h1>
                 Tudo certo, {{ reserva.nome_completo }}!
             </h1>
 
-
             <p class="mensagem">
-
                 Sua reserva foi registrada com sucesso.
-                Confira os detalhes abaixo.
-
+                Confira todos os detalhes abaixo.
             </p>
+
 
 
             <!-- ======================================
@@ -86,12 +130,12 @@
             <div class="reserva-detalhes">
 
 
-                <!-- Nome -->
+                <!-- NOME -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Nome
+                        👤 Nome
                     </span>
 
                     <strong>
@@ -101,12 +145,12 @@
                 </div>
 
 
-                <!-- Data -->
+                <!-- DATA -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Data
+                        📅 Data
                     </span>
 
                     <strong>
@@ -116,12 +160,12 @@
                 </div>
 
 
-                <!-- Horário -->
+                <!-- HORÁRIO -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Horário
+                        🕐 Horário
                     </span>
 
                     <strong>
@@ -131,12 +175,12 @@
                 </div>
 
 
-                <!-- Número de pessoas -->
+                <!-- NÚMERO DE PESSOAS -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Número de pessoas
+                        👥 Número de pessoas
                     </span>
 
                     <strong>
@@ -146,12 +190,12 @@
                 </div>
 
 
-                <!-- Categoria -->
+                <!-- CATEGORIA -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Categoria
+                        ☕ Categoria
                     </span>
 
                     <strong>
@@ -161,14 +205,14 @@
                 </div>
 
 
-                <!-- Observações -->
+                <!-- OBSERVAÇÕES -->
 
                 {% if reserva.observacoes %}
 
                 <div class="detalhe observacao">
 
                     <span class="detalhe-label">
-                        Observação
+                        💬 Observação
                     </span>
 
                     <strong>
@@ -180,12 +224,12 @@
                 {% endif %}
 
 
-                <!-- Status -->
+                <!-- STATUS -->
 
                 <div class="detalhe">
 
                     <span class="detalhe-label">
-                        Status
+                        🔔 Status
                     </span>
 
                     <strong>
@@ -196,6 +240,26 @@
 
 
             </div>
+
+
+
+            <!-- ======================================
+                 MENSAGEM FINAL
+            ======================================= -->
+
+            <div class="confirmacao-mensagem">
+
+                <span>
+                    ☕
+                </span>
+
+                <p>
+                    Obrigado por escolher o Café & Sabor!
+                    Esperamos você.
+                </p>
+
+            </div>
+
 
 
             <!-- ======================================
@@ -209,7 +273,7 @@
                     href="{{ url_for('routes.index') }}"
                     class="btn-voltar"
                 >
-                    Voltar para o início
+                    ← Voltar para o início
                 </a>
 
 
@@ -217,7 +281,13 @@
                     href="{{ url_for('routes.reserva') }}"
                     class="btn-reserva"
                 >
+
                     Fazer nova reserva
+
+                    <span class="btn-arrow">
+                        →
+                    </span>
+
                 </a>
 
 
@@ -229,15 +299,52 @@
     </main>
 
 
+
     <!-- ==========================================
          RODAPÉ
     =========================================== -->
 
-    <footer>
+    <footer class="footer">
 
-        <p>
-            © 2026 Café & Sabor — Sistema de Reservas
-        </p>
+        <div class="footer-container">
+
+
+            <div class="footer-logo">
+
+                <span>
+                    ☕
+                </span>
+
+                <strong>
+                    Café & Sabor
+                </strong>
+
+            </div>
+
+
+            <p>
+                © 2026 Café & Sabor — Sistema de Reservas
+            </p>
+
+
+            <div class="footer-links">
+
+                <a href="{{ url_for('routes.index') }}">
+                    Início
+                </a>
+
+                <a href="{{ url_for('routes.reserva') }}">
+                    Reservar
+                </a>
+
+                <a href="{{ url_for('routes.listar_reservas') }}">
+                    Reservas
+                </a>
+
+            </div>
+
+
+        </div>
 
     </footer>
 
@@ -245,3 +352,4 @@
 </body>
 
 </html>
+
