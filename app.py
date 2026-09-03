@@ -1,197 +1,60 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask
+
+from database import db
+from routes import routes
+
+
+# ==========================================
+# CONFIGURAÇÃO DA APLICAÇÃO
+# ==========================================
 
 app = Flask(__name__)
 
-# ==========================================
-# LISTA DE RESERVAS
-# ==========================================
-
-reservas = []
-
 
 # ==========================================
-# ROTA - PÁGINA INICIAL
+# CONFIGURAÇÕES
 # ==========================================
 
-@app.route("/")
-def index():
+app.config["SECRET_KEY"] = "chave-secreta-do-projeto"
 
-    # Total de reservas
-    total_reservas = len(reservas)
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///database.db"
+)
 
-    # Reservas confirmadas
-    reservas_confirmadas = sum(
-        1 for reserva in reservas
-        if reserva["status"] == "Confirmada"
-    )
-
-    # Total de pessoas
-    total_pessoas = sum(
-        reserva["pessoas"] for reserva in reservas
-    )
-
-    return render_template(
-        "index.html",
-        total_reservas=total_reservas,
-        reservas_confirmadas=reservas_confirmadas,
-        total_pessoas=total_pessoas
-    )
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 
 # ==========================================
-# ROTA - PÁGINA DE RESERVA
+# INICIALIZAÇÃO DO BANCO
 # ==========================================
 
-@app.route("/reserva")
-def reserva():
-    return render_template("reserva.html")
+db.init_app(app)
 
 
 # ==========================================
-# ROTA - RECEBIMENTO DA RESERVA
+# REGISTRAR BLUEPRINT
 # ==========================================
 
-@app.route("/confirmacao", methods=["POST"])
-def confirmacao():
-
-    # Recebendo os dados do formulário
-    nome = request.form.get("nome", "").strip()
-    data = request.form.get("data", "").strip()
-    horario = request.form.get("horario", "").strip()
-    pessoas = request.form.get("pessoas", "").strip()
-    categoria = request.form.get("categoria", "").strip()
-    observacao = request.form.get("observacao", "").strip()
-
-    # ==========================================
-    # VALIDAÇÕES
-    # ==========================================
-
-    # Campos obrigatórios
-    if not nome or not data or not horario or not pessoas or not categoria:
-        return render_template(
-            "reserva.html",
-            erro="Preencha todos os campos obrigatórios."
-        )
-
-    # Nome válido
-    if len(nome) < 2:
-        return render_template(
-            "reserva.html",
-            erro="Digite um nome válido."
-        )
-
-    # Verificar se pessoas é um número
-    try:
-        pessoas = int(pessoas)
-
-    except ValueError:
-        return render_template(
-            "reserva.html",
-            erro="O número de pessoas deve ser um valor válido."
-        )
-
-    # Não permitir zero ou números negativos
-    if pessoas <= 0:
-        return render_template(
-            "reserva.html",
-            erro="O número de pessoas deve ser maior que zero."
-        )
-
-    # Limite máximo
-    if pessoas > 20:
-        return render_template(
-            "reserva.html",
-            erro="A reserva pode ter no máximo 20 pessoas."
-        )
-
-    # ==========================================
-    # CRIANDO A RESERVA
-    # ==========================================
-
-    nova_reserva = {
-        "id": len(reservas) + 1,
-        "nome": nome,
-        "data": data,
-        "horario": horario,
-        "pessoas": pessoas,
-        "categoria": categoria,
-        "observacao": observacao,
-        "status": "Confirmada"
-    }
-
-    # Adiciona a reserva à memória
-    reservas.append(nova_reserva)
-
-    # ==========================================
-    # PÁGINA DE CONFIRMAÇÃO
-    # ==========================================
-
-    return render_template(
-        "confirmacao.html",
-        nome=nome,
-        data=data,
-        horario=horario,
-        pessoas=pessoas,
-        categoria=categoria,
-        observacao=observacao
-    )
+app.register_blueprint(
+    routes
+)
 
 
 # ==========================================
-# ROTA - LISTA DE RESERVAS
+# CRIAR BANCO E TABELAS
 # ==========================================
 
-@app.route("/reservas")
-def listar_reservas():
+with app.app_context():
 
-    # Recebe o texto da busca
-    busca = request.args.get("busca", "").strip().lower()
-
-    # Busca por nome OU categoria
-    if busca:
-
-        reservas_filtradas = [
-            reserva for reserva in reservas
-            if busca in reserva["nome"].lower()
-            or busca in reserva["categoria"].lower()
-        ]
-
-    else:
-
-        reservas_filtradas = reservas
-
-    return render_template(
-        "lista_reservas.html",
-        reservas=reservas_filtradas,
-        busca=busca
-    )
+    db.create_all()
 
 
 # ==========================================
-# ROTA - ALTERAR STATUS
-# ==========================================
-
-@app.route("/mudar-status/<int:id>", methods=["POST"])
-def mudar_status(id):
-
-    for reserva in reservas:
-
-        if reserva["id"] == id:
-
-            if reserva["status"] == "Confirmada":
-                reserva["status"] = "Concluída"
-
-            else:
-                reserva["status"] = "Confirmada"
-
-            break
-
-    return redirect(url_for("listar_reservas"))
-
-
-# ==========================================
-# INICIALIZAÇÃO DO SISTEMA
+# INICIAR SISTEMA
 # ==========================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run(
+        debug=True
+    )

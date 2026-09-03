@@ -2,15 +2,30 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Café & Sabor</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
 </head>
 
+
 <body>
+
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
 
     <header>
 
@@ -18,16 +33,32 @@
             ☕ Café & Sabor
         </div>
 
+
         <nav>
-            <a href="/">Início</a>
-            <a href="/reserva">Reservar mesa</a>
-            <a href="/reservas">Ver reservas</a>
+
+            <a href="{{ url_for('routes.index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('routes.reserva') }}">
+                Reservar mesa
+            </a>
+
+            <a href="{{ url_for('routes.listar_reservas') }}">
+                Ver reservas
+            </a>
+
         </nav>
 
     </header>
 
 
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
     <main>
+
 
         <!-- ==========================================
              CARDS DE MÉTRICAS
@@ -35,49 +66,81 @@
 
         <section class="metricas">
 
+
+            <!-- Total de reservas -->
+
             <div class="card-metrica">
-                <span class="icone">📋</span>
+
+                <span class="icone">
+                    📋
+                </span>
+
 
                 <div>
+
                     <span class="metrica-titulo">
                         Total de reservas
                     </span>
 
+
                     <strong>
                         {{ total_reservas }}
                     </strong>
+
                 </div>
+
             </div>
 
 
+            <!-- Reservas confirmadas -->
+
             <div class="card-metrica">
-                <span class="icone">✅</span>
+
+                <span class="icone">
+                    ✅
+                </span>
+
 
                 <div>
+
                     <span class="metrica-titulo">
                         Reservas confirmadas
                     </span>
 
+
                     <strong>
                         {{ reservas_confirmadas }}
                     </strong>
+
                 </div>
+
             </div>
 
 
+            <!-- Total de pessoas -->
+
             <div class="card-metrica">
-                <span class="icone">👥</span>
+
+                <span class="icone">
+                    👥
+                </span>
+
 
                 <div>
+
                     <span class="metrica-titulo">
                         Pessoas reservadas
                     </span>
 
+
                     <strong>
                         {{ total_pessoas }}
                     </strong>
+
                 </div>
+
             </div>
+
 
         </section>
 
@@ -88,22 +151,42 @@
 
         <section class="hero">
 
+
             <div class="hero-content">
 
-                <span class="subtitle">BEM-VINDO À CAFETERIA</span>
-                <h1>Seu momento especial começa com um bom café.</h1>
-                
+                <span class="subtitle">
+                    BEM-VINDO À CAFETERIA
+                </span>
+
+
+                <h1>
+                    Seu momento especial começa com um bom café.
+                </h1>
+
+
                 <p>
+
                     Desfrute de cafés especiais, doces deliciosos
                     e um ambiente aconchegante para compartilhar
                     bons momentos.
+
                 </p>
 
-                <a href="/reserva" class="btn-reserva">Fazer uma reserva</a>
+
+                <a
+                    href="{{ url_for('routes.reserva') }}"
+                    class="btn-reserva"
+                >
+                    Fazer uma reserva
+                </a>
 
             </div>
 
-            <div class="hero-image">☕</div>
+
+            <div class="hero-image">
+                ☕
+            </div>
+
 
         </section>
 
@@ -114,58 +197,116 @@
 
         <section class="sobre">
 
+
             <div class="sobre-content">
 
-                <span class="subtitle">SOBRE NÓS</span>
+                <span class="subtitle">
+                    SOBRE NÓS
+                </span>
 
-                <h2>Um espaço feito para você</h2>
+
+                <h2>
+                    Um espaço feito para você
+                </h2>
+
 
                 <p>
+
                     Nossa cafeteria oferece um ambiente confortável
                     para encontros, reuniões ou simplesmente para
                     aproveitar seu café favorito.
+
                 </p>
 
             </div>
 
 
+            <!-- ======================================
+                 BENEFÍCIOS
+            ======================================= -->
+
             <div class="beneficios">
 
+
+                <!-- Cafés -->
+
                 <div class="beneficio">
-                    <span>☕</span>
-                    <h3>Cafés especiais</h3>
-                    <p>Bebidas preparadas com carinho e qualidade.</p>
+
+                    <span>
+                        ☕
+                    </span>
+
+                    <h3>
+                        Cafés especiais
+                    </h3>
+
+                    <p>
+                        Bebidas preparadas com carinho e qualidade.
+                    </p>
 
                 </div>
 
 
+                <!-- Doces -->
+
                 <div class="beneficio">
-                    <span>🍰</span>
-                    <h3>Doces deliciosos</h3>
-                    <p>Opções para acompanhar seu café.</p>
+
+                    <span>
+                        🍰
+                    </span>
+
+                    <h3>
+                        Doces deliciosos
+                    </h3>
+
+                    <p>
+                        Opções para acompanhar seu café.
+                    </p>
 
                 </div>
 
 
+                <!-- Ambiente -->
+
                 <div class="beneficio">
-                    <span>🪑</span>
-                    <h3>Ambiente aconchegante</h3>
-                    <p>Um espaço confortável para seus momentos.</p>
+
+                    <span>
+                        🪑
+                    </span>
+
+                    <h3>
+                        Ambiente aconchegante
+                    </h3>
+
+                    <p>
+                        Um espaço confortável para seus momentos.
+                    </p>
 
                 </div>
+
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+
     <footer>
 
-        <p>© 2026 Café & Sabor — Sistema de Reservas</p>
+        <p>
+            © 2026 Café & Sabor — Sistema de Reservas
+        </p>
 
     </footer>
 
+
 </body>
+
 </html>

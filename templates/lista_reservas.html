@@ -6,15 +6,27 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Reservas | Café & Sabor</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 
 </head>
 
+
 <body>
+
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
 
     <header>
 
@@ -22,18 +34,38 @@
             ☕ Café & Sabor
         </div>
 
+
         <nav>
-            <a href="/">Início</a>
-            <a href="/reserva">Reservar mesa</a>
-            <a href="/reservas">Ver reservas</a>
+
+            <a href="{{ url_for('routes.index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('routes.reserva') }}">
+                Reservar mesa
+            </a>
+
+            <a href="{{ url_for('routes.listar_reservas') }}">
+                Ver reservas
+            </a>
+
         </nav>
 
     </header>
 
 
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
     <main>
 
         <section class="lista-reservas">
+
+
+            <!-- ======================================
+                 CABEÇALHO
+            ======================================= -->
 
             <div class="reserva-header">
 
@@ -41,9 +73,11 @@
                     GERENCIAMENTO
                 </span>
 
+
                 <h1>
                     Reservas da cafeteria
                 </h1>
+
 
                 <p>
                     Consulte e gerencie as reservas realizadas.
@@ -56,7 +90,11 @@
                  CAMPO DE BUSCA
             =========================================== -->
 
-            <form action="/reservas" method="GET" class="form-busca">
+            <form
+                action="{{ url_for('routes.listar_reservas') }}"
+                method="GET"
+                class="form-busca"
+            >
 
                 <input
                     type="text"
@@ -65,7 +103,11 @@
                     value="{{ busca }}"
                 >
 
-                <button type="submit" class="btn-reserva">
+
+                <button
+                    type="submit"
+                    class="btn-reserva"
+                >
                     🔎 Buscar
                 </button>
 
@@ -100,7 +142,7 @@
 
                             <th>Status</th>
 
-                            <th>Ação</th>
+                            <th>Ações</th>
 
                         </tr>
 
@@ -113,37 +155,66 @@
 
                         <tr>
 
+
+                            <!-- ID -->
+
                             <td>
                                 {{ reserva.id }}
                             </td>
 
+
+                            <!-- Nome -->
+
                             <td>
-                                {{ reserva.nome }}
+                                {{ reserva.nome_completo }}
                             </td>
 
+
+                            <!-- Categoria -->
+
                             <td>
-                                {{ reserva.categoria }}
+                                {{ reserva.categoria_reserva }}
                             </td>
 
+
+                            <!-- Data -->
+
                             <td>
-                                {{ reserva.data }}
+                                {{ reserva.data.strftime('%d/%m/%Y') }}
                             </td>
 
+
+                            <!-- Horário -->
+
                             <td>
-                                {{ reserva.horario }}
+                                {{ reserva.horario.strftime('%H:%M') }}
                             </td>
 
+
+                            <!-- Pessoas -->
+
                             <td>
-                                {{ reserva.pessoas }}
+                                {{ reserva.quantidade_pessoas }}
                             </td>
 
+
+                            <!-- Status -->
+
                             <td>
 
-                                {% if reserva.status == "Confirmada" %}
+                                {% if reserva.status == "Pendente" %}
+
+                                    <span class="status pendente">
+                                        {{ reserva.status }}
+                                    </span>
+
+
+                                {% elif reserva.status == "Confirmada" %}
 
                                     <span class="status confirmada">
                                         {{ reserva.status }}
                                     </span>
+
 
                                 {% else %}
 
@@ -155,23 +226,65 @@
 
                             </td>
 
+
+                            <!-- ==================================
+                                 AÇÕES
+                            =================================== -->
+
                             <td>
 
-                                <form
-                                    action="/mudar-status/{{ reserva.id }}"
-                                    method="POST"
-                                >
+                                <div class="acoes-reserva">
 
-                                    <button
-                                        type="submit"
-                                        class="btn-status"
+
+                                    <!-- Alterar status -->
+
+                                    <form
+                                        action="{{
+                                            url_for(
+                                                'routes.mudar_status',
+                                                id=reserva.id
+                                            )
+                                        }}"
+                                        method="POST"
                                     >
-                                        Mudar Status
-                                    </button>
 
-                                </form>
+                                        <button
+                                            type="submit"
+                                            class="btn-status"
+                                        >
+                                            Mudar Status
+                                        </button>
+
+                                    </form>
+
+
+                                    <!-- Excluir -->
+
+                                    <form
+                                        action="{{
+                                            url_for(
+                                                'routes.excluir_reserva',
+                                                id=reserva.id
+                                            )
+                                        }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir esta reserva?');"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="btn-excluir"
+                                        >
+                                            Excluir
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
 
                             </td>
+
 
                         </tr>
 
@@ -183,16 +296,26 @@
 
             </div>
 
+
             {% else %}
 
+
+                <!-- ======================================
+                     NENHUMA RESERVA
+                ======================================= -->
+
                 <div class="sem-reservas">
+
 
                     {% if busca %}
 
                         <p>
+
                             Nenhuma reserva encontrada para
                             "<strong>{{ busca }}</strong>".
+
                         </p>
+
 
                     {% else %}
 
@@ -202,35 +325,55 @@
 
                     {% endif %}
 
-                    <a href="/reserva" class="btn-reserva">
+
+                    <a
+                        href="{{ url_for('routes.reserva') }}"
+                        class="btn-reserva"
+                    >
                         Fazer uma reserva
                     </a>
 
+
                 </div>
+
 
             {% endif %}
 
 
             <!-- ==========================================
-                 VOLTAR
+                 AÇÕES DA PÁGINA
             =========================================== -->
 
             <div class="acoes-lista">
 
-                <a href="/" class="btn-voltar">
+
+                <a
+                    href="{{ url_for('routes.index') }}"
+                    class="btn-voltar"
+                >
                     Voltar para o início
                 </a>
 
-                <a href="/reserva" class="btn-reserva">
+
+                <a
+                    href="{{ url_for('routes.reserva') }}"
+                    class="btn-reserva"
+                >
                     Nova reserva
                 </a>
 
+
             </div>
+
 
         </section>
 
     </main>
 
+
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
 
     <footer>
 
@@ -239,6 +382,7 @@
         </p>
 
     </footer>
+
 
 </body>
 

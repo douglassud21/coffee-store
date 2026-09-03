@@ -2,17 +2,28 @@
 <html lang="pt-BR">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Reserva Confirmada | Café & Sabor</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- Cabeçalho -->
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
+
     <header>
 
         <div class="logo">
@@ -20,38 +31,62 @@
         </div>
 
         <nav>
-            <a href="/">Início</a>
-            <a href="/reserva">Nova reserva</a>
+
+            <a href="{{ url_for('routes.index') }}">
+                Início
+            </a>
+
+            <a href="{{ url_for('routes.reserva') }}">
+                Nova reserva
+            </a>
+
         </nav>
 
     </header>
 
 
-    <!-- Conteúdo principal -->
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
     <main>
 
         <section class="confirmacao">
+
+
+            <!-- Ícone de confirmação -->
 
             <div class="confirmacao-icon">
                 ✓
             </div>
 
+
             <span class="subtitle">
                 RESERVA CONFIRMADA
             </span>
 
+
             <h1>
-                Tudo certo, {{ nome }}!
+                Tudo certo, {{ reserva.nome_completo }}!
             </h1>
 
+
             <p class="mensagem">
+
                 Sua reserva foi registrada com sucesso.
                 Confira os detalhes abaixo.
+
             </p>
 
 
-            <!-- Detalhes da reserva -->
+            <!-- ======================================
+                 DETALHES DA RESERVA
+            ======================================= -->
+
             <div class="reserva-detalhes">
+
+
+                <!-- Nome -->
 
                 <div class="detalhe">
 
@@ -60,11 +95,13 @@
                     </span>
 
                     <strong>
-                        {{ nome }}
+                        {{ reserva.nome_completo }}
                     </strong>
 
                 </div>
 
+
+                <!-- Data -->
 
                 <div class="detalhe">
 
@@ -73,11 +110,13 @@
                     </span>
 
                     <strong>
-                        {{ data }}
+                        {{ reserva.data.strftime('%d/%m/%Y') }}
                     </strong>
 
                 </div>
 
+
+                <!-- Horário -->
 
                 <div class="detalhe">
 
@@ -86,11 +125,13 @@
                     </span>
 
                     <strong>
-                        {{ horario }}
+                        {{ reserva.horario.strftime('%H:%M') }}
                     </strong>
 
                 </div>
 
+
+                <!-- Número de pessoas -->
 
                 <div class="detalhe">
 
@@ -99,13 +140,30 @@
                     </span>
 
                     <strong>
-                        {{ pessoas }}
+                        {{ reserva.quantidade_pessoas }}
                     </strong>
 
                 </div>
 
 
-                {% if observacao %}
+                <!-- Categoria -->
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Categoria
+                    </span>
+
+                    <strong>
+                        {{ reserva.categoria_reserva }}
+                    </strong>
+
+                </div>
+
+
+                <!-- Observações -->
+
+                {% if reserva.observacoes %}
 
                 <div class="detalhe observacao">
 
@@ -114,35 +172,67 @@
                     </span>
 
                     <strong>
-                        {{ observacao }}
+                        {{ reserva.observacoes }}
                     </strong>
 
                 </div>
 
                 {% endif %}
 
+
+                <!-- Status -->
+
+                <div class="detalhe">
+
+                    <span class="detalhe-label">
+                        Status
+                    </span>
+
+                    <strong>
+                        {{ reserva.status }}
+                    </strong>
+
+                </div>
+
+
             </div>
 
 
-            <!-- Ações -->
+            <!-- ======================================
+                 AÇÕES
+            ======================================= -->
+
             <div class="confirmacao-acoes">
 
-                <a href="/" class="btn-voltar">
+
+                <a
+                    href="{{ url_for('routes.index') }}"
+                    class="btn-voltar"
+                >
                     Voltar para o início
                 </a>
 
-                <a href="/reserva" class="btn-reserva">
+
+                <a
+                    href="{{ url_for('routes.reserva') }}"
+                    class="btn-reserva"
+                >
                     Fazer nova reserva
                 </a>
 
+
             </div>
+
 
         </section>
 
     </main>
 
 
-    <!-- Rodapé -->
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+
     <footer>
 
         <p>
@@ -150,6 +240,7 @@
         </p>
 
     </footer>
+
 
 </body>
 

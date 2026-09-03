@@ -24,6 +24,36 @@ O sistema permite que o usuário:
 
 ---
 
+## Descrição Geral
+
+* Nosso objetivo é auxiliar as empresas de cafeteria nas vendas, recebimento dos pedidos, reserva de mesas, menu interativo, verificação de estoque e organização geral de usuarios
+
+## Requisitos Funcionais: 
+                                                                                                                                  
+**RF01** | **Realizar reserva:** o sistema deve permitir cadastrar uma reserva informando nome completo, data, horário, quantidade de pessoas, categoria e observações.                                            
+**RF02** | **Confirmar reserva:** o sistema deve permitir visualizar os dados cadastrados e confirmar a realização da reserva.                                                                                     
+**RF03** | **Listar reservas:** o sistema deve exibir as reservas cadastradas, incluindo o ID, nome, categoria, data, horário, quantidade de pessoas e status.                                                     
+**RF04** | **Alterar status:** o sistema deve permitir alterar o status da reserva entre **Pendente, Confirmada e Concluída**.                                                                                     
+**RF05** | **Excluir reserva:** o sistema deve permitir excluir definitivamente uma reserva pelo seu ID.                                                                                                           
+**RF06** | **Pesquisar reservas:** o sistema deve permitir pesquisar reservas pelo nome do cliente ou categoria da reserva.                                                                                        
+**RF07** | **Validar reservas:** o sistema deve impedir o cadastro de informações inválidas, como campos obrigatórios vazios, quantidade de pessoas menor ou igual a zero, data/horário inválidos ou data passada. 
+**RF08** | **Exibir informações gerais:** a página inicial deve apresentar indicadores como total de reservas, reservas confirmadas e total de pessoas.                                                            
+**RF09** | **Persistir dados:** o sistema deve armazenar as reservas em banco de dados SQLite, mantendo os dados mesmo após o encerramento e reinício do servidor.                                                 
+
+
+## Requisitos Não Funcionais: 
+                                                                                               
+| **RNF01** | **Desempenho:** o sistema deve realizar consultas, cadastros, alterações, exclusões e pesquisas de reservas de forma rápida e eficiente.                                        
+| **RNF02** | **Disponibilidade:** o sistema deve poder permanecer em execução continuamente, permitindo acesso às funcionalidades durante o período em que o servidor estiver disponível.    
+| **RNF03** | **Persistência:** os dados devem ser armazenados em banco de dados SQLite, não dependendo de listas ou variáveis temporárias em memória.                                        
+| **RNF04** | **Segurança dos dados:** informações do usuário e das reservas devem ser armazenadas de forma adequada, evitando o versionamento do banco de dados e de arquivos `.env` no Git. 
+| **RNF05** | **Manutenibilidade:** o sistema deve utilizar uma estrutura organizada, separando aplicação, rotas, modelos, banco de dados e templates.                                        
+| **RNF06** | **Usabilidade:** as mensagens de validação e erro devem ser claras para facilitar o preenchimento e a utilização do sistema.                                                    
+| **RNF07** | **Portabilidade:** cada máquina deve conseguir criar seu próprio banco de dados local por meio do `db.create_all()`, sem depender do arquivo de banco enviado pelo GitHub.      
+
+
+Quais os Dados dos Usuarios Que o sistema ira proteger? Nome, Dados Bancarios, Valores de pedidos, motivo de cancelamento, email, contato de telefone, endereço.
+
 ## 🎯 Objetivo
 
 Desenvolver uma aplicação web simples aplicando conceitos de:
@@ -479,13 +509,13 @@ Nesse caso, o sistema deve informar que o número de pessoas precisa ser um valo
 
 O DER representa a estrutura do banco de dados e o relacionamento entre suas entidades.
 
-![Diagrama Entidade-Relacionamento](docs/der.jpeg)
+![Diagrama Entidade-Relacionamento](docs/der.png)
 
 ### Arquitetura do Sistema
 
 O diagrama de arquitetura apresenta a organização e o fluxo dos principais componentes do sistema.
 
-![Arquitetura do Sistema](docs/arquitetura_sistema.jpeg)
+![Arquitetura do Sistema](docs/arquitetura_sistema.png)
 
 ---
 
