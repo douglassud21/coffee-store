@@ -80,6 +80,11 @@ def confirmacao():
         ""
     ).strip()
 
+    telefone = request.form.get(
+        "telefone",
+        ""
+    ).strip()
+
     data = request.form.get(
         "data",
         ""
@@ -117,6 +122,12 @@ def confirmacao():
             erro="Preencha o nome completo."
         )
 
+    if not nome_completo:
+
+        return render_template(
+            "reserva.html",
+            erro="Preencha o nome completo."
+        )
 
     if not data:
 
@@ -161,6 +172,20 @@ def confirmacao():
             erro="Digite um nome válido."
         )
 
+    # --------------------------------------
+    # remover os caracteres de formatação
+    # --------------------------------------
+
+    telefone_numeros = "".join(
+        filtro for filtro in telefone
+            if filtro.isdigit()
+        )
+
+    if len(telefone_numeros) not in (10, 11):
+        return render_template(
+            "reserva.html",
+            erro="Informe um telefone válido com DDD."
+        )
 
     # --------------------------------------
     # CONVERTER QUANTIDADE DE PESSOAS
@@ -264,6 +289,8 @@ def confirmacao():
 
         nome_completo=nome_completo,
 
+        telefone=telefone,
+
         data=data_reserva,
 
         horario=horario_reserva,
@@ -275,6 +302,7 @@ def confirmacao():
         observacoes=observacoes,
 
         status="Pendente"
+
     )
 
 
@@ -337,6 +365,10 @@ def listar_reservas():
             db.or_(
                 Reserva.nome_completo.ilike(
                     f"%{busca}%"
+                ),
+
+                Reserva.telefone.ilike( 
+                    f"%{busca}%" 
                 ),
 
                 Reserva.categoria_reserva.ilike(

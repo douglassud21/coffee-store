@@ -54,6 +54,25 @@ O sistema permite que o usuário:
 
 Quais os Dados dos Usuarios Que o sistema ira proteger? Nome, Dados Bancarios, Valores de pedidos, motivo de cancelamento, email, contato de telefone, endereço.
 
+| Evento                           | Ator    | Ação                                               | Resposta do Sistema                                                                             
+ 
+| **E01 – Acessar página inicial** | Usuário | Acessa `/`                                         | Sistema carrega o painel e apresenta os indicadores de reservas.                                |
+| **E02 – Iniciar reserva**        | Usuário | Clica em **Reservar**                              | Sistema apresenta o formulário de reserva.                                                      |
+| **E03 – Enviar reserva**         | Usuário | Preenche o formulário e envia                      | Sistema recebe os dados via `POST` e inicia as validações.                                      |
+| **E04 – Dados inválidos**        | Sistema | Identifica campo vazio ou informação inválida      | Sistema impede o cadastro e apresenta uma mensagem de erro.                                     |
+| **E05 – Reserva válida**         | Sistema | Valida todos os dados corretamente                 | Sistema cria um novo registro `Reserva` com status **Pendente**.                                |
+| **E06 – Salvar reserva**         | Sistema | Executa `db.session.add()` e `db.session.commit()` | Reserva é persistida no banco SQLite.                                                           |
+| **E07 – Confirmar cadastro**     | Sistema | Reserva foi salva com sucesso                      | Sistema apresenta a página de confirmação com os dados da reserva.                              |
+| **E08 – Consultar reservas**     | Usuário | Acessa a lista de reservas                         | Sistema consulta os registros através do ORM e apresenta a tabela.                              |
+| **E09 – Pesquisar reserva**      | Usuário | Digita um nome ou categoria                        | Sistema realiza uma consulta utilizando `LIKE/ILIKE` e apresenta os resultados correspondentes. |
+| **E10 – Alterar status**         | Usuário | Clica no botão de alteração de status              | Sistema altera o status da reserva e salva a alteração no banco.                                |
+| **E11 – Concluir reserva**       | Usuário | Altera uma reserva Confirmada                      | Sistema muda o status para **Concluída**.                                                       |
+| **E12 – Excluir reserva**        | Usuário | Clica em excluir                                   | Sistema solicita confirmação da exclusão.                                                       |
+| **E13 – Confirmar exclusão**     | Usuário | Confirma a exclusão                                | Sistema localiza a reserva pelo ID, executa `db.session.delete()` e `db.session.commit()`.      |
+| **E14 – Cancelar exclusão**      | Usuário | Cancela a exclusão                                 | Sistema mantém a reserva cadastrada.                                                            |
+| **E15 – Reiniciar servidor**     | Sistema | Aplicação é executada novamente                    | Sistema utiliza o banco SQLite existente e mantém os dados cadastrados.                         |
+
+
 ## 🎯 Objetivo
 
 Desenvolver uma aplicação web simples aplicando conceitos de:
