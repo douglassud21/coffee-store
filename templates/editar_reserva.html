@@ -1,0 +1,441 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Editar Reserva - Café & Sabor
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/editar_reserva.css') }}"
+    >
+
+</head>
+
+<body>
+
+
+<header class="header">
+
+    <div class="container header-content">
+
+        <a
+            href="{{ url_for('routes.index') }}"
+            class="logo"
+        >
+            Café & Sabor
+        </a>
+
+        <nav class="nav">
+
+            <a
+                href="{{ url_for('routes.index') }}"
+            >
+                Início
+            </a>
+
+            <a
+                href="{{ url_for('routes.reserva') }}"
+            >
+                Reservar mesa
+            </a>
+
+            <a
+                href="{{ url_for('routes.minhas_reservas') }}"
+                class="active"
+            >
+                Minhas reservas
+            </a>
+
+            <a
+                href="{{ url_for('routes.meu_cadastro') }}"
+            >
+                Meu cadastro
+            </a>
+
+            <a
+                href="{{ url_for('routes.logout') }}"
+            >
+                Sair
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="container pagina-formulario">
+
+
+    <div class="formulario-header">
+
+        <span class="titulo-secao">
+            Editar reserva
+        </span>
+
+        <h1>
+            Atualize sua reserva
+        </h1>
+
+        <p>
+            Altere os dados abaixo para atualizar
+            sua reserva no Café & Sabor.
+        </p>
+
+    </div>
+
+
+    {% if erro %}
+
+    <div class="mensagem-erro">
+        {{ erro }}
+    </div>
+
+    {% endif %}
+
+
+    <form
+        action="{{ url_for('routes.editar_reserva', id=reserva.id) }}"
+        method="POST"
+        class="formulario-reserva"
+    >
+
+
+        <section class="form-section">
+
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>
+                        Seus dados
+                    </h2>
+
+                    <p>
+                        Confira suas informações.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="nome_completo">
+                    Nome completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nome_completo"
+                    name="nome_completo"
+                    value="{{ request.form.get('nome_completo', reserva.nome_completo) }}"
+                    required
+                >
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="telefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    value="{{ request.form.get('telefone', reserva.telefone) }}"
+                    required
+                >
+
+                <small class="campo-ajuda">
+                    Informe seu telefone com DDD.
+                </small>
+
+            </div>
+
+
+        </section>
+
+
+        <section class="form-section">
+
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    📅
+                </div>
+
+                <div>
+
+                    <h2>
+                        Dados da reserva
+                    </h2>
+
+                    <p>
+                        Escolha a nova data e o horário.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="campo">
+
+                    <label for="data">
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data"
+                        name="data"
+                        value="{{ request.form.get('data', reserva.data.strftime('%Y-%m-%d')) }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="horario">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        id="horario"
+                        name="horario"
+                        value="{{ request.form.get('horario', reserva.horario.strftime('%H:%M')) }}"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="quantidade_pessoas">
+                        Quantidade de pessoas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidade_pessoas"
+                        name="quantidade_pessoas"
+                        min="1"
+                        max="20"
+                        value="{{ request.form.get('quantidade_pessoas', reserva.quantidade_pessoas) }}"
+                        required
+                    >
+
+                    <small class="campo-ajuda">
+                        Máximo de 20 pessoas.
+                    </small>
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="categoria_reserva">
+                        Categoria da reserva
+                    </label>
+
+                    <select
+                        id="categoria_reserva"
+                        name="categoria_reserva"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option
+                            value="Aniversário"
+                            {% if request.form.get('categoria_reserva', reserva.categoria_reserva) == 'Aniversário' %}
+                                selected
+                            {% endif %}
+                        >
+                            Aniversário
+                        </option>
+
+                        <option
+                            value="Encontro"
+                            {% if request.form.get('categoria_reserva', reserva.categoria_reserva) == 'Encontro' %}
+                                selected
+                            {% endif %}
+                        >
+                            Encontro
+                        </option>
+
+                        <option
+                            value="Reunião"
+                            {% if request.form.get('categoria_reserva', reserva.categoria_reserva) == 'Reunião' %}
+                                selected
+                            {% endif %}
+                        >
+                            Reunião
+                        </option>
+
+                        <option
+                            value="Família"
+                            {% if request.form.get('categoria_reserva', reserva.categoria_reserva) == 'Família' %}
+                                selected
+                            {% endif %}
+                        >
+                            Família
+                        </option>
+
+                        <option
+                            value="Outro"
+                            {% if request.form.get('categoria_reserva', reserva.categoria_reserva) == 'Outro' %}
+                                selected
+                            {% endif %}
+                        >
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <section class="form-section">
+
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    📝
+                </div>
+
+                <div>
+
+                    <h2>
+                        Observações
+                    </h2>
+
+                    <p>
+                        Alguma informação especial?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="observacoes">
+                    Observações
+                </label>
+
+                <textarea
+                    id="observacoes"
+                    name="observacoes"
+                    rows="5"
+                    placeholder="Ex.: mesa próxima à janela, comemoração de aniversário..."
+                >{{ request.form.get('observacoes', reserva.observacoes or '') }}</textarea>
+
+            </div>
+
+
+        </section>
+
+
+        <div class="form-notice">
+
+            <strong>
+                Importante
+            </strong>
+
+            <p>
+                Após salvar as alterações, sua reserva
+                continuará aguardando a confirmação
+                da equipe do Café & Sabor.
+            </p>
+
+        </div>
+
+
+        <div class="form-actions">
+
+            <a
+                href="{{ url_for('routes.minhas_reservas') }}"
+                class="btn-voltar"
+            >
+                Voltar
+            </a>
+
+            <button
+                type="submit"
+                class="btn-reserva"
+            >
+                Salvar alterações
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+</main>
+
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 Café & Sabor.
+            Todos os direitos reservados.
+        </p>
+
+    </div>
+</footer>
+
+
+</body>
+
+</html>
+

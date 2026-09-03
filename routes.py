@@ -40,11 +40,15 @@ def login_required(func):
     def decorated_function(*args, **kwargs):
 
         if "usuario_id" not in session:
+
             return redirect(
                 url_for("routes.login")
             )
 
-        return func(*args, **kwargs)
+        return func(
+            *args,
+            **kwargs
+        )
 
     return decorated_function
 
@@ -59,16 +63,21 @@ def cliente_required(func):
     def decorated_function(*args, **kwargs):
 
         if "usuario_id" not in session:
+
             return redirect(
                 url_for("routes.login")
             )
 
         if session.get("tipo") != "cliente":
+
             return redirect(
                 url_for("routes.index")
             )
 
-        return func(*args, **kwargs)
+        return func(
+            *args,
+            **kwargs
+        )
 
     return decorated_function
 
@@ -83,16 +92,21 @@ def admin_required(func):
     def decorated_function(*args, **kwargs):
 
         if "usuario_id" not in session:
+
             return redirect(
                 url_for("routes.login")
             )
 
         if session.get("tipo") != "admin":
+
             return redirect(
                 url_for("routes.index")
             )
 
-        return func(*args, **kwargs)
+        return func(
+            *args,
+            **kwargs
+        )
 
     return decorated_function
 
@@ -107,8 +121,12 @@ def admin_required(func):
 )
 def login():
 
-    # Se já estiver logado
+    # --------------------------------------
+    # SE JÁ ESTIVER LOGADO
+    # --------------------------------------
+
     if "usuario_id" in session:
+
         return redirect(
             url_for("routes.index")
         )
@@ -160,9 +178,9 @@ def login():
 
             else:
 
-                # ----------------------------------
+                # ------------------------------
                 # CRIA SESSÃO
-                # ----------------------------------
+                # ------------------------------
 
                 session["usuario_id"] = usuario.id
                 session["nome"] = usuario.nome
@@ -202,8 +220,8 @@ def logout():
 )
 def cadastro():
 
-    # Se já estiver logado
     if "usuario_id" in session:
+
         return redirect(
             url_for("routes.index")
         )
@@ -243,14 +261,13 @@ def cadastro():
 
         if not nome:
 
-            erro = (
-                "Informe seu nome."
-            )
+            erro = "Informe seu nome."
 
         elif len(nome) < 2:
 
             erro = (
-                "O nome deve possuir pelo menos 2 caracteres."
+                "O nome deve possuir pelo menos "
+                "2 caracteres."
             )
 
         elif not email or "@" not in email:
@@ -287,7 +304,8 @@ def cadastro():
             elif len(senha) < 6:
 
                 erro = (
-                    "A senha deve possuir pelo menos 6 caracteres."
+                    "A senha deve possuir pelo menos "
+                    "6 caracteres."
                 )
 
             elif senha != confirmar_senha:
@@ -298,9 +316,11 @@ def cadastro():
 
             else:
 
-                usuario_existente = Usuario.query.filter_by(
-                    email=email
-                ).first()
+                usuario_existente = (
+                    Usuario.query.filter_by(
+                        email=email
+                    ).first()
+                )
 
                 if usuario_existente:
 
@@ -309,10 +329,6 @@ def cadastro():
                     )
 
                 else:
-
-                    # ----------------------------------
-                    # CRIA USUÁRIO
-                    # ----------------------------------
 
                     novo_usuario = Usuario(
                         nome=nome,
@@ -330,13 +346,21 @@ def cadastro():
 
                     db.session.commit()
 
-                    # ----------------------------------
+                    # ------------------------------
                     # LOGIN AUTOMÁTICO
-                    # ----------------------------------
+                    # ------------------------------
 
-                    session["usuario_id"] = novo_usuario.id
-                    session["nome"] = novo_usuario.nome
-                    session["tipo"] = novo_usuario.tipo
+                    session["usuario_id"] = (
+                        novo_usuario.id
+                    )
+
+                    session["nome"] = (
+                        novo_usuario.nome
+                    )
+
+                    session["tipo"] = (
+                        novo_usuario.tipo
+                    )
 
                     return redirect(
                         url_for("routes.index")
@@ -361,22 +385,28 @@ def index():
     total_pessoas = 0
 
     # --------------------------------------
-    # MÉTRICAS SOMENTE PARA ADMIN
+    # MÉTRICAS DO ADMIN
     # --------------------------------------
 
     if session.get("tipo") == "admin":
 
-        total_reservas = Reserva.query.count()
+        total_reservas = (
+            Reserva.query.count()
+        )
 
-        reservas_confirmadas = Reserva.query.filter_by(
-            status="Confirmada"
-        ).count()
+        reservas_confirmadas = (
+            Reserva.query.filter_by(
+                status="Confirmada"
+            ).count()
+        )
 
-        total_pessoas = db.session.query(
-            db.func.sum(
-                Reserva.quantidade_pessoas
-            )
-        ).scalar() or 0
+        total_pessoas = (
+            db.session.query(
+                db.func.sum(
+                    Reserva.quantidade_pessoas
+                )
+            ).scalar() or 0
+        )
 
     return render_template(
         "index.html",
@@ -414,10 +444,6 @@ def reserva():
 )
 @cliente_required
 def confirmacao():
-
-    # --------------------------------------
-    # DADOS DO FORMULÁRIO
-    # --------------------------------------
 
     nome_completo = request.form.get(
         "nome_completo",
@@ -457,7 +483,7 @@ def confirmacao():
     erro = None
 
     # --------------------------------------
-    # VALIDAÇÃO DO NOME
+    # NOME
     # --------------------------------------
 
     if not nome_completo:
@@ -473,7 +499,7 @@ def confirmacao():
         )
 
     # --------------------------------------
-    # VALIDAÇÃO DO TELEFONE
+    # TELEFONE
     # --------------------------------------
 
     telefone_limpo = "".join(
@@ -490,7 +516,7 @@ def confirmacao():
             )
 
     # --------------------------------------
-    # VALIDAÇÃO DA DATA
+    # DATA
     # --------------------------------------
 
     data = None
@@ -519,7 +545,7 @@ def confirmacao():
                 )
 
     # --------------------------------------
-    # VALIDAÇÃO DO HORÁRIO
+    # HORÁRIO
     # --------------------------------------
 
     horario = None
@@ -548,7 +574,7 @@ def confirmacao():
                 )
 
     # --------------------------------------
-    # VERIFICA DATA/HORA PASSADAS
+    # DATA/HORA PASSADAS
     # --------------------------------------
 
     if not erro:
@@ -568,7 +594,7 @@ def confirmacao():
             )
 
     # --------------------------------------
-    # QUANTIDADE DE PESSOAS
+    # QUANTIDADE
     # --------------------------------------
 
     quantidade_pessoas = None
@@ -625,7 +651,7 @@ def confirmacao():
             )
 
     # --------------------------------------
-    # SE EXISTIR ERRO
+    # ERRO
     # --------------------------------------
 
     if erro:
@@ -672,20 +698,14 @@ def confirmacao():
             session["usuario_id"]
         )
 
-        erro = (
-            "Não foi possível realizar a reserva. "
-            "Tente novamente."
-        )
-
         return render_template(
             "reserva.html",
             usuario=usuario,
-            erro=erro
+            erro=(
+                "Não foi possível realizar a reserva. "
+                "Tente novamente."
+            )
         )
-
-    # --------------------------------------
-    # CONFIRMAÇÃO
-    # --------------------------------------
 
     return render_template(
         "confirmacao.html",
@@ -701,16 +721,17 @@ def confirmacao():
 @cliente_required
 def minhas_reservas():
 
-    # --------------------------------------
-    # BUSCA SOMENTE RESERVAS DO CLIENTE
-    # --------------------------------------
-
-    reservas = Reserva.query.filter_by(
-        usuario_id=session["usuario_id"]
-    ).order_by(
-        Reserva.data.asc(),
-        Reserva.horario.asc()
-    ).all()
+    reservas = (
+        Reserva.query
+        .filter_by(
+            usuario_id=session["usuario_id"]
+        )
+        .order_by(
+            Reserva.data.asc(),
+            Reserva.horario.asc()
+        )
+        .all()
+    )
 
     return render_template(
         "minhas_reservas.html",
@@ -730,7 +751,7 @@ def minhas_reservas():
 def editar_reserva(id):
 
     # --------------------------------------
-    # BUSCA RESERVA DO CLIENTE LOGADO
+    # BUSCA RESERVA DO CLIENTE
     # --------------------------------------
 
     reserva = Reserva.query.filter_by(
@@ -739,8 +760,7 @@ def editar_reserva(id):
     ).first_or_404()
 
     # --------------------------------------
-    # SOMENTE RESERVAS PENDENTES
-    # PODEM SER EDITADAS
+    # SOMENTE PENDENTE
     # --------------------------------------
 
     if reserva.status != "Pendente":
@@ -752,7 +772,7 @@ def editar_reserva(id):
     erro = None
 
     # --------------------------------------
-    # PROCESSA EDIÇÃO
+    # POST
     # --------------------------------------
 
     if request.method == "POST":
@@ -961,22 +981,37 @@ def editar_reserva(id):
                 )
 
         # ----------------------------------
-        # ATUALIZA RESERVA
+        # ATUALIZA
         # ----------------------------------
 
         if not erro:
 
             try:
 
-                reserva.nome_completo = nome_completo
-                reserva.telefone = telefone_limpo
+                reserva.nome_completo = (
+                    nome_completo
+                )
+
+                reserva.telefone = (
+                    telefone_limpo
+                )
+
                 reserva.data = data
                 reserva.horario = horario
-                reserva.quantidade_pessoas = quantidade_pessoas
-                reserva.categoria_reserva = categoria_reserva
-                reserva.observacoes = observacoes
 
-                # Ao editar, continua pendente
+                reserva.quantidade_pessoas = (
+                    quantidade_pessoas
+                )
+
+                reserva.categoria_reserva = (
+                    categoria_reserva
+                )
+
+                reserva.observacoes = (
+                    observacoes
+                )
+
+                # Continua pendente após edição
                 reserva.status = "Pendente"
 
                 db.session.commit()
@@ -996,10 +1031,6 @@ def editar_reserva(id):
                     "a reserva. Tente novamente."
                 )
 
-    # --------------------------------------
-    # EXIBE FORMULÁRIO
-    # --------------------------------------
-
     return render_template(
         "editar_reserva.html",
         reserva=reserva,
@@ -1018,18 +1049,10 @@ def editar_reserva(id):
 @cliente_required
 def cancelar_reserva(id):
 
-    # --------------------------------------
-    # BUSCA SOMENTE RESERVA DO CLIENTE
-    # --------------------------------------
-
     reserva = Reserva.query.filter_by(
         id=id,
         usuario_id=session["usuario_id"]
     ).first_or_404()
-
-    # --------------------------------------
-    # SÓ PERMITE CANCELAR RESERVA PENDENTE
-    # --------------------------------------
 
     if reserva.status == "Pendente":
 
@@ -1090,14 +1113,13 @@ def meu_cadastro():
 
         if not nome:
 
-            erro = (
-                "Informe seu nome."
-            )
+            erro = "Informe seu nome."
 
         elif len(nome) < 2:
 
             erro = (
-                "O nome deve possuir pelo menos 2 caracteres."
+                "O nome deve possuir pelo menos "
+                "2 caracteres."
             )
 
         elif not email or "@" not in email:
@@ -1126,7 +1148,7 @@ def meu_cadastro():
                 )
 
         # ----------------------------------
-        # VERIFICA E-MAIL
+        # E-MAIL
         # ----------------------------------
 
         if not erro:
@@ -1146,19 +1168,17 @@ def meu_cadastro():
         # SENHA
         # ----------------------------------
 
-        if not erro:
+        if not erro and nova_senha:
 
-            if nova_senha:
+            if len(nova_senha) < 6:
 
-                if len(nova_senha) < 6:
-
-                    erro = (
-                        "A nova senha deve possuir "
-                        "pelo menos 6 caracteres."
-                    )
+                erro = (
+                    "A nova senha deve possuir "
+                    "pelo menos 6 caracteres."
+                )
 
         # ----------------------------------
-        # ATUALIZA DADOS
+        # ATUALIZA
         # ----------------------------------
 
         if not erro:
@@ -1169,17 +1189,19 @@ def meu_cadastro():
 
             if nova_senha:
 
-                usuario.senha = generate_password_hash(
-                    nova_senha
+                usuario.senha = (
+                    generate_password_hash(
+                        nova_senha
+                    )
                 )
 
             db.session.commit()
 
-            # Atualiza nome da sessão
             session["nome"] = usuario.nome
 
             sucesso = (
-                "Seus dados foram atualizados com sucesso."
+                "Seus dados foram atualizados "
+                "com sucesso."
             )
 
     return render_template(
@@ -1237,7 +1259,7 @@ def lista_reservas():
 
 
 # ==========================================
-# MUDAR STATUS DA RESERVA - ADMIN
+# MUDAR STATUS - ADMIN
 # ==========================================
 
 @routes.route(
@@ -1250,8 +1272,7 @@ def mudar_status(id):
     reserva = Reserva.query.get_or_404(id)
 
     # --------------------------------------
-    # RESERVA CANCELADA
-    # NÃO PODE SER REATIVADA
+    # CANCELADA NÃO PODE SER REATIVADA
     # --------------------------------------
 
     if reserva.status == "Cancelada":
@@ -1263,7 +1284,7 @@ def mudar_status(id):
         )
 
     # --------------------------------------
-    # CICLO DE STATUS
+    # CICLO
     # --------------------------------------
 
     if reserva.status == "Pendente":

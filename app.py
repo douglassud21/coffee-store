@@ -1,3 +1,4 @@
+
 from flask import Flask
 from sqlalchemy import inspect, text
 
@@ -14,9 +15,16 @@ from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
 
+
+# ==========================================
+# CONFIGURAÇÕES
+# ==========================================
+
 app.config["SECRET_KEY"] = "chave-secreta-do-projeto"
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "sqlite:///database.db"
+)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -41,28 +49,25 @@ app.register_blueprint(routes)
 
 with app.app_context():
 
-    # Cria as tabelas que ainda não existem
     db.create_all()
 
-    # --------------------------------------
-    # MIGRAÇÃO DA TABELA RESERVAS
-    # --------------------------------------
-    #
-    # Caso o database.db já existisse antes
-    # da criação do usuario_id, o db.create_all()
-    # não adicionaria automaticamente essa coluna.
-    #
-    # Por isso verificamos se ela existe.
-
-    inspector = inspect(db.engine)
+    inspector = inspect(
+        db.engine
+    )
 
     tabelas = inspector.get_table_names()
+
+    # --------------------------------------
+    # GARANTE usuario_id NA TABELA RESERVAS
+    # --------------------------------------
 
     if "reservas" in tabelas:
 
         colunas_reservas = [
             coluna["name"]
-            for coluna in inspector.get_columns("reservas")
+            for coluna in inspector.get_columns(
+                "reservas"
+            )
         ]
 
         if "usuario_id" not in colunas_reservas:
@@ -76,9 +81,9 @@ with app.app_context():
                     )
                 )
 
-    # ======================================
-    # CRIA ADMINISTRADOR PADRÃO
-    # ======================================
+    # --------------------------------------
+    # CRIA ADMIN PADRÃO
+    # --------------------------------------
 
     admin = Usuario.query.filter_by(
         email="admin@cafeesabor.com"
@@ -90,7 +95,9 @@ with app.app_context():
             nome="Administrador",
             email="admin@cafeesabor.com",
             telefone="00000000000",
-            senha=generate_password_hash("Admin@123"),
+            senha=generate_password_hash(
+                "Admin@123"
+            ),
             tipo="admin"
         )
 
@@ -104,4 +111,8 @@ with app.app_context():
 # ==========================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    app.run(
+        debug=True
+    )
+
