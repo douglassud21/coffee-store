@@ -3,27 +3,14 @@
 <html lang="pt-BR">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<meta charset="UTF-8">
+<title>Reservar Mesa - Café & Sabor</title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<meta
-    name="description"
-    content="Faça sua reserva no Café & Sabor."
->
-
-<title>Reservar Mesa | Café & Sabor</title>
-
-<link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='style.css') }}"
->
-
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reserva.css') }}">
 
 </head>
 
@@ -31,59 +18,38 @@
 
 
 <!-- ==========================================
-     CABEÇALHO
+     HEADER
 =========================================== -->
 
 <header class="header">
 
-    <div class="header-container">
+    <div class="container header-content">
 
-
-        <!-- LOGO -->
-
-        <a
-            href="{{ url_for('routes.index') }}"
-            class="logo"
-        >
-
-            <span class="logo-icon">
-                ☕
-            </span>
-
-            <span class="logo-text">
-                Café <span>&</span> Sabor
-            </span>
-
+        <a href="{{ url_for('routes.index') }}"
+           class="logo">
+            Café & Sabor
         </a>
-
-
-        <!-- NAVEGAÇÃO -->
 
         <nav class="nav">
 
-            <a
-                href="{{ url_for('routes.index') }}"
-                class="nav-link"
-            >
+            <a href="{{ url_for('routes.index') }}">
                 Início
             </a>
 
-            <a
-                href="{{ url_for('routes.reserva') }}"
-                class="nav-link active"
-            >
+            <a href="{{ url_for('routes.reserva') }}"
+               class="active">
                 Reservar mesa
             </a>
 
-            <a
-                href="{{ url_for('routes.listar_reservas') }}"
-                class="nav-link"
-            >
-                Ver reservas
+            <a href="{{ url_for('routes.meu_cadastro') }}">
+                Meu cadastro
+            </a>
+
+            <a href="{{ url_for('routes.logout') }}">
+                Sair
             </a>
 
         </nav>
-
 
     </div>
 
@@ -91,179 +57,161 @@
 
 
 <!-- ==========================================
-     CONTEÚDO PRINCIPAL
+     CONTEÚDO
 =========================================== -->
 
-<main>
+<main class="container pagina-formulario">
+
+    <div class="formulario-header">
+
+        <span class="titulo-secao">
+            Reserva
+        </span>
+
+        <h1>
+            Reserve sua mesa
+        </h1>
+
+        <p>
+            Preencha os dados abaixo para realizar
+            sua reserva no Café & Sabor.
+        </p>
+
+    </div>
 
 
-    <section class="reserva">
+    <!-- ======================================
+         ERRO
+    ======================================= -->
+
+    {% if erro %}
+
+    <div class="mensagem-erro">
+        {{ erro }}
+    </div>
+
+    {% endif %}
 
 
-        <!-- ======================================
-             CABEÇALHO DA RESERVA
-        ======================================= -->
+    <!-- ======================================
+         FORMULÁRIO
+    ======================================= -->
 
-        <div class="reserva-header">
-
-            <span class="subtitle">
-                ☕ FAÇA SUA RESERVA
-            </span>
-
-            <h1>
-                Reserve sua mesa
-            </h1>
-
-            <p>
-                Preencha os dados abaixo e garanta
-                seu momento especial no Café & Sabor.
-            </p>
-
-        </div>
+    <form action="{{ url_for('routes.confirmacao') }}"
+          method="POST"
+          class="formulario-reserva">
 
 
-        <!-- ======================================
-             MENSAGEM DE ERRO
-        ======================================= -->
+        <!-- ==================================
+             DADOS DO CLIENTE
+        =================================== -->
 
-        {% if erro %}
+        <section class="form-section">
 
-        <div class="mensagem-erro">
+            <div class="form-section-header">
 
-            <span>
-                ⚠
-            </span>
-
-            <span>
-                {{ erro }}
-            </span>
-
-        </div>
-
-        {% endif %}
-
-
-        <!-- ======================================
-             FORMULÁRIO
-        ======================================= -->
-
-        <form
-            action="{{ url_for('routes.confirmacao') }}"
-            method="POST"
-            class="form-reserva"
-        >
-
-
-            <!-- ==================================
-                 INFORMAÇÕES PESSOAIS
-            =================================== -->
-
-            <div class="form-section">
-
-                <div class="form-section-header">
-
-                    <span class="form-section-icon">
-                        👤
-                    </span>
-
-                    <div>
-
-                        <h2>
-                            Seus dados
-                        </h2>
-
-                        <p>
-                            Informe seus dados para identificarmos sua reserva.
-                        </p>
-
-                    </div>
-
+                <div class="form-section-icon">
+                    👤
                 </div>
 
+                <div>
+                    <h2>
+                        Seus dados
+                    </h2>
 
-                <!-- NOME -->
-
-                <div class="form-group">
-
-                    <label for="nome_completo">
-                        Nome completo
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nome_completo"
-                        name="nome_completo"
-                        placeholder="Digite seu nome completo"
-                        maxlength="150"
-                        autocomplete="name"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- TELEFONE -->
-
-                <div class="form-group">
-
-                    <label for="telefone">
-                        Telefone
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="telefone"
-                        name="telefone"
-                        placeholder="(11) 99999-9999"
-                        maxlength="15"
-                        autocomplete="tel"
-                        required
-                    >
-
+                    <p>
+                        Confira suas informações.
+                    </p>
                 </div>
 
             </div>
 
 
-            <!-- ==================================
-                 INFORMAÇÕES DA RESERVA
-            =================================== -->
+            <!-- NOME -->
 
-            <div class="form-section">
+            <div class="campo">
 
-                <div class="form-section-header">
+                <label for="nome_completo">
+                    Nome completo
+                </label>
 
-                    <span class="form-section-icon">
-                        📅
-                    </span>
+                <input
+                    type="text"
+                    id="nome_completo"
+                    name="nome_completo"
+                    value="{{ request.form.get('nome_completo', usuario.nome) }}"
+                    required
+                >
 
-                    <div>
+            </div>
 
-                        <h2>
-                            Detalhes da reserva
-                        </h2>
 
-                        <p>
-                            Escolha quando você deseja visitar nossa cafeteria.
-                        </p>
+            <!-- TELEFONE -->
 
-                    </div>
+            <div class="campo">
 
+                <label for="telefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    value="{{ request.form.get('telefone', usuario.telefone) }}"
+                    required
+                >
+
+                <small class="campo-ajuda">
+                    Informe seu telefone com DDD.
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             DADOS DA RESERVA
+        =================================== -->
+
+        <section class="form-section">
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    📅
                 </div>
+
+                <div>
+                    <h2>
+                        Dados da reserva
+                    </h2>
+
+                    <p>
+                        Escolha a data e o horário.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
 
 
                 <!-- DATA -->
 
-                <div class="form-group">
+                <div class="campo">
 
                     <label for="data">
-                        Data da reserva
+                        Data
                     </label>
 
                     <input
                         type="date"
                         id="data"
                         name="data"
+                        value="{{ request.form.get('data', '') }}"
                         required
                     >
 
@@ -272,7 +220,7 @@
 
                 <!-- HORÁRIO -->
 
-                <div class="form-group">
+                <div class="campo">
 
                     <label for="horario">
                         Horário
@@ -282,18 +230,19 @@
                         type="time"
                         id="horario"
                         name="horario"
+                        value="{{ request.form.get('horario', '') }}"
                         required
                     >
 
                 </div>
 
 
-                <!-- NÚMERO DE PESSOAS -->
+                <!-- QUANTIDADE -->
 
-                <div class="form-group">
+                <div class="campo">
 
                     <label for="quantidade_pessoas">
-                        Número de pessoas
+                        Quantidade de pessoas
                     </label>
 
                     <input
@@ -302,12 +251,12 @@
                         name="quantidade_pessoas"
                         min="1"
                         max="20"
-                        placeholder="Ex.: 4"
+                        value="{{ request.form.get('quantidade_pessoas', '') }}"
                         required
                     >
 
                     <small class="campo-ajuda">
-                        Aceitamos reservas para até 20 pessoas.
+                        Máximo de 20 pessoas.
                     </small>
 
                 </div>
@@ -315,7 +264,7 @@
 
                 <!-- CATEGORIA -->
 
-                <div class="form-group">
+                <div class="campo">
 
                     <label for="categoria_reserva">
                         Categoria da reserva
@@ -331,20 +280,39 @@
                             Selecione uma categoria
                         </option>
 
-                        <option value="Café da manhã">
-                            ☕ Café da manhã
+                        <option
+                            value="Aniversário"
+                            {% if request.form.get('categoria_reserva') == 'Aniversário' %}selected{% endif %}
+                        >
+                            Aniversário
                         </option>
 
-                        <option value="Almoço">
-                            🍽️ Almoço
+                        <option
+                            value="Encontro"
+                            {% if request.form.get('categoria_reserva') == 'Encontro' %}selected{% endif %}
+                        >
+                            Encontro
                         </option>
 
-                        <option value="Jantar">
-                            🌙 Jantar
+                        <option
+                            value="Reunião"
+                            {% if request.form.get('categoria_reserva') == 'Reunião' %}selected{% endif %}
+                        >
+                            Reunião
                         </option>
 
-                        <option value="Comemoração">
-                            🎉 Comemoração
+                        <option
+                            value="Família"
+                            {% if request.form.get('categoria_reserva') == 'Família' %}selected{% endif %}
+                        >
+                            Família
+                        </option>
+
+                        <option
+                            value="Outro"
+                            {% if request.form.get('categoria_reserva') == 'Outro' %}selected{% endif %}
+                        >
+                            Outro
                         </option>
 
                     </select>
@@ -353,152 +321,105 @@
 
             </div>
 
+        </section>
 
-            <!-- ==================================
-                 OBSERVAÇÕES
-            =================================== -->
 
-            <div class="form-section">
+        <!-- ==================================
+             OBSERVAÇÕES
+        =================================== -->
 
-                <div class="form-section-header">
+        <section class="form-section">
 
-                    <span class="form-section-icon">
-                        💬
-                    </span>
+            <div class="form-section-header">
 
-                    <div>
-
-                        <h2>
-                            Alguma observação?
-                        </h2>
-
-                        <p>
-                            Conte-nos se existe algum detalhe especial.
-                        </p>
-
-                    </div>
-
+                <div class="form-section-icon">
+                    📝
                 </div>
 
-
-                <div class="form-group">
-
-                    <label for="observacoes">
+                <div>
+                    <h2>
                         Observações
-                    </label>
+                    </h2>
 
-                    <textarea
-                        id="observacoes"
-                        name="observacoes"
-                        rows="4"
-                        placeholder="Ex.: Gostaria de uma mesa próxima à janela..."
-                    ></textarea>
-
+                    <p>
+                        Alguma informação especial?
+                    </p>
                 </div>
 
             </div>
 
 
-            <!-- ==================================
-                 AÇÕES
-            =================================== -->
+            <div class="campo">
 
-            <div class="form-actions">
+                <label for="observacoes">
+                    Observações
+                </label>
 
-                <a
-                    href="{{ url_for('routes.index') }}"
-                    class="btn-voltar"
-                >
-                    ← Voltar
-                </a>
-
-
-                <button
-                    type="submit"
-                    class="btn-reserva"
-                >
-
-                    Confirmar reserva
-
-                    <span class="btn-arrow">
-                        →
-                    </span>
-
-                </button>
+                <textarea
+                    id="observacoes"
+                    name="observacoes"
+                    rows="5"
+                    placeholder="Ex.: mesa próxima à janela, comemoração de aniversário..."
+                >{{ request.form.get('observacoes', '') }}</textarea>
 
             </div>
 
-
-            <!-- ==================================
-                 AVISO
-            =================================== -->
-
-            <div class="form-notice">
-
-                <span>
-                    🔒
-                </span>
-
-                <p>
-                    Seus dados serão utilizados apenas
-                    para o gerenciamento da sua reserva.
-                </p>
-
-            </div>
+        </section>
 
 
-        </form>
+        <!-- ==================================
+             AVISO
+        =================================== -->
+
+        <div class="form-notice">
+
+            <strong>
+                Importante
+            </strong>
+
+            <p>
+                Sua reserva será cadastrada como
+                <strong>Pendente</strong> e deverá ser
+                confirmada pela equipe do Café & Sabor.
+            </p>
+
+        </div>
 
 
-    </section>
+        <!-- ==================================
+             BOTÕES
+        =================================== -->
 
+        <div class="form-actions">
+
+            <a href="{{ url_for('routes.index') }}"
+               class="btn-voltar">
+                Voltar
+            </a>
+
+            <button type="submit"
+                    class="btn-reserva">
+                Confirmar reserva
+            </button>
+
+        </div>
+
+    </form>
 
 </main>
 
 
 <!-- ==========================================
-     RODAPÉ
+     FOOTER
 =========================================== -->
 
 <footer class="footer">
 
-    <div class="footer-container">
-
-
-        <div class="footer-logo">
-
-            <span>
-                ☕
-            </span>
-
-            <strong>
-                Café & Sabor
-            </strong>
-
-        </div>
-
+    <div class="container">
 
         <p>
-            © 2026 Café & Sabor — Sistema de Reservas
+            © 2026 Café & Sabor. Todos os direitos reservados.
         </p>
-
-
-        <div class="footer-links">
-
-            <a href="{{ url_for('routes.index') }}">
-                Início
-            </a>
-
-            <a href="{{ url_for('routes.reserva') }}">
-                Reservar
-            </a>
-
-            <a href="{{ url_for('routes.listar_reservas') }}">
-                Reservas
-            </a>
-
-        </div>
-
 
     </div>
 

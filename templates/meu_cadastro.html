@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Meu cadastro | Café & Sabor
+    </title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/meu_cadastro.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
+
+    <header class="header">
+
+        <div class="container header-container">
+
+            <!-- LOGO -->
+
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="logo"
+            >
+                Café & Sabor
+            </a>
+
+
+            <!-- MENU -->
+
+            <nav class="nav">
+
+                <a
+                    href="{{ url_for('routes.index') }}"
+                    class="nav-link"
+                >
+                    Início
+                </a>
+
+                <a
+                    href="{{ url_for('routes.reserva') }}"
+                    class="nav-link"
+                >
+                    Reservar mesa
+                </a>
+
+                <a
+                    href="{{ url_for('routes.meu_cadastro') }}"
+                    class="nav-link"
+                >
+                    Meu cadastro
+                </a>
+
+                <a
+                    href="{{ url_for('routes.logout') }}"
+                    class="nav-link"
+                >
+                    Sair
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
+    <main class="login-container">
+
+        <div class="login-card cadastro-card">
+
+
+            <!-- ==================================
+                 CABEÇALHO
+            =================================== -->
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    👤
+                </div>
+
+                <span class="section-subtitle">
+                    Minha conta
+                </span>
+
+                <h1>
+                    Meu cadastro
+                </h1>
+
+                <p>
+                    Atualize seus dados pessoais
+                    quando quiser.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================
+                 MENSAGEM DE ERRO
+            =================================== -->
+
+            {% if erro %}
+
+                <div class="mensagem-erro">
+
+                    <span>
+                        ⚠
+                    </span>
+
+                    <p>
+                        {{ erro }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ==================================
+                 MENSAGEM DE SUCESSO
+            =================================== -->
+
+            {% if sucesso %}
+
+                <div class="mensagem-sucesso">
+
+                    <span>
+                        ✓
+                    </span>
+
+                    <p>
+                        {{ sucesso }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ==================================
+                 FORMULÁRIO
+            =================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('routes.meu_cadastro') }}"
+                class="form-login"
+            >
+
+
+                <!-- NOME -->
+
+                <div class="campo">
+
+                    <label for="nome">
+                        Nome completo
+                    </label>
+
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite seu nome completo"
+                        autocomplete="name"
+                        value="{{ usuario.nome }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- E-MAIL -->
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        value="{{ usuario.email }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- TELEFONE -->
+
+                <div class="campo">
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="(11) 99999-9999"
+                        autocomplete="tel"
+                        value="{{ usuario.telefone }}"
+                    >
+
+                </div>
+
+
+                <!-- ==================================
+                     NOVA SENHA
+                =================================== -->
+
+                <div class="form-section">
+
+                    <div class="form-section-header">
+
+                        <div class="form-section-icon">
+                            🔒
+                        </div>
+
+                        <div>
+
+                            <h2>
+                                Alterar senha
+                            </h2>
+
+                            <p>
+                                Deixe em branco caso
+                                não queira alterar.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- NOVA SENHA -->
+
+                    <div class="campo">
+
+                        <label for="senha">
+                            Nova senha
+                        </label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite uma nova senha"
+                            autocomplete="new-password"
+                        >
+
+                        <small class="campo-ajuda">
+                            A senha deve possuir pelo
+                            menos 6 caracteres.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ==================================
+                     AVISO
+                =================================== -->
+
+                <div class="form-notice">
+
+                    <span>
+                        ℹ️
+                    </span>
+
+                    <p>
+                        Seus dados serão utilizados
+                        para identificar você e
+                        associar suas reservas à sua conta.
+                    </p>
+
+                </div>
+
+
+                <!-- ==================================
+                     AÇÕES
+                =================================== -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('routes.index') }}"
+                        class="btn btn-voltar"
+                    >
+                        Cancelar
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="btn btn-reserva"
+                    >
+                        Salvar alterações
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Café & Sabor.
+                    Todos os direitos reservados.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+

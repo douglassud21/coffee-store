@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Login | Café & Sabor
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/login.css') }}"
+    >
+
+</head>
+
+
+<body class="pagina-login">
+
+
+    <!-- ==========================================
+         CABEÇALHO
+    =========================================== -->
+
+    <header class="header">
+
+        <div class="container header-container">
+
+            <a
+                href="{{ url_for('routes.login') }}"
+                class="logo"
+            >
+                Café & Sabor
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTEÚDO
+    =========================================== -->
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+
+            <!-- ==================================
+                 CABEÇALHO DO LOGIN
+            =================================== -->
+
+            <div class="login-header">
+
+                <div class="login-icon">
+                    ☕
+                </div>
+
+                <span class="section-subtitle">
+                    Bem-vindo
+                </span>
+
+                <h1>
+                    Acesse sua conta
+                </h1>
+
+                <p>
+                    Entre para continuar no
+                    Café & Sabor.
+                </p>
+
+            </div>
+
+
+            <!-- ==================================
+                 MENSAGEM DE ERRO
+            =================================== -->
+
+            {% if erro %}
+
+                <div class="mensagem-erro">
+
+                    <span>
+                        ⚠
+                    </span>
+
+                    <p>
+                        {{ erro }}
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- ==================================
+                 FORMULÁRIO
+            =================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for('routes.login') }}"
+                class="form-login"
+            >
+
+
+                <!-- E-MAIL -->
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <button
+                    type="submit"
+                    class="btn btn-reserva btn-login"
+                >
+                    Entrar
+                </button>
+
+            </form>
+
+
+            <!-- ==================================
+                 CADASTRO
+            =================================== -->
+
+            <div class="login-cadastro">
+
+                <p>
+                    Ainda não possui uma conta?
+                </p>
+
+                <a
+                    href="{{ url_for('routes.cadastro') }}"
+                    class="link-cadastro"
+                >
+                    Criar minha conta
+                </a>
+
+            </div>
+
+
+            <!-- ==================================
+                 VOLTAR
+            =================================== -->
+
+            <div class="login-voltar">
+
+                <a
+                    href="{{ url_for('routes.index') }}"
+                    class="btn-voltar"
+                >
+                    ← Voltar
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+
+    <footer class="footer footer-login">
+
+        <div class="container">
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 Café & Sabor.
+                    Todos os direitos reservados.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
+

@@ -1,355 +1,301 @@
-
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
 
-    <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta charset="UTF-8">
 
-    <meta
-        name="description"
-        content="Confirmação da sua reserva no Café & Sabor."
-    >
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
 
-    <title>Reserva Confirmada | Café & Sabor</title>
+<title>Reserva Confirmada - Café & Sabor</title>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='style.css') }}"
-    >
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/confirmacao.css') }}">
 
 </head>
-
 
 <body>
 
 
-    <!-- ==========================================
-         CABEÇALHO
-    =========================================== -->
+<!-- ==========================================
+     HEADER
+=========================================== -->
 
-    <header class="header">
+<header class="header">
 
-        <div class="header-container">
+    <div class="container header-content">
 
+        <a href="{{ url_for('routes.index') }}"
+           class="logo">
+            Café & Sabor
+        </a>
 
-            <!-- LOGO -->
+        <nav class="nav">
 
-            <a
-                href="{{ url_for('routes.index') }}"
-                class="logo"
-            >
-
-                <span class="logo-icon">
-                    ☕
-                </span>
-
-                <span class="logo-text">
-                    Café <span>&</span> Sabor
-                </span>
-
+            <a href="{{ url_for('routes.index') }}">
+                Início
             </a>
 
+            <a href="{{ url_for('routes.reserva') }}">
+                Reservar mesa
+            </a>
 
-            <!-- NAVEGAÇÃO -->
+            <a href="{{ url_for('routes.meu_cadastro') }}">
+                Meu cadastro
+            </a>
 
-            <nav class="nav">
+            <a href="{{ url_for('routes.logout') }}">
+                Sair
+            </a>
 
-                <a
-                    href="{{ url_for('routes.index') }}"
-                    class="nav-link"
-                >
-                    Início
-                </a>
+        </nav>
 
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="nav-link"
-                >
-                    Reservar mesa
-                </a>
+    </div>
 
-                <a
-                    href="{{ url_for('routes.listar_reservas') }}"
-                    class="nav-link"
-                >
-                    Ver reservas
-                </a>
-
-            </nav>
+</header>
 
 
+<!-- ==========================================
+     CONFIRMAÇÃO
+=========================================== -->
+
+<main class="container pagina-confirmacao">
+
+    <div class="confirmacao-card">
+
+
+        <!-- ==================================
+             ÍCONE
+        =================================== -->
+
+        <div class="confirmacao-icone">
+            ✓
         </div>
 
-    </header>
 
+        <!-- ==================================
+             TÍTULO
+        =================================== -->
 
+        <div class="confirmacao-mensagem">
 
-    <!-- ==========================================
-         CONTEÚDO PRINCIPAL
-    =========================================== -->
-
-    <main>
-
-        <section class="confirmacao">
-
-
-            <!-- ÍCONE DE CONFIRMAÇÃO -->
-
-            <div class="confirmacao-icon">
-                ✓
-            </div>
-
-
-            <!-- TÍTULO -->
-
-            <span class="subtitle">
-                ✓ RESERVA CONFIRMADA
+            <span class="titulo-secao">
+                Reserva realizada
             </span>
 
             <h1>
-                Tudo certo, {{ reserva.nome_completo }}!
+                Tudo certo!
             </h1>
 
-            <p class="mensagem">
+            <p>
                 Sua reserva foi registrada com sucesso.
-                Confira todos os detalhes abaixo.
             </p>
 
+            <p>
+                Aguarde a confirmação da equipe do
+                Café & Sabor.
+            </p>
+
+        </div>
 
 
-            <!-- ======================================
-                 DETALHES DA RESERVA
-            ======================================= -->
+        <!-- ==================================
+             DETALHES
+        =================================== -->
 
-            <div class="reserva-detalhes">
+        <div class="confirmacao-detalhes">
 
-
-                <!-- NOME -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        👤 Nome
-                    </span>
-
-                    <strong>
-                        {{ reserva.nome_completo }}
-                    </strong>
-
-                </div>
-
-
-                <!-- DATA -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        📅 Data
-                    </span>
-
-                    <strong>
-                        {{ reserva.data.strftime('%d/%m/%Y') }}
-                    </strong>
-
-                </div>
-
-
-                <!-- HORÁRIO -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        🕐 Horário
-                    </span>
-
-                    <strong>
-                        {{ reserva.horario.strftime('%H:%M') }}
-                    </strong>
-
-                </div>
-
-
-                <!-- NÚMERO DE PESSOAS -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        👥 Número de pessoas
-                    </span>
-
-                    <strong>
-                        {{ reserva.quantidade_pessoas }}
-                    </strong>
-
-                </div>
-
-
-                <!-- CATEGORIA -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        ☕ Categoria
-                    </span>
-
-                    <strong>
-                        {{ reserva.categoria_reserva }}
-                    </strong>
-
-                </div>
-
-
-                <!-- OBSERVAÇÕES -->
-
-                {% if reserva.observacoes %}
-
-                <div class="detalhe observacao">
-
-                    <span class="detalhe-label">
-                        💬 Observação
-                    </span>
-
-                    <strong>
-                        {{ reserva.observacoes }}
-                    </strong>
-
-                </div>
-
-                {% endif %}
-
-
-                <!-- STATUS -->
-
-                <div class="detalhe">
-
-                    <span class="detalhe-label">
-                        🔔 Status
-                    </span>
-
-                    <strong>
-                        {{ reserva.status }}
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- ======================================
-                 MENSAGEM FINAL
-            ======================================= -->
-
-            <div class="confirmacao-mensagem">
+            <div class="confirmacao-item">
 
                 <span>
-                    ☕
-                </span>
-
-                <p>
-                    Obrigado por escolher o Café & Sabor!
-                    Esperamos você.
-                </p>
-
-            </div>
-
-
-
-            <!-- ======================================
-                 AÇÕES
-            ======================================= -->
-
-            <div class="confirmacao-acoes">
-
-
-                <a
-                    href="{{ url_for('routes.index') }}"
-                    class="btn-voltar"
-                >
-                    ← Voltar para o início
-                </a>
-
-
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="btn-reserva"
-                >
-
-                    Fazer nova reserva
-
-                    <span class="btn-arrow">
-                        →
-                    </span>
-
-                </a>
-
-
-            </div>
-
-
-        </section>
-
-    </main>
-
-
-
-    <!-- ==========================================
-         RODAPÉ
-    =========================================== -->
-
-    <footer class="footer">
-
-        <div class="footer-container">
-
-
-            <div class="footer-logo">
-
-                <span>
-                    ☕
+                    Número da reserva
                 </span>
 
                 <strong>
-                    Café & Sabor
+                    #{{ reserva.id }}
                 </strong>
 
             </div>
 
 
-            <p>
-                © 2026 Café & Sabor — Sistema de Reservas
-            </p>
+            <div class="confirmacao-item">
 
+                <span>
+                    Nome
+                </span>
 
-            <div class="footer-links">
-
-                <a href="{{ url_for('routes.index') }}">
-                    Início
-                </a>
-
-                <a href="{{ url_for('routes.reserva') }}">
-                    Reservar
-                </a>
-
-                <a href="{{ url_for('routes.listar_reservas') }}">
-                    Reservas
-                </a>
+                <strong>
+                    {{ reserva.nome_completo }}
+                </strong>
 
             </div>
 
 
+            <div class="confirmacao-item">
+
+                <span>
+                    Telefone
+                </span>
+
+                <strong>
+                    {{ reserva.telefone }}
+                </strong>
+
+            </div>
+
+
+            <div class="confirmacao-item">
+
+                <span>
+                    Data
+                </span>
+
+                <strong>
+                    {{ reserva.data.strftime('%d/%m/%Y') }}
+                </strong>
+
+            </div>
+
+
+            <div class="confirmacao-item">
+
+                <span>
+                    Horário
+                </span>
+
+                <strong>
+                    {{ reserva.horario.strftime('%H:%M') }}
+                </strong>
+
+            </div>
+
+
+            <div class="confirmacao-item">
+
+                <span>
+                    Pessoas
+                </span>
+
+                <strong>
+                    {{ reserva.quantidade_pessoas }}
+                </strong>
+
+            </div>
+
+
+            <div class="confirmacao-item">
+
+                <span>
+                    Categoria
+                </span>
+
+                <strong>
+                    {{ reserva.categoria_reserva }}
+                </strong>
+
+            </div>
+
+
+            <div class="confirmacao-item">
+
+                <span>
+                    Status
+                </span>
+
+                <strong class="status status-pendente">
+                    {{ reserva.status }}
+                </strong>
+
+            </div>
+
+
+            {% if reserva.observacoes %}
+
+            <div class="confirmacao-observacoes">
+
+                <span>
+                    Observações
+                </span>
+
+                <p>
+                    {{ reserva.observacoes }}
+                </p>
+
+            </div>
+
+            {% endif %}
+
         </div>
 
-    </footer>
+
+        <!-- ==================================
+             AVISO
+        =================================== -->
+
+        <div class="form-notice">
+
+            <strong>
+                Aguarde a confirmação
+            </strong>
+
+            <p>
+                Sua reserva está atualmente como
+                <strong>Pendente</strong>.
+                A equipe do Café & Sabor fará a confirmação
+                da reserva.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================
+             BOTÕES
+        =================================== -->
+
+        <div class="form-actions">
+
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="btn-voltar"
+            >
+                Voltar ao início
+            </a>
+
+            <a
+                href="{{ url_for('routes.reserva') }}"
+                class="btn-reserva"
+            >
+                Nova reserva
+            </a>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <p>
+            © 2026 Café & Sabor. Todos os direitos reservados.
+        </p>
+
+    </div>
+
+</footer>
 
 
 </body>
 
 </html>
-
