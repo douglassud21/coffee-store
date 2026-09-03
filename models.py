@@ -6,9 +6,13 @@ from database import db
 # ==========================================
 
 class Usuario(db.Model):
+
     __tablename__ = "usuarios"
 
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(
+        db.Integer,
+        primary_key=True
+    )
 
     nome = db.Column(
         db.String(150),
@@ -37,7 +41,10 @@ class Usuario(db.Model):
         default="cliente"
     )
 
-    # Relacionamento com reservas
+    # --------------------------------------
+    # RELACIONAMENTO COM RESERVAS
+    # --------------------------------------
+
     reservas = db.relationship(
         "Reserva",
         backref="usuario",
@@ -45,6 +52,7 @@ class Usuario(db.Model):
     )
 
     def __repr__(self):
+
         return f"<Usuario {self.id} - {self.email}>"
 
 
@@ -53,6 +61,7 @@ class Usuario(db.Model):
 # ==========================================
 
 class Reserva(db.Model):
+
     __tablename__ = "reservas"
 
     id = db.Column(
@@ -101,7 +110,10 @@ class Reserva(db.Model):
         default="Pendente"
     )
 
-    # Usuário responsável pela reserva
+    # --------------------------------------
+    # USUÁRIO RESPONSÁVEL PELA RESERVA
+    # --------------------------------------
+
     usuario_id = db.Column(
         db.Integer,
         db.ForeignKey("usuarios.id"),
@@ -109,4 +121,5 @@ class Reserva(db.Model):
     )
 
     def __repr__(self):
+
         return f"<Reserva {self.id} - {self.nome_completo}>"

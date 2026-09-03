@@ -1,3 +1,4 @@
+
 from flask import (
     Blueprint,
     render_template,
@@ -100,7 +101,10 @@ def admin_required(func):
 # LOGIN
 # ==========================================
 
-@routes.route("/login", methods=["GET", "POST"])
+@routes.route(
+    "/login",
+    methods=["GET", "POST"]
+)
 def login():
 
     # Se já estiver logado
@@ -129,7 +133,9 @@ def login():
 
         if not email or not senha:
 
-            erro = "Preencha o e-mail e a senha."
+            erro = (
+                "Preencha o e-mail e a senha."
+            )
 
         else:
 
@@ -139,14 +145,18 @@ def login():
 
             if not usuario:
 
-                erro = "E-mail ou senha incorretos."
+                erro = (
+                    "E-mail ou senha incorretos."
+                )
 
             elif not check_password_hash(
                 usuario.senha,
                 senha
             ):
 
-                erro = "E-mail ou senha incorretos."
+                erro = (
+                    "E-mail ou senha incorretos."
+                )
 
             else:
 
@@ -186,7 +196,10 @@ def logout():
 # CADASTRO
 # ==========================================
 
-@routes.route("/cadastro", methods=["GET", "POST"])
+@routes.route(
+    "/cadastro",
+    methods=["GET", "POST"]
+)
 def cadastro():
 
     # Se já estiver logado
@@ -230,19 +243,27 @@ def cadastro():
 
         if not nome:
 
-            erro = "Informe seu nome."
+            erro = (
+                "Informe seu nome."
+            )
 
         elif len(nome) < 2:
 
-            erro = "O nome deve possuir pelo menos 2 caracteres."
+            erro = (
+                "O nome deve possuir pelo menos 2 caracteres."
+            )
 
         elif not email or "@" not in email:
 
-            erro = "Informe um e-mail válido."
+            erro = (
+                "Informe um e-mail válido."
+            )
 
         elif not telefone:
 
-            erro = "Informe seu telefone."
+            erro = (
+                "Informe seu telefone."
+            )
 
         else:
 
@@ -253,19 +274,27 @@ def cadastro():
 
             if len(telefone_limpo) not in [10, 11]:
 
-                erro = "Informe um telefone válido."
+                erro = (
+                    "Informe um telefone válido."
+                )
 
             elif not senha:
 
-                erro = "Informe uma senha."
+                erro = (
+                    "Informe uma senha."
+                )
 
             elif len(senha) < 6:
 
-                erro = "A senha deve possuir pelo menos 6 caracteres."
+                erro = (
+                    "A senha deve possuir pelo menos 6 caracteres."
+                )
 
             elif senha != confirmar_senha:
 
-                erro = "As senhas não coincidem."
+                erro = (
+                    "As senhas não coincidem."
+                )
 
             else:
 
@@ -275,7 +304,9 @@ def cadastro():
 
                 if usuario_existente:
 
-                    erro = "Este e-mail já está cadastrado."
+                    erro = (
+                        "Este e-mail já está cadastrado."
+                    )
 
                 else:
 
@@ -284,17 +315,12 @@ def cadastro():
                     # ----------------------------------
 
                     novo_usuario = Usuario(
-
                         nome=nome,
-
                         email=email,
-
                         telefone=telefone_limpo,
-
                         senha=generate_password_hash(
                             senha
                         ),
-
                         tipo="cliente"
                     )
 
@@ -354,11 +380,8 @@ def index():
 
     return render_template(
         "index.html",
-
         total_reservas=total_reservas,
-
         reservas_confirmadas=reservas_confirmadas,
-
         total_pessoas=total_pessoas
     )
 
@@ -439,11 +462,15 @@ def confirmacao():
 
     if not nome_completo:
 
-        erro = "Informe o nome completo."
+        erro = (
+            "Informe o nome completo."
+        )
 
     elif len(nome_completo) < 2:
 
-        erro = "Informe um nome válido."
+        erro = (
+            "Informe um nome válido."
+        )
 
     # --------------------------------------
     # VALIDAÇÃO DO TELEFONE
@@ -458,7 +485,9 @@ def confirmacao():
 
         if len(telefone_limpo) not in [10, 11]:
 
-            erro = "Informe um telefone válido."
+            erro = (
+                "Informe um telefone válido."
+            )
 
     # --------------------------------------
     # VALIDAÇÃO DA DATA
@@ -470,7 +499,9 @@ def confirmacao():
 
         if not data_str:
 
-            erro = "Informe a data da reserva."
+            erro = (
+                "Informe a data da reserva."
+            )
 
         else:
 
@@ -483,7 +514,9 @@ def confirmacao():
 
             except ValueError:
 
-                erro = "Informe uma data válida."
+                erro = (
+                    "Informe uma data válida."
+                )
 
     # --------------------------------------
     # VALIDAÇÃO DO HORÁRIO
@@ -495,7 +528,9 @@ def confirmacao():
 
         if not horario_str:
 
-            erro = "Informe o horário da reserva."
+            erro = (
+                "Informe o horário da reserva."
+            )
 
         else:
 
@@ -508,7 +543,9 @@ def confirmacao():
 
             except ValueError:
 
-                erro = "Informe um horário válido."
+                erro = (
+                    "Informe um horário válido."
+                )
 
     # --------------------------------------
     # VERIFICA DATA/HORA PASSADAS
@@ -540,7 +577,9 @@ def confirmacao():
 
         if not quantidade_str:
 
-            erro = "Informe a quantidade de pessoas."
+            erro = (
+                "Informe a quantidade de pessoas."
+            )
 
         else:
 
@@ -552,7 +591,10 @@ def confirmacao():
 
             except ValueError:
 
-                erro = "A quantidade de pessoas deve ser um número."
+                erro = (
+                    "A quantidade de pessoas "
+                    "deve ser um número."
+                )
 
         if not erro:
 
@@ -578,7 +620,9 @@ def confirmacao():
 
         if not categoria_reserva:
 
-            erro = "Selecione uma categoria de reserva."
+            erro = (
+                "Selecione uma categoria de reserva."
+            )
 
     # --------------------------------------
     # SE EXISTIR ERRO
@@ -603,23 +647,14 @@ def confirmacao():
     try:
 
         nova_reserva = Reserva(
-
             nome_completo=nome_completo,
-
             telefone=telefone_limpo,
-
             data=data,
-
             horario=horario,
-
             quantidade_pessoas=quantidade_pessoas,
-
             categoria_reserva=categoria_reserva,
-
             observacoes=observacoes,
-
             status="Pendente",
-
             usuario_id=session["usuario_id"]
         )
 
@@ -655,6 +690,357 @@ def confirmacao():
     return render_template(
         "confirmacao.html",
         reserva=nova_reserva
+    )
+
+
+# ==========================================
+# MINHAS RESERVAS
+# ==========================================
+
+@routes.route("/minhas-reservas")
+@cliente_required
+def minhas_reservas():
+
+    # --------------------------------------
+    # BUSCA SOMENTE RESERVAS DO CLIENTE
+    # --------------------------------------
+
+    reservas = Reserva.query.filter_by(
+        usuario_id=session["usuario_id"]
+    ).order_by(
+        Reserva.data.asc(),
+        Reserva.horario.asc()
+    ).all()
+
+    return render_template(
+        "minhas_reservas.html",
+        reservas=reservas
+    )
+
+
+# ==========================================
+# EDITAR RESERVA
+# ==========================================
+
+@routes.route(
+    "/editar-reserva/<int:id>",
+    methods=["GET", "POST"]
+)
+@cliente_required
+def editar_reserva(id):
+
+    # --------------------------------------
+    # BUSCA RESERVA DO CLIENTE LOGADO
+    # --------------------------------------
+
+    reserva = Reserva.query.filter_by(
+        id=id,
+        usuario_id=session["usuario_id"]
+    ).first_or_404()
+
+    # --------------------------------------
+    # SOMENTE RESERVAS PENDENTES
+    # PODEM SER EDITADAS
+    # --------------------------------------
+
+    if reserva.status != "Pendente":
+
+        return redirect(
+            url_for("routes.minhas_reservas")
+        )
+
+    erro = None
+
+    # --------------------------------------
+    # PROCESSA EDIÇÃO
+    # --------------------------------------
+
+    if request.method == "POST":
+
+        nome_completo = request.form.get(
+            "nome_completo",
+            ""
+        ).strip()
+
+        telefone = request.form.get(
+            "telefone",
+            ""
+        ).strip()
+
+        data_str = request.form.get(
+            "data",
+            ""
+        ).strip()
+
+        horario_str = request.form.get(
+            "horario",
+            ""
+        ).strip()
+
+        quantidade_str = request.form.get(
+            "quantidade_pessoas",
+            ""
+        ).strip()
+
+        categoria_reserva = request.form.get(
+            "categoria_reserva",
+            ""
+        ).strip()
+
+        observacoes = request.form.get(
+            "observacoes",
+            ""
+        ).strip()
+
+        # ----------------------------------
+        # NOME
+        # ----------------------------------
+
+        if not nome_completo:
+
+            erro = (
+                "Informe o nome completo."
+            )
+
+        elif len(nome_completo) < 2:
+
+            erro = (
+                "Informe um nome válido."
+            )
+
+        # ----------------------------------
+        # TELEFONE
+        # ----------------------------------
+
+        telefone_limpo = "".join(
+            c for c in telefone
+            if c.isdigit()
+        )
+
+        if not erro:
+
+            if len(telefone_limpo) not in [10, 11]:
+
+                erro = (
+                    "Informe um telefone válido."
+                )
+
+        # ----------------------------------
+        # DATA
+        # ----------------------------------
+
+        data = None
+
+        if not erro:
+
+            if not data_str:
+
+                erro = (
+                    "Informe a data da reserva."
+                )
+
+            else:
+
+                try:
+
+                    data = datetime.strptime(
+                        data_str,
+                        "%Y-%m-%d"
+                    ).date()
+
+                except ValueError:
+
+                    erro = (
+                        "Informe uma data válida."
+                    )
+
+        # ----------------------------------
+        # HORÁRIO
+        # ----------------------------------
+
+        horario = None
+
+        if not erro:
+
+            if not horario_str:
+
+                erro = (
+                    "Informe o horário da reserva."
+                )
+
+            else:
+
+                try:
+
+                    horario = datetime.strptime(
+                        horario_str,
+                        "%H:%M"
+                    ).time()
+
+                except ValueError:
+
+                    erro = (
+                        "Informe um horário válido."
+                    )
+
+        # ----------------------------------
+        # DATA/HORA PASSADAS
+        # ----------------------------------
+
+        if not erro:
+
+            agora = datetime.now()
+
+            data_hora_reserva = datetime.combine(
+                data,
+                horario
+            )
+
+            if data_hora_reserva < agora:
+
+                erro = (
+                    "A data e o horário da reserva "
+                    "não podem estar no passado."
+                )
+
+        # ----------------------------------
+        # QUANTIDADE
+        # ----------------------------------
+
+        quantidade_pessoas = None
+
+        if not erro:
+
+            if not quantidade_str:
+
+                erro = (
+                    "Informe a quantidade de pessoas."
+                )
+
+            else:
+
+                try:
+
+                    quantidade_pessoas = int(
+                        quantidade_str
+                    )
+
+                except ValueError:
+
+                    erro = (
+                        "A quantidade de pessoas "
+                        "deve ser um número."
+                    )
+
+            if not erro:
+
+                if quantidade_pessoas < 1:
+
+                    erro = (
+                        "A quantidade de pessoas "
+                        "deve ser maior que zero."
+                    )
+
+                elif quantidade_pessoas > 20:
+
+                    erro = (
+                        "A quantidade máxima é de "
+                        "20 pessoas."
+                    )
+
+        # ----------------------------------
+        # CATEGORIA
+        # ----------------------------------
+
+        if not erro:
+
+            if not categoria_reserva:
+
+                erro = (
+                    "Selecione uma categoria de reserva."
+                )
+
+        # ----------------------------------
+        # ATUALIZA RESERVA
+        # ----------------------------------
+
+        if not erro:
+
+            try:
+
+                reserva.nome_completo = nome_completo
+                reserva.telefone = telefone_limpo
+                reserva.data = data
+                reserva.horario = horario
+                reserva.quantidade_pessoas = quantidade_pessoas
+                reserva.categoria_reserva = categoria_reserva
+                reserva.observacoes = observacoes
+
+                # Ao editar, continua pendente
+                reserva.status = "Pendente"
+
+                db.session.commit()
+
+                return redirect(
+                    url_for(
+                        "routes.minhas_reservas"
+                    )
+                )
+
+            except Exception:
+
+                db.session.rollback()
+
+                erro = (
+                    "Não foi possível atualizar "
+                    "a reserva. Tente novamente."
+                )
+
+    # --------------------------------------
+    # EXIBE FORMULÁRIO
+    # --------------------------------------
+
+    return render_template(
+        "editar_reserva.html",
+        reserva=reserva,
+        erro=erro
+    )
+
+
+# ==========================================
+# CANCELAR RESERVA
+# ==========================================
+
+@routes.route(
+    "/cancelar-reserva/<int:id>",
+    methods=["POST"]
+)
+@cliente_required
+def cancelar_reserva(id):
+
+    # --------------------------------------
+    # BUSCA SOMENTE RESERVA DO CLIENTE
+    # --------------------------------------
+
+    reserva = Reserva.query.filter_by(
+        id=id,
+        usuario_id=session["usuario_id"]
+    ).first_or_404()
+
+    # --------------------------------------
+    # SÓ PERMITE CANCELAR RESERVA PENDENTE
+    # --------------------------------------
+
+    if reserva.status == "Pendente":
+
+        reserva.status = "Cancelada"
+
+        db.session.commit()
+
+    return redirect(
+        url_for(
+            "routes.minhas_reservas"
+        )
     )
 
 
@@ -704,19 +1090,27 @@ def meu_cadastro():
 
         if not nome:
 
-            erro = "Informe seu nome."
+            erro = (
+                "Informe seu nome."
+            )
 
         elif len(nome) < 2:
 
-            erro = "O nome deve possuir pelo menos 2 caracteres."
+            erro = (
+                "O nome deve possuir pelo menos 2 caracteres."
+            )
 
         elif not email or "@" not in email:
 
-            erro = "Informe um e-mail válido."
+            erro = (
+                "Informe um e-mail válido."
+            )
 
         elif not telefone:
 
-            erro = "Informe seu telefone."
+            erro = (
+                "Informe seu telefone."
+            )
 
         else:
 
@@ -727,7 +1121,9 @@ def meu_cadastro():
 
             if len(telefone_limpo) not in [10, 11]:
 
-                erro = "Informe um telefone válido."
+                erro = (
+                    "Informe um telefone válido."
+                )
 
         # ----------------------------------
         # VERIFICA E-MAIL
@@ -742,7 +1138,9 @@ def meu_cadastro():
 
             if outro_usuario:
 
-                erro = "Este e-mail já está sendo utilizado."
+                erro = (
+                    "Este e-mail já está sendo utilizado."
+                )
 
         # ----------------------------------
         # SENHA
@@ -766,9 +1164,7 @@ def meu_cadastro():
         if not erro:
 
             usuario.nome = nome
-
             usuario.email = email
-
             usuario.telefone = telefone_limpo
 
             if nova_senha:
@@ -795,7 +1191,7 @@ def meu_cadastro():
 
 
 # ==========================================
-# LISTA DE RESERVAS
+# LISTA DE RESERVAS - ADMIN
 # ==========================================
 
 @routes.route("/reservas")
@@ -814,11 +1210,9 @@ def lista_reservas():
                 Reserva.nome_completo.ilike(
                     f"%{busca}%"
                 ),
-
                 Reserva.telefone.ilike(
                     f"%{busca}%"
                 ),
-
                 Reserva.categoria_reserva.ilike(
                     f"%{busca}%"
                 )
@@ -843,7 +1237,7 @@ def lista_reservas():
 
 
 # ==========================================
-# MUDAR STATUS DA RESERVA
+# MUDAR STATUS DA RESERVA - ADMIN
 # ==========================================
 
 @routes.route(
@@ -854,6 +1248,19 @@ def lista_reservas():
 def mudar_status(id):
 
     reserva = Reserva.query.get_or_404(id)
+
+    # --------------------------------------
+    # RESERVA CANCELADA
+    # NÃO PODE SER REATIVADA
+    # --------------------------------------
+
+    if reserva.status == "Cancelada":
+
+        return redirect(
+            url_for(
+                "routes.lista_reservas"
+            )
+        )
 
     # --------------------------------------
     # CICLO DE STATUS
@@ -874,12 +1281,14 @@ def mudar_status(id):
     db.session.commit()
 
     return redirect(
-        url_for("routes.lista_reservas")
+        url_for(
+            "routes.lista_reservas"
+        )
     )
 
 
 # ==========================================
-# EXCLUIR RESERVA
+# EXCLUIR RESERVA - ADMIN
 # ==========================================
 
 @routes.route(
@@ -898,5 +1307,8 @@ def excluir_reserva(id):
     db.session.commit()
 
     return redirect(
-        url_for("routes.lista_reservas")
+        url_for(
+            "routes.lista_reservas"
+        )
     )
+
