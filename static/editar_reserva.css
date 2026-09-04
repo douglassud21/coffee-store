@@ -1,0 +1,1288 @@
+/* =========================================================
+   CAFÉ & SABOR
+   EDITAR RESERVA
+   Estilo da página de edição de reserva
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --marrom-escuro: #34231a;
+    --marrom: #6f4e37;
+    --marrom-claro: #916546;
+
+    --dourado: #c9945b;
+    --dourado-claro: #f0d5b4;
+
+    --creme: #f8f4ef;
+    --creme-escuro: #eee4da;
+
+    --branco: #ffffff;
+
+    --texto: #342820;
+    --texto-secundario: #74645a;
+    --texto-suave: #9a8980;
+
+    --borda: #e4d9d0;
+
+    --verde: #4c8961;
+    --verde-fundo: #edf7f0;
+
+    --vermelho: #b34d45;
+    --vermelho-fundo: #fff0ee;
+
+    --sombra:
+        0 15px 45px rgba(62, 39, 25, 0.09);
+
+    --transicao:
+        0.22s ease;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    background:
+        radial-gradient(
+            circle at 5% 10%,
+            rgba(201, 148, 91, 0.08),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 95% 80%,
+            rgba(111, 78, 55, 0.06),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #faf8f5 0%,
+            #f2ebe4 100%
+        );
+
+    color: var(--texto);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #39271d,
+            #60412d
+        );
+
+    box-shadow:
+        0 5px 25px rgba(45, 27, 18, 0.14);
+}
+
+
+.header-content {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.header .logo {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.header .logo:hover {
+
+    color: #f0c48d;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.header .nav {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 4px;
+}
+
+
+.header .nav a {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 40px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 8px;
+
+    color: #e8dcd3;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        color var(--transicao),
+        background var(--transicao);
+}
+
+
+.header .nav a:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.09);
+}
+
+
+/* =========================================================
+   LINK ATIVO
+========================================================= */
+
+.header .nav a.active {
+
+    color: #ffffff;
+
+    background:
+        rgba(201, 148, 91, 0.18);
+}
+
+
+.header .nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+
+    bottom: 4px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        var(--dourado);
+}
+
+
+/* =========================================================
+   LINK SAIR
+========================================================= */
+
+.header .nav a:last-child {
+
+    margin-left: 5px;
+
+    color: #f1c38d;
+
+    border:
+        1px solid rgba(
+            241,
+            195,
+            141,
+            0.28
+        );
+}
+
+
+.header .nav a:last-child:hover {
+
+    color: #39271d;
+
+    background:
+        #f1c38d;
+}
+
+
+/* =========================================================
+   CONTAINER PRINCIPAL
+========================================================= */
+
+.pagina-formulario {
+
+    width: 100%;
+
+    max-width: 900px;
+
+    margin:
+        0 auto;
+
+    padding:
+        65px 20px 80px;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO FORMULÁRIO
+========================================================= */
+
+.formulario-header {
+
+    margin-bottom: 35px;
+
+    text-align: center;
+}
+
+
+.titulo-secao {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    color:
+        var(--dourado);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.formulario-header h1 {
+
+    margin:
+        0 0 12px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(34px, 5vw, 46px);
+
+    line-height: 1.15;
+
+    letter-spacing: -0.7px;
+}
+
+
+.formulario-header p {
+
+    max-width: 580px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO
+========================================================= */
+
+.mensagem-erro {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+    padding:
+        15px 18px;
+
+    background:
+        var(--vermelho-fundo);
+
+    border:
+        1px solid #efcbc7;
+
+    border-left:
+        4px solid var(--vermelho);
+
+    border-radius: 10px;
+
+    color:
+        #91423c;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    box-shadow:
+        0 5px 15px rgba(
+            150,
+            62,
+            55,
+            0.05
+        );
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.formulario-reserva {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.form-section {
+
+    position: relative;
+
+    padding:
+        30px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--sombra);
+
+    transition:
+        box-shadow var(--transicao),
+        transform var(--transicao);
+}
+
+
+.form-section:hover {
+
+    box-shadow:
+        0 18px 48px
+        rgba(
+            62,
+            39,
+            25,
+            0.11
+        );
+}
+
+
+/* =========================================================
+   CABEÇALHO DA SEÇÃO
+========================================================= */
+
+.form-section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 27px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid #eee5de;
+}
+
+
+.form-section-icon {
+
+    flex:
+        0 0 auto;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4e5d6,
+            #ead4bf
+        );
+
+    color:
+        var(--marrom);
+
+    font-size: 23px;
+
+    box-shadow:
+        inset 0 0 0 1px
+        rgba(
+            111,
+            78,
+            55,
+            0.06
+        );
+}
+
+
+.form-section-header h2 {
+
+    margin:
+        0 0 4px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 21px;
+}
+
+
+.form-section-header p {
+
+    margin: 0;
+
+    color:
+        var(--texto-suave);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.campo:last-child {
+
+    margin-bottom: 0;
+}
+
+
+.campo label {
+
+    color:
+        var(--texto);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+.campo input,
+.campo select,
+.campo textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 10px;
+
+    background:
+        #fffdfb;
+
+    color:
+        var(--texto);
+
+    font-family:
+        inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.campo input,
+.campo select {
+
+    height: 49px;
+
+    padding:
+        0 14px;
+}
+
+
+.campo textarea {
+
+    min-height: 130px;
+
+    padding:
+        13px 14px;
+
+    line-height: 1.6;
+
+    resize: vertical;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+
+    color:
+        #b5a69d;
+}
+
+
+/* =========================================================
+   FOCO
+========================================================= */
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+
+    border-color:
+        var(--dourado);
+
+    background:
+        #ffffff;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(
+            201,
+            148,
+            91,
+            0.12
+        );
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.campo input:hover,
+.campo select:hover,
+.campo textarea:hover {
+
+    border-color:
+        #d3b8a2;
+}
+
+
+/* =========================================================
+   AJUDA DOS CAMPOS
+========================================================= */
+
+.campo-ajuda {
+
+    display: block;
+
+    margin-top: -2px;
+
+    color:
+        var(--texto-suave);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   GRID DOS CAMPOS
+========================================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 20px;
+
+    row-gap: 3px;
+}
+
+
+/* =========================================================
+   SELECT
+========================================================= */
+
+.campo select {
+
+    cursor: pointer;
+
+    appearance: none;
+
+    padding-right: 42px;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #806653 50%),
+        linear-gradient(135deg, #806653 50%, transparent 50%);
+
+    background-position:
+        calc(100% - 18px) 21px,
+        calc(100% - 13px) 21px;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat: no-repeat;
+}
+
+
+/* =========================================================
+   DATA E HORA
+========================================================= */
+
+.campo input[type="date"],
+.campo input[type="time"] {
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+.campo input[type="number"] {
+
+    appearance: textfield;
+}
+
+
+.campo input[type="number"]::-webkit-inner-spin-button,
+.campo input[type="number"]::-webkit-outer-spin-button {
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.form-notice {
+
+    position: relative;
+
+    padding:
+        19px 20px 19px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f9f2e9,
+            #f5eadf
+        );
+
+    border:
+        1px solid #ead8c7;
+
+    border-left:
+        4px solid var(--dourado);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(
+            98,
+            61,
+            36,
+            0.05
+        );
+}
+
+
+.form-notice strong {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--marrom);
+
+    font-size: 13px;
+}
+
+
+.form-notice p {
+
+    margin: 0;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 4px;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.btn-voltar {
+
+    min-height: 49px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 22px;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 10px;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--texto-secundario);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.btn-voltar:hover {
+
+    color:
+        var(--marrom);
+
+    border-color:
+        #d1b8a3;
+
+    background:
+        #fbf5ef;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+.btn-reserva {
+
+    min-height: 49px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 25px;
+
+    border:
+        none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #805638,
+            #563a29
+        );
+
+    color:
+        #ffffff;
+
+    text-decoration: none;
+
+    font-family:
+        inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            79,
+            52,
+            35,
+            0.18
+        );
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.btn-reserva:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #956343,
+            #67452f
+        );
+
+    box-shadow:
+        0 12px 28px
+        rgba(
+            79,
+            52,
+            35,
+            0.25
+        );
+}
+
+
+.btn-reserva:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background:
+        #302019;
+
+    padding:
+        25px 0;
+
+    text-align: center;
+}
+
+
+.footer p {
+
+    margin: 0;
+
+    color:
+        #988276;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding:
+            15px 0;
+
+        gap: 10px;
+    }
+
+
+    .header .nav {
+
+        justify-content: center;
+    }
+
+
+    .pagina-formulario {
+
+        padding:
+            50px 18px 65px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET / CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .pagina-formulario {
+
+        padding:
+            40px 14px 55px;
+    }
+
+
+    .formulario-header {
+
+        margin-bottom: 28px;
+    }
+
+
+    .formulario-header h1 {
+
+        font-size: 34px;
+    }
+
+
+    .formulario-header p {
+
+        font-size: 14px;
+    }
+
+
+    .form-section {
+
+        padding:
+            23px 19px;
+
+        border-radius: 15px;
+    }
+
+
+    .form-section-header {
+
+        gap: 12px;
+
+        margin-bottom: 23px;
+
+        padding-bottom: 17px;
+    }
+
+
+    .form-section-icon {
+
+        width: 44px;
+        height: 44px;
+
+        font-size: 20px;
+
+        border-radius: 11px;
+    }
+
+
+    .form-section-header h2 {
+
+        font-size: 19px;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .campo input,
+    .campo select {
+
+        height: 48px;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+
+        gap: 10px;
+    }
+
+
+    .btn-voltar,
+    .btn-reserva {
+
+        width: 100%;
+
+        box-sizing: border-box;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .header .nav {
+
+        width: 100%;
+
+        gap: 2px;
+    }
+
+
+    .header .nav a {
+
+        padding:
+            7px 8px;
+
+        font-size: 11px;
+    }
+
+
+    .header .nav a:last-child {
+
+        margin-left: 2px;
+    }
+
+
+    .pagina-formulario {
+
+        padding:
+            30px 10px 45px;
+    }
+
+
+    .formulario-header h1 {
+
+        font-size: 30px;
+    }
+
+
+    .form-section {
+
+        padding:
+            20px 15px;
+    }
+
+
+    .form-section-header {
+
+        align-items: flex-start;
+    }
+
+
+    .form-section-icon {
+
+        width: 40px;
+        height: 40px;
+
+        font-size: 18px;
+    }
+
+
+    .form-section-header h2 {
+
+        font-size: 17px;
+    }
+
+
+    .form-section-header p {
+
+        font-size: 11px;
+    }
+
+
+    .form-notice {
+
+        padding:
+            16px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   FOCO POR TECLADO
+========================================================= */
+
+.header .nav a:focus-visible,
+.btn-voltar:focus-visible,
+.btn-reserva:focus-visible,
+.campo input:focus-visible,
+.campo select:focus-visible,
+.campo textarea:focus-visible {
+
+    outline:
+        3px solid
+        rgba(
+            201,
+            148,
+            91,
+            0.35
+        );
+
+    outline-offset: 2px;
+}

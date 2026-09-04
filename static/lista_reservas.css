@@ -1,0 +1,1420 @@
+/* =========================================================
+   CAFÉ & SABOR
+   LISTA DE RESERVAS
+   Painel administrativo
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --marrom-escuro: #34231a;
+    --marrom: #6f4e37;
+    --marrom-claro: #916546;
+
+    --dourado: #c9945b;
+    --dourado-claro: #f0d5b4;
+
+    --fundo: #f7f3ee;
+    --fundo-card: #ffffff;
+
+    --texto: #352820;
+    --texto-secundario: #75645a;
+    --texto-suave: #9b8b81;
+
+    --borda: #e5dcd4;
+
+    --verde: #4b8960;
+    --verde-fundo: #eaf5ed;
+
+    --amarelo: #a56c24;
+    --amarelo-fundo: #fff4df;
+
+    --azul: #4c6f96;
+    --azul-fundo: #edf3fa;
+
+    --vermelho: #b34d45;
+    --vermelho-fundo: #fff0ee;
+
+    --sombra:
+        0 15px 40px rgba(58, 38, 26, 0.08);
+
+    --transicao: 0.22s ease;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    min-height: 100vh;
+
+    background:
+
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(201, 148, 91, 0.08),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 100% 100%,
+            rgba(111, 78, 55, 0.05),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fbfaf8 0%,
+            #f2ebe4 100%
+        );
+
+    color: var(--texto);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #38261c,
+            #60412d
+        );
+
+    box-shadow:
+        0 5px 25px rgba(45, 28, 18, 0.14);
+}
+
+
+.header-content {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.header .logo {
+
+    color: #fff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.header .logo:hover {
+
+    color: #f1c48e;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.header .nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    flex-wrap: wrap;
+}
+
+
+.header .nav a {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 40px;
+
+    padding:
+        8px 14px;
+
+    border-radius: 8px;
+
+    color: #e9ddd4;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transicao),
+        background var(--transicao);
+}
+
+
+.header .nav a:hover {
+
+    color: #fff;
+
+    background:
+        rgba(255, 255, 255, 0.09);
+}
+
+
+/* =========================================================
+   LINK ATIVO
+========================================================= */
+
+.header .nav a.active {
+
+    color: #fff;
+
+    background:
+        rgba(
+            201,
+            148,
+            91,
+            0.18
+        );
+}
+
+
+.header .nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 4px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        var(--dourado);
+}
+
+
+/* =========================================================
+   SAIR
+========================================================= */
+
+.header .nav a:last-child {
+
+    margin-left: 5px;
+
+    color: #f0c28a;
+
+    border:
+        1px solid
+        rgba(
+            240,
+            194,
+            138,
+            0.28
+        );
+}
+
+
+.header .nav a:last-child:hover {
+
+    color: #39271d;
+
+    background:
+        #f0c28a;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.pagina-lista {
+
+    width: 100%;
+
+    max-width: 1400px;
+
+    margin:
+        0 auto;
+
+    padding:
+        60px 24px 80px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.lista-header {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+}
+
+
+.lista-header .titulo-secao {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        var(--dourado);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.lista-header h1 {
+
+    margin:
+        0 0 10px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(34px, 5vw, 46px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.8px;
+}
+
+
+.lista-header p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.busca-form {
+
+    margin-bottom: 25px;
+}
+
+
+.campo-busca {
+
+    display: flex;
+
+    width: 100%;
+
+    padding: 5px;
+
+    background:
+        #fff;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(
+            58,
+            38,
+            26,
+            0.06
+        );
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao);
+}
+
+
+.campo-busca:focus-within {
+
+    border-color:
+        var(--dourado);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(
+            201,
+            148,
+            91,
+            0.10
+        );
+}
+
+
+.campo-busca input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    height: 48px;
+
+    padding:
+        0 15px;
+
+    border: none;
+
+    outline: none;
+
+    background:
+        transparent;
+
+    color:
+        var(--texto);
+
+    font-family:
+        inherit;
+
+    font-size: 13px;
+}
+
+
+.campo-busca input::placeholder {
+
+    color:
+        #a99b92;
+}
+
+
+/* =========================================================
+   BOTÃO BUSCAR
+========================================================= */
+
+.campo-busca button {
+
+    min-width: 105px;
+
+    height: 48px;
+
+    padding:
+        0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #805638,
+            #573a28
+        );
+
+    color:
+        #fff;
+
+    font-family:
+        inherit;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(
+            82,
+            53,
+            36,
+            0.15
+        );
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.campo-busca button:hover {
+
+    transform:
+        translateY(-1px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #966443,
+            #67452f
+        );
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            82,
+            53,
+            36,
+            0.22
+        );
+}
+
+
+/* =========================================================
+   CONTAINER DA TABELA
+========================================================= */
+
+.tabela-container {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.97
+        );
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--sombra);
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        #c7b09d
+        #f1ebe5;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+.tabela-container::-webkit-scrollbar {
+
+    height: 8px;
+}
+
+
+.tabela-container::-webkit-scrollbar-track {
+
+    background:
+        #f1ebe5;
+}
+
+
+.tabela-container::-webkit-scrollbar-thumb {
+
+    background:
+        #c8af9a;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.tabela-reservas {
+
+    width: 100%;
+
+    min-width: 1050px;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+========================================================= */
+
+.tabela-reservas thead {
+
+    background:
+        linear-gradient(
+            135deg,
+            #4a3224,
+            #63432d
+        );
+}
+
+
+.tabela-reservas th {
+
+    height: 55px;
+
+    padding:
+        0 15px;
+
+    color:
+        #f7eee7;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-align: left;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    white-space: nowrap;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+}
+
+
+/* bordas arredondadas */
+
+.tabela-reservas thead th:first-child {
+
+    border-top-left-radius: 17px;
+}
+
+
+.tabela-reservas thead th:last-child {
+
+    border-top-right-radius: 17px;
+}
+
+
+/* =========================================================
+   LINHAS
+========================================================= */
+
+.tabela-reservas tbody tr {
+
+    transition:
+        background var(--transicao);
+}
+
+
+.tabela-reservas tbody tr:nth-child(even) {
+
+    background:
+        #fdfbf9;
+}
+
+
+.tabela-reservas tbody tr:hover {
+
+    background:
+        #faf2e9;
+}
+
+
+/* =========================================================
+   CÉLULAS
+========================================================= */
+
+.tabela-reservas td {
+
+    padding:
+        17px 15px;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 12px;
+
+    vertical-align: middle;
+
+    border-bottom:
+        1px solid #eee6df;
+
+    white-space: nowrap;
+}
+
+
+.tabela-reservas tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   NOME
+========================================================= */
+
+.tabela-reservas td strong {
+
+    color:
+        var(--texto);
+
+    font-size: 13px;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+.tabela-reservas td:first-child {
+
+    color:
+        var(--marrom);
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 83px;
+
+    padding:
+        6px 10px;
+
+    border-radius: 30px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* pequeno indicador */
+
+.status::before {
+
+    content: "";
+
+    width: 6px;
+    height: 6px;
+
+    margin-right: 6px;
+
+    border-radius: 50%;
+
+    background:
+        currentColor;
+}
+
+
+/* =========================================================
+   PENDENTE
+========================================================= */
+
+.status-pendente {
+
+    color:
+        var(--amarelo);
+
+    background:
+        var(--amarelo-fundo);
+
+    border:
+        1px solid #efd7aa;
+}
+
+
+/* =========================================================
+   CONFIRMADA
+========================================================= */
+
+.status-confirmada {
+
+    color:
+        var(--verde);
+
+    background:
+        var(--verde-fundo);
+
+    border:
+        1px solid #cce3d3;
+}
+
+
+/* =========================================================
+   CONCLUÍDA
+========================================================= */
+
+.status-concluida {
+
+    color:
+        var(--azul);
+
+    background:
+        var(--azul-fundo);
+
+    border:
+        1px solid #d3dfed;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.acoes-reserva {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+/* remove estilos padrão dos forms */
+
+.acoes-reserva form {
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   BOTÃO STATUS
+========================================================= */
+
+.btn-status {
+
+    min-height: 34px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid #d8c3af;
+
+    border-radius: 7px;
+
+    background:
+        #fff8f1;
+
+    color:
+        var(--marrom);
+
+    font-family:
+        inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.btn-status:hover {
+
+    color:
+        #fff;
+
+    border-color:
+        var(--marrom);
+
+    background:
+        var(--marrom);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EXCLUIR
+========================================================= */
+
+.btn-excluir {
+
+    min-height: 34px;
+
+    padding:
+        0 11px;
+
+    border:
+        1px solid #e8c5c1;
+
+    border-radius: 7px;
+
+    background:
+        #fff7f6;
+
+    color:
+        var(--vermelho);
+
+    font-family:
+        inherit;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.btn-excluir:hover {
+
+    color:
+        #fff;
+
+    border-color:
+        var(--vermelho);
+
+    background:
+        var(--vermelho);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   NENHUMA RESERVA
+========================================================= */
+
+.sem-reservas {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 300px;
+
+    padding:
+        45px 25px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--sombra);
+
+    text-align: center;
+}
+
+
+/* ícone decorativo */
+
+.sem-reservas::before {
+
+    content: "☕";
+
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 50%;
+
+    background:
+        #f5e9dd;
+
+    color:
+        var(--marrom);
+
+    font-size: 28px;
+}
+
+
+.sem-reservas h2 {
+
+    margin:
+        0 0 9px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 24px;
+}
+
+
+.sem-reservas p {
+
+    max-width: 480px;
+
+    margin:
+        0 0 20px;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+.sem-reservas p strong {
+
+    color:
+        var(--marrom);
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.btn-voltar {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0 18px;
+
+    border:
+        1px solid var(--borda);
+
+    border-radius: 9px;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--marrom);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    transition:
+        background var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.btn-voltar:hover {
+
+    background:
+        #faf2e9;
+
+    border-color:
+        #d3b9a2;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background:
+        #302019;
+
+    padding:
+        25px 0;
+
+    text-align: center;
+}
+
+
+.footer p {
+
+    margin: 0;
+
+    color:
+        #978174;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        padding:
+            15px 0;
+
+        gap: 10px;
+    }
+
+
+    .header .nav {
+
+        justify-content: center;
+    }
+
+
+    .pagina-lista {
+
+        padding:
+            45px 16px 65px;
+    }
+
+
+    .lista-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .pagina-lista {
+
+        padding:
+            38px 12px 55px;
+    }
+
+
+    .lista-header h1 {
+
+        font-size: 34px;
+    }
+
+
+    .lista-header p {
+
+        font-size: 13px;
+    }
+
+
+    .campo-busca {
+
+        padding: 4px;
+    }
+
+
+    .campo-busca input {
+
+        height: 45px;
+
+        padding:
+            0 11px;
+
+        font-size: 12px;
+    }
+
+
+    .campo-busca button {
+
+        min-width: 85px;
+
+        height: 45px;
+
+        padding:
+            0 13px;
+    }
+
+
+    .tabela-container {
+
+        border-radius: 14px;
+    }
+
+
+    .tabela-reservas {
+
+        min-width: 1000px;
+    }
+
+
+    .tabela-reservas th {
+
+        height: 50px;
+
+        padding:
+            0 12px;
+    }
+
+
+    .tabela-reservas td {
+
+        padding:
+            14px 12px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .header .logo {
+
+        font-size: 22px;
+    }
+
+
+    .header .nav {
+
+        width: 100%;
+
+        gap: 2px;
+    }
+
+
+    .header .nav a {
+
+        padding:
+            7px 8px;
+
+        font-size: 10px;
+    }
+
+
+    .header .nav a:last-child {
+
+        margin-left: 2px;
+    }
+
+
+    .lista-header h1 {
+
+        font-size: 30px;
+    }
+
+
+    .lista-header p {
+
+        font-size: 12px;
+    }
+
+
+    .campo-busca {
+
+        flex-direction: column;
+
+        padding: 6px;
+    }
+
+
+    .campo-busca input {
+
+        width: 100%;
+    }
+
+
+    .campo-busca button {
+
+        width: 100%;
+    }
+
+
+    .sem-reservas {
+
+        min-height: 260px;
+
+        padding:
+            35px 18px;
+    }
+
+
+    .sem-reservas h2 {
+
+        font-size: 21px;
+    }
+
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+.header .nav a:focus-visible,
+.btn-status:focus-visible,
+.btn-excluir:focus-visible,
+.btn-voltar:focus-visible,
+.campo-busca input:focus-visible,
+.campo-busca button:focus-visible {
+
+    outline:
+        3px solid
+        rgba(
+            201,
+            148,
+            91,
+            0.35
+        );
+
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUZIR ANIMAÇÕES
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+
+}

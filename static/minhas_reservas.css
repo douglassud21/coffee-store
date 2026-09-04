@@ -1,0 +1,1408 @@
+/* =========================================================
+   CAFÉ & SABOR
+   MINHAS RESERVAS
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --marrom-escuro: #302017;
+    --marrom: #6f4e37;
+    --marrom-medio: #805a3f;
+    --marrom-claro: #a47754;
+
+    --dourado: #c9945b;
+    --dourado-claro: #efd0ad;
+
+    --fundo: #f7f2ec;
+    --branco: #ffffff;
+
+    --texto: #352820;
+    --texto-secundario: #75645a;
+    --texto-suave: #9c8c82;
+
+    --borda: #e4d9cf;
+
+    --verde: #397a57;
+    --verde-fundo: #edf8f1;
+    --verde-borda: #c7e5d2;
+
+    --amarelo: #a97822;
+    --amarelo-fundo: #fff8e8;
+    --amarelo-borda: #eedba9;
+
+    --vermelho: #b64d45;
+    --vermelho-fundo: #fff0ee;
+    --vermelho-borda: #efc8c4;
+
+    --azul: #47718c;
+    --azul-fundo: #eef6fa;
+
+    --sombra:
+        0 15px 45px rgba(55, 35, 23, 0.09);
+
+    --sombra-hover:
+        0 20px 55px rgba(55, 35, 23, 0.14);
+
+    --transicao: 0.25s ease;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body.pagina-minhas-reservas {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background:
+
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(201, 148, 91, 0.12),
+            transparent 27%
+        ),
+
+        radial-gradient(
+            circle at 95% 75%,
+            rgba(111, 78, 55, 0.07),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fcfaf8 0%,
+            #f4ece5 100%
+        );
+
+    color: var(--texto);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.pagina-minhas-reservas .header {
+
+    flex-shrink: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #352219,
+            #64432d
+        );
+
+    box-shadow:
+        0 6px 25px
+        rgba(45, 28, 18, 0.16);
+}
+
+
+.pagina-minhas-reservas .header-content {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.pagina-minhas-reservas .logo {
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    letter-spacing: -0.5px;
+
+    transition:
+        color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.pagina-minhas-reservas .logo:hover {
+
+    color: #f1c58f;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.pagina-minhas-reservas .nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.pagina-minhas-reservas .nav a {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 38px;
+
+    padding:
+        0 13px;
+
+    border-radius: 7px;
+
+    color:
+        rgba(255,255,255,0.78);
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transicao),
+        background var(--transicao);
+}
+
+
+.pagina-minhas-reservas .nav a:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(255,255,255,0.09);
+}
+
+
+/* item ativo */
+
+.pagina-minhas-reservas .nav a.active {
+
+    color: #ffffff;
+
+    background:
+        rgba(255,255,255,0.13);
+}
+
+
+.pagina-minhas-reservas .nav a.active::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+
+    bottom: 5px;
+
+    height: 2px;
+
+    border-radius: 10px;
+
+    background:
+        #d6a16d;
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+========================================================= */
+
+.minhas-reservas-container {
+
+    flex: 1;
+
+    padding:
+        55px 0 75px;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.reservas-header {
+
+    max-width: 760px;
+
+    margin:
+        0 auto 42px;
+
+    text-align: center;
+}
+
+
+.reservas-header .section-subtitle {
+
+    display: block;
+
+    margin-bottom: 9px;
+
+    color:
+        var(--dourado);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.reservas-header h1 {
+
+    margin:
+        0 0 12px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(30px, 5vw, 40px);
+
+    line-height: 1.1;
+
+    letter-spacing: -0.8px;
+}
+
+
+.reservas-header p {
+
+    max-width: 520px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   LISTA
+========================================================= */
+
+.reservas-lista {
+
+    width: 100%;
+
+    max-width: 980px;
+
+    margin:
+        0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   CARD DA RESERVA
+========================================================= */
+
+.reserva-card {
+
+    position: relative;
+
+    padding:
+        26px 28px;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border:
+        1px solid
+        rgba(218,202,188,0.85);
+
+    border-radius: 17px;
+
+    box-shadow:
+        var(--sombra);
+
+    overflow: hidden;
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        border-color var(--transicao);
+}
+
+
+.reserva-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 4px;
+
+    height: 100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #c9945b,
+            #805a3f
+        );
+}
+
+
+.reserva-card:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        var(--sombra-hover);
+
+    border-color:
+        #d9c6b5;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO CARD
+========================================================= */
+
+.reserva-card-header {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 21px;
+
+    border-bottom:
+        1px solid
+        #eee6df;
+}
+
+
+.reserva-numero {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--dourado);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.4px;
+}
+
+
+.reserva-card-header h2 {
+
+    margin: 0;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 21px;
+
+    line-height: 1.2;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 31px;
+
+    padding:
+        0 12px;
+
+    border-radius: 50px;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    white-space: nowrap;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+/* pendente */
+
+.status-pendente {
+
+    color:
+        var(--amarelo);
+
+    background:
+        var(--amarelo-fundo);
+
+    border:
+        1px solid
+        var(--amarelo-borda);
+}
+
+
+/* confirmada */
+
+.status-confirmada {
+
+    color:
+        var(--verde);
+
+    background:
+        var(--verde-fundo);
+
+    border:
+        1px solid
+        var(--verde-borda);
+}
+
+
+/* concluída */
+
+.status-concluida {
+
+    color:
+        var(--azul);
+
+    background:
+        var(--azul-fundo);
+
+    border:
+        1px solid
+        #d1e4ed;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES
+========================================================= */
+
+.reserva-info {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 0;
+
+    margin:
+        0;
+
+    padding:
+        22px 0;
+}
+
+
+.info-item {
+
+    min-height: 52px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding:
+        0 18px;
+
+    border-right:
+        1px solid
+        #eee6df;
+}
+
+
+.info-item:first-child {
+
+    padding-left: 0;
+}
+
+
+.info-item:last-child {
+
+    border-right: none;
+
+    padding-right: 0;
+}
+
+
+.info-label {
+
+    display: block;
+
+    margin-bottom: 6px;
+
+    color:
+        var(--texto-suave);
+
+    font-size: 10px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+}
+
+
+.info-valor {
+
+    color:
+        var(--texto);
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   OBSERVAÇÕES
+========================================================= */
+
+.reserva-observacoes {
+
+    margin-bottom: 21px;
+
+    padding:
+        15px 17px;
+
+    background:
+        #faf7f4;
+
+    border:
+        1px solid
+        #ece2d9;
+
+    border-radius: 9px;
+}
+
+
+.reserva-observacoes .info-label {
+
+    margin-bottom: 7px;
+}
+
+
+.reserva-observacoes p {
+
+    margin: 0;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.reserva-acoes {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding-top: 19px;
+
+    border-top:
+        1px solid
+        #eee6df;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.reserva-acoes .btn {
+
+    min-height: 41px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 17px;
+
+    border-radius: 8px;
+
+    font-family:
+        inherit;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao),
+        color var(--transicao),
+        border-color var(--transicao);
+}
+
+
+/* =========================================================
+   EDITAR
+========================================================= */
+
+.btn-editar {
+
+    color:
+        var(--marrom);
+
+    background:
+        #f8f1eb;
+
+    border:
+        1px solid
+        #e3d2c3;
+}
+
+
+.btn-editar:hover {
+
+    color:
+        #ffffff;
+
+    background:
+        var(--marrom);
+
+    border-color:
+        var(--marrom);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   CANCELAR
+========================================================= */
+
+.form-cancelar {
+
+    margin: 0;
+}
+
+
+.btn-cancelar {
+
+    color:
+        var(--vermelho);
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid
+        var(--vermelho-borda);
+}
+
+
+.btn-cancelar:hover {
+
+    color:
+        #ffffff;
+
+    background:
+        var(--vermelho);
+
+    border-color:
+        var(--vermelho);
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(182,77,69,0.18);
+}
+
+
+/* =========================================================
+   SEM RESERVAS
+========================================================= */
+
+.sem-reservas {
+
+    width: 100%;
+
+    max-width: 650px;
+
+    margin:
+        0 auto;
+
+    padding:
+        55px 35px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius: 19px;
+
+    box-shadow:
+        var(--sombra);
+}
+
+
+/* =========================================================
+   ÍCONE SEM RESERVAS
+========================================================= */
+
+.sem-reservas-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 auto 22px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4e3d2,
+            #ead1ba
+        );
+
+    border:
+        1px solid
+        #dfc4aa;
+
+    color:
+        var(--marrom);
+
+    font-size: 30px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(111,78,55,0.10);
+}
+
+
+.sem-reservas h2 {
+
+    margin:
+        0 0 11px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+}
+
+
+.sem-reservas p {
+
+    max-width: 440px;
+
+    margin:
+        0 auto 25px;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   BOTÃO NOVA RESERVA
+========================================================= */
+
+.sem-reservas .btn-reserva {
+
+    min-height: 46px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 22px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #82593d,
+            #593b29
+        );
+
+    color:
+        #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 8px 20px
+        rgba(82,53,36,0.18);
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.sem-reservas .btn-reserva:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #966744,
+            #69472f
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(82,53,36,0.25);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.pagina-minhas-reservas .footer {
+
+    flex-shrink: 0;
+
+    background:
+        #302017;
+
+    padding:
+        22px 0;
+}
+
+
+.pagina-minhas-reservas .footer-bottom {
+
+    padding: 0;
+
+    border: none;
+
+    text-align: center;
+}
+
+
+.pagina-minhas-reservas .footer p {
+
+    margin: 0;
+
+    color:
+        #988276;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .pagina-minhas-reservas .header-content {
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
+    .pagina-minhas-reservas .nav {
+
+        gap: 2px;
+    }
+
+
+    .pagina-minhas-reservas .nav a {
+
+        padding:
+            0 8px;
+
+        font-size: 10px;
+    }
+
+
+    .reserva-info {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        row-gap: 20px;
+    }
+
+
+    .info-item {
+
+        border-right: none;
+
+        padding:
+            0 15px;
+
+        border-bottom:
+            1px solid
+            #eee6df;
+
+        padding-bottom: 18px;
+    }
+
+
+    .info-item:nth-child(odd) {
+
+        padding-left: 0;
+
+        border-right:
+            1px solid
+            #eee6df;
+    }
+
+
+    .info-item:nth-child(even) {
+
+        padding-right: 0;
+    }
+
+
+    .info-item:nth-last-child(-n+2) {
+
+        border-bottom: none;
+
+        padding-bottom: 0;
+    }
+}
+
+
+/* =========================================================
+   TABLET / CELULAR
+========================================================= */
+
+@media (max-width: 680px) {
+
+    .pagina-minhas-reservas .header-content {
+
+        min-height: 70px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 6px;
+
+        padding-top: 9px;
+
+        padding-bottom: 9px;
+    }
+
+
+    .pagina-minhas-reservas .logo {
+
+        font-size: 23px;
+    }
+
+
+    .pagina-minhas-reservas .nav {
+
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+
+    .pagina-minhas-reservas .nav a {
+
+        min-height: 31px;
+
+        padding:
+            0 6px;
+
+        font-size: 9px;
+    }
+
+
+    .pagina-minhas-reservas .nav a.active::after {
+
+        left: 6px;
+
+        right: 6px;
+    }
+
+
+    .minhas-reservas-container {
+
+        padding:
+            38px 0 55px;
+    }
+
+
+    .reservas-header {
+
+        margin-bottom: 30px;
+
+        padding:
+            0 15px;
+    }
+
+
+    .reservas-header h1 {
+
+        font-size: 31px;
+    }
+
+
+    .reservas-header p {
+
+        font-size: 12px;
+    }
+
+
+    .reservas-lista {
+
+        padding:
+            0 15px;
+
+        box-sizing: border-box;
+    }
+
+
+    .reserva-card {
+
+        padding:
+            22px 20px;
+
+        border-radius: 15px;
+    }
+
+
+    .reserva-card-header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 13px;
+    }
+
+
+    .reserva-card-header h2 {
+
+        font-size: 19px;
+    }
+
+
+    .status {
+
+        min-height: 29px;
+
+        font-size: 9px;
+    }
+
+
+    .reserva-info {
+
+        gap: 0;
+
+        padding:
+            20px 0;
+    }
+
+
+    .reserva-acoes {
+
+        justify-content: stretch;
+    }
+
+
+    .reserva-acoes .btn {
+
+        flex: 1;
+
+        padding:
+            0 10px;
+    }
+
+
+    .sem-reservas {
+
+        width: calc(100% - 30px);
+
+        padding:
+            42px 22px;
+
+        border-radius: 16px;
+    }
+
+
+    .sem-reservas h2 {
+
+        font-size: 22px;
+    }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .pagina-minhas-reservas .nav a {
+
+        font-size: 8.5px;
+
+        padding:
+            0 5px;
+    }
+
+
+    .reservas-header h1 {
+
+        font-size: 27px;
+    }
+
+
+    .reserva-card {
+
+        padding:
+            20px 17px;
+    }
+
+
+    .reserva-info {
+
+        grid-template-columns:
+            1fr;
+
+        row-gap: 0;
+    }
+
+
+    .info-item,
+    .info-item:nth-child(odd),
+    .info-item:nth-child(even) {
+
+        width: 100%;
+
+        padding:
+            12px 0;
+
+        border-right: none;
+
+        border-bottom:
+            1px solid
+            #eee6df;
+    }
+
+
+    .info-item:last-child {
+
+        border-bottom: none;
+    }
+
+
+    .reserva-acoes {
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .reserva-acoes .btn {
+
+        width: 100%;
+
+        flex: none;
+    }
+
+
+    .sem-reservas {
+
+        padding:
+            38px 18px;
+    }
+
+
+    .sem-reservas-icon {
+
+        width: 65px;
+
+        height: 65px;
+
+        font-size: 27px;
+    }
+
+
+    .sem-reservas h2 {
+
+        font-size: 20px;
+    }
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+.pagina-minhas-reservas a:focus-visible,
+.pagina-minhas-reservas button:focus-visible {
+
+    outline:
+        3px solid
+        rgba(201,148,91,0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+
+}

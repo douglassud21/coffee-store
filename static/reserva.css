@@ -1,0 +1,890 @@
+/* =========================================================
+   CAFÉ & SABOR
+   RESERVA.CSS
+   ========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+   :root {
+    --marrom-escuro: #3b2418;
+    --marrom: #6f4530;
+    --marrom-medio: #8b5e3c;
+    --marrom-claro: #b98255;
+
+    --bege: #f7f1e8;
+    --bege-escuro: #eee2d2;
+    --creme: #fffaf3;
+
+    --branco: #ffffff;
+    --texto: #30251f;
+    --texto-suave: #756960;
+
+    --borda: #e5d8ca;
+
+    --verde: #39734a;
+    --verde-claro: #e9f5ec;
+
+    --vermelho: #a94335;
+    --vermelho-claro: #fff0ee;
+
+    --sombra: 0 15px 40px rgba(59, 36, 24, 0.10);
+    --sombra-hover: 0 20px 50px rgba(59, 36, 24, 0.16);
+
+    --raio: 16px;
+    --transicao: 0.25s ease;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(185, 130, 85, 0.08),
+            transparent 35%
+        ),
+        var(--bege);
+
+    color: var(--texto);
+
+    font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.container {
+    width: min(1120px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(59, 36, 24, 0.97);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.12);
+}
+
+.header-content {
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    color: var(--branco);
+    text-decoration: none;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.65rem;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+
+    transition: var(--transicao);
+}
+
+.logo:hover {
+    color: #e7b98d;
+}
+
+
+/* =========================================================
+   MENU
+   ========================================================= */
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.nav a {
+    position: relative;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    text-decoration: none;
+
+    font-size: 0.92rem;
+    font-weight: 500;
+
+    padding: 9px 13px;
+
+    border-radius: 8px;
+
+    transition: var(--transicao);
+}
+
+.nav a:hover {
+    color: var(--branco);
+    background: rgba(255, 255, 255, 0.09);
+}
+
+.nav a.active {
+    color: var(--branco);
+    background: rgba(255, 255, 255, 0.13);
+}
+
+
+/* =========================================================
+   PÁGINA DE FORMULÁRIO
+   ========================================================= */
+
+.pagina-formulario {
+    padding-top: 65px;
+    padding-bottom: 80px;
+
+    max-width: 850px;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO FORMULÁRIO
+   ========================================================= */
+
+.formulario-header {
+    text-align: center;
+
+    margin-bottom: 38px;
+}
+
+.titulo-secao {
+    display: inline-flex;
+    align-items: center;
+
+    color: var(--marrom-medio);
+
+    font-size: 0.78rem;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+}
+
+.titulo-secao::before,
+.titulo-secao::after {
+    content: "•";
+
+    color: var(--marrom-claro);
+
+    margin: 0 9px;
+}
+
+.formulario-header h1 {
+    margin: 0 0 12px;
+
+    color: var(--marrom-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(2rem, 5vw, 3rem);
+
+    line-height: 1.15;
+
+    letter-spacing: -1px;
+}
+
+.formulario-header p {
+    max-width: 620px;
+
+    margin: 0 auto;
+
+    color: var(--texto-suave);
+
+    font-size: 1rem;
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO
+   ========================================================= */
+
+.mensagem-erro {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 25px;
+
+    padding: 15px 18px;
+
+    color: var(--vermelho);
+
+    background: var(--vermelho-claro);
+
+    border: 1px solid #f1c9c4;
+
+    border-left: 4px solid var(--vermelho);
+
+    border-radius: 10px;
+
+    font-size: 0.94rem;
+}
+
+.mensagem-erro::before {
+    content: "⚠";
+
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.formulario-reserva {
+    display: flex;
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+
+/* =========================================================
+   SEÇÕES
+   ========================================================= */
+
+.form-section {
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio);
+
+    padding: 30px;
+
+    box-shadow: var(--sombra);
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.form-section:hover {
+    box-shadow: var(--sombra-hover);
+}
+
+
+/* =========================================================
+   CABEÇALHO DAS SEÇÕES
+   ========================================================= */
+
+.form-section-header {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+
+    padding-bottom: 22px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #eee5dc;
+}
+
+.form-section-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4dfca,
+            #ead0b5
+        );
+
+    color: var(--marrom);
+
+    border-radius: 13px;
+
+    font-size: 1.35rem;
+
+    box-shadow:
+        inset 0 0 0 1px rgba(111, 69, 48, 0.08);
+}
+
+.form-section-header h2 {
+    margin: 0;
+
+    color: var(--marrom-escuro);
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 1.35rem;
+}
+
+.form-section-header p {
+    margin: 3px 0 0;
+
+    color: var(--texto-suave);
+
+    font-size: 0.88rem;
+}
+
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+.campo {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+}
+
+.campo:last-child {
+    margin-bottom: 0;
+}
+
+.campo label {
+    margin-bottom: 8px;
+
+    color: var(--marrom-escuro);
+
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   INPUTS / SELECT / TEXTAREA
+   ========================================================= */
+
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    color: var(--texto);
+
+    background: #fffdf9;
+
+    border: 1px solid var(--borda);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 0.95rem;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+.campo input {
+    min-height: 49px;
+}
+
+.campo select {
+    min-height: 49px;
+
+    cursor: pointer;
+}
+
+.campo textarea {
+    min-height: 130px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+}
+
+
+/* PLACEHOLDER */
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #a69a90;
+}
+
+
+/* FOCUS */
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    background: var(--branco);
+
+    border-color: var(--marrom-medio);
+
+    box-shadow:
+        0 0 0 4px rgba(139, 94, 60, 0.12);
+}
+
+
+/* =========================================================
+   GRID DOS CAMPOS
+   ========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+}
+
+.form-grid .campo {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   AJUDA DOS CAMPOS
+   ========================================================= */
+
+.campo-ajuda {
+    display: block;
+
+    margin-top: 7px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.78rem;
+}
+
+
+/* =========================================================
+   AVISO
+   ========================================================= */
+
+.form-notice {
+    position: relative;
+
+    padding: 20px 22px 20px 58px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8ed,
+            #fff3e3
+        );
+
+    border: 1px solid #ecd5b9;
+
+    border-radius: 13px;
+
+    color: var(--texto);
+}
+
+.form-notice::before {
+    content: "☕";
+
+    position: absolute;
+
+    left: 20px;
+    top: 20px;
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--marrom);
+
+    font-size: 1rem;
+}
+
+.form-notice strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--marrom-escuro);
+
+    font-size: 0.95rem;
+}
+
+.form-notice p {
+    margin: 0;
+
+    color: var(--texto-suave);
+
+    font-size: 0.88rem;
+
+    line-height: 1.55;
+}
+
+.form-notice p strong {
+    display: inline;
+
+    color: var(--marrom);
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.form-actions {
+    display: flex;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 12px;
+
+    padding-top: 5px;
+}
+
+.btn-reserva,
+.btn-voltar {
+    min-height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px 24px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+/* BOTÃO PRINCIPAL */
+
+.btn-reserva {
+    color: var(--branco);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--marrom),
+            var(--marrom-escuro)
+        );
+
+    border: 1px solid var(--marrom-escuro);
+
+    box-shadow:
+        0 7px 18px rgba(59, 36, 24, 0.18);
+}
+
+.btn-reserva:hover {
+    background:
+        linear-gradient(
+            135deg,
+            var(--marrom-medio),
+            var(--marrom)
+        );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 11px 24px rgba(59, 36, 24, 0.25);
+}
+
+.btn-reserva:active {
+    transform: translateY(0);
+}
+
+
+/* BOTÃO VOLTAR */
+
+.btn-voltar {
+    color: var(--marrom);
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+}
+
+.btn-voltar:hover {
+    color: var(--marrom-escuro);
+
+    background: var(--creme);
+
+    border-color: #cdb9a7;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px rgba(59, 36, 24, 0.08);
+}
+
+
+/* =========================================================
+   ESTADOS DE VALIDAÇÃO
+   ========================================================= */
+
+.campo input:valid:not(:placeholder-shown),
+.campo select:valid {
+    /* Mantém visual limpo sem deixar tudo verde */
+}
+
+.campo input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #d99a91;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    padding: 28px 0;
+
+    background: var(--marrom-escuro);
+
+    color: rgba(255, 255, 255, 0.65);
+
+    text-align: center;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer p {
+    margin: 0;
+
+    font-size: 0.83rem;
+}
+
+
+/* =========================================================
+   SELEÇÃO DE TEXTO
+   ========================================================= */
+
+::selection {
+    color: var(--branco);
+    background: var(--marrom);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eee5dc;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b99a7e;
+
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--marrom);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .header-content {
+        padding: 15px 0;
+
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .nav a {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+
+    .pagina-formulario {
+        padding-top: 45px;
+        padding-bottom: 55px;
+    }
+
+    .form-section {
+        padding: 23px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 560px) {
+
+    .container {
+        width: min(100% - 24px, 1120px);
+    }
+
+    .logo {
+        font-size: 1.45rem;
+    }
+
+    .nav {
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 5px;
+    }
+
+    .nav a {
+        text-align: center;
+    }
+
+    .formulario-header {
+        margin-bottom: 28px;
+    }
+
+    .formulario-header h1 {
+        font-size: 2rem;
+    }
+
+    .form-section {
+        padding: 20px 16px;
+
+        border-radius: 13px;
+    }
+
+    .form-section-header {
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+
+    .form-section-icon {
+        width: 42px;
+        height: 42px;
+
+        font-size: 1.15rem;
+    }
+
+    .form-section-header h2 {
+        font-size: 1.15rem;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        width: 100%;
+    }
+
+    .btn-reserva,
+    .btn-voltar {
+        width: 100%;
+    }
+
+    .form-notice {
+        padding: 18px 18px 18px 52px;
+    }
+
+    .form-notice::before {
+        left: 17px;
+        top: 18px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .nav {
+        grid-template-columns: 1fr;
+    }
+
+    .formulario-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .form-section {
+        padding: 18px 14px;
+    }
+
+}

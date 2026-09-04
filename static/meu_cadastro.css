@@ -1,0 +1,1308 @@
+/* =========================================================
+   CAFÉ & SABOR
+   MEU CADASTRO
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --marrom-escuro: #302017;
+    --marrom: #6f4e37;
+    --marrom-medio: #805a3f;
+    --marrom-claro: #a47754;
+
+    --dourado: #c9945b;
+    --dourado-claro: #efd0ad;
+
+    --fundo: #f7f2ec;
+    --branco: #ffffff;
+
+    --texto: #352820;
+    --texto-secundario: #75645a;
+    --texto-suave: #9c8c82;
+
+    --borda: #e4d9cf;
+
+    --verde: #397a57;
+    --verde-fundo: #edf8f1;
+
+    --vermelho: #b64d45;
+    --vermelho-fundo: #fff0ee;
+
+    --azul: #47718c;
+    --azul-fundo: #eef6fa;
+
+    --sombra:
+        0 20px 60px rgba(55, 35, 23, 0.12);
+
+    --transicao: 0.25s ease;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    background:
+
+        radial-gradient(
+            circle at 5% 5%,
+            rgba(201, 148, 91, 0.13),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 95% 85%,
+            rgba(111, 78, 55, 0.08),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fcfaf8,
+            #f2e9e1
+        );
+
+    color: var(--texto);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #352219,
+            #64432d
+        );
+
+    box-shadow:
+        0 6px 25px
+        rgba(45, 28, 18, 0.16);
+}
+
+
+.header-container {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+
+    color: #ffffff;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 27px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    letter-spacing: -0.5px;
+
+    transition:
+        color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.logo:hover {
+
+    color: #f1c58f;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.nav-link,
+.nav a {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 38px;
+
+    padding:
+        0 13px;
+
+    border-radius: 7px;
+
+    color:
+        rgba(255,255,255,0.82);
+
+    font-size: 12px;
+
+    font-weight: 650;
+
+    text-decoration: none;
+
+    transition:
+        color var(--transicao),
+        background var(--transicao);
+}
+
+
+.nav-link:hover,
+.nav a:hover {
+
+    color: #ffffff;
+
+    background:
+        rgba(255,255,255,0.09);
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.login-container {
+
+    width: 100%;
+
+    min-height:
+        calc(100vh - 76px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    padding:
+        55px 20px 70px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.cadastro-card {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 570px;
+
+    padding:
+        44px 46px 40px;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border:
+        1px solid
+        rgba(218,202,188,0.85);
+
+    border-radius: 22px;
+
+    box-shadow:
+        var(--sombra);
+
+    overflow: hidden;
+}
+
+
+/* barra superior */
+
+.cadastro-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9b6a48,
+            #d6a16d,
+            #9b6a48
+        );
+}
+
+
+/* detalhe decorativo */
+
+.cadastro-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    right: -135px;
+
+    top: -130px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(201,148,91,0.06);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.login-header {
+
+    position: relative;
+
+    z-index: 1;
+
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   ÍCONE
+========================================================= */
+
+.login-icon {
+
+    width: 68px;
+
+    height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin:
+        0 auto 18px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5e5d5,
+            #ead1bb
+        );
+
+    border:
+        1px solid
+        #dfc3aa;
+
+    color:
+        var(--marrom);
+
+    font-size: 28px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(111,78,55,0.10);
+}
+
+
+/* =========================================================
+   SUBTÍTULO
+========================================================= */
+
+.section-subtitle {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        var(--dourado);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.login-header h1 {
+
+    margin:
+        0 0 10px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(28px, 5vw, 35px);
+
+    line-height: 1.15;
+
+    letter-spacing: -0.6px;
+}
+
+
+.login-header p {
+
+    max-width: 360px;
+
+    margin:
+        0 auto;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.form-login {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   CAMPO
+========================================================= */
+
+.campo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.campo label {
+
+    color:
+        var(--texto);
+
+    font-size: 12px;
+
+    font-weight: 750;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.campo input {
+
+    width: 100%;
+
+    height: 49px;
+
+    padding:
+        0 14px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background:
+        #fcfbfa;
+
+    color:
+        var(--texto);
+
+    font-family:
+        inherit;
+
+    font-size: 13px;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.campo input::placeholder {
+
+    color:
+        var(--texto-suave);
+
+    font-size: 12px;
+}
+
+
+.campo input:hover {
+
+    border-color:
+        #cfbbaa;
+
+    background:
+        #ffffff;
+}
+
+
+.campo input:focus {
+
+    background:
+        #ffffff;
+
+    border-color:
+        var(--dourado);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(201,148,91,0.11);
+}
+
+
+/* =========================================================
+   TEXTO DE AJUDA
+========================================================= */
+
+.campo-ajuda {
+
+    color:
+        var(--texto-suave);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SEÇÃO DE ALTERAÇÃO DE SENHA
+========================================================= */
+
+.form-section {
+
+    margin-top: 5px;
+
+    padding:
+        22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fcfaf8,
+            #f8f1eb
+        );
+
+    border:
+        1px solid
+        #eaded4;
+
+    border-radius: 13px;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA SEÇÃO
+========================================================= */
+
+.form-section-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 21px;
+
+    padding-bottom: 17px;
+
+    border-bottom:
+        1px solid
+        #e9ddd3;
+}
+
+
+.form-section-icon {
+
+    width: 43px;
+
+    height: 43px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        #efe1d4;
+
+    border:
+        1px solid
+        #dfc9b8;
+
+    font-size: 18px;
+}
+
+
+.form-section-header h2 {
+
+    margin:
+        0 0 4px;
+
+    color:
+        var(--marrom-escuro);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 17px;
+}
+
+
+.form-section-header p {
+
+    margin: 0;
+
+    color:
+        var(--texto-secundario);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   MENSAGEM DE ERRO
+========================================================= */
+
+.mensagem-erro {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-bottom: 22px;
+
+    padding:
+        13px 15px;
+
+    background:
+        var(--vermelho-fundo);
+
+    border:
+        1px solid
+        #efc8c4;
+
+    border-left:
+        4px solid
+        var(--vermelho);
+
+    border-radius: 9px;
+
+    color:
+        var(--vermelho);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.mensagem-erro span {
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   MENSAGEM DE SUCESSO
+========================================================= */
+
+.mensagem-sucesso {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-bottom: 22px;
+
+    padding:
+        13px 15px;
+
+    background:
+        var(--verde-fundo);
+
+    border:
+        1px solid
+        #c7e5d2;
+
+    border-left:
+        4px solid
+        var(--verde);
+
+    border-radius: 9px;
+
+    color:
+        var(--verde);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+}
+
+
+.mensagem-sucesso span {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 18px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background:
+        var(--verde);
+
+    color:
+        white;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.mensagem-sucesso p {
+
+    margin: 0;
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.form-notice {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    margin-top: 2px;
+
+    padding:
+        15px 17px;
+
+    background:
+        var(--azul-fundo);
+
+    border:
+        1px solid
+        #d1e4ed;
+
+    border-left:
+        4px solid
+        var(--azul);
+
+    border-radius: 9px;
+
+    color:
+        #496675;
+}
+
+
+.form-notice span {
+
+    flex-shrink: 0;
+
+    font-size: 15px;
+}
+
+
+.form-notice p {
+
+    margin: 0;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR / CANCELAR
+========================================================= */
+
+.btn-voltar {
+
+    min-height: 48px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 20px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--borda);
+
+    border-radius: 9px;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--texto-secundario);
+
+    font-family:
+        inherit;
+
+    font-size: 12px;
+
+    font-weight: 750;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color var(--transicao),
+        background var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.btn-voltar:hover {
+
+    color:
+        var(--marrom);
+
+    background:
+        #faf5f0;
+
+    border-color:
+        #cfbbaa;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO SALVAR
+========================================================= */
+
+.btn-reserva {
+
+    min-height: 48px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        0 22px;
+
+    box-sizing: border-box;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #82593d,
+            #593b29
+        );
+
+    color:
+        #ffffff;
+
+    font-family:
+        inherit;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(82,53,36,0.18);
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        background var(--transicao);
+}
+
+
+.btn-reserva:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #966744,
+            #69472f
+        );
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 26px
+        rgba(82,53,36,0.25);
+}
+
+
+.btn-reserva:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background:
+        #302017;
+
+    padding:
+        22px 0;
+}
+
+
+.footer-bottom {
+
+    padding: 0;
+
+    border: none;
+
+    text-align: center;
+}
+
+
+.footer p {
+
+    margin: 0;
+
+    color:
+        #988276;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   AUTOPREENCHIMENTO
+========================================================= */
+
+.campo input:-webkit-autofill {
+
+    -webkit-text-fill-color:
+        var(--texto);
+
+    -webkit-box-shadow:
+        0 0 0 1000px #fcfbfa inset;
+
+    transition:
+        background-color 5000s ease-in-out 0s;
+}
+
+
+/* =========================================================
+   ACESSIBILIDADE
+========================================================= */
+
+.campo input:focus-visible,
+.btn-reserva:focus-visible,
+.btn-voltar:focus-visible,
+.nav a:focus-visible {
+
+    outline:
+        3px solid
+        rgba(201,148,91,0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .header-container {
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .nav {
+
+        gap: 2px;
+    }
+
+    .nav-link,
+    .nav a {
+
+        padding:
+            0 8px;
+
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================================
+   TABLET / CELULAR
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .header-container {
+
+        min-height: 70px;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 7px;
+
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+
+    .logo {
+
+        font-size: 23px;
+    }
+
+
+    .nav {
+
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+
+    .nav-link,
+    .nav a {
+
+        min-height: 32px;
+
+        font-size: 10px;
+
+        padding:
+            0 7px;
+    }
+
+
+    .login-container {
+
+        min-height:
+            auto;
+
+        padding:
+            35px 15px 50px;
+    }
+
+
+    .cadastro-card {
+
+        padding:
+            37px 25px 30px;
+
+        border-radius: 18px;
+    }
+
+
+    .login-header {
+
+        margin-bottom: 25px;
+    }
+
+
+    .login-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 25px;
+    }
+
+
+    .login-header h1 {
+
+        font-size: 28px;
+    }
+
+
+    .form-login {
+
+        gap: 17px;
+    }
+
+
+    .form-section {
+
+        padding:
+            18px;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .form-actions .btn,
+    .form-actions .btn-reserva,
+    .form-actions .btn-voltar {
+
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .nav-link,
+    .nav a {
+
+        font-size: 9px;
+
+        padding:
+            0 5px;
+    }
+
+
+    .cadastro-card {
+
+        padding:
+            32px 18px 26px;
+    }
+
+
+    .login-header h1 {
+
+        font-size: 25px;
+    }
+
+
+    .login-header p {
+
+        font-size: 11px;
+    }
+
+
+    .campo input {
+
+        height: 47px;
+    }
+
+
+    .form-section {
+
+        padding:
+            15px;
+    }
+
+
+    .form-section-header {
+
+        gap: 10px;
+    }
+
+
+    .form-section-icon {
+
+        width: 39px;
+
+        height: 39px;
+
+        font-size: 16px;
+    }
+
+
+    .form-section-header h2 {
+
+        font-size: 15px;
+    }
+
+
+    .form-section-header p {
+
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        transition: none !important;
+
+        animation: none !important;
+    }
+
+}

@@ -1,0 +1,1100 @@
+/* =========================================================
+   CAFÉ & SABOR
+   CONFIRMACAO.CSS
+   Página de reserva confirmada
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
+
+:root {
+
+    --confirm-primary: #6f4e37;
+    --confirm-primary-dark: #4d3324;
+    --confirm-primary-light: #9a6b48;
+
+    --confirm-gold: #c9955c;
+    --confirm-gold-light: #efd4b3;
+
+    --confirm-success: #4d8b63;
+    --confirm-success-dark: #356848;
+    --confirm-success-light: #eaf5ed;
+
+    --confirm-bg: #f8f4ee;
+    --confirm-card: #ffffff;
+
+    --confirm-text: #35251d;
+    --confirm-text-light: #756258;
+    --confirm-muted: #9a887c;
+
+    --confirm-border: #e8ddd3;
+
+    --confirm-shadow:
+        0 25px 70px rgba(61, 39, 26, 0.13);
+
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    background:
+
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(201, 149, 92, 0.08),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(77, 139, 99, 0.06),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fbf9f6 0%,
+            #f3ebe2 100%
+        );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #39261c,
+            #5a3b28
+        );
+
+    box-shadow:
+        0 5px 25px rgba(48, 30, 20, 0.14);
+}
+
+
+.header-content {
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.header .logo {
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    color: #fff;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+
+.header .logo:hover {
+
+    color: #f1c58e;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.header .nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+}
+
+
+.header .nav a {
+
+    position: relative;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    min-height: 40px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 8px;
+
+    color: #e9ddd5;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.header .nav a:hover {
+
+    color: #fff;
+
+    background:
+        rgba(255, 255, 255, 0.09);
+}
+
+
+.header .nav a:last-child {
+
+    margin-left: 5px;
+
+    color: #f0c28a;
+
+    border:
+        1px solid rgba(
+            240,
+            194,
+            138,
+            0.3
+        );
+}
+
+
+.header .nav a:last-child:hover {
+
+    color: #3d281c;
+
+    background: #f0c28a;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+.pagina-confirmacao {
+
+    width: 100%;
+
+    min-height: calc(
+        100vh - 155px
+    );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        65px 20px;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+========================================================= */
+
+.confirmacao-card {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 680px;
+
+    padding:
+        48px;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border:
+        1px solid rgba(
+            232,
+            221,
+            211,
+            0.95
+        );
+
+    border-radius: 26px;
+
+    box-shadow:
+        var(--confirm-shadow);
+
+    overflow: hidden;
+
+    text-align: center;
+
+    animation:
+        cardEntrada 0.65s ease both;
+}
+
+
+@keyframes cardEntrada {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.98);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* barra superior */
+
+.confirmacao-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4d8b63,
+            #c9955c,
+            #4d8b63
+        );
+}
+
+
+/* decoração */
+
+.confirmacao-card::after {
+
+    content: "☕";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -60px;
+    top: -60px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(
+            201,
+            149,
+            92,
+            0.055
+        );
+
+    color:
+        rgba(
+            111,
+            78,
+            55,
+            0.10
+        );
+
+    font-size: 65px;
+
+    transform:
+        rotate(12deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ÍCONE DE SUCESSO
+========================================================= */
+
+.confirmacao-icone {
+
+    position: relative;
+
+    width: 88px;
+    height: 88px;
+
+    margin:
+        0 auto 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5b9b70,
+            #3f7655
+        );
+
+    color: #fff;
+
+    font-size: 43px;
+
+    font-weight: 500;
+
+    box-shadow:
+        0 12px 30px
+        rgba(
+            63,
+            118,
+            85,
+            0.22
+        );
+
+    animation:
+        sucessoEntrada 0.7s
+        cubic-bezier(
+            0.175,
+            0.885,
+            0.32,
+            1.275
+        )
+        0.15s both;
+}
+
+
+@keyframes sucessoEntrada {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.4)
+            rotate(-20deg);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0);
+    }
+
+}
+
+
+/* círculo externo */
+
+.confirmacao-icone::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -8px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(
+            77,
+            139,
+            99,
+            0.16
+        );
+}
+
+
+/* =========================================================
+   MENSAGEM
+========================================================= */
+
+.confirmacao-mensagem {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-bottom: 32px;
+}
+
+
+.titulo-secao {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        var(--confirm-success);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.confirmacao-mensagem h1 {
+
+    margin-bottom: 12px;
+
+    color:
+        var(--confirm-text);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(38px, 6vw, 52px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+}
+
+
+.confirmacao-mensagem p {
+
+    margin: 3px 0;
+
+    color:
+        var(--confirm-text-light);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   DETALHES DA RESERVA
+========================================================= */
+
+.confirmacao-detalhes {
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 1px;
+
+    margin-bottom: 25px;
+
+    overflow: hidden;
+
+    background:
+        var(--confirm-border);
+
+    border:
+        1px solid var(--confirm-border);
+
+    border-radius: 15px;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   ITEM
+========================================================= */
+
+.confirmacao-item {
+
+    min-height: 82px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    padding:
+        15px 18px;
+
+    background:
+        #fffdfb;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.confirmacao-item:hover {
+
+    background:
+        #fff9f4;
+}
+
+
+.confirmacao-item span {
+
+    color:
+        var(--confirm-muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+.confirmacao-item strong {
+
+    color:
+        var(--confirm-text);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    padding:
+        5px 11px;
+
+    border-radius: 20px;
+
+    font-size: 11px !important;
+
+    font-weight: 800 !important;
+
+    text-transform: uppercase;
+}
+
+
+.status-pendente {
+
+    color:
+        #9a6825 !important;
+
+    background:
+        #fff3dc;
+
+    border:
+        1px solid #efd6a8;
+}
+
+
+/* =========================================================
+   OBSERVAÇÕES
+========================================================= */
+
+.confirmacao-observacoes {
+
+    grid-column:
+        1 / -1;
+
+    padding:
+        18px;
+
+    background:
+        #fbf6f0;
+
+    border-top:
+        1px solid var(--confirm-border);
+
+    text-align: left;
+}
+
+
+.confirmacao-observacoes span {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color:
+        var(--confirm-muted);
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+.confirmacao-observacoes p {
+
+    margin: 0;
+
+    color:
+        var(--confirm-text-light);
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.confirmacao-card .form-notice {
+
+    display: block;
+
+    margin-bottom: 28px;
+
+    padding:
+        17px 18px;
+
+    background:
+        var(--confirm-success-light);
+
+    border:
+        1px solid #cfe4d5;
+
+    border-left:
+        4px solid var(--confirm-success);
+
+    border-radius: 11px;
+
+    text-align: left;
+}
+
+
+.confirmacao-card .form-notice strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--confirm-success-dark);
+
+    font-size: 13px;
+}
+
+
+.confirmacao-card .form-notice p {
+
+    margin: 0;
+
+    color:
+        #587161;
+
+    font-size: 12px;
+
+    line-height: 1.65;
+}
+
+
+.confirmacao-card .form-notice p strong {
+
+    display: inline;
+
+    margin: 0;
+
+    color:
+        var(--confirm-success-dark);
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.form-actions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+.form-actions .btn-voltar {
+
+    min-height: 49px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        11px 20px;
+
+    border:
+        1px solid var(--confirm-border);
+
+    border-radius: 10px;
+
+    background:
+        #fff;
+
+    color:
+        var(--confirm-text-light);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.form-actions .btn-voltar:hover {
+
+    color:
+        var(--confirm-primary);
+
+    border-color:
+        #d8c2ad;
+
+    background:
+        #fbf6f0;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   BOTÃO NOVA RESERVA
+========================================================= */
+
+.form-actions .btn-reserva {
+
+    min-height: 49px;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        11px 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #805536,
+            #573a28
+        );
+
+    color: #fff;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            86,
+            57,
+            39,
+            0.18
+        );
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.form-actions .btn-reserva:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #966443,
+            #67442e
+        );
+
+    box-shadow:
+        0 12px 27px
+        rgba(
+            86,
+            57,
+            39,
+            0.25
+        );
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+    background:
+        #302019;
+
+    padding:
+        23px 0;
+
+    text-align: center;
+}
+
+
+.footer p {
+
+    margin: 0;
+
+    color:
+        #907c6e;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .header-content {
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 10px;
+
+        padding:
+            15px 0;
+    }
+
+
+    .header .nav {
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+
+    .pagina-confirmacao {
+
+        align-items: flex-start;
+
+        padding:
+            45px 16px 55px;
+    }
+
+
+    .confirmacao-card {
+
+        padding:
+            40px 30px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .confirmacao-card {
+
+        padding:
+            35px 20px;
+
+        border-radius:
+            20px;
+    }
+
+
+    .confirmacao-card::after {
+
+        display: none;
+    }
+
+
+    .confirmacao-icone {
+
+        width: 76px;
+        height: 76px;
+
+        font-size: 36px;
+
+        margin-bottom: 20px;
+    }
+
+
+    .confirmacao-mensagem h1 {
+
+        font-size: 38px;
+    }
+
+
+    .confirmacao-mensagem p {
+
+        font-size: 14px;
+    }
+
+
+    .confirmacao-detalhes {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .confirmacao-item {
+
+        min-height: 70px;
+    }
+
+
+    .confirmacao-observacoes {
+
+        grid-column: auto;
+    }
+
+
+    .form-actions {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .form-actions .btn-voltar,
+    .form-actions .btn-reserva {
+
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 400px) {
+
+    .pagina-confirmacao {
+
+        padding:
+            30px 10px 40px;
+    }
+
+
+    .confirmacao-card {
+
+        padding:
+            30px 16px;
+    }
+
+
+    .confirmacao-mensagem h1 {
+
+        font-size: 34px;
+    }
+
+
+    .confirmacao-item {
+
+        padding:
+            13px 15px;
+    }
+
+}

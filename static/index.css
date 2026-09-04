@@ -1,0 +1,1003 @@
+/* =========================================================
+   CAFÉ & SABOR
+   INDEX.CSS
+   Página inicial
+========================================================= */
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 590px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(200, 149, 90, 0.20),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 10% 90%,
+            rgba(111, 78, 55, 0.10),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #fffaf3 0%,
+            #f3e8dc 100%
+        );
+}
+
+
+/* círculo decorativo */
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -180px;
+    top: -160px;
+
+    border-radius: 50%;
+
+    border:
+        70px solid rgba(111, 78, 55, 0.05);
+}
+
+
+/* segundo detalhe */
+
+.hero::after {
+
+    content: "☕";
+
+    position: absolute;
+
+    right: 9%;
+    bottom: 12%;
+
+    width: 150px;
+    height: 150px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.55);
+
+    box-shadow:
+        0 25px 60px rgba(74, 48, 32, 0.10);
+
+    font-size: 70px;
+
+    opacity: 0.75;
+
+    transform: rotate(-10deg);
+}
+
+
+/* =========================================================
+   CONTEÚDO DO HERO
+========================================================= */
+
+.hero-content {
+
+    position: relative;
+    z-index: 2;
+
+    min-height: 590px;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.hero-text {
+
+    max-width: 720px;
+
+    animation:
+        heroAppear 0.8s ease both;
+}
+
+
+@keyframes heroAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   SUBTÍTULO
+========================================================= */
+
+.hero-subtitle {
+
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 18px;
+
+    color: #9a6b45;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.hero-subtitle::before {
+
+    content: "";
+
+    width: 32px;
+    height: 2px;
+
+    background: #c8955a;
+}
+
+
+/* =========================================================
+   TÍTULO
+========================================================= */
+
+.hero h1 {
+
+    max-width: 700px;
+
+    margin-bottom: 22px;
+
+    color: #39261c;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(42px, 6vw, 70px);
+
+    font-weight: 700;
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+}
+
+
+.hero p {
+
+    max-width: 570px;
+
+    margin-bottom: 32px;
+
+    color: #725f53;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   MÉTRICAS
+========================================================= */
+
+.metricas {
+
+    position: relative;
+
+    padding:
+        70px 0;
+
+    background: #fff;
+
+    border-bottom:
+        1px solid #eee3da;
+}
+
+
+.metricas-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 22px;
+}
+
+
+.metrica-card {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    min-height: 130px;
+
+    padding: 24px;
+
+    overflow: hidden;
+
+    background: #fff;
+
+    border:
+        1px solid #eee2d8;
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow-sm);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.metrica-card::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    bottom: -45px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(200, 149, 90, 0.07);
+}
+
+
+.metrica-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #dfc6af;
+
+    box-shadow:
+        var(--shadow);
+}
+
+
+/* =========================================================
+   ÍCONE DAS MÉTRICAS
+========================================================= */
+
+.metrica-icon {
+
+    flex-shrink: 0;
+
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d6040,
+            #5d3d2a
+        );
+
+    color: #fff;
+
+    font-size: 23px;
+
+    box-shadow:
+        0 8px 18px rgba(93, 61, 42, 0.20);
+}
+
+
+.metrica-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.metrica-label {
+
+    color: #897568;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.metrica-valor {
+
+    color: #38261c;
+
+    font-size: 30px;
+
+    line-height: 1.1;
+}
+
+
+/* =========================================================
+   SOBRE
+========================================================= */
+
+.sobre {
+
+    position: relative;
+
+    padding:
+        110px 0;
+
+    background:
+        #faf7f2;
+}
+
+
+.section-header {
+
+    max-width: 720px;
+
+    margin:
+        0 auto 55px;
+
+    text-align: center;
+}
+
+
+.section-subtitle {
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    color: #a06f47;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 2px;
+}
+
+
+.section-header h2 {
+
+    margin-bottom: 18px;
+
+    color: #3b291f;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(32px, 4vw, 46px);
+
+    line-height: 1.15;
+}
+
+
+.section-header p {
+
+    color: #78665a;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   BENEFÍCIOS
+========================================================= */
+
+.beneficios {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 24px;
+}
+
+
+.beneficio-card {
+
+    position: relative;
+
+    padding:
+        38px 30px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 255, 255, 0.90);
+
+    border:
+        1px solid #e9ddd3;
+
+    border-radius:
+        var(--radius-lg);
+
+    box-shadow:
+        0 5px 20px rgba(69, 43, 29, 0.05);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    overflow: hidden;
+}
+
+
+.beneficio-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6f4e37,
+            #d0a06a
+        );
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        left;
+
+    transition:
+        transform 0.3s ease;
+}
+
+
+.beneficio-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        #dfc6af;
+
+    box-shadow:
+        0 18px 40px rgba(69, 43, 29, 0.11);
+}
+
+
+.beneficio-card:hover::before {
+
+    transform:
+        scaleX(1);
+}
+
+
+/* =========================================================
+   ÍCONE DOS BENEFÍCIOS
+========================================================= */
+
+.beneficio-icon {
+
+    width: 75px;
+    height: 75px;
+
+    margin:
+        0 auto 22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4e3d2,
+            #fff7ee
+        );
+
+    border:
+        1px solid #ead4c0;
+
+    font-size: 34px;
+
+    box-shadow:
+        0 8px 20px rgba(94, 59, 38, 0.07);
+}
+
+
+.beneficio-card h3 {
+
+    margin-bottom: 10px;
+
+    color: #432f23;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 20px;
+}
+
+
+.beneficio-card p {
+
+    color: #816e62;
+
+    font-size: 14px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.cta {
+
+    position: relative;
+
+    padding:
+        100px 0;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #503324 0%,
+            #704a32 55%,
+            #513321 100%
+        );
+
+    color: #fff;
+}
+
+
+.cta::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 400px;
+    height: 400px;
+
+    left: -180px;
+    top: -200px;
+
+    border-radius: 50%;
+
+    border:
+        80px solid rgba(255, 255, 255, 0.045);
+}
+
+
+.cta::after {
+
+    content: "✦";
+
+    position: absolute;
+
+    right: 10%;
+    top: 25%;
+
+    color:
+        rgba(255, 255, 255, 0.08);
+
+    font-size: 100px;
+}
+
+
+.cta-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+.cta .section-subtitle {
+
+    color: #e9bd86;
+}
+
+
+.cta h2 {
+
+    margin-bottom: 18px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size:
+        clamp(35px, 5vw, 50px);
+
+    line-height: 1.1;
+
+    color: #fff;
+}
+
+
+.cta p {
+
+    max-width: 580px;
+
+    margin:
+        0 auto 30px;
+
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 17px;
+
+    line-height: 1.8;
+}
+
+
+.cta .btn {
+
+    min-width: 200px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f0c38b,
+            #dba66b
+        );
+
+    color: #3d281b;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
+}
+
+
+.cta .btn:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f7d09e,
+            #e5b77f
+        );
+}
+
+
+/* =========================================================
+   ANIMAÇÃO DOS CARDS
+========================================================= */
+
+.beneficio-card,
+.metrica-card {
+
+    animation:
+        cardAppear 0.6s ease both;
+}
+
+
+.beneficio-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+
+.beneficio-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+
+        min-height: 520px;
+    }
+
+
+    .hero-content {
+
+        min-height: 520px;
+    }
+
+
+    .hero::after {
+
+        right: -30px;
+        bottom: 8%;
+
+        opacity: 0.35;
+    }
+
+
+    .metricas-grid,
+    .beneficios {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .metrica-card:last-child {
+
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .hero {
+
+        min-height: 500px;
+
+        text-align: center;
+    }
+
+
+    .hero-content {
+
+        min-height: 500px;
+
+        justify-content: center;
+    }
+
+
+    .hero-text {
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .hero h1 {
+
+        font-size: 42px;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .hero p {
+
+        font-size: 16px;
+    }
+
+
+    .hero-subtitle {
+
+        justify-content: center;
+    }
+
+
+    .hero::after {
+
+        display: none;
+    }
+
+
+    .hero-buttons {
+
+        justify-content: center;
+    }
+
+
+    .metricas {
+
+        padding: 45px 0;
+    }
+
+
+    .metricas-grid,
+    .beneficios {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .metrica-card:last-child {
+
+        grid-column: auto;
+    }
+
+
+    .sobre {
+
+        padding: 75px 0;
+    }
+
+
+    .section-header {
+
+        margin-bottom: 40px;
+    }
+
+
+    .beneficio-card {
+
+        padding:
+            32px 24px;
+    }
+
+
+    .cta {
+
+        padding:
+            75px 0;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .hero h1 {
+
+        font-size: 36px;
+    }
+
+
+    .hero p {
+
+        font-size: 15px;
+    }
+
+
+    .btn {
+
+        width: 100%;
+    }
+
+
+    .hero-buttons {
+
+        width: 100%;
+    }
+
+
+    .metrica-card {
+
+        padding: 20px;
+    }
+
+
+    .metrica-icon {
+
+        width: 50px;
+        height: 50px;
+
+        font-size: 20px;
+    }
+
+
+    .metrica-valor {
+
+        font-size: 26px;
+    }
+
+}
