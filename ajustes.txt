@@ -1,19 +1,21 @@
-Preciso criar um sistema de mesas, onde o cliente escolhe a mesa e o horário dessa mesa vai ser bloqueado por 2 horas do horário que já foi escolhido pelo cliente.
+Login => 
 
-isso vai ser acrescentado no formulário de reservas.
+* Ao cadastrar enviar um email de agradecimento pelo cadastro.
+* Confirmar se e Gmail ou outros tipos validos de email.
+* No telefone confirmar o tamanho dos Números e formatar melhor.
+* Não permitir Letras no telefone nem caracteres especiais
+
+Cardápio =>
+
+* Incluir um Cardápio ao site na parte de Usuário.
+* Na parte de ADM deixar com que ele possa cadastrar produtos manualmente.
 
 
-preciso separar o sistema entre cliente e adm, clientes podem usar certa parte do sistema e adm podem utilizar livremente.
 
-tela de login.
 
-resumo: vamos colocar tela de login: se for cliente, site comum, se for adm terá acesso ao painel de métricas, e ao sistema de exclusão e monitoramento de mesas.
 
-o cliente poderá ver somente a alteração da mesa e poderá excluir apenas a sua mesa.
 
-1- criar tela de login => usuário e adm 
-2- se for usuário fica no site sem Métricas, a reserva ira apenas confirmar e para ele vai ter uma tela apenas dele próprio alterar o cadastro dele mesmo ou excluir.
-3- se for adm, terá acesso as métricas, e a todo o sistema.
+
 
 
 
