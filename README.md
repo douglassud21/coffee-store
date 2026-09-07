@@ -534,7 +534,7 @@ O DER representa a estrutura do banco de dados e o relacionamento entre suas ent
 
 O diagrama de arquitetura apresenta a organização e o fluxo dos principais componentes do sistema.
 
-![Arquitetura do Sistema](docs/arquitetura_sistema.png)
+![Arquitetura do Sistema](docs/diagrama_componentes.png)
 
 ---
 
