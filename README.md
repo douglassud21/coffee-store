@@ -12,93 +12,89 @@ O sistema permite que o usuário:
 
 * Acesse a página inicial da cafeteria;
 * Acesse a página de reservas;
-* Preencha seus dados;
+* Preencha seus dados cadastrais;
 * Informe a data e o horário da reserva;
 * Informe a quantidade de pessoas;
-* Adicione uma observação, caso necessário;
+* Adicione observações, caso necessário;
 * Envie a reserva através de um formulário `POST`;
 * Visualize uma tela de confirmação com os dados informados;
 * Visualize a lista de reservas cadastradas;
-* Pesquise reservas pelo nome;
-* Altere o status das reservas cadastradas.
+* Pesquise reservas pelo nome do cliente ou categoria;
+* Altere o status das reservas cadastradas;
+* Exclua reservas definitivamente do sistema.
 
 ---
 
-## Descrição Geral
+## 📝 Descrição Geral
 
 O objetivo do sistema **Café & Sabor** é auxiliar no gerenciamento de reservas de mesas em uma cafeteria, permitindo que os usuários realizem reservas e consultem suas informações de forma organizada.
 
-A aplicação centraliza o cadastro, validação, armazenamento, consulta e alteração do status das reservas, facilitando o controle das informações pela cafeteria.
+A aplicação centraliza o cadastro, validação, armazenamento, consulta, exclusão e alteração do status das reservas, facilitando o controle das informações pela cafeteria.
 
 ---
 
-## Requisitos Funcionais
+## 📋 Requisitos Funcionais
 
-**RF01** | **Realizar reserva:** o sistema deve permitir cadastrar uma reserva informando nome completo, data, horário, quantidade de pessoas, categoria e observações.
-
-**RF02** | **Confirmar reserva:** o sistema deve permitir visualizar os dados cadastrados e confirmar a realização da reserva.
-
-**RF03** | **Listar reservas:** o sistema deve exibir as reservas cadastradas, incluindo o ID, nome, categoria, data, horário, quantidade de pessoas e status.
-
-**RF04** | **Alterar status:** o sistema deve permitir alterar o status da reserva entre **Pendente, Confirmada e Concluída**.
-
-**RF05** | **Excluir reserva:** o sistema deve permitir excluir definitivamente uma reserva pelo seu ID.
-
-**RF06** | **Pesquisar reservas:** o sistema deve permitir pesquisar reservas pelo nome do cliente ou categoria da reserva.
-
-**RF07** | **Validar reservas:** o sistema deve impedir o cadastro de informações inválidas, como campos obrigatórios vazios, quantidade de pessoas menor ou igual a zero, data/horário inválidos ou data passada.
-
-**RF08** | **Exibir informações gerais:** a página inicial deve apresentar indicadores como total de reservas, reservas confirmadas e total de pessoas.
-
-**RF09** | **Persistir dados:** o sistema deve armazenar as reservas em banco de dados SQLite, mantendo os dados mesmo após o encerramento e reinício do servidor.
+| Código | Descrição |
+| :---: | :--- |
+| **RF01** | **Realizar reserva:** o sistema deve permitir cadastrar uma reserva informando nome completo, data, horário, quantidade de pessoas, categoria e observações. |
+| **RF02** | **Confirmar reserva:** o sistema deve permitir visualizar os dados cadastrados e confirmar a realização da reserva. |
+| **RF03** | **Listar reservas:** o sistema deve exibir as reservas cadastradas, incluindo o ID, nome, categoria, data, horário, quantidade de pessoas e status. |
+| **RF04** | **Alterar status:** o sistema deve permitir alterar o status da reserva entre **Pendente**, **Confirmada** e **Concluída**. |
+| **RF05** | **Excluir reserva:** o sistema deve permitir excluir definitivamente uma reserva pelo seu ID. |
+| **RF06** | **Pesquisar reservas:** o sistema deve permitir pesquisar reservas pelo nome do cliente ou categoria da reserva. |
+| **RF07** | **Validar reservas:** o sistema deve impedir o cadastro de informações inválidas, como campos obrigatórios vazios, quantidade de pessoas menor ou igual a zero, data/horário inválidos ou data passada. |
+| **RF08** | **Exibir informações gerais:** a página inicial deve apresentar indicadores como total de reservas, reservas confirmadas e total de pessoas. |
+| **RF09** | **Persistir dados:** o sistema deve armazenar as reservas em banco de dados SQLite, mantendo os dados mesmo após o encerramento e reinício do servidor. |
 
 ---
 
-## Requisitos Não Funcionais
+## ⚡ Requisitos Não Funcionais
 
-| **RNF01** | **Desempenho:** o sistema deve realizar consultas, cadastros, alterações, exclusões e pesquisas de reservas de forma rápida e eficiente.                                          |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **RNF02** | **Disponibilidade:** o sistema deve poder permanecer em execução continuamente, permitindo acesso às funcionalidades durante o período em que o servidor estiver disponível.      |
-| **RNF03** | **Persistência:** os dados devem ser armazenados em banco de dados SQLite, não dependendo de listas ou variáveis temporárias em memória.                                          |
+| Código | Descrição |
+| :---: | :--- |
+| **RNF01** | **Desempenho:** o sistema deve realizar consultas, cadastros, alterações, exclusões e pesquisas de reservas de forma rápida e eficiente. |
+| **RNF02** | **Disponibilidade:** o sistema deve poder permanecer em execução continuamente, permitindo acesso às funcionalidades durante o período em que o servidor estiver disponível. |
+| **RNF03** | **Persistência:** os dados devem ser armazenados em banco de dados SQLite, não dependendo de listas ou variáveis temporárias em memória. |
 | **RNF04** | **Segurança dos dados:** informações dos usuários e das reservas devem ser armazenadas de forma adequada, evitando o versionamento do banco de dados e de arquivos `.env` no Git. |
-| **RNF05** | **Manutenibilidade:** o sistema deve utilizar uma estrutura organizada, separando aplicação, rotas, modelos, banco de dados e templates.                                          |
-| **RNF06** | **Usabilidade:** as mensagens de validação e erro devem ser claras para facilitar o preenchimento e a utilização do sistema.                                                      |
-| **RNF07** | **Portabilidade:** cada máquina deve conseguir criar seu próprio banco de dados local por meio do `db.create_all()`, sem depender do arquivo de banco enviado pelo GitHub.        |
+| **RNF05** | **Manutenibilidade:** o sistema deve utilizar uma estrutura organizada, separando aplicação, rotas, modelos, banco de dados e templates. |
+| **RNF06** | **Usabilidade:** as mensagens de validação e erro devem ser claras para facilitar o preenchimento e a utilização do sistema. |
+| **RNF07** | **Portabilidade:** cada máquina deve conseguir criar seu próprio banco de dados local por meio do `db.create_all()`, sem depender do arquivo de banco enviado pelo GitHub. |
 
 ---
 
-## Dados dos usuários que o sistema deve proteger
+## 🛡️ Proteção de Dados dos Usuários
 
 O sistema deve proteger principalmente os dados pessoais utilizados no cadastro e nas reservas, como:
 
 * Nome completo;
 * E-mail;
 * Telefone;
-* Dados relacionados às reservas realizadas.
+* Dados e histórico relacionados às reservas realizadas.
 
-O banco de dados e arquivos que possam conter informações sensíveis não devem ser enviados ao repositório do GitHub.
+> 🔒 **Aviso de Segurança:** Arquivos de banco de dados locais (`*.db`, `*.sqlite`) e configurações sensíveis (`.env`) contendo informações de usuários não devem ser versionados ou enviados ao repositório do GitHub.
 
 ---
 
-## Eventos do sistema
+## ⏱️ Eventos do Sistema
 
-| Evento                           | Ator    | Ação                                          | Resposta do Sistema                                                        |
-| -------------------------------- | ------- | --------------------------------------------- | -------------------------------------------------------------------------- |
-| **E01 – Acessar página inicial** | Usuário | Acessa `/`                                    | Sistema carrega o painel e apresenta os indicadores de reservas.           |
-| **E02 – Iniciar reserva**        | Usuário | Clica em **Reservar**                         | Sistema apresenta o formulário de reserva.                                 |
-| **E03 – Enviar reserva**         | Usuário | Preenche o formulário e envia                 | Sistema recebe os dados via `POST` e inicia as validações.                 |
-| **E04 – Dados inválidos**        | Sistema | Identifica campo vazio ou informação inválida | Sistema impede o cadastro e apresenta uma mensagem de erro.                |
-| **E05 – Reserva válida**         | Sistema | Valida todos os dados corretamente            | Sistema cria um novo registro `Reserva` com status **Pendente**.           |
-| **E06 – Salvar reserva**         | Sistema | Executa a persistência dos dados              | Reserva é armazenada no banco SQLite.                                      |
-| **E07 – Confirmar cadastro**     | Sistema | Reserva foi salva com sucesso                 | Sistema apresenta a página de confirmação com os dados da reserva.         |
-| **E08 – Consultar reservas**     | Usuário | Acessa a lista de reservas                    | Sistema consulta os registros e apresenta a tabela.                        |
-| **E09 – Pesquisar reserva**      | Usuário | Digita um nome ou categoria                   | Sistema realiza a pesquisa e apresenta os resultados correspondentes.      |
-| **E10 – Alterar status**         | Usuário | Clica no botão de alteração de status         | Sistema altera o status da reserva e salva a alteração no banco.           |
-| **E11 – Concluir reserva**       | Usuário | Altera uma reserva Confirmada                 | Sistema muda o status para **Concluída**.                                  |
-| **E12 – Excluir reserva**        | Usuário | Clica em excluir                              | Sistema solicita confirmação da exclusão.                                  |
-| **E13 – Confirmar exclusão**     | Usuário | Confirma a exclusão                           | Sistema localiza a reserva pelo ID, exclui o registro e salva a alteração. |
-| **E14 – Cancelar exclusão**      | Usuário | Cancela a exclusão                            | Sistema mantém a reserva cadastrada.                                       |
-| **E15 – Reiniciar servidor**     | Sistema | Aplicação é executada novamente               | Sistema utiliza o banco SQLite existente e mantém os dados cadastrados.    |
+| Evento | Ator | Ação | Resposta do Sistema |
+| :--- | :--- | :--- | :--- |
+| **E01 – Acessar página inicial** | Usuário | Acessa `/` | Sistema carrega o painel e apresenta os indicadores de reservas. |
+| **E02 – Iniciar reserva** | Usuário | Clica em **Reservar** | Sistema apresenta o formulário de reserva. |
+| **E03 – Enviar reserva** | Usuário | Preenche o formulário e envia | Sistema recebe os dados via `POST` e inicia as validações. |
+| **E04 – Dados inválidos** | Sistema | Identifica campo vazio ou informação inválida | Sistema impede o cadastro e apresenta uma mensagem de erro. |
+| **E05 – Reserva válida** | Sistema | Valida todos os dados corretamente | Sistema cria um novo registro `Reserva` com status **Pendente**. |
+| **E06 – Salvar reserva** | Sistema | Executa a persistência dos dados | Reserva é armazenada no banco SQLite. |
+| **E07 – Confirmar cadastro** | Sistema | Reserva foi salva com sucesso | Sistema apresenta a página de confirmação com os dados da reserva. |
+| **E08 – Consultar reservas** | Usuário | Acessa a lista de reservas | Sistema consulta os registros e apresenta a tabela. |
+| **E09 – Pesquisar reserva** | Usuário | Digita um nome ou categoria | Sistema realiza a pesquisa e apresenta os resultados correspondentes. |
+| **E10 – Alterar status** | Usuário | Clica no botão de alteração de status | Sistema altera o status da reserva e salva a alteração no banco. |
+| **E11 – Concluir reserva** | Usuário | Altera uma reserva Confirmada | Sistema muda o status para **Concluída**. |
+| **E12 – Excluir reserva** | Usuário | Clica em excluir | Sistema solicita confirmação da exclusão. |
+| **E13 – Confirmar exclusão** | Usuário | Confirma a exclusão | Sistema localiza a reserva pelo ID, exclui o registro e salva a alteração. |
+| **E14 – Cancelar exclusão** | Usuário | Cancela a exclusão | Sistema mantém a reserva cadastrada. |
+| **E15 – Reiniciar servidor** | Sistema | Aplicação é executada novamente | Sistema utiliza o banco SQLite existente e mantém os dados cadastrados. |
 
 ---
 
@@ -106,49 +102,25 @@ O banco de dados e arquivos que possam conter informações sensíveis não deve
 
 Desenvolver uma aplicação web simples aplicando conceitos de:
 
-* Desenvolvimento Web;
-* Backend com Flask;
-* Rotas;
-* Formulários HTML;
-* Método HTTP `POST`;
-* Método HTTP `GET`;
-* Recebimento e processamento de dados;
-* Templates;
-* Validação de dados;
-* Métricas;
-* Manipulação de estados;
-* Pesquisa e filtragem de dados;
-* Arquitetura Monolítica;
-* Componentes de comunicação;
-* API REST;
-* Comunicação síncrona;
-* Comunicação assíncrona;
-* Estratégias de cache;
-* Git e GitHub.
+* Desenvolvimento Web Backend com **Flask / Python**;
+* Gerenciamento de Rotas e Requisições HTTP (`GET`, `POST`);
+* Formulários HTML, Validação de Dados e Processamento de Entradas;
+* Renderização de Templates e Exibição de Métricas;
+* Manipulação de Estados e Banco de Dados Relacional (**SQLite**);
+* Pesquisa, Filtragem e Operações CRUD (Create, Read, Update, Delete);
+* Arquitetura Monolítica e Padrões de Projeto;
+* Componentes de Comunicação (API REST, Síncrona vs Assíncrona, Fila/Mensageria);
+* Estratégias de Cache para otimização de performance;
+* Versionamento e colaboração com **Git e GitHub**.
 
 ---
 
-## 🛠️ Tecnologias utilizadas
+## 🛠️ Tecnologias Utilizadas
 
-### Backend
-
-* Python
-* Flask
-
-### Frontend
-
-* HTML5
-* CSS3
-
-### Banco de dados
-
-* SQLite
-
-### Ferramentas
-
-* Git
-* GitHub
-* Visual Studio Code
+* **Backend:** Python 3, Flask, Flask-SQLAlchemy
+* **Frontend:** HTML5, CSS3
+* **Banco de Dados:** SQLite
+* **Ferramentas:** Git, GitHub, Visual Studio Code
 
 ---
 
@@ -156,22 +128,22 @@ Desenvolver uma aplicação web simples aplicando conceitos de:
 
 O projeto utiliza uma **arquitetura monolítica**, na qual os principais componentes da aplicação estão concentrados em um único projeto.
 
-Para a evolução da arquitetura apresentada nesta entrega, são considerados componentes de comunicação que permitem melhorar a organização, o desempenho e a comunicação entre o usuário e a aplicação.
+Para a evolução da arquitetura apresentada nesta entrega, são considerados componentes de comunicação que permitem melhorar a organização, o desempenho e a comunicação entre o usuário e a aplicação:
 
-O **API Gateway** é utilizado como ponto de entrada das requisições, direcionando as solicitações para os componentes responsáveis pelo processamento.
+* **API Gateway:** Utilizado como ponto de entrada único das requisições, direcionando as solicitações para os componentes responsáveis pelo processamento.
+* **Cache:** Estratégia de otimização para informações consultadas frequentemente, reduzindo a carga de leituras repetitivas no banco de dados.
+* **Fila/Mensageria:** Mecanismo desacoplado para executar tarefas assíncronas (ex.: envio de notificações) sem bloquear o fluxo principal do usuário.
 
-O **Cache** é utilizado como estratégia de otimização para informações que são consultadas frequentemente, reduzindo consultas repetitivas ao banco de dados.
+### Componentes Principais
 
-### Componentes principais
+* **Usuário:** Realiza as interações com o sistema através do navegador web.
+* **API Gateway:** Atua como ponto de entrada das requisições e direciona as solicitações para a aplicação.
+* **Aplicação Flask:** Responsável pelas rotas, regras de negócio e processamento das requisições.
+* **Banco de Dados SQLite:** Responsável pela persistência relacional das informações.
+* **Cache:** Armazena temporariamente informações de alta leitura para otimizar o tempo de resposta.
+* **Fila/Mensageria:** Processa tarefas em segundo plano de forma assíncrona.
 
-* **Usuário:** realiza as interações com o sistema através do navegador.
-* **API Gateway:** atua como ponto de entrada das requisições e direciona as solicitações para a aplicação.
-* **Aplicação Flask:** responsável pelas rotas, regras de negócio e processamento das requisições.
-* **Banco de dados SQLite:** responsável pela persistência das informações.
-* **Cache:** armazena temporariamente informações consultadas com frequência para melhorar o tempo de resposta.
-* **Fila/Mensageria:** representa o mecanismo utilizado para executar tarefas que não precisam bloquear a resposta ao usuário.
-
-### Fluxo principal
+### Fluxo Principal de Processamento
 
 ```text
 Usuário
@@ -182,31 +154,23 @@ API Gateway
    ▼
 Aplicação Flask
    │
-   ├──────────────► Cache
+   ├──────────────► Cache (Otimização de Métricas)
    │
    ▼
 Banco de Dados SQLite
-```
 
-O diagrama de componentes completo está apresentado na seção de documentação.
 
----
+🗂️ Estratégia de Cache
+O Cache é utilizado para armazenar temporariamente informações de alta rotatividade de leitura que não necessitam ser consultadas no banco de dados a cada nova requisição.
 
-## 🗂️ Estratégia de Cache
+No sistema Café & Sabor, esta estratégia é aplicada nas métricas da página inicial:
 
-O **Cache** será utilizado para armazenar temporariamente informações que são consultadas com frequência e que não precisam ser buscadas no banco de dados a cada requisição.
+Total de reservas;
+Total de reservas confirmadas;
+Total de pessoas.
 
-No sistema Café & Sabor, uma aplicação possível é utilizar o cache para as **métricas apresentadas na página inicial**, como:
+Fluxo de Funcionamento do Cache:
 
-* Total de reservas;
-* Total de reservas confirmadas;
-* Total de pessoas.
-
-Quando o usuário acessar a página inicial, o sistema poderá verificar primeiro se essas informações estão disponíveis no cache.
-
-### Fluxo do Cache
-
-```text
 Usuário
    │
    ▼
@@ -218,512 +182,216 @@ Aplicação Flask
    ▼
 Verifica Cache
    │
-   ├── Informação disponível
-   │          │
-   │          ▼
-   │     Retorna informação
+   ├── [Cache HIT]  ────► Retorna Informação Rapidamente
    │
-   └── Informação não disponível
-              │
-              ▼
-        Consulta banco
-              │
-              ▼
-        Atualiza Cache
-              │
-              ▼
-        Retorna informação
-```
+   └── [Cache MISS] ────► Consulta Banco de Dados ────► Atualiza Cache ────► Retorna Informação
 
-Essa estratégia reduz consultas repetitivas ao banco de dados e pode melhorar o tempo de resposta da aplicação.
+📌 Nota: A implementação do Cache representa uma proposta de evolução arquitetural projetada no documento do sistema.
 
-**Observação:** o uso do Cache nesta documentação representa uma estratégia arquitetural proposta para evolução do sistema.
 
----
+🔄 Fluxos de Comunicação
+1. Comunicação Síncrona — API REST
+A comunicação síncrona é utilizada em funcionalidades onde o usuário necessita do retorno imediato da aplicação para dar prosseguimento à sua ação, como no cadastro de uma reserva.
 
-# 🔄 Fluxos de Comunicação
+Fluxo Síncrono:
 
-## 1. Comunicação Síncrona — API REST
+Usuário ──(POST /confirmacao)──► API Gateway ──► Aplicação Flask ──► Validação ──► Banco de Dados
+  ▲                                                                                      │
+  └─────────────────────────────── Resposta HTTP (Confirmação) ──────────────────────────┘
 
-A comunicação síncrona será utilizada em funcionalidades que precisam de uma resposta imediata para que o usuário possa continuar sua interação com o sistema.
+Nesse fluxo, a conexão permanece aberta até que o registro seja gravado e a página de confirmação seja devolvida.
 
-Um exemplo real é o **cadastro de uma reserva**.
+2. Comunicação Assíncrona — Fila/Mensageria
+A comunicação assíncrona é utilizada para tarefas de segundo plano que não devem travar a navegação do usuário, como o envio de e-mail ou SMS de confirmação.
 
-### Fluxo
+Fluxo Assíncrono:
 
-```text
-Usuário
-   │
-   │ POST /confirmacao
-   ▼
-API Gateway
-   │
-   ▼
-Aplicação Flask
-   │
-   ▼
-Validação dos dados
-   │
-   ▼
-Banco de Dados
-   │
-   ▼
-Reserva salva
-   │
-   ▼
-Resposta HTTP
-   │
-   ▼
-Usuário recebe confirmação
-```
-
-Nesse fluxo, o usuário aguarda a resposta da aplicação para saber se a reserva foi cadastrada corretamente.
-
-A comunicação é considerada **síncrona** porque a resposta da aplicação é necessária imediatamente para continuar o processo.
-
-### Exemplo
-
-```text
-POST /confirmacao
-```
-
-O sistema recebe os dados da reserva, realiza as validações, salva as informações e retorna a página de confirmação.
-
----
-
-## 2. Comunicação Assíncrona — Fila/Mensageria
-
-A comunicação assíncrona será utilizada para tarefas que podem ser executadas em segundo plano e que não precisam bloquear a navegação do usuário.
-
-Um exemplo é o **envio de uma notificação de confirmação da reserva**.
-
-### Fluxo
-
-```text
-Usuário
-   │
-   ▼
-API Gateway
-   │
-   ▼
-Aplicação Flask
-   │
-   ▼
-Banco de Dados
-   │
-   ▼
-Reserva cadastrada
-   │
-   ├──────────────► Fila de Mensagens
-   │                       │
-   ▼                       ▼
-Confirmação            Processamento
-para usuário           em segundo plano
+Usuário ──► API Gateway ──► Aplicação Flask ──► Salva no Banco
                                │
-                               ▼
-                       Envio de notificação
-```
+                               ├─► Retorna Confirmação ao Usuário (Imediato)
+                               │
+                               └─► Publica Mensagem na Fila ──► Worker em Segundo Plano ──► Envia Notificação
 
-Nesse caso, após salvar a reserva, a aplicação pode enviar uma mensagem para uma fila.
+📌 Nota: O componente de Fila/Mensageria representa uma proposta de evolução arquitetural para suportar grande volume de notificações.
 
-O usuário recebe a confirmação da reserva sem precisar esperar o processamento da notificação.
 
-A tarefa de envio da mensagem pode ser executada posteriormente por um processo em segundo plano.
+🚀 Funcionalidades
+🏠 Página Inicial (Dashboard)
+Apresenta informações sobre a cafeteria e exibe o painel estatístico em tempo real:
 
-**Observação:** a fila/mensageria apresentada neste documento representa uma proposta de evolução arquitetural e não significa que um serviço externo de mensageria já esteja implementado no sistema atual.
+Total de reservas cadastradas;
 
----
+Quantidade de reservas confirmadas;
 
-# 🚀 Funcionalidades
+Soma total de pessoas esperadas.
 
-## Página inicial
+📝 Formulário de Reserva
+Permite a entrada dos dados da reserva:
 
-Apresenta informações sobre a cafeteria e disponibiliza acesso à página de reservas.
+Nome completo do responsável;
 
-A página inicial também apresenta métricas:
+Data e Horário da reserva;
 
-* Total de reservas;
-* Reservas confirmadas;
-* Total de pessoas.
+Quantidade de pessoas (limite de 1 a 20);
 
----
+Categoria da reserva (ex.: Aniversário, Reunião, Evento, Comum);
 
-## Reserva
+Observações e solicitações especiais.
 
-O usuário pode informar:
+✅ Tela de Confirmação
+Exibe o resumo detalhado dos dados informados logo após o envio bem-sucedido do formulário.
 
-* Nome completo;
-* Data da reserva;
-* Horário;
-* Número de pessoas;
-* Categoria da reserva;
-* Observações.
+📑 Lista e Consulta de Reservas
+Página administrativa que exibe todas as reservas armazenadas em uma tabela organizada com filtros.
 
----
+🔎 Pesquisa Dinâmica
+Permite a busca e filtragem rápida de reservas cadastradas através do nome do cliente ou da categoria informada via parâmetro GET.
 
-## Confirmação
+🔄 Gerenciamento de Status
+Permite alterar o ciclo de vida da reserva entre os estados:
 
-Após o envio do formulário, o sistema apresenta os dados informados pelo usuário em uma tela de confirmação.
+Pendente (Status padrão ao criar)
 
----
+Confirmada
 
-## Validações
+Concluída
 
-O sistema realiza validações dos dados antes de salvar uma reserva.
+🗑️ Exclusão de Reservas
+Permite remover registros do banco de dados definitivamente via confirmação do usuário.
 
-São verificadas as seguintes situações:
 
-* Campos obrigatórios vazios;
-* Nome inválido;
-* Número de pessoas não numérico;
-* Número de pessoas igual ou menor que zero;
-* Número de pessoas acima de 20;
-* Data ou horário inválidos;
-* Data da reserva no passado.
 
-Caso algum dado seja inválido, a reserva não é cadastrada e uma mensagem de erro é apresentada ao usuário.
-
----
-
-## Métricas
-
-O sistema apresenta três métricas principais:
-
-* Total de reservas;
-* Reservas confirmadas;
-* Total de pessoas.
-
-As métricas são obtidas a partir das reservas armazenadas no banco de dados.
-
-Como estratégia de otimização arquitetural, essas informações podem ser armazenadas temporariamente em **Cache**, reduzindo consultas repetitivas ao banco de dados.
-
----
-
-## Lista de Reservas
-
-O sistema possui uma página para visualizar as reservas cadastradas.
-
-A lista apresenta informações como:
-
-* ID;
-* Nome;
-* Categoria;
-* Data;
-* Horário;
-* Número de pessoas;
-* Status.
-
----
-
-## Pesquisa
-
-A lista de reservas possui uma ferramenta de pesquisa que permite localizar uma reserva pelo nome do cliente ou categoria.
-
-A pesquisa utiliza o método HTTP `GET`.
-
----
-
-## Alteração de Status
-
-Cada reserva possui um status.
-
-Ao ser cadastrada, a reserva recebe inicialmente o status:
-
-**Pendente**
-
-O status pode ser alterado para:
-
-**Confirmada**
-
-e posteriormente:
-
-**Concluída**
-
-A alteração do status não exclui a reserva do sistema.
-
----
-
-# 📂 Estrutura do projeto
+# 📂 Estrutura do Projeto
 
 ```text
 coffee-store/
 │
-├── app.py
-├── requirements.txt
-├── .gitignore
-├── README.md
+├── docs/                       # Documentações, diagramas e especificações
+│   ├── api_endpoints.md        # Documentação dos endpoints da API
+│   ├── arquitetura_sistema.jpeg# Diagrama/imagem da arquitetura do sistema
+│   ├── arquitetura.md          # Documentação detalhada da arquitetura
+│   ├── Der.png                 # Diagrama Entidade-Relacionamento
+│   └── diagrama_componentes.png# Diagrama de componentes e visão geral
 │
-├── templates/
-│   ├── index.html
-│   ├── reserva.html
-│   ├── confirmacao.html
-│   └── lista_reservas.html
+├── instance/                   # Pasta de instâncias locais (ex: banco de dados SQLite)
 │
-├── static/
-│   └── style.css
+├── static/                     # Arquivos estáticos (Estilos CSS)
+│   ├── base.css                # Estilo base/global da aplicação
+│   ├── cadastro.css            # Estilo da página de cadastro de usuários
+│   ├── confirmacao.css         # Estilo da tela de confirmação de reserva
+│   ├── editar_reserva.css      # Estilo da tela de edição de reserva
+│   ├── index.css               # Estilo da página inicial (Dashboard)
+│   ├── lista_reservas.css      # Estilo da tabela de listagem de reservas
+│   ├── login.css               # Estilo da tela de login
+│   ├── meu_cadastro.css        # Estilo do perfil do usuário
+│   ├── minhas_reservas.css     # Estilo da tela de reservas do usuário
+│   └── reserva.css             # Estilo do formulário de reserva
 │
-└── docs/
-    ├── der.png
-    └── diagrama_componentes.png
-```
+├── templates/                  # Templates HTML (Jinja2)
+│   ├── cadastro.html           # Página de cadastro de novos usuários
+│   ├── confirmacao.html        # Página de confirmação da reserva
+│   ├── editar_reserva.html     # Formulário para edição de reserva
+│   ├── index.html              # Página inicial / Dashboard de métricas
+│   ├── lista_reservas.html     # Painel administrativo de reservas
+│   ├── login.html              # Página de login/autenticação
+│   ├── meu_cadastro.html       # Visualização e edição dos dados cadastrais
+│   ├── minhas_reservas.html    # Lista de reservas do usuário logado
+│   └── reserva.html            # Formulário de criação de novas reservas
+│
+├── .gitignore                  # Arquivos e pastas ignorados pelo Git
+├── app.py                      # Ponto de entrada e inicialização da aplicação Flask
+├── database.py                 # Configurações e conexões com o banco de dados
+├── Login_Adm.txt               # Credenciais/instruções para acesso administrativo
+├── models.py                   # Modelos do banco de dados (SQLAlchemy)
+├── README.md                   # Documentação principal do repositório
+├── requirements.txt            # Dependências e bibliotecas Python do projeto
+└── routes.py                   # Definição e gerenciamento das rotas do sistema
 
----
 
-# ⚙️ Como executar o projeto
 
-### 1. Clonar o repositório
+⚙️ Como Executar o Projeto
+1. Clonar o repositório
 
-```bash
-git clone https://github.com/douglassud21/coffee-store.git
-```
-
-Entre na pasta:
-
-```bash
+git clone [https://github.com/douglassud21/coffee-store.git](https://github.com/douglassud21/coffee-store.git)
 cd coffee-store
-```
 
-### 2. Criar um ambiente virtual
-
+2. Criar e ativar o ambiente virtual
 No Windows:
 
-```bash
 python -m venv venv
-```
-
-Ative o ambiente virtual:
-
-```bash
 venv\Scripts\activate
-```
 
-### 3. Instalar as dependências
+No Linux/macOS:
 
-```bash
+python3 -m venv venv
+source venv/bin/activate
+
+3. Instalar as dependências
+
 pip install -r requirements.txt
-```
 
-### 4. Executar a aplicação
+4. Executar a aplicação
 
-```bash
 python app.py
-```
 
-### 5. Acessar no navegador
+5. Acessar no navegador
+Acesse http://127.0.0.1:5000/ no seu navegador.
 
-```text
-http://127.0.0.1:5000/
-```
+🔄 Rotas do SistemaMétodoRotaFunção / ObjetivoGET/Carrega a página inicial e exibe o dashboard de métricas.GET/reservaExibe o formulário para cadastro de nova reserva.POST/confirmacaoProcessa os dados do formulário, valida e salva a reserva.GET/reservasLista todas as reservas e permite filtragem/pesquisa via parâmetro ?busca=.POST/mudar-status/<int:id>Atualiza o status da reserva no banco de dados.POST/excluir/<int:id>Exclui permanentemente a reserva do banco de dados pelo seu ID.
 
----
+🛡️ Regras de Validação
+Antes de realizar a gravação no banco de dados SQLite, o backend executa as seguintes verificações de integridade:
 
-# 🔄 Rotas do sistema
+Campos Obrigatórios: Nome, data, horário e quantidade de pessoas não podem estar vazios.
 
-| Método | Rota                 | Função                               |
-| ------ | -------------------- | ------------------------------------ |
-| GET    | `/`                  | Página inicial                       |
-| GET    | `/reserva`           | Formulário de reserva                |
-| POST   | `/confirmacao`       | Recebe os dados e processa a reserva |
-| GET    | `/reservas`          | Lista e pesquisa as reservas         |
-| POST   | `/mudar-status/<id>` | Altera o status da reserva           |
+Validação de Nome: Impede nomes muito curtos ou contendo caracteres inválidos.
 
----
+Quantidade de Pessoas:
 
-# 📤 Envio dos dados
+Deve ser obrigatoriamente um número inteiro.
 
-O formulário de reserva utiliza o método HTTP `POST`.
+Não pode ser menor ou igual a 0.
 
-Exemplo:
+Não pode exceder o limite de 20 pessoas por mesa.
 
-```html
-<form action="/confirmacao" method="POST">
-```
+Data e Horário:
 
-Os dados são recebidos no Flask através do formulário e processados pela aplicação.
+Impede o agendamento em datas passadas em relação ao dia atual.
 
-Após a validação e o cadastro, os dados são utilizados para apresentar a confirmação da reserva.
+Garante o formato correto de data e hora.
 
----
+Em caso de inconsistência, a aplicação cancela o cadastro e exibe alertas explicativos ao usuário.
 
-# 🛡️ Validações
+🧪 Roteiro de Testes
+Para homologar as funcionalidades do sistema, siga o roteiro de testes:
 
-Antes de salvar uma reserva, o sistema realiza validações dos dados recebidos.
+Acesso: Navegue até a página inicial (/) e verifique os indicadores zerados ou iniciais.
 
-Os campos obrigatórios são verificados para garantir que não estejam vazios.
+Cadastro Válido: Clique em Reservar, preencha os dados corretamente e envie.
 
-O número de pessoas também é validado para garantir que:
+Confirmação: Confirme se os dados preenchidos aparecem corretamente na tela /confirmacao.
 
-* Seja um valor numérico;
-* Seja maior que zero;
-* Não ultrapasse o limite de 20 pessoas.
+Listagem: Acesse /reservas e confirme se o novo registro consta na tabela com status Pendente.
 
-O nome também é validado para garantir que seja informado corretamente.
+Busca: Digite o nome do cliente no campo de pesquisa e verifique se o filtro funciona corretamente.
 
-Quando uma informação inválida é identificada, o sistema impede o cadastro e apresenta uma mensagem amigável ao usuário.
+Alteração de Status: Clique no botão de alterar status e verifique a transição para Confirmada e Concluída.
 
-Exemplos de valores inválidos:
+Teste de Validação (Inválido): Tente cadastrar uma reserva com 0 pessoas ou com data no passado e confirme se o sistema exibe o erro e bloqueia a gravação.
 
-```text
-Pessoas: 0
-```
+Exclusão: Remova uma reserva de teste e confirme sua remoção da listagem e do banco de dados.
 
-```text
-Pessoas: -1
-```
+Métricas: Volte à página inicial (/) e verifique se o contador de reservas e pessoas refletiu as mudanças.
 
-```text
-Pessoas: abc
-```
+📐 Documentação Técnica
+Diagrama Entidade-Relacionamento (DER)
+Abaixo é apresentada a estrutura conceitual do banco de dados relacional SQLite:
 
----
+Diagrama de Componentes e Comunicação
+Visão geral da arquitetura monolítica com a proposta de evolução integrando API Gateway, Cache e Fila de Mensagens:
 
-# 📊 Métricas
-
-As métricas apresentadas na página inicial são obtidas a partir das reservas cadastradas no sistema.
-
-São apresentadas:
-
-```text
-Total de reservas
-Reservas confirmadas
-Total de pessoas
-```
-
-Essas informações são enviadas para o template da página inicial e apresentadas nos cards do dashboard.
-
-Como melhoria de desempenho, a arquitetura proposta prevê a utilização de **Cache** para evitar consultas repetitivas ao banco de dados quando essas informações forem solicitadas com frequência.
-
----
-
-# 🔄 Manipulação de estados
-
-Cada reserva possui um status.
-
-O status inicial de uma nova reserva é:
-
-```text
-Pendente
-```
-
-Após a análise da reserva, ela pode ser alterada para:
-
-```text
-Confirmada
-```
-
-Depois de realizada, pode ser alterada para:
-
-```text
-Concluída
-```
-
-A alteração do status não exclui a reserva do sistema.
-
----
-
-# 🔎 Pesquisa e filtragem
-
-A página de reservas permite realizar pesquisas utilizando o método HTTP `GET`.
-
-Exemplo:
-
-```text
-/reservas?busca=douglas
-```
-
-O sistema verifica as reservas cadastradas e apresenta os resultados correspondentes à pesquisa.
-
----
-
-# 🧪 Testes
-
-Para testar o sistema:
-
-1. Acesse a página inicial;
-2. Clique em **Fazer uma reserva**;
-3. Preencha todos os campos obrigatórios;
-4. Clique em **Confirmar reserva**;
-5. Verifique se a página de confirmação apresenta corretamente os dados informados;
-6. Acesse a página de **Lista de Reservas**;
-7. Verifique se a reserva cadastrada aparece na lista;
-8. Utilize a pesquisa pelo nome;
-9. Utilize o botão **Mudar Status**;
-10. Verifique se o status da reserva foi alterado;
-11. Retorne à página inicial e verifique se as métricas foram atualizadas.
-
-### Cenário esperado
-
-```text
-Nome: Douglas Nascimento
-Data: 20/08/2026
-Horário: 19:00
-Pessoas: 4
-Observação: Mesa próxima à janela
-```
-
-O sistema deve apresentar essas informações na tela de confirmação.
-
-### Testes de validação
-
-Também foram realizados testes com valores inválidos.
-
-Exemplo:
-
-```text
-Pessoas: 0
-```
-
-O sistema deve impedir o cadastro e apresentar uma mensagem informando que o número de pessoas deve ser maior que zero.
-
-Outro teste:
-
-```text
-Pessoas: -1
-```
-
-O sistema também deve impedir o cadastro.
-
-Também é realizado o teste com um valor não numérico:
-
-```text
-Pessoas: abc
-```
-
-Nesse caso, o sistema deve informar que o número de pessoas precisa ser um valor válido.
-
----
-
-# 📐 Documentação
-
-## Diagrama Entidade-Relacionamento (DER)
-
-O DER representa a estrutura do banco de dados e o relacionamento entre suas entidades.
-
-![Diagrama Entidade-Relacionamento](docs/der.png)
-
-## Diagrama de Componentes e Comunicação
-
-O diagrama apresenta os principais componentes da arquitetura e suas relações de comunicação, incluindo o **API Gateway**, o **Cache**, a aplicação, o banco de dados e os fluxos de comunicação.
-
-![Diagrama de Componentes](docs/diagrama_componentes.png)
-
----
-
-# 👥 Equipe
-
-| Integrante                  |    RM | Responsabilidade                                                            |
-| --------------------------- | ----: | --------------------------------------------------------------------------- |
-| Douglas Silva Nascimento    | 22873 | Backend, Flask, rotas, formulário POST, recebimento dos dados e confirmação |
-| Allan Gabriel Sousa Palma   | 22544 | HTML, CSS e navegação entre páginas                                         |
-| Vitória de Carvalho Esteves | 21684 | Arquitetura monolítica, diagrama, evento principal e reações automatizadas  |
-| Gustavo Gomes Pecora        | 22767 | GitHub, documentação, DER, testes e organização da apresentação             |
-
----
-
-# 📚 Projeto acadêmico
-
-Projeto desenvolvido como atividade acadêmica para aplicação prática dos conceitos de desenvolvimento web, arquitetura de software, componentes, comunicação síncrona e assíncrona, estratégias de cache, Git/GitHub e integração entre frontend e backend.
-
----
-
-**☕ Café & Sabor — Sistema de Reservas**
+Integrante                  |RM                 |Responsabilidade Principal
+Douglas Silva Nascimento    |22873              |"Backend Flask, gerenciamento de rotas, integração com banco de dados e regras de negócio."
+Allan Gabriel Sousa Palma   |22544              |"Desenvolvedor Frontend (HTML/CSS), estrutura de layouts e usabilidade das páginas."
+Vitória de Carvalho Esteves |21684              |"Arquitetura de software, diagramas, mapeamento de eventos do sistema e fluxos de comunicação."
+Gustavo Gomes Pecora        |22767              |"Gestão do repositório Git/GitHub, documentação do projeto, modelagem DER e testes."
