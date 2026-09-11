@@ -41,6 +41,7 @@ logging.basicConfig(level=logging.INFO)
 # MIDDLEWARE / API GATEWAY (FILTROS DE REQUISIÇÃO)
 # ==========================================
 
+
 @app.before_request
 def middleware_gateway():
     # Exemplo de Middleware: Log de requisições de entrada
@@ -67,10 +68,14 @@ with app.app_context():
 
     # Garante usuario_id na tabela reservas
     if "reservas" in tabelas:
-        colunas_reservas = [coluna["name"] for coluna in inspector.get_columns("reservas")]
+        colunas_reservas = [
+            coluna["name"] for coluna in inspector.get_columns("reservas")
+        ]
         if "usuario_id" not in colunas_reservas:
             with db.engine.begin() as connection:
-                connection.execute(text("ALTER TABLE reservas ADD COLUMN usuario_id INTEGER"))
+                connection.execute(
+                    text("ALTER TABLE reservas ADD COLUMN usuario_id INTEGER")
+                )
 
     # Cria Administrador Padrão
     admin = Usuario.query.filter_by(email="admin@cafeesabor.com").first()
@@ -80,7 +85,7 @@ with app.app_context():
             email="admin@cafeesabor.com",
             telefone="00000000000",
             senha=generate_password_hash("Admin@123"),
-            tipo="admin"
+            tipo="admin",
         )
         db.session.add(admin)
         db.session.commit()

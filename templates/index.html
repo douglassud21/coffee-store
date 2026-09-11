@@ -1,654 +1,351 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
 
-<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
+        <title>Café & Sabor | Sistema de Reservas</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
 
-    <title>
-        Café & Sabor | Sistema de Reservas
-    </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+    </head>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='base.css') }}"
-    >
-
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='index.css') }}"
-    >
-
-</head>
-
-<body>
-
-
-<!-- ==========================================
+    <body>
+        <!-- ==========================================
      CABEÇALHO
 =========================================== -->
 
-<header class="header">
+        <header class="header">
+            <div class="container header-container">
+                <!-- LOGO -->
 
-    <div class="container header-container">
+                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
 
+                <!-- MENU -->
 
-        <!-- LOGO -->
+                <nav class="nav">
+                    <!-- INÍCIO - TODOS -->
 
-        <a
-            href="{{ url_for('routes.index') }}"
-            class="logo"
-        >
-            Café & Sabor
-        </a>
+                    <a href="{{ url_for('routes.index') }}" class="nav-link"> Início </a>
 
-
-        <!-- MENU -->
-
-        <nav class="nav">
-
-
-            <!-- INÍCIO - TODOS -->
-
-            <a
-                href="{{ url_for('routes.index') }}"
-                class="nav-link"
-            >
-                Início
-            </a>
-
-
-            <!-- ==================================
+                    <!-- ==================================
                  MENU DO CLIENTE
             =================================== -->
 
-            {% if session.get("tipo") == "cliente" %}
+                    {% if session.get("tipo") == "cliente" %}
 
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="nav-link"
-                >
-                    Reservar mesa
-                </a>
+                    <a href="{{ url_for('routes.reserva') }}" class="nav-link"> Reservar mesa </a>
 
-                <a
-                    href="{{ url_for('routes.minhas_reservas') }}"
-                    class="nav-link"
-                >
-                    Minhas Reservas
-                </a>
+                    <a href="{{ url_for('routes.minhas_reservas') }}" class="nav-link">
+                        Minhas Reservas
+                    </a>
 
-                <a
-                    href="{{ url_for('routes.meu_cadastro') }}"
-                    class="nav-link"
-                >
-                    Meu cadastro
-                </a>
+                    <a href="{{ url_for('routes.meu_cadastro') }}" class="nav-link">
+                        Meu cadastro
+                    </a>
 
-            {% endif %}
+                    {% endif %}
 
-
-            <!-- ==================================
+                    <!-- ==================================
                  MENU DO ADMINISTRADOR
             =================================== -->
 
-            {% if session.get("tipo") == "admin" %}
+                    {% if session.get("tipo") == "admin" %}
 
-                <a
-                    href="{{ url_for('routes.lista_reservas') }}"
-                    class="nav-link"
-                >
-                    Ver reservas
-                </a>
+                    <a href="{{ url_for('routes.lista_reservas') }}" class="nav-link">
+                        Ver reservas
+                    </a>
 
-            {% endif %}
+                    {% endif %}
 
-
-            <!-- ==================================
+                    <!-- ==================================
                  SAIR
             =================================== -->
 
-            <a
-                href="{{ url_for('routes.logout') }}"
-                class="nav-link"
-            >
-                Sair
-            </a>
+                    <a href="{{ url_for('routes.logout') }}" class="nav-link"> Sair </a>
+                </nav>
+            </div>
+        </header>
 
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-
-<!-- ==========================================
+        <!-- ==========================================
      CONTEÚDO PRINCIPAL
 =========================================== -->
 
-<main>
-
-
-    <!-- ======================================
+        <main>
+            <!-- ======================================
          HERO
     ======================================= -->
 
-    <section class="hero">
+            <section class="hero">
+                <div class="container hero-content">
+                    <div class="hero-text">
+                        <span class="hero-subtitle"> Bem-vindo ao Café & Sabor </span>
 
-        <div class="container hero-content">
+                        <h1>Seu momento especial começa aqui.</h1>
 
+                        <p>
+                            Reserve sua mesa e aproveite uma experiência especial em nossa
+                            cafeteria.
+                        </p>
 
-            <div class="hero-text">
-
-
-                <span class="hero-subtitle">
-                    Bem-vindo ao Café & Sabor
-                </span>
-
-
-                <h1>
-                    Seu momento especial
-                    começa aqui.
-                </h1>
-
-
-                <p>
-                    Reserve sua mesa e aproveite
-                    uma experiência especial
-                    em nossa cafeteria.
-                </p>
-
-
-                <!-- ==================================
+                        <!-- ==================================
                      BOTÃO DO CLIENTE
                 =================================== -->
 
-                {% if session.get("tipo") == "cliente" %}
+                        {% if session.get("tipo") == "cliente" %}
 
-                    <div class="hero-buttons">
+                        <div class="hero-buttons">
+                            <a href="{{ url_for('routes.reserva') }}" class="btn btn-reserva">
+                                Fazer uma reserva
+                            </a>
+                        </div>
 
-                        <a
-                            href="{{ url_for('routes.reserva') }}"
-                            class="btn btn-reserva"
-                        >
-                            Fazer uma reserva
-                        </a>
+                        {% endif %}
 
-                    </div>
-
-                {% endif %}
-
-
-                <!-- ==================================
+                        <!-- ==================================
                      BOTÃO DO ADMIN
                 =================================== -->
 
-                {% if session.get("tipo") == "admin" %}
+                        {% if session.get("tipo") == "admin" %}
 
-                    <div class="hero-buttons">
+                        <div class="hero-buttons">
+                            <a
+                                href="{{ url_for('routes.lista_reservas') }}"
+                                class="btn btn-reserva"
+                            >
+                                Gerenciar reservas
+                            </a>
+                        </div>
 
-                        <a
-                            href="{{ url_for('routes.lista_reservas') }}"
-                            class="btn btn-reserva"
-                        >
-                            Gerenciar reservas
-                        </a>
-
+                        {% endif %}
                     </div>
+                </div>
+            </section>
 
-                {% endif %}
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==========================================
+            <!-- ==========================================
          MÉTRICAS
          SOMENTE ADMINISTRADOR
     =========================================== -->
 
-    {% if session.get("tipo") == "admin" %}
+            {% if session.get("tipo") == "admin" %}
 
-    <section class="metricas">
+            <section class="metricas">
+                <div class="container">
+                    <div class="metricas-grid">
+                        <!-- TOTAL DE RESERVAS -->
 
-        <div class="container">
+                        <div class="metrica-card">
+                            <div class="metrica-icon">☕</div>
 
-            <div class="metricas-grid">
+                            <div class="metrica-info">
+                                <span class="metrica-label"> Total de reservas </span>
 
+                                <strong class="metrica-valor"> {{ total_reservas }} </strong>
+                            </div>
+                        </div>
 
-                <!-- TOTAL DE RESERVAS -->
+                        <!-- RESERVAS CONFIRMADAS -->
 
-                <div class="metrica-card">
+                        <div class="metrica-card">
+                            <div class="metrica-icon">✓</div>
 
-                    <div class="metrica-icon">
-                        ☕
+                            <div class="metrica-info">
+                                <span class="metrica-label"> Reservas confirmadas </span>
+
+                                <strong class="metrica-valor"> {{ reservas_confirmadas }} </strong>
+                            </div>
+                        </div>
+
+                        <!-- PESSOAS RESERVADAS -->
+
+                        <div class="metrica-card">
+                            <div class="metrica-icon">👥</div>
+
+                            <div class="metrica-info">
+                                <span class="metrica-label"> Pessoas reservadas </span>
+
+                                <strong class="metrica-valor"> {{ total_pessoas }} </strong>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="metrica-info">
-
-                        <span class="metrica-label">
-                            Total de reservas
-                        </span>
-
-                        <strong class="metrica-valor">
-                            {{ total_reservas }}
-                        </strong>
-
-                    </div>
-
                 </div>
+            </section>
 
+            {% endif %}
 
-
-                <!-- RESERVAS CONFIRMADAS -->
-
-                <div class="metrica-card">
-
-                    <div class="metrica-icon">
-                        ✓
-                    </div>
-
-                    <div class="metrica-info">
-
-                        <span class="metrica-label">
-                            Reservas confirmadas
-                        </span>
-
-                        <strong class="metrica-valor">
-                            {{ reservas_confirmadas }}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- PESSOAS RESERVADAS -->
-
-                <div class="metrica-card">
-
-                    <div class="metrica-icon">
-                        👥
-                    </div>
-
-                    <div class="metrica-info">
-
-                        <span class="metrica-label">
-                            Pessoas reservadas
-                        </span>
-
-                        <strong class="metrica-valor">
-                            {{ total_pessoas }}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-    {% endif %}
-
-
-
-    <!-- ==========================================
+            <!-- ==========================================
          SOBRE A CAFETERIA
     =========================================== -->
 
-    <section class="sobre">
+            <section class="sobre">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-subtitle"> Nossa cafeteria </span>
 
-        <div class="container">
+                        <h2>Um espaço feito para você</h2>
 
-
-            <div class="section-header">
-
-                <span class="section-subtitle">
-                    Nossa cafeteria
-                </span>
-
-                <h2>
-                    Um espaço feito para você
-                </h2>
-
-                <p>
-                    No Café & Sabor, cada detalhe foi
-                    pensado para proporcionar momentos
-                    agradáveis, seja para um café,
-                    almoço ou comemoração especial.
-                </p>
-
-            </div>
-
-
-
-            <!-- BENEFÍCIOS -->
-
-            <div class="beneficios">
-
-
-                <!-- BENEFÍCIO 1 -->
-
-                <div class="beneficio-card">
-
-                    <div class="beneficio-icon">
-                        ☕
+                        <p>
+                            No Café & Sabor, cada detalhe foi pensado para proporcionar momentos
+                            agradáveis, seja para um café, almoço ou comemoração especial.
+                        </p>
                     </div>
 
-                    <h3>
-                        Ambiente agradável
-                    </h3>
+                    <!-- BENEFÍCIOS -->
 
-                    <p>
-                        Um espaço confortável para
-                        aproveitar seu momento.
-                    </p>
+                    <div class="beneficios">
+                        <!-- BENEFÍCIO 1 -->
 
-                </div>
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">☕</div>
 
+                            <h3>Ambiente agradável</h3>
 
+                            <p>Um espaço confortável para aproveitar seu momento.</p>
+                        </div>
 
-                <!-- BENEFÍCIO 2 -->
+                        <!-- BENEFÍCIO 2 -->
 
-                <div class="beneficio-card">
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">🍰</div>
 
-                    <div class="beneficio-icon">
-                        🍰
+                            <h3>Qualidade</h3>
+
+                            <p>Produtos preparados com carinho e qualidade.</p>
+                        </div>
+
+                        <!-- BENEFÍCIO 3 -->
+
+                        <div class="beneficio-card">
+                            <div class="beneficio-icon">❤️</div>
+
+                            <h3>Experiência</h3>
+
+                            <p>Queremos tornar cada visita especial para você.</p>
+                        </div>
                     </div>
-
-                    <h3>
-                        Qualidade
-                    </h3>
-
-                    <p>
-                        Produtos preparados com
-                        carinho e qualidade.
-                    </p>
-
                 </div>
+            </section>
 
-
-
-                <!-- BENEFÍCIO 3 -->
-
-                <div class="beneficio-card">
-
-                    <div class="beneficio-icon">
-                        ❤️
-                    </div>
-
-                    <h3>
-                        Experiência
-                    </h3>
-
-                    <p>
-                        Queremos tornar cada visita
-                        especial para você.
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ==========================================
+            <!-- ==========================================
          CTA DO CLIENTE
     =========================================== -->
 
-    {% if session.get("tipo") == "cliente" %}
+            {% if session.get("tipo") == "cliente" %}
 
-    <section class="cta">
+            <section class="cta">
+                <div class="container">
+                    <div class="cta-content">
+                        <span class="section-subtitle"> Pronto? </span>
 
-        <div class="container">
+                        <h2>Reserve sua mesa</h2>
 
-            <div class="cta-content">
+                        <p>Garanta seu lugar no Café & Sabor e aproveite seu momento.</p>
 
+                        <a href="{{ url_for('routes.reserva') }}" class="btn btn-reserva">
+                            Reservar minha mesa
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-                <span class="section-subtitle">
-                    Pronto?
-                </span>
+            {% endif %}
 
-
-                <h2>
-                    Reserve sua mesa
-                </h2>
-
-
-                <p>
-                    Garanta seu lugar no Café & Sabor
-                    e aproveite seu momento.
-                </p>
-
-
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="btn btn-reserva"
-                >
-                    Reservar minha mesa
-                </a>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-    {% endif %}
-
-
-
-    <!-- ==========================================
+            <!-- ==========================================
          CTA DO ADMINISTRADOR
     =========================================== -->
 
-    {% if session.get("tipo") == "admin" %}
+            {% if session.get("tipo") == "admin" %}
 
-    <section class="cta">
+            <section class="cta">
+                <div class="container">
+                    <div class="cta-content">
+                        <span class="section-subtitle"> Administração </span>
 
-        <div class="container">
+                        <h2>Gerencie as reservas</h2>
 
-            <div class="cta-content">
+                        <p>Acompanhe, confirme, conclua ou exclua as reservas da cafeteria.</p>
 
+                        <a href="{{ url_for('routes.lista_reservas') }}" class="btn btn-reserva">
+                            Ver reservas
+                        </a>
+                    </div>
+                </div>
+            </section>
 
-                <span class="section-subtitle">
-                    Administração
-                </span>
+            {% endif %}
+        </main>
 
-
-                <h2>
-                    Gerencie as reservas
-                </h2>
-
-
-                <p>
-                    Acompanhe, confirme, conclua ou
-                    exclua as reservas da cafeteria.
-                </p>
-
-
-                <a
-                    href="{{ url_for('routes.lista_reservas') }}"
-                    class="btn btn-reserva"
-                >
-                    Ver reservas
-                </a>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-    {% endif %}
-
-
-</main>
-
-
-
-<!-- ==========================================
+        <!-- ==========================================
      RODAPÉ
 =========================================== -->
 
-<footer class="footer">
-
-    <div class="container">
-
-
-        <div class="footer-content">
-
-
-            <!-- ==================================
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <!-- ==================================
                  INFORMAÇÕES
             =================================== -->
 
-            <div class="footer-brand">
+                    <div class="footer-brand">
+                        <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
 
+                        <p>
+                            Seu espaço para bons momentos, cafés especiais e experiências
+                            inesquecíveis.
+                        </p>
+                    </div>
 
-                <a
-                    href="{{ url_for('routes.index') }}"
-                    class="logo"
-                >
-                    Café & Sabor
-                </a>
-
-
-                <p>
-                    Seu espaço para bons momentos,
-                    cafés especiais e experiências
-                    inesquecíveis.
-                </p>
-
-
-            </div>
-
-
-
-            <!-- ==================================
+                    <!-- ==================================
                  LINKS
             =================================== -->
 
-            <div class="footer-links">
+                    <div class="footer-links">
+                        <h3>Navegação</h3>
 
+                        <!-- INÍCIO -->
 
-                <h3>
-                    Navegação
-                </h3>
+                        <a href="{{ url_for('routes.index') }}"> Início </a>
 
-
-                <!-- INÍCIO -->
-
-                <a
-                    href="{{ url_for('routes.index') }}"
-                >
-                    Início
-                </a>
-
-
-                <!-- ==================================
+                        <!-- ==================================
                      LINKS DO CLIENTE
                 =================================== -->
 
-                {% if session.get("tipo") == "cliente" %}
+                        {% if session.get("tipo") == "cliente" %}
 
-                    <a
-                        href="{{ url_for('routes.reserva') }}"
-                    >
-                        Reservar mesa
-                    </a>
+                        <a href="{{ url_for('routes.reserva') }}"> Reservar mesa </a>
 
-                    <a
-                        href="{{ url_for('routes.minhas_reservas') }}"
-                    >
-                        Minhas Reservas
-                    </a>
+                        <a href="{{ url_for('routes.minhas_reservas') }}"> Minhas Reservas </a>
 
-                    <a
-                        href="{{ url_for('routes.meu_cadastro') }}"
-                    >
-                        Meu cadastro
-                    </a>
+                        <a href="{{ url_for('routes.meu_cadastro') }}"> Meu cadastro </a>
 
-                {% endif %}
+                        {% endif %}
 
-
-                <!-- ==================================
+                        <!-- ==================================
                      LINKS DO ADMIN
                 =================================== -->
 
-                {% if session.get("tipo") == "admin" %}
+                        {% if session.get("tipo") == "admin" %}
 
-                    <a
-                        href="{{ url_for('routes.lista_reservas') }}"
-                    >
-                        Ver reservas
-                    </a>
+                        <a href="{{ url_for('routes.lista_reservas') }}"> Ver reservas </a>
 
-                {% endif %}
+                        {% endif %}
 
+                        <!-- SAIR -->
 
-                <!-- SAIR -->
+                        <a href="{{ url_for('routes.logout') }}"> Sair </a>
+                    </div>
+                </div>
 
-                <a
-                    href="{{ url_for('routes.logout') }}"
-                >
-                    Sair
-                </a>
-
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- ==================================
+                <!-- ==================================
              COPYRIGHT
         =================================== -->
 
-        <div class="footer-bottom">
-
-            <p>
-                © 2026 Café & Sabor.
-                Todos os direitos reservados.
-            </p>
-
-        </div>
-
-
-    </div>
-
-</footer>
-
-
-</body>
-
+                <div class="footer-bottom">
+                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+    </body>
 </html>
-

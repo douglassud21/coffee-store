@@ -5,6 +5,7 @@ from database import db
 # MODELO DE USUÁRIO
 # ==========================================
 
+
 class Usuario(db.Model):
     __tablename__ = "usuarios"
 
@@ -25,6 +26,7 @@ class Usuario(db.Model):
 # ==========================================
 # MODELO DE RESERVA
 # ==========================================
+
 
 class Reserva(db.Model):
     __tablename__ = "reservas"

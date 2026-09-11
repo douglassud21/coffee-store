@@ -1,361 +1,219 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
 
-<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
+        <title>Meu cadastro | Café & Sabor</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='meu_cadastro.css') }}" />
+    </head>
 
-    <title>
-        Meu cadastro | Café & Sabor
-    </title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='meu_cadastro.css') }}">
-
-</head>
-
-
-<body>
-
-
-    <!-- ==========================================
+    <body>
+        <!-- ==========================================
          CABEÇALHO
     =========================================== -->
 
-    <header class="header">
+        <header class="header">
+            <div class="container header-container">
+                <!-- LOGO -->
 
-        <div class="container header-container">
+                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
 
-            <!-- LOGO -->
+                <!-- MENU -->
 
-            <a
-                href="{{ url_for('routes.index') }}"
-                class="logo"
-            >
-                Café & Sabor
-            </a>
+                <nav class="nav">
+                    <a href="{{ url_for('routes.index') }}" class="nav-link"> Início </a>
 
+                    <a href="{{ url_for('routes.reserva') }}" class="nav-link"> Reservar mesa </a>
 
-            <!-- MENU -->
+                    <a href="{{ url_for('routes.meu_cadastro') }}" class="nav-link">
+                        Meu cadastro
+                    </a>
 
-            <nav class="nav">
+                    <a href="{{ url_for('routes.logout') }}" class="nav-link"> Sair </a>
+                </nav>
+            </div>
+        </header>
 
-                <a
-                    href="{{ url_for('routes.index') }}"
-                    class="nav-link"
-                >
-                    Início
-                </a>
-
-                <a
-                    href="{{ url_for('routes.reserva') }}"
-                    class="nav-link"
-                >
-                    Reservar mesa
-                </a>
-
-                <a
-                    href="{{ url_for('routes.meu_cadastro') }}"
-                    class="nav-link"
-                >
-                    Meu cadastro
-                </a>
-
-                <a
-                    href="{{ url_for('routes.logout') }}"
-                    class="nav-link"
-                >
-                    Sair
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!-- ==========================================
+        <!-- ==========================================
          CONTEÚDO PRINCIPAL
     =========================================== -->
 
-    <main class="login-container">
-
-        <div class="login-card cadastro-card">
-
-
-            <!-- ==================================
+        <main class="login-container">
+            <div class="login-card cadastro-card">
+                <!-- ==================================
                  CABEÇALHO
             =================================== -->
 
-            <div class="login-header">
+                <div class="login-header">
+                    <div class="login-icon">👤</div>
 
-                <div class="login-icon">
-                    👤
+                    <span class="section-subtitle"> Minha conta </span>
+
+                    <h1>Meu cadastro</h1>
+
+                    <p>Atualize seus dados pessoais quando quiser.</p>
                 </div>
 
-                <span class="section-subtitle">
-                    Minha conta
-                </span>
-
-                <h1>
-                    Meu cadastro
-                </h1>
-
-                <p>
-                    Atualize seus dados pessoais
-                    quando quiser.
-                </p>
-
-            </div>
-
-
-            <!-- ==================================
+                <!-- ==================================
                  MENSAGEM DE ERRO
             =================================== -->
 
-            {% if erro %}
+                {% if erro %}
 
                 <div class="mensagem-erro">
+                    <span> ⚠ </span>
 
-                    <span>
-                        ⚠
-                    </span>
-
-                    <p>
-                        {{ erro }}
-                    </p>
-
+                    <p>{{ erro }}</p>
                 </div>
 
-            {% endif %}
+                {% endif %}
 
-
-            <!-- ==================================
+                <!-- ==================================
                  MENSAGEM DE SUCESSO
             =================================== -->
 
-            {% if sucesso %}
+                {% if sucesso %}
 
                 <div class="mensagem-sucesso">
+                    <span> ✓ </span>
 
-                    <span>
-                        ✓
-                    </span>
-
-                    <p>
-                        {{ sucesso }}
-                    </p>
-
+                    <p>{{ sucesso }}</p>
                 </div>
 
-            {% endif %}
+                {% endif %}
 
-
-            <!-- ==================================
+                <!-- ==================================
                  FORMULÁRIO
             =================================== -->
 
-            <form
-                method="POST"
-                action="{{ url_for('routes.meu_cadastro') }}"
-                class="form-login"
-            >
+                <form
+                    method="POST"
+                    action="{{ url_for('routes.meu_cadastro') }}"
+                    class="form-login"
+                >
+                    <!-- NOME -->
 
+                    <div class="campo">
+                        <label for="nome"> Nome completo </label>
 
-                <!-- NOME -->
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            autocomplete="name"
+                            value="{{ usuario.nome }}"
+                            required
+                        />
+                    </div>
 
-                <div class="campo">
+                    <!-- E-MAIL -->
 
-                    <label for="nome">
-                        Nome completo
-                    </label>
+                    <div class="campo">
+                        <label for="email"> E-mail </label>
 
-                    <input
-                        type="text"
-                        id="nome"
-                        name="nome"
-                        placeholder="Digite seu nome completo"
-                        autocomplete="name"
-                        value="{{ usuario.nome }}"
-                        required
-                    >
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                            value="{{ usuario.email }}"
+                            required
+                        />
+                    </div>
 
-                </div>
+                    <!-- TELEFONE -->
 
+                    <div class="campo">
+                        <label for="telefone"> Telefone </label>
 
-                <!-- E-MAIL -->
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(11) 99999-9999"
+                            autocomplete="tel"
+                            value="{{ usuario.telefone }}"
+                        />
+                    </div>
 
-                <div class="campo">
-
-                    <label for="email">
-                        E-mail
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Digite seu e-mail"
-                        autocomplete="email"
-                        value="{{ usuario.email }}"
-                        required
-                    >
-
-                </div>
-
-
-                <!-- TELEFONE -->
-
-                <div class="campo">
-
-                    <label for="telefone">
-                        Telefone
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="telefone"
-                        name="telefone"
-                        placeholder="(11) 99999-9999"
-                        autocomplete="tel"
-                        value="{{ usuario.telefone }}"
-                    >
-
-                </div>
-
-
-                <!-- ==================================
+                    <!-- ==================================
                      NOVA SENHA
                 =================================== -->
 
-                <div class="form-section">
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">🔒</div>
 
-                    <div class="form-section-header">
+                            <div>
+                                <h2>Alterar senha</h2>
 
-                        <div class="form-section-icon">
-                            🔒
+                                <p>Deixe em branco caso não queira alterar.</p>
+                            </div>
                         </div>
 
-                        <div>
+                        <!-- NOVA SENHA -->
 
-                            <h2>
-                                Alterar senha
-                            </h2>
+                        <div class="campo">
+                            <label for="senha"> Nova senha </label>
 
-                            <p>
-                                Deixe em branco caso
-                                não queira alterar.
-                            </p>
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Digite uma nova senha"
+                                autocomplete="new-password"
+                            />
 
+                            <small class="campo-ajuda">
+                                A senha deve possuir pelo menos 6 caracteres.
+                            </small>
                         </div>
-
                     </div>
 
-
-                    <!-- NOVA SENHA -->
-
-                    <div class="campo">
-
-                        <label for="senha">
-                            Nova senha
-                        </label>
-
-                        <input
-                            type="password"
-                            id="senha"
-                            name="senha"
-                            placeholder="Digite uma nova senha"
-                            autocomplete="new-password"
-                        >
-
-                        <small class="campo-ajuda">
-                            A senha deve possuir pelo
-                            menos 6 caracteres.
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <!-- ==================================
+                    <!-- ==================================
                      AVISO
                 =================================== -->
 
-                <div class="form-notice">
+                    <div class="form-notice">
+                        <span> ℹ️ </span>
 
-                    <span>
-                        ℹ️
-                    </span>
+                        <p>
+                            Seus dados serão utilizados para identificar você e associar suas
+                            reservas à sua conta.
+                        </p>
+                    </div>
 
-                    <p>
-                        Seus dados serão utilizados
-                        para identificar você e
-                        associar suas reservas à sua conta.
-                    </p>
-
-                </div>
-
-
-                <!-- ==================================
+                    <!-- ==================================
                      AÇÕES
                 =================================== -->
 
-                <div class="form-actions">
+                    <div class="form-actions">
+                        <a href="{{ url_for('routes.index') }}" class="btn btn-voltar">
+                            Cancelar
+                        </a>
 
-                    <a
-                        href="{{ url_for('routes.index') }}"
-                        class="btn btn-voltar"
-                    >
-                        Cancelar
-                    </a>
+                        <button type="submit" class="btn btn-reserva">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </main>
 
-                    <button
-                        type="submit"
-                        class="btn btn-reserva"
-                    >
-                        Salvar alterações
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </main>
-
-
-    <!-- ==========================================
+        <!-- ==========================================
          RODAPÉ
     =========================================== -->
 
-    <footer class="footer">
-
-        <div class="container">
-
-            <div class="footer-bottom">
-
-                <p>
-                    © 2026 Café & Sabor.
-                    Todos os direitos reservados.
-                </p>
-
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
+                </div>
             </div>
-
-        </div>
-
-    </footer>
-
-
-</body>
-
+        </footer>
+    </body>
 </html>
-

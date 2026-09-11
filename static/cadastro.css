@@ -4,13 +4,11 @@
    Página de criação de conta
 ========================================================= */
 
-
 /* =========================================================
    VARIÁVEIS LOCAIS
 ========================================================= */
 
 :root {
-
     --cadastro-bg: #f8f3ed;
     --cadastro-card: #ffffff;
 
@@ -31,81 +29,48 @@
     --cadastro-error-bg: #fff3f2;
     --cadastro-error-border: #edc4c1;
 
-    --cadastro-shadow:
-        0 20px 60px rgba(61, 39, 26, 0.12);
+    --cadastro-shadow: 0 20px 60px rgba(61, 39, 26, 0.12);
 
-    --cadastro-shadow-hover:
-        0 25px 70px rgba(61, 39, 26, 0.16);
-
+    --cadastro-shadow-hover: 0 25px 70px rgba(61, 39, 26, 0.16);
 }
-
 
 /* =========================================================
    PÁGINA
 ========================================================= */
 
 .pagina-login {
-
     min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
     background:
-
-        radial-gradient(
-            circle at 10% 20%,
-            rgba(201, 149, 92, 0.08),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 90% 80%,
-            rgba(111, 78, 55, 0.07),
-            transparent 25%
-        ),
-
-        linear-gradient(
-            135deg,
-            #fbf8f4 0%,
-            #f3ebe2 100%
-        );
+        radial-gradient(circle at 10% 20%, rgba(201, 149, 92, 0.08), transparent 25%),
+        radial-gradient(circle at 90% 80%, rgba(111, 78, 55, 0.07), transparent 25%),
+        linear-gradient(135deg, #fbf8f4 0%, #f3ebe2 100%);
 }
-
 
 /* =========================================================
    CABEÇALHO
 ========================================================= */
 
 .pagina-login .header {
-
     flex-shrink: 0;
 
-    background:
-        linear-gradient(
-            135deg,
-            #3d281d,
-            #5b3b29
-        );
+    background: linear-gradient(135deg, #3d281d, #5b3b29);
 
-    border-bottom:
-        1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 
-    box-shadow:
-        0 5px 25px rgba(45, 27, 18, 0.15);
+    box-shadow: 0 5px 25px rgba(45, 27, 18, 0.15);
 }
 
-
 .pagina-login .header-container {
-
     min-height: 76px;
 
     justify-content: center;
 }
 
-
 .pagina-login .logo {
-
     font-size: 25px;
 
     transition:
@@ -113,22 +78,17 @@
         color 0.25s ease;
 }
 
-
 .pagina-login .logo:hover {
-
-    transform:
-        translateY(-2px);
+    transform: translateY(-2px);
 
     color: #f2c58e;
 }
-
 
 /* =========================================================
    ÁREA PRINCIPAL
 ========================================================= */
 
 .login-container {
-
     flex: 1;
 
     width: 100%;
@@ -138,72 +98,53 @@
     justify-content: center;
     align-items: flex-start;
 
-    padding:
-        65px 20px 75px;
+    padding: 65px 20px 75px;
 }
-
 
 /* =========================================================
    CARD DE CADASTRO
 ========================================================= */
 
 .login-card {
-
     width: 100%;
 
     max-width: 530px;
 
-    padding:
-        42px;
+    padding: 42px;
 
-    background:
-        rgba(255, 255, 255, 0.96);
+    background: rgba(255, 255, 255, 0.96);
 
-    border:
-        1px solid rgba(232, 221, 211, 0.9);
+    border: 1px solid rgba(232, 221, 211, 0.9);
 
     border-radius: 24px;
 
-    box-shadow:
-        var(--cadastro-shadow);
+    box-shadow: var(--cadastro-shadow);
 
     position: relative;
 
     overflow: hidden;
 
-    animation:
-        cadastroEntrada 0.65s ease both;
+    animation: cadastroEntrada 0.65s ease both;
 }
 
-
 @keyframes cadastroEntrada {
-
     from {
-
         opacity: 0;
 
-        transform:
-            translateY(25px)
-            scale(0.98);
+        transform: translateY(25px) scale(0.98);
     }
 
     to {
-
         opacity: 1;
 
-        transform:
-            translateY(0)
-            scale(1);
+        transform: translateY(0) scale(1);
     }
-
 }
-
 
 /* detalhe superior */
 
 .login-card::before {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -213,21 +154,13 @@
     width: 100%;
     height: 5px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #60402d,
-            #c9955c,
-            #60402d
-        );
+    background: linear-gradient(90deg, #60402d, #c9955c, #60402d);
 }
-
 
 /* decoração */
 
 .login-card::after {
-
-    content: "☕";
+    content: '☕';
 
     position: absolute;
 
@@ -244,27 +177,22 @@
 
     border-radius: 50%;
 
-    background:
-        rgba(201, 149, 92, 0.06);
+    background: rgba(201, 149, 92, 0.06);
 
-    color:
-        rgba(111, 78, 55, 0.10);
+    color: rgba(111, 78, 55, 0.1);
 
     font-size: 55px;
 
-    transform:
-        rotate(12deg);
+    transform: rotate(12deg);
 
     pointer-events: none;
 }
-
 
 /* =========================================================
    CABEÇALHO DO FORMULÁRIO
 ========================================================= */
 
 .login-header {
-
     position: relative;
 
     z-index: 2;
@@ -274,13 +202,11 @@
     margin-bottom: 30px;
 }
 
-
 /* =========================================================
    ÍCONE
 ========================================================= */
 
 .login-icon {
-
     width: 72px;
     height: 72px;
 
@@ -289,66 +215,45 @@
     align-items: center;
     justify-content: center;
 
-    margin:
-        0 auto 20px;
+    margin: 0 auto 20px;
 
     border-radius: 21px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #f2dfca,
-            #fff7ee
-        );
+    background: linear-gradient(135deg, #f2dfca, #fff7ee);
 
-    border:
-        1px solid #ead4bf;
+    border: 1px solid #ead4bf;
 
-    box-shadow:
-        0 10px 25px rgba(94, 59, 38, 0.08);
+    box-shadow: 0 10px 25px rgba(94, 59, 38, 0.08);
 
     font-size: 34px;
 
-    animation:
-        iconEntrada 0.7s ease 0.1s both;
+    animation: iconEntrada 0.7s ease 0.1s both;
 }
 
-
 @keyframes iconEntrada {
-
     from {
-
         opacity: 0;
 
-        transform:
-            scale(0.7)
-            rotate(-10deg);
+        transform: scale(0.7) rotate(-10deg);
     }
 
     to {
-
         opacity: 1;
 
-        transform:
-            scale(1)
-            rotate(0);
+        transform: scale(1) rotate(0);
     }
-
 }
-
 
 /* =========================================================
    SUBTÍTULO
 ========================================================= */
 
 .login-header .section-subtitle {
-
     display: block;
 
     margin-bottom: 9px;
 
-    color:
-        var(--cadastro-primary-light);
+    color: var(--cadastro-primary-light);
 
     font-size: 11px;
 
@@ -359,54 +264,41 @@
     letter-spacing: 2px;
 }
 
-
 /* =========================================================
    TÍTULO
 ========================================================= */
 
 .login-header h1 {
-
     margin-bottom: 12px;
 
-    color:
-        var(--cadastro-text);
+    color: var(--cadastro-text);
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
-    font-size:
-        clamp(30px, 5vw, 38px);
+    font-size: clamp(30px, 5vw, 38px);
 
     line-height: 1.15;
 
     letter-spacing: -0.6px;
 }
 
-
 .login-header p {
-
     max-width: 400px;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    color:
-        var(--cadastro-text-light);
+    color: var(--cadastro-text-light);
 
     font-size: 14px;
 
     line-height: 1.7;
 }
 
-
 /* =========================================================
    MENSAGEM DE ERRO
 ========================================================= */
 
 .mensagem-erro {
-
     position: relative;
 
     display: flex;
@@ -417,51 +309,36 @@
 
     margin-bottom: 25px;
 
-    padding:
-        14px 16px;
+    padding: 14px 16px;
 
-    background:
-        var(--cadastro-error-bg);
+    background: var(--cadastro-error-bg);
 
-    border:
-        1px solid var(--cadastro-error-border);
+    border: 1px solid var(--cadastro-error-border);
 
-    border-left:
-        4px solid var(--cadastro-error);
+    border-left: 4px solid var(--cadastro-error);
 
     border-radius: 10px;
 
-    color:
-        var(--cadastro-error);
+    color: var(--cadastro-error);
 
-    animation:
-        erroEntrada 0.35s ease both;
+    animation: erroEntrada 0.35s ease both;
 }
 
-
 @keyframes erroEntrada {
-
     from {
-
         opacity: 0;
 
-        transform:
-            translateY(-8px);
+        transform: translateY(-8px);
     }
 
     to {
-
         opacity: 1;
 
-        transform:
-            translateY(0);
+        transform: translateY(0);
     }
-
 }
 
-
 .mensagem-erro span {
-
     flex-shrink: 0;
 
     width: 23px;
@@ -474,19 +351,15 @@
 
     border-radius: 50%;
 
-    background:
-        rgba(169, 68, 66, 0.10);
+    background: rgba(169, 68, 66, 0.1);
 
     font-size: 13px;
 }
 
-
 .mensagem-erro p {
-
     margin: 0;
 
-    color:
-        var(--cadastro-error);
+    color: var(--cadastro-error);
 
     font-size: 13px;
 
@@ -495,13 +368,11 @@
     line-height: 1.5;
 }
 
-
 /* =========================================================
    FORMULÁRIO
 ========================================================= */
 
 .form-login {
-
     display: flex;
 
     flex-direction: column;
@@ -509,13 +380,11 @@
     gap: 20px;
 }
 
-
 /* =========================================================
    CAMPOS
 ========================================================= */
 
 .campo {
-
     display: flex;
 
     flex-direction: column;
@@ -523,43 +392,34 @@
     gap: 8px;
 }
 
-
 .campo label {
-
-    color:
-        #4b382d;
+    color: #4b382d;
 
     font-size: 13px;
 
     font-weight: 700;
 }
 
-
 /* =========================================================
    INPUTS
 ========================================================= */
 
 .campo input {
-
     width: 100%;
 
     height: 52px;
 
-    padding:
-        0 15px;
+    padding: 0 15px;
 
-    border:
-        1px solid var(--cadastro-border);
+    border: 1px solid var(--cadastro-border);
 
     border-radius: 10px;
 
     outline: none;
 
-    background:
-        #fffdfb;
+    background: #fffdfb;
 
-    color:
-        var(--cadastro-text);
+    color: var(--cadastro-text);
 
     font-size: 14px;
 
@@ -570,61 +430,45 @@
         transform 0.2s ease;
 }
 
-
 .campo input::placeholder {
-
-    color:
-        #b3a59c;
+    color: #b3a59c;
 }
-
 
 /* foco */
 
 .campo input:focus {
+    border-color: var(--cadastro-gold);
 
-    border-color:
-        var(--cadastro-gold);
+    background: #ffffff;
 
-    background:
-        #ffffff;
-
-    box-shadow:
-        0 0 0 4px rgba(201, 149, 92, 0.13);
+    box-shadow: 0 0 0 4px rgba(201, 149, 92, 0.13);
 }
-
 
 /* quando válido */
 
 .campo input:valid:not(:placeholder-shown) {
-
-    border-color:
-        #d8c8ba;
+    border-color: #d8c8ba;
 }
-
 
 /* =========================================================
    TEXTO DE AJUDA
 ========================================================= */
 
 .campo-ajuda {
-
     margin-top: -2px;
 
-    color:
-        var(--cadastro-muted);
+    color: var(--cadastro-muted);
 
     font-size: 11px;
 
     line-height: 1.5;
 }
 
-
 /* =========================================================
    AVISO DE SEGURANÇA
 ========================================================= */
 
 .form-notice {
-
     display: flex;
 
     align-items: flex-start;
@@ -633,21 +477,16 @@
 
     margin-top: 2px;
 
-    padding:
-        14px 15px;
+    padding: 14px 15px;
 
-    border:
-        1px solid #eee1d6;
+    border: 1px solid #eee1d6;
 
     border-radius: 10px;
 
-    background:
-        #fcf8f3;
+    background: #fcf8f3;
 }
 
-
 .form-notice span {
-
     flex-shrink: 0;
 
     width: 27px;
@@ -660,32 +499,26 @@
 
     border-radius: 8px;
 
-    background:
-        #ead8c5;
+    background: #ead8c5;
 
     font-size: 13px;
 }
 
-
 .form-notice p {
-
     margin: 0;
 
-    color:
-        #806d60;
+    color: #806d60;
 
     font-size: 11px;
 
     line-height: 1.6;
 }
 
-
 /* =========================================================
    BOTÃO DE CADASTRO
 ========================================================= */
 
 .btn-login {
-
     width: 100%;
 
     min-height: 54px;
@@ -696,12 +529,7 @@
 
     border-radius: 11px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #805536,
-            #573a28
-        );
+    background: linear-gradient(135deg, #805536, #573a28);
 
     color: #fff;
 
@@ -711,8 +539,7 @@
 
     letter-spacing: 0.2px;
 
-    box-shadow:
-        0 9px 22px rgba(86, 57, 39, 0.20);
+    box-shadow: 0 9px 22px rgba(86, 57, 39, 0.2);
 
     transition:
         transform 0.25s ease,
@@ -720,40 +547,25 @@
         background 0.25s ease;
 }
 
-
 .btn-login:hover {
+    transform: translateY(-2px);
 
-    transform:
-        translateY(-2px);
+    background: linear-gradient(135deg, #956344, #65432e);
 
-    background:
-        linear-gradient(
-            135deg,
-            #956344,
-            #65432e
-        );
-
-    box-shadow:
-        0 13px 28px rgba(86, 57, 39, 0.27);
+    box-shadow: 0 13px 28px rgba(86, 57, 39, 0.27);
 }
-
 
 .btn-login:active {
+    transform: translateY(0);
 
-    transform:
-        translateY(0);
-
-    box-shadow:
-        0 5px 12px rgba(86, 57, 39, 0.18);
+    box-shadow: 0 5px 12px rgba(86, 57, 39, 0.18);
 }
-
 
 /* =========================================================
    ÁREA "JÁ POSSUI CONTA?"
 ========================================================= */
 
 .login-cadastro {
-
     display: flex;
 
     align-items: center;
@@ -765,52 +577,38 @@
 
     padding-top: 25px;
 
-    border-top:
-        1px solid #eee5de;
+    border-top: 1px solid #eee5de;
 
     text-align: center;
 }
 
-
 .login-cadastro p {
-
-    color:
-        #89776b;
+    color: #89776b;
 
     font-size: 13px;
 }
 
-
 .link-cadastro {
-
-    color:
-        #805536;
+    color: #805536;
 
     font-size: 13px;
 
     font-weight: 800;
 
-    transition:
-        color 0.2s ease;
+    transition: color 0.2s ease;
 }
-
 
 .link-cadastro:hover {
+    color: #c18b56;
 
-    color:
-        #c18b56;
-
-    text-decoration:
-        underline;
+    text-decoration: underline;
 }
-
 
 /* =========================================================
    VOLTAR
 ========================================================= */
 
 .login-voltar {
-
     display: flex;
 
     justify-content: center;
@@ -818,9 +616,7 @@
     margin-top: 18px;
 }
 
-
 .btn-voltar {
-
     display: inline-flex;
 
     align-items: center;
@@ -829,13 +625,11 @@
 
     min-height: 38px;
 
-    padding:
-        8px 14px;
+    padding: 8px 14px;
 
     border-radius: 8px;
 
-    color:
-        #88766a;
+    color: #88766a;
 
     font-size: 12px;
 
@@ -847,45 +641,32 @@
         transform 0.2s ease;
 }
 
-
 .btn-voltar:hover {
+    color: #5e402c;
 
-    color:
-        #5e402c;
+    background: #f5ece4;
 
-    background:
-        #f5ece4;
-
-    transform:
-        translateX(-2px);
+    transform: translateX(-2px);
 }
-
 
 /* =========================================================
    RODAPÉ DA PÁGINA DE LOGIN
 ========================================================= */
 
 .footer-login {
-
     flex-shrink: 0;
 
-    padding:
-        22px 0;
+    padding: 22px 0;
 
-    background:
-        #302019;
+    background: #302019;
 }
-
 
 .footer-login::before,
 .footer-login::after {
-
     display: none;
 }
 
-
 .footer-login .footer-bottom {
-
     margin: 0;
 
     padding: 0;
@@ -893,133 +674,90 @@
     border: none;
 }
 
-
 .footer-login .footer-bottom p {
-
-    color:
-        #927e70;
+    color: #927e70;
 
     font-size: 11px;
 }
-
 
 /* =========================================================
    ESTADO DE ERRO DOS INPUTS
 ========================================================= */
 
 .campo input:invalid:not(:placeholder-shown) {
-
-    border-color:
-        #dba4a0;
+    border-color: #dba4a0;
 }
-
 
 .campo input:invalid:not(:placeholder-shown):focus {
+    border-color: #b85c56;
 
-    border-color:
-        #b85c56;
-
-    box-shadow:
-        0 0 0 4px rgba(184, 92, 86, 0.10);
+    box-shadow: 0 0 0 4px rgba(184, 92, 86, 0.1);
 }
-
 
 /* =========================================================
    AUTOFILL DO NAVEGADOR
 ========================================================= */
 
 .campo input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #fffdfb inset;
 
-    -webkit-box-shadow:
-        0 0 0 1000px #fffdfb inset;
+    -webkit-text-fill-color: var(--cadastro-text);
 
-    -webkit-text-fill-color:
-        var(--cadastro-text);
-
-    transition:
-        background-color 9999s ease-in-out 0s;
+    transition: background-color 9999s ease-in-out 0s;
 }
-
 
 /* =========================================================
    RESPONSIVIDADE — TABLET
 ========================================================= */
 
 @media (max-width: 700px) {
-
     .login-container {
-
-        padding:
-            45px 16px 55px;
+        padding: 45px 16px 55px;
     }
-
 
     .login-card {
-
         max-width: 520px;
 
-        padding:
-            36px 30px;
+        padding: 36px 30px;
     }
-
 
     .login-card::after {
-
         opacity: 0.5;
     }
-
 }
-
 
 /* =========================================================
    RESPONSIVIDADE — CELULAR
 ========================================================= */
 
 @media (max-width: 500px) {
-
     .pagina-login .header-container {
-
         min-height: 68px;
     }
 
-
     .pagina-login .logo {
-
         font-size: 22px;
     }
 
-
     .login-container {
-
-        padding:
-            30px 12px 40px;
+        padding: 30px 12px 40px;
     }
-
 
     .login-card {
+        padding: 32px 20px;
 
-        padding:
-            32px 20px;
-
-        border-radius:
-            19px;
+        border-radius: 19px;
     }
 
-
     .login-card::after {
-
         display: none;
     }
 
-
     .login-header {
-
         margin-bottom: 25px;
     }
 
-
     .login-icon {
-
         width: 64px;
         height: 64px;
 
@@ -1030,72 +768,49 @@
         font-size: 30px;
     }
 
-
     .login-header h1 {
-
         font-size: 29px;
     }
 
-
     .login-header p {
-
         font-size: 13px;
     }
 
-
     .form-login {
-
         gap: 17px;
     }
 
-
     .campo input {
-
         height: 50px;
 
         font-size: 14px;
     }
 
-
     .form-notice {
-
-        padding:
-            12px;
+        padding: 12px;
     }
 
-
     .login-cadastro {
-
         flex-direction: column;
 
         gap: 3px;
     }
-
 }
-
 
 /* =========================================================
    CELULARES MUITO PEQUENOS
 ========================================================= */
 
 @media (max-width: 350px) {
-
     .login-card {
-
-        padding:
-            28px 16px;
+        padding: 28px 16px;
     }
 
-
     .login-header h1 {
-
         font-size: 26px;
     }
 
-
     .campo input {
-
         height: 48px;
     }
-
 }

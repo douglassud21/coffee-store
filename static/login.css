@@ -1,10 +1,8 @@
-
 /* =========================================================
    VARIÁVEIS
    ========================================================= */
 
 :root {
-
     /* ---------- CORES PRINCIPAIS ---------- */
 
     --marrom-escuro: #24160f;
@@ -43,23 +41,17 @@
 
     /* ---------- SOMBRAS ---------- */
 
-    --sombra-card:
-        0 30px 80px rgba(55, 35, 23, 0.14),
-        0 8px 25px rgba(55, 35, 23, 0.06);
+    --sombra-card: 0 30px 80px rgba(55, 35, 23, 0.14), 0 8px 25px rgba(55, 35, 23, 0.06);
 
-    --sombra-botao:
-        0 10px 25px rgba(82, 53, 36, 0.20);
+    --sombra-botao: 0 10px 25px rgba(82, 53, 36, 0.2);
 
-    --sombra-hover:
-        0 16px 35px rgba(82, 53, 36, 0.28);
+    --sombra-hover: 0 16px 35px rgba(82, 53, 36, 0.28);
 
     /* ---------- TRANSIÇÕES ---------- */
 
     --transicao: 0.25s ease;
     --transicao-suave: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-
 }
-
 
 /* =========================================================
    RESET ESPECÍFICO
@@ -71,13 +63,11 @@
     box-sizing: border-box;
 }
 
-
 /* =========================================================
    BODY
    ========================================================= */
 
 body.pagina-login {
-
     min-height: 100vh;
 
     margin: 0;
@@ -88,75 +78,42 @@ body.pagina-login {
     background:
 
         /* brilho superior esquerdo */
-
-        radial-gradient(circle at 8% 8%,
-            rgba(201, 148, 91, 0.16),
-            transparent 25%),
-
+        radial-gradient(circle at 8% 8%, rgba(201, 148, 91, 0.16), transparent 25%),
         /* brilho inferior direito */
-
-        radial-gradient(circle at 92% 82%,
-            rgba(111, 78, 55, 0.10),
-            transparent 28%),
-
+        radial-gradient(circle at 92% 82%, rgba(111, 78, 55, 0.1), transparent 28%),
         /* brilho central */
-
-        radial-gradient(circle at 50% 45%,
-            rgba(255, 255, 255, 0.80),
-            transparent 45%),
-
-        linear-gradient(135deg,
-            #fcfaf8 0%,
-            #f4ebe3 48%,
-            #eee2d8 100%);
+        radial-gradient(circle at 50% 45%, rgba(255, 255, 255, 0.8), transparent 45%),
+        linear-gradient(135deg, #fcfaf8 0%, #f4ebe3 48%, #eee2d8 100%);
 
     color: var(--texto);
 
     font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
+        -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-
 }
-
 
 /* =========================================================
    HEADER
    ========================================================= */
 
 .pagina-login .header {
-
     position: relative;
 
     flex-shrink: 0;
 
-    background:
+    background: linear-gradient(135deg, #24160f 0%, #352219 45%, #64432d 100%);
 
-        linear-gradient(135deg,
-            #24160f 0%,
-            #352219 45%,
-            #64432d 100%);
-
-    box-shadow:
-        0 8px 30px rgba(45, 28, 18, 0.20);
+    box-shadow: 0 8px 30px rgba(45, 28, 18, 0.2);
 
     z-index: 10;
-
 }
-
 
 /* brilho discreto do header */
 
 .pagina-login .header::after {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -166,23 +123,16 @@ body.pagina-login {
     width: 100%;
     height: 1px;
 
-    background:
-        linear-gradient(90deg,
-            transparent,
-            rgba(239, 208, 173, 0.55),
-            transparent);
+    background: linear-gradient(90deg, transparent, rgba(239, 208, 173, 0.55), transparent);
 
     pointer-events: none;
-
 }
-
 
 /* =========================================================
    HEADER CONTAINER
    ========================================================= */
 
 .pagina-login .header-container {
-
     min-height: 78px;
 
     display: flex;
@@ -191,26 +141,19 @@ body.pagina-login {
 
     justify-content: center;
 
-    padding:
-        0 20px;
-
+    padding: 0 20px;
 }
-
 
 /* =========================================================
    LOGO
    ========================================================= */
 
 .pagina-login .logo {
-
     position: relative;
 
     color: #ffffff;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
+    font-family: Georgia, 'Times New Roman', serif;
 
     font-size: 28px;
 
@@ -224,15 +167,12 @@ body.pagina-login {
         color var(--transicao-suave),
         transform var(--transicao-suave),
         text-shadow var(--transicao-suave);
-
 }
-
 
 /* pequeno detalhe dourado */
 
 .pagina-login .logo::after {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -247,43 +187,28 @@ body.pagina-login {
 
     border-radius: 10px;
 
-    background:
-        linear-gradient(90deg,
-            var(--dourado),
-            var(--dourado-claro));
+    background: linear-gradient(90deg, var(--dourado), var(--dourado-claro));
 
-    transition:
-        width var(--transicao-suave);
-
+    transition: width var(--transicao-suave);
 }
-
 
 .pagina-login .logo:hover {
-
     color: #f5d4ad;
 
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 
-    text-shadow:
-        0 5px 20px rgba(239, 208, 173, 0.25);
-
+    text-shadow: 0 5px 20px rgba(239, 208, 173, 0.25);
 }
-
 
 .pagina-login .logo:hover::after {
-
     width: 45px;
-
 }
-
 
 /* =========================================================
    CONTAINER DO LOGIN
    ========================================================= */
 
 .login-container {
-
     position: relative;
 
     flex: 1;
@@ -296,17 +221,13 @@ body.pagina-login {
 
     justify-content: center;
 
-    padding:
-        60px 20px 70px;
-
+    padding: 60px 20px 70px;
 }
-
 
 /* textura decorativa */
 
 .login-container::before {
-
-    content: "";
+    content: '';
 
     position: fixed;
 
@@ -318,92 +239,69 @@ body.pagina-login {
 
     border-radius: 50%;
 
-    border:
-        1px solid rgba(111, 78, 55, 0.06);
+    border: 1px solid rgba(111, 78, 55, 0.06);
 
     box-shadow:
         0 0 0 40px rgba(111, 78, 55, 0.025),
         0 0 0 80px rgba(111, 78, 55, 0.018);
 
     pointer-events: none;
-
 }
-
 
 /* =========================================================
    CARD
    ========================================================= */
 
 .login-card {
-
     position: relative;
 
     width: 100%;
 
     max-width: 465px;
 
-    padding:
-        46px 46px 39px;
+    padding: 46px 46px 39px;
 
-    background:
-        rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.94);
 
-    border:
-        1px solid rgba(218, 202, 188, 0.80);
+    border: 1px solid rgba(218, 202, 188, 0.8);
 
     border-radius: 24px;
 
-    box-shadow:
-        var(--sombra-card);
+    box-shadow: var(--sombra-card);
 
     overflow: hidden;
 
-    backdrop-filter:
-        blur(12px);
+    backdrop-filter: blur(12px);
 
-    -webkit-backdrop-filter:
-        blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 
-    animation:
-        loginCardEntrada 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
-
+    animation: loginCardEntrada 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
 
 /* =========================================================
    ANIMAÇÃO DO CARD
    ========================================================= */
 
 @keyframes loginCardEntrada {
-
     from {
-
         opacity: 0;
 
-        transform:
-            translateY(20px) scale(0.985);
-
+        transform: translateY(20px) scale(0.985);
     }
 
     to {
-
         opacity: 1;
 
-        transform:
-            translateY(0) scale(1);
-
+        transform: translateY(0) scale(1);
     }
-
 }
-
 
 /* =========================================================
    DETALHE SUPERIOR
    ========================================================= */
 
 .login-card::before {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -413,24 +311,22 @@ body.pagina-login {
     width: 100%;
     height: 4px;
 
-    background:
-        linear-gradient(90deg,
-            #80583c 0%,
-            #c9945b 35%,
-            #efd0ad 50%,
-            #c9945b 65%,
-            #80583c 100%);
-
+    background: linear-gradient(
+        90deg,
+        #80583c 0%,
+        #c9945b 35%,
+        #efd0ad 50%,
+        #c9945b 65%,
+        #80583c 100%
+    );
 }
-
 
 /* =========================================================
    BRILHO DO CARD
    ========================================================= */
 
 .login-card::after {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -442,22 +338,16 @@ body.pagina-login {
 
     border-radius: 50%;
 
-    background:
-        radial-gradient(circle,
-            rgba(201, 148, 91, 0.13),
-            transparent 70%);
+    background: radial-gradient(circle, rgba(201, 148, 91, 0.13), transparent 70%);
 
     pointer-events: none;
-
 }
-
 
 /* =========================================================
    CABEÇALHO DO LOGIN
    ========================================================= */
 
 .login-header {
-
     position: relative;
 
     z-index: 2;
@@ -465,16 +355,13 @@ body.pagina-login {
     text-align: center;
 
     margin-bottom: 30px;
-
 }
-
 
 /* =========================================================
    ÍCONE
    ========================================================= */
 
 .login-icon {
-
     position: relative;
 
     width: 70px;
@@ -485,38 +372,29 @@ body.pagina-login {
     align-items: center;
     justify-content: center;
 
-    margin:
-        0 auto 21px;
+    margin: 0 auto 21px;
 
     border-radius: 50%;
 
-    background:
-        linear-gradient(145deg,
-            #f8eadc,
-            #ead1bb);
+    background: linear-gradient(145deg, #f8eadc, #ead1bb);
 
-    border:
-        1px solid #dfc3aa;
+    border: 1px solid #dfc3aa;
 
-    color:
-        var(--marrom);
+    color: var(--marrom);
 
     font-size: 29px;
 
     box-shadow:
         0 12px 28px rgba(111, 78, 55, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.80);
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
 
     transition:
         transform var(--transicao-suave),
         box-shadow var(--transicao-suave);
-
 }
 
-
 .login-icon::before {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -524,36 +402,27 @@ body.pagina-login {
 
     border-radius: 50%;
 
-    border:
-        1px solid rgba(201, 148, 91, 0.16);
-
+    border: 1px solid rgba(201, 148, 91, 0.16);
 }
 
-
 .login-icon:hover {
-
-    transform:
-        translateY(-3px) rotate(-2deg);
+    transform: translateY(-3px) rotate(-2deg);
 
     box-shadow:
         0 17px 34px rgba(111, 78, 55, 0.18),
         inset 0 1px 0 rgba(255, 255, 255, 0.85);
-
 }
-
 
 /* =========================================================
    SUBTÍTULO
    ========================================================= */
 
 .login-header .section-subtitle {
-
     display: block;
 
     margin-bottom: 9px;
 
-    color:
-        var(--dourado);
+    color: var(--dourado);
 
     font-size: 10px;
 
@@ -562,66 +431,49 @@ body.pagina-login {
     text-transform: uppercase;
 
     letter-spacing: 2.8px;
-
 }
-
 
 /* =========================================================
    TÍTULO
    ========================================================= */
 
 .login-header h1 {
+    margin: 0 0 11px;
 
-    margin:
-        0 0 11px;
+    color: var(--marrom-escuro);
 
-    color:
-        var(--marrom-escuro);
+    font-family: Georgia, 'Times New Roman', serif;
 
-    font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-    font-size:
-        clamp(29px, 5vw, 35px);
+    font-size: clamp(29px, 5vw, 35px);
 
     font-weight: 700;
 
     line-height: 1.15;
 
     letter-spacing: -0.7px;
-
 }
-
 
 /* =========================================================
    TEXTO DO CABEÇALHO
    ========================================================= */
 
 .login-header p {
-
     max-width: 320px;
 
-    margin:
-        0 auto;
+    margin: 0 auto;
 
-    color:
-        var(--texto-secundario);
+    color: var(--texto-secundario);
 
     font-size: 13px;
 
     line-height: 1.7;
-
 }
-
 
 /* =========================================================
    MENSAGEM DE ERRO
    ========================================================= */
 
 .mensagem-erro {
-
     display: flex;
 
     align-items: flex-start;
@@ -630,70 +482,46 @@ body.pagina-login {
 
     margin-bottom: 23px;
 
-    padding:
-        13px 15px;
+    padding: 13px 15px;
 
-    background:
-        linear-gradient(135deg,
-            #fff4f2,
-            var(--vermelho-fundo));
+    background: linear-gradient(135deg, #fff4f2, var(--vermelho-fundo));
 
-    border:
-        1px solid var(--vermelho-borda);
+    border: 1px solid var(--vermelho-borda);
 
-    border-left:
-        4px solid var(--vermelho);
+    border-left: 4px solid var(--vermelho);
 
     border-radius: 10px;
 
-    color:
-        var(--vermelho);
+    color: var(--vermelho);
 
-    box-shadow:
-        0 5px 15px rgba(182, 77, 69, 0.06);
+    box-shadow: 0 5px 15px rgba(182, 77, 69, 0.06);
 
-    animation:
-        mensagemEntrada 0.35s ease both;
-
+    animation: mensagemEntrada 0.35s ease both;
 }
 
-
 @keyframes mensagemEntrada {
-
     from {
-
         opacity: 0;
 
-        transform:
-            translateY(-5px);
-
+        transform: translateY(-5px);
     }
 
     to {
-
         opacity: 1;
 
-        transform:
-            translateY(0);
-
+        transform: translateY(0);
     }
-
 }
 
-
 .mensagem-erro span {
-
     flex-shrink: 0;
 
     font-size: 16px;
 
     line-height: 1.4;
-
 }
 
-
 .mensagem-erro p {
-
     margin: 0;
 
     font-size: 12px;
@@ -701,44 +529,34 @@ body.pagina-login {
     font-weight: 600;
 
     line-height: 1.5;
-
 }
-
 
 /* =========================================================
    FORMULÁRIO
    ========================================================= */
 
 .form-login {
-
     display: flex;
 
     flex-direction: column;
 
     gap: 20px;
-
 }
-
 
 /* =========================================================
    CAMPO
    ========================================================= */
 
 .campo {
-
     display: flex;
 
     flex-direction: column;
 
     gap: 8px;
-
 }
 
-
 .campo label {
-
-    color:
-        var(--texto);
+    color: var(--texto);
 
     font-size: 12px;
 
@@ -746,42 +564,31 @@ body.pagina-login {
 
     letter-spacing: 0.1px;
 
-    transition:
-        color var(--transicao);
-
+    transition: color var(--transicao);
 }
-
 
 /* =========================================================
    INPUT
    ========================================================= */
 
 .campo input {
-
     width: 100%;
 
     height: 51px;
 
-    padding:
-        0 15px;
+    padding: 0 15px;
 
-    border:
-        1px solid var(--borda);
+    border: 1px solid var(--borda);
 
     border-radius: 10px;
 
     outline: none;
 
-    background:
-        linear-gradient(180deg,
-            #fdfcfb,
-            #faf8f6);
+    background: linear-gradient(180deg, #fdfcfb, #faf8f6);
 
-    color:
-        var(--texto);
+    color: var(--texto);
 
-    font-family:
-        inherit;
+    font-family: inherit;
 
     font-size: 13px;
 
@@ -792,90 +599,57 @@ body.pagina-login {
         background var(--transicao-suave),
         box-shadow var(--transicao-suave),
         transform var(--transicao-suave);
-
 }
 
-
 .campo input::placeholder {
-
-    color:
-        var(--texto-suave);
+    color: var(--texto-suave);
 
     font-size: 12px;
 
-    transition:
-        opacity var(--transicao);
-
+    transition: opacity var(--transicao);
 }
-
 
 .campo input:hover {
+    border-color: #cdb8a7;
 
-    border-color:
-        #cdb8a7;
-
-    background:
-        #ffffff;
-
+    background: #ffffff;
 }
-
 
 .campo input:hover::placeholder {
-
     opacity: 0.75;
-
 }
 
-
 .campo input:focus {
+    background: #ffffff;
 
-    background:
-        #ffffff;
-
-    border-color:
-        var(--dourado);
+    border-color: var(--dourado);
 
     box-shadow:
         0 0 0 4px rgba(201, 148, 91, 0.11),
         0 7px 18px rgba(111, 78, 55, 0.06);
-
 }
-
 
 .campo:focus-within label {
-
-    color:
-        var(--marrom);
-
+    color: var(--marrom);
 }
-
 
 /* =========================================================
    VALIDAÇÃO
    ========================================================= */
 
 .campo input:invalid:not(:placeholder-shown) {
-
-    border-color:
-        #d58b84;
-
+    border-color: #d58b84;
 }
-
 
 .campo input:valid:not(:placeholder-shown) {
-
-    border-color:
-        #c7b09b;
-
+    border-color: #c7b09b;
 }
-
 
 /* =========================================================
    BOTÃO LOGIN
    ========================================================= */
 
 .btn-login {
-
     position: relative;
 
     width: 100%;
@@ -884,8 +658,7 @@ body.pagina-login {
 
     margin-top: 3px;
 
-    padding:
-        0 20px;
+    padding: 0 20px;
 
     border: none;
 
@@ -893,17 +666,11 @@ body.pagina-login {
 
     overflow: hidden;
 
-    background:
-        linear-gradient(135deg,
-            #82593d 0%,
-            #69462f 50%,
-            #593b29 100%);
+    background: linear-gradient(135deg, #82593d 0%, #69462f 50%, #593b29 100%);
 
-    color:
-        #ffffff;
+    color: #ffffff;
 
-    font-family:
-        inherit;
+    font-family: inherit;
 
     font-size: 13px;
 
@@ -913,22 +680,18 @@ body.pagina-login {
 
     cursor: pointer;
 
-    box-shadow:
-        var(--sombra-botao);
+    box-shadow: var(--sombra-botao);
 
     transition:
         transform var(--transicao-suave),
         box-shadow var(--transicao-suave),
         background var(--transicao-suave);
-
 }
-
 
 /* brilho do botão */
 
 .btn-login::before {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -938,62 +701,36 @@ body.pagina-login {
     width: 70%;
     height: 100%;
 
-    background:
-        linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.16),
-            transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
 
-    transform:
-        skewX(-20deg);
+    transform: skewX(-20deg);
 
-    transition:
-        left 0.6s ease;
-
+    transition: left 0.6s ease;
 }
-
 
 .btn-login:hover {
+    background: linear-gradient(135deg, #966744 0%, #754e34 50%, #62412c 100%);
 
-    background:
-        linear-gradient(135deg,
-            #966744 0%,
-            #754e34 50%,
-            #62412c 100%);
+    transform: translateY(-2px);
 
-    transform:
-        translateY(-2px);
-
-    box-shadow:
-        var(--sombra-hover);
-
+    box-shadow: var(--sombra-hover);
 }
-
 
 .btn-login:hover::before {
-
     left: 130%;
-
 }
-
 
 .btn-login:active {
+    transform: translateY(0);
 
-    transform:
-        translateY(0);
-
-    box-shadow:
-        0 6px 15px rgba(82, 53, 36, 0.18);
-
+    box-shadow: 0 6px 15px rgba(82, 53, 36, 0.18);
 }
-
 
 /* =========================================================
    CADASTRO
    ========================================================= */
 
 .login-cadastro {
-
     display: flex;
 
     flex-direction: column;
@@ -1006,32 +743,23 @@ body.pagina-login {
 
     padding-top: 24px;
 
-    border-top:
-        1px solid var(--borda-clara);
+    border-top: 1px solid var(--borda-clara);
 
     text-align: center;
-
 }
-
 
 .login-cadastro p {
-
     margin: 0;
 
-    color:
-        var(--texto-secundario);
+    color: var(--texto-secundario);
 
     font-size: 12px;
-
 }
 
-
 .link-cadastro {
-
     position: relative;
 
-    color:
-        var(--marrom);
+    color: var(--marrom);
 
     font-size: 12px;
 
@@ -1039,15 +767,11 @@ body.pagina-login {
 
     text-decoration: none;
 
-    transition:
-        color var(--transicao);
-
+    transition: color var(--transicao);
 }
 
-
 .link-cadastro::after {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -1057,47 +781,32 @@ body.pagina-login {
     width: 0;
     height: 1px;
 
-    background:
-        var(--dourado);
+    background: var(--dourado);
 
-    transition:
-        width var(--transicao-suave);
-
+    transition: width var(--transicao-suave);
 }
-
 
 .link-cadastro:hover {
-
-    color:
-        var(--dourado);
-
+    color: var(--dourado);
 }
-
 
 .link-cadastro:hover::after {
-
     width: 100%;
-
 }
-
 
 /* =========================================================
    VOLTAR
    ========================================================= */
 
 .login-voltar {
-
     display: flex;
 
     justify-content: center;
 
     margin-top: 20px;
-
 }
 
-
 .login-voltar .btn-voltar {
-
     display: inline-flex;
 
     align-items: center;
@@ -1106,16 +815,13 @@ body.pagina-login {
 
     min-height: 38px;
 
-    padding:
-        0 16px;
+    padding: 0 16px;
 
-    border:
-        1px solid transparent;
+    border: 1px solid transparent;
 
     border-radius: 9px;
 
-    color:
-        var(--texto-suave);
+    color: var(--texto-suave);
 
     font-size: 11px;
 
@@ -1128,53 +834,36 @@ body.pagina-login {
         background var(--transicao-suave),
         border-color var(--transicao-suave),
         transform var(--transicao-suave);
-
 }
-
 
 .login-voltar .btn-voltar:hover {
+    color: var(--marrom);
 
-    color:
-        var(--marrom);
+    background: rgba(250, 245, 240, 0.85);
 
-    background:
-        rgba(250, 245, 240, 0.85);
+    border-color: var(--borda);
 
-    border-color:
-        var(--borda);
-
-    transform:
-        translateY(-1px);
-
+    transform: translateY(-1px);
 }
-
 
 /* =========================================================
    FOOTER
    ========================================================= */
 
 .footer-login {
-
     position: relative;
 
     flex-shrink: 0;
 
-    background:
-        linear-gradient(135deg,
-            #24160f,
-            #302017);
+    background: linear-gradient(135deg, #24160f, #302017);
 
-    padding:
-        23px 0;
-
+    padding: 23px 0;
 }
-
 
 /* detalhe superior */
 
 .footer-login::before {
-
-    content: "";
+    content: '';
 
     position: absolute;
 
@@ -1184,287 +873,180 @@ body.pagina-login {
     width: 100%;
     height: 1px;
 
-    background:
-        linear-gradient(90deg,
-            transparent,
-            rgba(201, 148, 91, 0.35),
-            transparent);
-
+    background: linear-gradient(90deg, transparent, rgba(201, 148, 91, 0.35), transparent);
 }
 
-
 .footer-login .footer-bottom {
-
     border: none;
 
     padding: 0;
 
     text-align: center;
-
 }
 
-
 .footer-login p {
-
     margin: 0;
 
-    color:
-        #988276;
+    color: #988276;
 
     font-size: 10px;
 
     letter-spacing: 0.2px;
-
 }
-
 
 /* =========================================================
    RESPONSIVIDADE
    ========================================================= */
 
 @media (max-width: 600px) {
-
     .pagina-login .header-container {
-
         min-height: 72px;
-
     }
-
 
     .pagina-login .logo {
-
         font-size: 25px;
-
     }
-
 
     .login-container {
-
         align-items: flex-start;
 
-        padding:
-            42px 16px 55px;
-
+        padding: 42px 16px 55px;
     }
-
 
     .login-card {
-
         max-width: 430px;
 
-        padding:
-            39px 28px 31px;
+        padding: 39px 28px 31px;
 
         border-radius: 20px;
-
     }
-
 
     .login-header {
-
         margin-bottom: 27px;
-
     }
 
-
     .login-icon {
-
         width: 62px;
         height: 62px;
 
         margin-bottom: 18px;
 
         font-size: 26px;
-
     }
 
-
     .login-header .section-subtitle {
-
         font-size: 9px;
 
         letter-spacing: 2.3px;
-
     }
-
 
     .login-header h1 {
-
         font-size: 28px;
-
     }
 
-
     .login-header p {
-
         font-size: 12px;
 
         line-height: 1.65;
-
     }
-
 
     .form-login {
-
         gap: 18px;
-
     }
-
 
     .campo input {
-
         height: 49px;
-
     }
-
 
     .btn-login {
-
         min-height: 50px;
-
     }
-
 }
-
 
 /* =========================================================
    CELULAR PEQUENO
    ========================================================= */
 
 @media (max-width: 400px) {
-
     .pagina-login .header-container {
-
         min-height: 66px;
-
     }
-
 
     .pagina-login .logo {
-
         font-size: 22px;
-
     }
-
 
     .login-container {
-
-        padding:
-            30px 12px 42px;
-
+        padding: 30px 12px 42px;
     }
-
 
     .login-card {
-
-        padding:
-            34px 20px 28px;
+        padding: 34px 20px 28px;
 
         border-radius: 17px;
-
     }
-
 
     .login-header {
-
         margin-bottom: 24px;
-
     }
 
-
     .login-icon {
-
         width: 57px;
         height: 57px;
 
         margin-bottom: 16px;
 
         font-size: 24px;
-
     }
 
-
     .login-header h1 {
-
         font-size: 25px;
 
         letter-spacing: -0.5px;
-
     }
 
-
     .login-header p {
-
         max-width: 280px;
 
         font-size: 11px;
-
     }
-
 
     .form-login {
-
         gap: 16px;
-
     }
-
 
     .campo {
-
         gap: 7px;
-
     }
-
 
     .campo label {
-
         font-size: 11px;
-
     }
-
 
     .campo input {
-
         height: 47px;
 
-        padding:
-            0 13px;
-
+        padding: 0 13px;
     }
-
 
     .btn-login {
-
         min-height: 49px;
-
     }
 
-
     .login-cadastro {
-
         margin-top: 25px;
 
         padding-top: 21px;
-
     }
-
 
     .login-voltar {
-
         margin-top: 17px;
-
     }
-
 
     .footer-login {
-
-        padding:
-            20px 12px;
-
+        padding: 20px 12px;
     }
-
 }
-
 
 /* =========================================================
    ALTURA REDUZIDA
@@ -1472,50 +1054,31 @@ body.pagina-login {
    ========================================================= */
 
 @media (max-height: 720px) and (min-width: 601px) {
-
     .login-container {
-
-        padding:
-            35px 20px 45px;
-
+        padding: 35px 20px 45px;
     }
-
 
     .login-card {
-
-        padding:
-            35px 42px 30px;
-
+        padding: 35px 42px 30px;
     }
-
 
     .login-header {
-
         margin-bottom: 22px;
-
     }
 
-
     .login-icon {
-
         width: 60px;
         height: 60px;
 
         margin-bottom: 14px;
-
     }
 
-
     .login-cadastro {
-
         margin-top: 22px;
 
         padding-top: 18px;
-
     }
-
 }
-
 
 /* =========================================================
    ACESSIBILIDADE
@@ -1525,14 +1088,10 @@ body.pagina-login {
 .btn-login:focus-visible,
 .link-cadastro:focus-visible,
 .login-voltar .btn-voltar:focus-visible {
-
-    outline:
-        3px solid rgba(201, 148, 91, 0.35);
+    outline: 3px solid rgba(201, 148, 91, 0.35);
 
     outline-offset: 3px;
-
 }
-
 
 /* =========================================================
    AUTOPREENCHIMENTO DO NAVEGADOR
@@ -1541,54 +1100,37 @@ body.pagina-login {
 .campo input:-webkit-autofill,
 .campo input:-webkit-autofill:hover,
 .campo input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--texto);
 
-    -webkit-text-fill-color:
-        var(--texto);
+    -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
 
-    -webkit-box-shadow:
-        0 0 0 1000px #ffffff inset;
+    box-shadow: 0 0 0 1000px #ffffff inset;
 
-    box-shadow:
-        0 0 0 1000px #ffffff inset;
-
-    transition:
-        background-color 5000s ease-in-out 0s;
-
+    transition: background-color 5000s ease-in-out 0s;
 }
-
 
 /* =========================================================
    SELEÇÃO DE TEXTO
    ========================================================= */
 
 .pagina-login ::selection {
+    background: rgba(201, 148, 91, 0.25);
 
-    background:
-        rgba(201, 148, 91, 0.25);
-
-    color:
-        var(--marrom-escuro);
-
+    color: var(--marrom-escuro);
 }
-
 
 /* =========================================================
    REDUÇÃO DE MOVIMENTO
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
-
         scroll-behavior: auto !important;
 
         transition: none !important;
 
         animation: none !important;
-
     }
-
 }
-

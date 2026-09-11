@@ -1,372 +1,230 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
 
-<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <title>Reservas - Café & Sabor</title>
 
-<meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='lista_reservas.css') }}" />
+    </head>
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>Reservas - Café & Sabor</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='lista_reservas.css') }}">
-
-
-</head>
-
-<body>
-
-
-<!-- ==========================================
+    <body>
+        <!-- ==========================================
      HEADER
 =========================================== -->
 
-<header class="header">
+        <header class="header">
+            <div class="container header-content">
+                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
 
-    <div class="container header-content">
+                <nav class="nav">
+                    <a href="{{ url_for('routes.index') }}"> Início </a>
 
-        <a href="{{ url_for('routes.index') }}"
-           class="logo">
-            Café & Sabor
-        </a>
+                    <a href="{{ url_for('routes.lista_reservas') }}" class="active">
+                        Ver reservas
+                    </a>
 
-        <nav class="nav">
+                    <a href="{{ url_for('routes.logout') }}"> Sair </a>
+                </nav>
+            </div>
+        </header>
 
-            <a href="{{ url_for('routes.index') }}">
-                Início
-            </a>
-
-            <a href="{{ url_for('routes.lista_reservas') }}"
-               class="active">
-                Ver reservas
-            </a>
-
-            <a href="{{ url_for('routes.logout') }}">
-                Sair
-            </a>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-<!-- ==========================================
+        <!-- ==========================================
      CONTEÚDO
 =========================================== -->
 
-<main class="container pagina-lista">
-
-
-    <!-- ======================================
+        <main class="container pagina-lista">
+            <!-- ======================================
          CABEÇALHO
     ======================================= -->
 
-    <div class="lista-header">
+            <div class="lista-header">
+                <div>
+                    <span class="titulo-secao"> Administração </span>
 
-        <div>
+                    <h1>Gerenciar reservas</h1>
 
-            <span class="titulo-secao">
-                Administração
-            </span>
+                    <p>
+                        Consulte, confirme, conclua ou exclua as reservas realizadas pelos clientes.
+                    </p>
+                </div>
+            </div>
 
-            <h1>
-                Gerenciar reservas
-            </h1>
-
-            <p>
-                Consulte, confirme, conclua ou exclua
-                as reservas realizadas pelos clientes.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <!-- ======================================
+            <!-- ======================================
          BUSCA
     ======================================= -->
 
-    <form
-        method="GET"
-        action="{{ url_for('routes.lista_reservas') }}"
-        class="busca-form"
-    >
+            <form method="GET" action="{{ url_for('routes.lista_reservas') }}" class="busca-form">
+                <div class="campo-busca">
+                    <input
+                        type="text"
+                        name="busca"
+                        value="{{ busca }}"
+                        placeholder="Buscar por nome, telefone ou categoria..."
+                    />
 
-        <div class="campo-busca">
+                    <button type="submit">Buscar</button>
+                </div>
+            </form>
 
-            <input
-                type="text"
-                name="busca"
-                value="{{ busca }}"
-                placeholder="Buscar por nome, telefone ou categoria..."
-            >
-
-            <button type="submit">
-                Buscar
-            </button>
-
-        </div>
-
-    </form>
-
-
-    <!-- ======================================
+            <!-- ======================================
          RESULTADO
     ======================================= -->
 
-    {% if reservas %}
+            {% if reservas %}
 
-    <div class="tabela-container">
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
 
-        <table class="tabela-reservas">
+                            <th>Nome</th>
 
-            <thead>
+                            <th>Telefone</th>
 
-                <tr>
+                            <th>Categoria</th>
 
-                    <th>
-                        ID
-                    </th>
+                            <th>Data</th>
 
-                    <th>
-                        Nome
-                    </th>
+                            <th>Horário</th>
 
-                    <th>
-                        Telefone
-                    </th>
+                            <th>Pessoas</th>
 
-                    <th>
-                        Categoria
-                    </th>
+                            <th>Status</th>
 
-                    <th>
-                        Data
-                    </th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
 
-                    <th>
-                        Horário
-                    </th>
+                    <tbody>
+                        {% for reserva in reservas %}
 
-                    <th>
-                        Pessoas
-                    </th>
+                        <tr>
+                            <td>#{{ reserva.id }}</td>
 
-                    <th>
-                        Status
-                    </th>
+                            <td>
+                                <strong> {{ reserva.nome_completo }} </strong>
+                            </td>
 
-                    <th>
-                        Ações
-                    </th>
+                            <td>{{ reserva.telefone }}</td>
 
-                </tr>
+                            <td>{{ reserva.categoria_reserva }}</td>
 
-            </thead>
+                            <td>{{ reserva.data.strftime('%d/%m/%Y') }}</td>
 
+                            <td>{{ reserva.horario.strftime('%H:%M') }}</td>
 
-            <tbody>
+                            <td>{{ reserva.quantidade_pessoas }}</td>
 
-                {% for reserva in reservas %}
+                            <td>
+                                {% if reserva.status == "Pendente" %}
 
-                <tr>
+                                <span class="status status-pendente"> Pendente </span>
 
-                    <td>
-                        #{{ reserva.id }}
-                    </td>
+                                {% elif reserva.status == "Confirmada" %}
 
-                    <td>
-                        <strong>
-                            {{ reserva.nome_completo }}
-                        </strong>
-                    </td>
+                                <span class="status status-confirmada"> Confirmada </span>
 
-                    <td>
-                        {{ reserva.telefone }}
-                    </td>
+                                {% else %}
 
-                    <td>
-                        {{ reserva.categoria_reserva }}
-                    </td>
+                                <span class="status status-concluida"> Concluída </span>
 
-                    <td>
-                        {{ reserva.data.strftime('%d/%m/%Y') }}
-                    </td>
+                                {% endif %}
+                            </td>
 
-                    <td>
-                        {{ reserva.horario.strftime('%H:%M') }}
-                    </td>
-
-                    <td>
-                        {{ reserva.quantidade_pessoas }}
-                    </td>
-
-                    <td>
-
-                        {% if reserva.status == "Pendente" %}
-
-                            <span class="status status-pendente">
-                                Pendente
-                            </span>
-
-                        {% elif reserva.status == "Confirmada" %}
-
-                            <span class="status status-confirmada">
-                                Confirmada
-                            </span>
-
-                        {% else %}
-
-                            <span class="status status-concluida">
-                                Concluída
-                            </span>
-
-                        {% endif %}
-
-                    </td>
-
-
-                    <!-- ======================
+                            <!-- ======================
                          AÇÕES
                     ======================= -->
 
-                    <td>
+                            <td>
+                                <div class="acoes-reserva">
+                                    <!-- ALTERAR STATUS -->
 
-                        <div class="acoes-reserva">
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('routes.mudar_status', id=reserva.id) }}"
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="btn-status"
+                                            title="Alterar status"
+                                        >
+                                            {% if reserva.status == "Pendente" %} Confirmar {% elif
+                                            reserva.status == "Confirmada" %} Concluir {% else %}
+                                            Reabrir {% endif %}
+                                        </button>
+                                    </form>
 
+                                    <!-- EXCLUIR -->
 
-                            <!-- ALTERAR STATUS -->
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('routes.excluir_reserva', id=reserva.id) }}"
+                                        onsubmit="
+                                            return confirm(
+                                                'Tem certeza que deseja excluir esta reserva?'
+                                            );
+                                        "
+                                    >
+                                        <button
+                                            type="submit"
+                                            class="btn-excluir"
+                                            title="Excluir reserva"
+                                        >
+                                            Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
 
-                            <form
-                                method="POST"
-                                action="{{ url_for('routes.mudar_status', id=reserva.id) }}"
-                            >
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-                                <button
-                                    type="submit"
-                                    class="btn-status"
-                                    title="Alterar status"
-                                >
+            {% else %}
 
-                                    {% if reserva.status == "Pendente" %}
-                                        Confirmar
-
-                                    {% elif reserva.status == "Confirmada" %}
-                                        Concluir
-
-                                    {% else %}
-                                        Reabrir
-
-                                    {% endif %}
-
-                                </button>
-
-                            </form>
-
-
-                            <!-- EXCLUIR -->
-
-                            <form
-                                method="POST"
-                                action="{{ url_for('routes.excluir_reserva', id=reserva.id) }}"
-                                onsubmit="return confirm('Tem certeza que deseja excluir esta reserva?');"
-                            >
-
-                                <button
-                                    type="submit"
-                                    class="btn-excluir"
-                                    title="Excluir reserva"
-                                >
-                                    Excluir
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    </td>
-
-                </tr>
-
-                {% endfor %}
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-
-    {% else %}
-
-    <!-- ======================================
+            <!-- ======================================
          NENHUMA RESERVA
     ======================================= -->
 
-    <div class="sem-reservas">
+            <div class="sem-reservas">
+                {% if busca %}
 
-        {% if busca %}
+                <h2>Nenhuma reserva encontrada</h2>
 
-            <h2>
-                Nenhuma reserva encontrada
-            </h2>
+                <p>Não encontramos reservas para "<strong>{{ busca }}</strong>".</p>
 
-            <p>
-                Não encontramos reservas para
-                "<strong>{{ busca }}</strong>".
-            </p>
+                <a href="{{ url_for('routes.lista_reservas') }}" class="btn-voltar">
+                    Ver todas as reservas
+                </a>
 
-            <a
-                href="{{ url_for('routes.lista_reservas') }}"
-                class="btn-voltar"
-            >
-                Ver todas as reservas
-            </a>
+                {% else %}
 
-        {% else %}
+                <h2>Nenhuma reserva cadastrada</h2>
 
-            <h2>
-                Nenhuma reserva cadastrada
-            </h2>
+                <p>Ainda não existem reservas no sistema.</p>
 
-            <p>
-                Ainda não existem reservas no sistema.
-            </p>
+                {% endif %}
+            </div>
 
-        {% endif %}
+            {% endif %}
+        </main>
 
-    </div>
-
-    {% endif %}
-
-
-</main>
-
-
-<!-- ==========================================
+        <!-- ==========================================
      FOOTER
 =========================================== -->
 
-<footer class="footer">
-
-    <div class="container">
-
-        <p>
-            © 2026 Café & Sabor. Todos os direitos reservados.
-        </p>
-
-    </div>
-
-</footer>
-
-
-</body>
-
+        <footer class="footer">
+            <div class="container">
+                <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </body>
 </html>

@@ -1,325 +1,167 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
 
-<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta charset="UTF-8">
+        <title>Minhas Reservas | Café & Sabor</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
 
-    <title>
-        Minhas Reservas | Café & Sabor
-    </title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='minhas_reservas.css') }}" />
+    </head>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='base.css') }}"
-    >
+    <body class="pagina-minhas-reservas">
+        <header class="header">
+            <div class="container header-content">
+                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
 
-    <link
-        rel="stylesheet"
-        href="{{ url_for('static', filename='minhas_reservas.css') }}"
-    >
+                <nav class="nav">
+                    <a href="{{ url_for('routes.index') }}"> Início </a>
 
-</head>
+                    <a href="{{ url_for('routes.reserva') }}"> Reservar mesa </a>
 
-<body class="pagina-minhas-reservas">
-
-
-<header class="header">
-
-    <div class="container header-content">
-
-        <a
-            href="{{ url_for('routes.index') }}"
-            class="logo"
-        >
-            Café & Sabor
-        </a>
-
-        <nav class="nav">
-
-            <a
-                href="{{ url_for('routes.index') }}"
-            >
-                Início
-            </a>
-
-            <a
-                href="{{ url_for('routes.reserva') }}"
-            >
-                Reservar mesa
-            </a>
-
-            <a
-                href="{{ url_for('routes.minhas_reservas') }}"
-                class="active"
-            >
-                Minhas reservas
-            </a>
-
-            <a
-                href="{{ url_for('routes.meu_cadastro') }}"
-            >
-                Meu cadastro
-            </a>
-
-            <a
-                href="{{ url_for('routes.logout') }}"
-            >
-                Sair
-            </a>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-<main class="minhas-reservas-container">
-
-    <div class="container">
-
-
-        <section class="reservas-header">
-
-            <span class="section-subtitle">
-                Área do cliente
-            </span>
-
-            <h1>
-                Minhas Reservas
-            </h1>
-
-            <p>
-                Acompanhe suas reservas e veja o status
-                de cada uma delas.
-            </p>
-
-        </section>
-
-
-        {% if not reservas %}
-
-
-        <section class="sem-reservas">
-
-            <div class="sem-reservas-icon">
-                ☕
-            </div>
-
-            <h2>
-                Você ainda não possui reservas
-            </h2>
-
-            <p>
-                Faça sua primeira reserva e aproveite
-                uma experiência especial no Café & Sabor.
-            </p>
-
-            <a
-                href="{{ url_for('routes.reserva') }}"
-                class="btn btn-reserva"
-            >
-                Fazer uma Reserva
-            </a>
-
-        </section>
-
-
-        {% else %}
-
-
-        <section class="reservas-lista">
-
-
-            {% for reserva in reservas %}
-
-
-            <article class="reserva-card">
-
-
-                <div class="reserva-card-header">
-
-                    <div>
-
-                        <span class="reserva-numero">
-                            Reserva #{{ reserva.id }}
-                        </span>
-
-                        <h2>
-                            {{ reserva.nome_completo }}
-                        </h2>
-
-                    </div>
-
-
-                    <span
-                        class="status status-{{ reserva.status|lower|replace('ã', 'a')|replace('ç', 'c') }}"
-                    >
-                        {{ reserva.status }}
-                    </span>
-
-                </div>
-
-
-                <div class="reserva-info">
-
-
-                    <div class="info-item">
-
-                        <span class="info-label">
-                            Data
-                        </span>
-
-                        <span class="info-valor">
-                            {{ reserva.data.strftime('%d/%m/%Y') }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="info-label">
-                            Horário
-                        </span>
-
-                        <span class="info-valor">
-                            {{ reserva.horario.strftime('%H:%M') }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="info-label">
-                            Pessoas
-                        </span>
-
-                        <span class="info-valor">
-                            {{ reserva.quantidade_pessoas }}
-                        </span>
-
-                    </div>
-
-
-                    <div class="info-item">
-
-                        <span class="info-label">
-                            Categoria
-                        </span>
-
-                        <span class="info-valor">
-                            {{ reserva.categoria_reserva }}
-                        </span>
-
-                    </div>
-
-
-                </div>
-
-
-                {% if reserva.observacoes %}
-
-                <div class="reserva-observacoes">
-
-                    <span class="info-label">
-                        Observações
-                    </span>
-
-                    <p>
-                        {{ reserva.observacoes }}
-                    </p>
-
-                </div>
-
-                {% endif %}
-
-
-                <div class="reserva-acoes">
-
-
-                    {% if reserva.status == "Pendente" %}
-
-
-                    <!-- EDITAR -->
-
-                    <a
-                        href="{{ url_for('routes.editar_reserva', id=reserva.id) }}"
-                        class="btn btn-editar"
-                    >
-                        Editar Reserva
+                    <a href="{{ url_for('routes.minhas_reservas') }}" class="active">
+                        Minhas reservas
                     </a>
 
+                    <a href="{{ url_for('routes.meu_cadastro') }}"> Meu cadastro </a>
 
-                    <!-- CANCELAR -->
+                    <a href="{{ url_for('routes.logout') }}"> Sair </a>
+                </nav>
+            </div>
+        </header>
 
-                    <form
-                        method="POST"
-                        action="{{ url_for('routes.cancelar_reserva', id=reserva.id) }}"
-                        class="form-cancelar"
-                        onsubmit="return confirm('Tem certeza que deseja cancelar esta reserva?');"
-                    >
+        <main class="minhas-reservas-container">
+            <div class="container">
+                <section class="reservas-header">
+                    <span class="section-subtitle"> Área do cliente </span>
 
-                        <button
-                            type="submit"
-                            class="btn btn-cancelar"
-                        >
-                            Cancelar
-                        </button>
+                    <h1>Minhas Reservas</h1>
 
-                    </form>
+                    <p>Acompanhe suas reservas e veja o status de cada uma delas.</p>
+                </section>
 
+                {% if not reservas %}
 
-                    {% endif %}
+                <section class="sem-reservas">
+                    <div class="sem-reservas-icon">☕</div>
 
+                    <h2>Você ainda não possui reservas</h2>
 
+                    <p>
+                        Faça sua primeira reserva e aproveite uma experiência especial no Café &
+                        Sabor.
+                    </p>
+
+                    <a href="{{ url_for('routes.reserva') }}" class="btn btn-reserva">
+                        Fazer uma Reserva
+                    </a>
+                </section>
+
+                {% else %}
+
+                <section class="reservas-lista">
+                    {% for reserva in reservas %}
+
+                    <article class="reserva-card">
+                        <div class="reserva-card-header">
+                            <div>
+                                <span class="reserva-numero"> Reserva #{{ reserva.id }} </span>
+
+                                <h2>{{ reserva.nome_completo }}</h2>
+                            </div>
+
+                            <span
+                                class="status status-{{ reserva.status|lower|replace('ã', 'a')|replace('ç', 'c') }}"
+                            >
+                                {{ reserva.status }}
+                            </span>
+                        </div>
+
+                        <div class="reserva-info">
+                            <div class="info-item">
+                                <span class="info-label"> Data </span>
+
+                                <span class="info-valor">
+                                    {{ reserva.data.strftime('%d/%m/%Y') }}
+                                </span>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="info-label"> Horário </span>
+
+                                <span class="info-valor">
+                                    {{ reserva.horario.strftime('%H:%M') }}
+                                </span>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="info-label"> Pessoas </span>
+
+                                <span class="info-valor"> {{ reserva.quantidade_pessoas }} </span>
+                            </div>
+
+                            <div class="info-item">
+                                <span class="info-label"> Categoria </span>
+
+                                <span class="info-valor"> {{ reserva.categoria_reserva }} </span>
+                            </div>
+                        </div>
+
+                        {% if reserva.observacoes %}
+
+                        <div class="reserva-observacoes">
+                            <span class="info-label"> Observações </span>
+
+                            <p>{{ reserva.observacoes }}</p>
+                        </div>
+
+                        {% endif %}
+
+                        <div class="reserva-acoes">
+                            {% if reserva.status == "Pendente" %}
+
+                            <!-- EDITAR -->
+
+                            <a
+                                href="{{ url_for('routes.editar_reserva', id=reserva.id) }}"
+                                class="btn btn-editar"
+                            >
+                                Editar Reserva
+                            </a>
+
+                            <!-- CANCELAR -->
+
+                            <form
+                                method="POST"
+                                action="{{ url_for('routes.cancelar_reserva', id=reserva.id) }}"
+                                class="form-cancelar"
+                                onsubmit="
+                                    return confirm('Tem certeza que deseja cancelar esta reserva?');
+                                "
+                            >
+                                <button type="submit" class="btn btn-cancelar">Cancelar</button>
+                            </form>
+
+                            {% endif %}
+                        </div>
+                    </article>
+
+                    {% endfor %}
+                </section>
+
+                {% endif %}
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
                 </div>
-
-
-            </article>
-
-
-            {% endfor %}
-
-
-        </section>
-
-
-        {% endif %}
-
-
-    </div>
-
-</main>
-
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-bottom">
-
-            <p>
-                © 2026 Café & Sabor.
-                Todos os direitos reservados.
-            </p>
-
-        </div>
-
-    </div>
-
-</footer>
-
-
-</body>
-
+            </div>
+        </footer>
+    </body>
 </html>
-

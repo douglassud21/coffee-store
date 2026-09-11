@@ -10,7 +10,7 @@ from flask import (
     redirect,
     url_for,
     session,
-    jsonify
+    jsonify,
 )
 from flask_caching import Cache
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -28,14 +28,18 @@ routes = Blueprint("routes", __name__)
 # SISTEMA DE TAREFAS ASSÍNCRONAS (BACKGROUND WORKER)
 # ==========================================
 
+
 def enviar_notificacao_assincrona(tipo_evento, detalhes):
     """
     Função assíncrona executada em segundo plano para envio de notificações/e-mails sem travar a resposta da API.
     """
+
     def worker():
         # Simula o processamento demorado de um serviço de mensageria / e-mail
         time.sleep(2)
-        print(f"[ASYNC WORKER] Evento '{tipo_evento}' processado com sucesso. Detalhes: {detalhes}")
+        print(
+            f"[ASYNC WORKER] Evento '{tipo_evento}' processado com sucesso. Detalhes: {detalhes}"
+        )
 
     thread = threading.Thread(target=worker)
     thread.daemon = True
@@ -46,12 +50,14 @@ def enviar_notificacao_assincrona(tipo_evento, detalhes):
 # DECORADORES DE AUTENTICAÇÃO
 # ==========================================
 
+
 def login_required(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         if "usuario_id" not in session:
             return redirect(url_for("routes.login"))
         return func(*args, **kwargs)
+
     return decorated_function
 
 
@@ -63,6 +69,7 @@ def cliente_required(func):
         if session.get("tipo") != "cliente":
             return redirect(url_for("routes.index"))
         return func(*args, **kwargs)
+
     return decorated_function
 
 
@@ -74,12 +81,14 @@ def admin_required(func):
         if session.get("tipo") != "admin":
             return redirect(url_for("routes.index"))
         return func(*args, **kwargs)
+
     return decorated_function
 
 
 # ==========================================
 # ROTA DE CACHE (CATÁLOGO DE PRODUTOS / CARDÁPIO)
 # ==========================================
+
 
 @routes.route("/catalogo")
 @cache.cached(timeout=60)  # Salva o resultado em cache por 60 segundos
@@ -91,8 +100,13 @@ def catalogo():
     produtos = [
         {"id": 1, "nome": "Café Espresso", "preco": "R$ 6,00", "categoria": "Bebidas"},
         {"id": 2, "nome": "Cappuccino", "preco": "R$ 10,00", "categoria": "Bebidas"},
-        {"id": 3, "nome": "Torta de Maçã", "preco": "R$ 14,00", "categoria": "Sobremesas"},
-        {"id": 4, "nome": "Pão de Queijo", "preco": "R$ 5,00", "categoria": "Salgados"}
+        {
+            "id": 3,
+            "nome": "Torta de Maçã",
+            "preco": "R$ 14,00",
+            "categoria": "Sobremesas",
+        },
+        {"id": 4, "nome": "Pão de Queijo", "preco": "R$ 5,00", "categoria": "Salgados"},
     ]
     return render_template("catalogo.html", produtos=produtos)
 
@@ -100,6 +114,7 @@ def catalogo():
 # ==========================================
 # AUTHENTICATION (LOGIN, LOGOUT, CADASTRO)
 # ==========================================
+
 
 @routes.route("/login", methods=["GET", "POST"])
 def login():
@@ -165,7 +180,7 @@ def cadastro():
                 email=email,
                 telefone=telefone_limpo,
                 senha=generate_password_hash(senha),
-                tipo="cliente"
+                tipo="cliente",
             )
             db.session.add(novo_usuario)
             db.session.commit()
@@ -185,6 +200,7 @@ def cadastro():
 # DASHBOARD PRINCIPAL
 # ==========================================
 
+
 @routes.route("/")
 @login_required
 def index():
@@ -195,21 +211,22 @@ def index():
     if session.get("tipo") == "admin":
         total_reservas = Reserva.query.count()
         reservas_confirmadas = Reserva.query.filter_by(status="Confirmada").count()
-        total_pessoas = db.session.query(
-            db.func.sum(Reserva.quantidade_pessoas)
-        ).scalar() or 0
+        total_pessoas = (
+            db.session.query(db.func.sum(Reserva.quantidade_pessoas)).scalar() or 0
+        )
 
     return render_template(
         "index.html",
         total_reservas=total_reservas,
         reservas_confirmadas=reservas_confirmadas,
-        total_pessoas=total_pessoas
+        total_pessoas=total_pessoas,
     )
 
 
 # ==========================================
 # GESTÃO DE RESERVAS (CLIENTE)
 # ==========================================
+
 
 @routes.route("/reserva")
 @cliente_required
@@ -280,15 +297,14 @@ def confirmacao():
             categoria_reserva=categoria_reserva,
             observacoes=observacoes,
             status="Pendente",
-            usuario_id=session["usuario_id"]
+            usuario_id=session["usuario_id"],
         )
         db.session.add(nova_reserva)
         db.session.commit()
 
         # Dispara notificação assíncrona
         enviar_notificacao_assincrona(
-            "NOVA_RESERVA",
-            f"Reserva #{nova_reserva.id} criada por {nome_completo}."
+            "NOVA_RESERVA", f"Reserva #{nova_reserva.id} criada por {nome_completo}."
         )
 
     except Exception:
@@ -297,7 +313,7 @@ def confirmacao():
         return render_template(
             "reserva.html",
             usuario=usuario,
-            erro="Não foi possível realizar a reserva. Tente novamente."
+            erro="Não foi possível realizar a reserva. Tente novamente.",
         )
 
     return render_template("confirmacao.html", reserva=nova_reserva)
@@ -449,19 +465,24 @@ def meu_cadastro():
 # PAINEL ADMINISTRATIVO
 # ==========================================
 
+
 @routes.route("/reservas")
 @admin_required
 def lista_reservas():
     busca = request.args.get("busca", "").strip()
 
     if busca:
-        reservas = Reserva.query.filter(
-            db.or_(
-                Reserva.nome_completo.ilike(f"%{busca}%"),
-                Reserva.telefone.ilike(f"%{busca}%"),
-                Reserva.categoria_reserva.ilike(f"%{busca}%")
+        reservas = (
+            Reserva.query.filter(
+                db.or_(
+                    Reserva.nome_completo.ilike(f"%{busca}%"),
+                    Reserva.telefone.ilike(f"%{busca}%"),
+                    Reserva.categoria_reserva.ilike(f"%{busca}%"),
+                )
             )
-        ).order_by(Reserva.data.asc(), Reserva.horario.asc()).all()
+            .order_by(Reserva.data.asc(), Reserva.horario.asc())
+            .all()
+        )
     else:
         reservas = Reserva.query.order_by(
             Reserva.data.asc(), Reserva.horario.asc()
@@ -487,8 +508,7 @@ def mudar_status(id):
 
         # Notificação assíncrona de atualização
         enviar_notificacao_assincrona(
-            "MUDANCA_STATUS",
-            f"Reserva #{id} mudou para {reserva.status}."
+            "MUDANCA_STATUS", f"Reserva #{id} mudou para {reserva.status}."
         )
 
     return redirect(url_for("routes.lista_reservas"))
