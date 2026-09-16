@@ -1,16 +1,16 @@
-import time
-import threading
-from datetime import datetime
-from functools import wraps
+import time                        # Controle de tempo e pausas
+import threading                   # Execução de tarefas em segundo plano
+from datetime import datetime      # Manipulação e formatação de datas/horários
+from functools import wraps        # Garante que os decoradores criados funcionem bem
 
 from flask import (
-    Blueprint,
-    render_template,
-    request,
-    redirect,
-    url_for,
-    session,
-    jsonify,
+    Blueprint,                     # Organização de rotas em módulos separados
+    render_template,               # Renderiza as páginas HTML na tela
+    request,                       # Captura dados enviados pelo usuário (formulários/URLs)
+    redirect,                      # Redireciona o usuário para outra página
+    url_for,                       # Gera os endereços das rotas dinamicamente
+    session,                       # Guarda dados do usuário logado
+    jsonify,                       # Converte respostas do código para o formato JSON
 )
 from flask_caching import Cache
 from werkzeug.security import generate_password_hash, check_password_hash
