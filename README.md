@@ -391,7 +391,8 @@ Abaixo é apresentada a estrutura conceitual do banco de dados relacional SQLite
 
 Diagrama de Componentes e Comunicação
 Visão geral da arquitetura monolítica com a proposta de evolução integrando API Gateway, Cache e Fila de Mensagens:
-![imagem do diagrama de componentes](./docs/diagramas/Diagrama de componentes.jpeg)
+![imagem do diagrama de componentes](./docs/diagramas/Diagrama%20de%20componentes.jpeg)
+
 
 
 Integrante                  |RM                 |Responsabilidade Principal
