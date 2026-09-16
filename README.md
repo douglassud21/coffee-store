@@ -386,12 +386,12 @@ Métricas: Volte à página inicial (/) e verifique se o contador de reservas e 
 📐 Documentação Técnica
 Diagrama Entidade-Relacionamento (DER)
 Abaixo é apresentada a estrutura conceitual do banco de dados relacional SQLite:
-![imagem do DER](docs/diagramas/Der.jpeg)
+![imagem do DER](docs/diagramas/DER.jpeg)
 
 
 Diagrama de Componentes e Comunicação
 Visão geral da arquitetura monolítica com a proposta de evolução integrando API Gateway, Cache e Fila de Mensagens:
-![imagem do diagrama de componentes](docs/diagramas/Diagrama%20de%20componentes.jpeg)
+![imagem do diagrama de componentes](docs/diagramas/DiagramaDeComponentes.jpeg)
 
 
 
