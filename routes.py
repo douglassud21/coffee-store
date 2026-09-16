@@ -98,16 +98,277 @@ def catalogo():
     """
     # Dados simulados do catálogo de produtos do café
     produtos = [
-        {"id": 1, "nome": "Café Espresso", "preco": "R$ 6,00", "categoria": "Bebidas"},
-        {"id": 2, "nome": "Cappuccino", "preco": "R$ 10,00", "categoria": "Bebidas"},
-        {
-            "id": 3,
-            "nome": "Torta de Maçã",
-            "preco": "R$ 14,00",
-            "categoria": "Sobremesas",
-        },
-        {"id": 4, "nome": "Pão de Queijo", "preco": "R$ 5,00", "categoria": "Salgados"},
-    ]
+
+    # =========================
+    # CAFÉS
+    # =========================
+
+    {
+        "id": 1,
+        "nome": "Café Espresso",
+        "preco": "R$ 6,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 2,
+        "nome": "Café Espresso Duplo",
+        "preco": "R$ 8,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 3,
+        "nome": "Cappuccino Tradicional",
+        "preco": "R$ 10,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 4,
+        "nome": "Cappuccino de Chocolate",
+        "preco": "R$ 12,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 5,
+        "nome": "Café com Leite",
+        "preco": "R$ 8,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 6,
+        "nome": "Mocha",
+        "preco": "R$ 13,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 7,
+        "nome": "Latte",
+        "preco": "R$ 11,00",
+        "categoria": "Cafés"
+    },
+    {
+        "id": 8,
+        "nome": "Latte Caramelo",
+        "preco": "R$ 13,00",
+        "categoria": "Cafés"
+    },
+
+    # =========================
+    # BEBIDAS
+    # =========================
+
+    {
+        "id": 9,
+        "nome": "Chocolate Quente",
+        "preco": "R$ 10,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 10,
+        "nome": "Chocolate Quente Especial",
+        "preco": "R$ 14,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 11,
+        "nome": "Chá de Camomila",
+        "preco": "R$ 7,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 12,
+        "nome": "Chá de Frutas Vermelhas",
+        "preco": "R$ 8,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 13,
+        "nome": "Suco de Laranja",
+        "preco": "R$ 9,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 14,
+        "nome": "Suco de Morango",
+        "preco": "R$ 10,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 15,
+        "nome": "Limonada Suíça",
+        "preco": "R$ 11,00",
+        "categoria": "Bebidas"
+    },
+    {
+        "id": 16,
+        "nome": "Água Mineral",
+        "preco": "R$ 4,00",
+        "categoria": "Bebidas"
+    },
+
+    # =========================
+    # DOCES
+    # =========================
+
+    {
+        "id": 17,
+        "nome": "Torta de Maçã",
+        "preco": "R$ 14,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 18,
+        "nome": "Cheesecake de Frutas Vermelhas",
+        "preco": "R$ 16,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 19,
+        "nome": "Brownie com Chocolate",
+        "preco": "R$ 12,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 20,
+        "nome": "Bolo de Chocolate",
+        "preco": "R$ 10,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 21,
+        "nome": "Bolo de Cenoura",
+        "preco": "R$ 9,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 22,
+        "nome": "Cookie de Chocolate",
+        "preco": "R$ 7,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 23,
+        "nome": "Cookie de Baunilha",
+        "preco": "R$ 7,00",
+        "categoria": "Sobremesas"
+    },
+    {
+        "id": 24,
+        "nome": "Pudim de Leite",
+        "preco": "R$ 11,00",
+        "categoria": "Sobremesas"
+    },
+
+    # =========================
+    # SALGADOS
+    # =========================
+
+    {
+        "id": 25,
+        "nome": "Pão de Queijo",
+        "preco": "R$ 5,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 26,
+        "nome": "Pão de Queijo Recheado",
+        "preco": "R$ 8,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 27,
+        "nome": "Coxinha de Frango",
+        "preco": "R$ 9,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 28,
+        "nome": "Coxinha com Catupiry",
+        "preco": "R$ 10,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 29,
+        "nome": "Empada de Frango",
+        "preco": "R$ 9,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 30,
+        "nome": "Empada de Palmito",
+        "preco": "R$ 9,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 31,
+        "nome": "Croissant de Presunto e Queijo",
+        "preco": "R$ 13,00",
+        "categoria": "Salgados"
+    },
+    {
+        "id": 32,
+        "nome": "Quiche de Queijo",
+        "preco": "R$ 14,00",
+        "categoria": "Salgados"
+    },
+
+    # =========================
+    # LANCHES
+    # =========================
+
+    {
+        "id": 33,
+        "nome": "Misto Quente",
+        "preco": "R$ 12,00",
+        "categoria": "Lanches"
+    },
+    {
+        "id": 34,
+        "nome": "Sanduíche Natural de Frango",
+        "preco": "R$ 15,00",
+        "categoria": "Lanches"
+    },
+    {
+        "id": 35,
+        "nome": "Sanduíche de Presunto e Queijo",
+        "preco": "R$ 14,00",
+        "categoria": "Lanches"
+    },
+    {
+        "id": 36,
+        "nome": "Tostex Especial",
+        "preco": "R$ 16,00",
+        "categoria": "Lanches"
+    },
+
+    # =========================
+    # COMBOS
+    # =========================
+
+    {
+        "id": 37,
+        "nome": "Combo Café da Manhã",
+        "preco": "R$ 22,00",
+        "categoria": "Combos"
+    },
+    {
+        "id": 38,
+        "nome": "Combo Cappuccino + Brownie",
+        "preco": "R$ 20,00",
+        "categoria": "Combos"
+    },
+    {
+        "id": 39,
+        "nome": "Combo Café + Pão de Queijo",
+        "preco": "R$ 12,00",
+        "categoria": "Combos"
+    },
+    {
+        "id": 40,
+        "nome": "Combo Croissant + Café",
+        "preco": "R$ 18,00",
+        "categoria": "Combos"
+    }
+]
     return render_template("catalogo.html", produtos=produtos)
 
 

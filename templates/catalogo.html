@@ -1,0 +1,1512 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Conheça o cardápio do Café & Sabor."
+    >
+
+    <title>Cardápio | Café & Sabor</title>
+
+    <style>
+
+        
+/* =========================================================
+   CAFÉ & SABOR — CATÁLOGO PREMIUM
+   ========================================================= */
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    background: #f6f0e8;
+    color: #2b1a12;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+:root {
+    --marrom-950: #1d0f09;
+    --marrom-900: #29140c;
+    --marrom-800: #351b10;
+    --marrom-700: #452712;
+    --marrom-600: #60391f;
+    --marrom-500: #795033;
+
+    --creme-50: #fffdf9;
+    --creme-100: #fbf6ef;
+    --creme-200: #f6f0e8;
+    --creme-300: #eee3d6;
+
+    --laranja: #d9680b;
+    --laranja-light: #ee8a32;
+    --laranja-dark: #b95405;
+
+    --texto: #2b1a12;
+    --texto-secundario: #77665b;
+    --texto-claro: #bcaea4;
+
+    --branco: #ffffff;
+
+    --borda: rgba(69, 39, 18, 0.10);
+    --borda-hover: rgba(217, 104, 11, 0.28);
+
+    --sombra-sm:
+        0 4px 15px rgba(43, 26, 18, 0.05);
+
+    --sombra-md:
+        0 12px 35px rgba(43, 26, 18, 0.09);
+
+    --sombra-lg:
+        0 25px 60px rgba(43, 26, 18, 0.14);
+
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(29, 15, 9, 0.94);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.header-container {
+    width: min(1180px, calc(100% - 40px));
+
+    min-height: 76px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 35px;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: -0.4px;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.logo:hover {
+    color: #f2a15d;
+
+    transform: translateY(-1px);
+}
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
+
+.nav {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+}
+
+.nav a {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 40px;
+
+    padding: 0 13px;
+
+    color: rgba(255, 255, 255, 0.82);
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    border-radius: 9px;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease;
+}
+
+.nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 13px;
+    right: 13px;
+    bottom: 4px;
+
+    height: 2px;
+
+    background: #e27a20;
+
+    border-radius: 10px;
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition: transform 0.25s ease;
+}
+
+.nav a:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.nav a:hover::after {
+    transform: scaleX(1);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height: 440px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 90px 20px;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(226, 108, 5, 0.18),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 80%,
+            rgba(255, 184, 120, 0.10),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #1d0f09 0%,
+            #351b10 48%,
+            #452712 100%
+        );
+}
+
+/* Textura discreta */
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.04;
+
+    background-image:
+        radial-gradient(
+            rgba(255, 255, 255, 0.8) 1px,
+            transparent 1px
+        );
+
+    background-size: 26px 26px;
+
+    pointer-events: none;
+}
+
+/* Círculo decorativo */
+
+.hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    right: -180px;
+    bottom: -270px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 70px rgba(255, 255, 255, 0.025),
+        0 0 0 140px rgba(255, 255, 255, 0.015);
+
+    pointer-events: none;
+}
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(800px, 100%);
+
+    text-align: center;
+
+    animation: heroAppear 0.8s ease both;
+}
+
+@keyframes heroAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================================
+   BADGE DO HERO
+   ========================================================= */
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 16px;
+
+    margin-bottom: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    color: #eeb17f;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* =========================================================
+   TÍTULO
+   ========================================================= */
+
+.hero h1 {
+    margin-bottom: 20px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(48px, 7vw, 78px);
+
+    line-height: 0.98;
+
+    letter-spacing: -2.5px;
+
+    font-weight: 700;
+
+    color: #fffdf9;
+}
+
+.hero p {
+    width: min(640px, 100%);
+
+    margin: 0 auto;
+
+    color: rgba(255, 255, 255, 0.70);
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+/* =========================================================
+   CONTEÚDO
+   ========================================================= */
+
+.catalogo {
+    width: min(1180px, calc(100% - 40px));
+
+    margin: 0 auto;
+
+    padding: 80px 0 90px;
+}
+
+/* =========================================================
+   CABEÇALHO DO CATÁLOGO
+   ========================================================= */
+
+.cabecalho-catalogo {
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 32px;
+}
+
+.cabecalho-catalogo h2 {
+    margin-bottom: 7px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    color: var(--marrom-800);
+
+    font-size: clamp(30px, 4vw, 42px);
+
+    line-height: 1.1;
+
+    letter-spacing: -1px;
+}
+
+.cabecalho-catalogo p {
+    color: var(--texto-secundario);
+
+    font-size: 15px;
+}
+
+/* =========================================================
+   CONTADOR
+   ========================================================= */
+
+.contador {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    background: var(--creme-50);
+
+    border: 1px solid var(--borda);
+
+    border-radius: 999px;
+
+    color: var(--texto-secundario);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    box-shadow: var(--sombra-sm);
+}
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.filtros {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 38px;
+
+    padding-bottom: 4px;
+}
+
+.filtro {
+    appearance: none;
+
+    border: 1px solid var(--borda);
+
+    background: rgba(255, 255, 255, 0.7);
+
+    color: var(--marrom-700);
+
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    border-radius: 999px;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.filtro:hover {
+    transform: translateY(-2px);
+
+    border-color: var(--borda-hover);
+
+    background: var(--branco);
+
+    box-shadow: var(--sombra-sm);
+}
+
+.filtro.ativo {
+    color: #ffffff;
+
+    background: var(--marrom-800);
+
+    border-color: var(--marrom-800);
+
+    box-shadow:
+        0 7px 20px rgba(53, 27, 16, 0.18);
+}
+
+/* =========================================================
+   GRID DOS PRODUTOS
+   ========================================================= */
+
+.produtos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 20px;
+}
+
+/* =========================================================
+   CARD DO PRODUTO
+   ========================================================= */
+
+.produto {
+    position: relative;
+
+    min-height: 285px;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 25px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fffdf9 100%
+        );
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--radius-md);
+
+    box-shadow:
+        0 4px 18px rgba(43, 26, 18, 0.035);
+
+    transition:
+        transform 0.35s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+/* Linha superior */
+
+.produto::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--laranja),
+            var(--laranja-light)
+        );
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+
+    transition: transform 0.4s ease;
+}
+
+/* Brilho */
+
+.produto::after {
+    content: "";
+
+    position: absolute;
+
+    width: 150px;
+    height: 150px;
+
+    right: -80px;
+    top: -80px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(217, 104, 11, 0.08),
+            transparent 70%
+        );
+
+    opacity: 0;
+
+    transition: opacity 0.4s ease;
+}
+
+.produto:hover {
+    transform: translateY(-8px);
+
+    border-color: var(--borda-hover);
+
+    box-shadow: var(--sombra-md);
+}
+
+.produto:hover::before {
+    transform: scaleX(1);
+}
+
+.produto:hover::after {
+    opacity: 1;
+}
+
+/* =========================================================
+   ÍCONE
+   ========================================================= */
+
+.icone-produto {
+    width: 54px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 22px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fbf1e6,
+            #f5e6d5
+        );
+
+    border: 1px solid rgba(69, 39, 18, 0.06);
+
+    font-size: 24px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* =========================================================
+   NOME DO PRODUTO
+   ========================================================= */
+
+.produto h3 {
+    max-width: 220px;
+
+    margin-bottom: 9px;
+
+    color: var(--marrom-800);
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: 19px;
+
+    line-height: 1.25;
+
+    letter-spacing: -0.2px;
+}
+
+/* =========================================================
+   CATEGORIA
+   ========================================================= */
+
+.categoria {
+    margin-bottom: auto;
+
+    color: var(--laranja);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+/* =========================================================
+   RODAPÉ DO CARD
+   ========================================================= */
+
+.rodape-produto {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-top: 24px;
+
+    padding-top: 17px;
+
+    border-top: 1px solid rgba(69, 39, 18, 0.08);
+}
+
+/* =========================================================
+   PREÇO
+   ========================================================= */
+
+.preco {
+    color: var(--marrom-800);
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.3px;
+}
+
+/* =========================================================
+   BOTÃO +
+   ========================================================= */
+
+.mais {
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--creme-100);
+
+    color: var(--laranja);
+
+    font-size: 21px;
+    font-weight: 400;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.produto:hover .mais {
+    background: var(--laranja);
+
+    color: #ffffff;
+
+    transform: rotate(90deg);
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta {
+    position: relative;
+
+    overflow: hidden;
+
+    margin-top: 75px;
+
+    padding: 60px 35px;
+
+    text-align: center;
+
+    border-radius: var(--radius-lg);
+
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(217, 104, 11, 0.20),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #29140c,
+            #452712
+        );
+
+    box-shadow:
+        0 25px 55px rgba(43, 26, 18, 0.14);
+}
+
+.cta::before {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    right: -170px;
+    top: -170px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 45px rgba(255, 255, 255, 0.02),
+        0 0 0 90px rgba(255, 255, 255, 0.015);
+}
+
+.cta h2 {
+    position: relative;
+
+    margin-bottom: 12px;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    font-size: clamp(28px, 4vw, 38px);
+
+    letter-spacing: -0.7px;
+}
+
+.cta p {
+    position: relative;
+
+    margin-bottom: 28px;
+
+    color: rgba(255, 255, 255, 0.68);
+
+    font-size: 15px;
+}
+
+.botao {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding: 0 24px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--laranja),
+            var(--laranja-light)
+        );
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px rgba(217, 104, 11, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+.botao:hover {
+    transform: translateY(-3px);
+
+    filter: brightness(1.05);
+
+    box-shadow:
+        0 15px 30px rgba(217, 104, 11, 0.28);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer {
+    margin-top: 0;
+
+    padding: 30px 20px;
+
+    background: var(--marrom-950);
+
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    color: #98877c;
+
+    text-align: center;
+
+    font-size: 12px;
+}
+
+/* =========================================================
+   ANIMAÇÃO DOS CARDS
+   ========================================================= */
+
+.produto {
+    animation: cardAppear 0.5s ease both;
+}
+
+.produto:nth-child(1) {
+    animation-delay: 0.02s;
+}
+
+.produto:nth-child(2) {
+    animation-delay: 0.04s;
+}
+
+.produto:nth-child(3) {
+    animation-delay: 0.06s;
+}
+
+.produto:nth-child(4) {
+    animation-delay: 0.08s;
+}
+
+.produto:nth-child(5) {
+    animation-delay: 0.10s;
+}
+
+.produto:nth-child(6) {
+    animation-delay: 0.12s;
+}
+
+.produto:nth-child(7) {
+    animation-delay: 0.14s;
+}
+
+.produto:nth-child(8) {
+    animation-delay: 0.16s;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+    .produtos {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+}
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET PEQUENO
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .header-container {
+        width: min(100% - 30px, 700px);
+
+        min-height: auto;
+
+        padding: 17px 0;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .nav {
+        justify-content: center;
+    }
+
+    .hero {
+        min-height: 390px;
+
+        padding: 75px 20px;
+    }
+
+    .produtos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .catalogo {
+        width: min(100% - 30px, 700px);
+
+        padding-top: 65px;
+    }
+
+}
+
+/* =========================================================
+   RESPONSIVIDADE — MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .header-container {
+        width: calc(100% - 24px);
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 3px;
+    }
+
+    .nav a {
+        padding: 0 8px;
+
+        font-size: 12px;
+    }
+
+    .nav a::after {
+        left: 8px;
+        right: 8px;
+    }
+
+    .hero {
+        min-height: 360px;
+
+        padding: 65px 18px;
+    }
+
+    .hero h1 {
+        font-size: 48px;
+
+        letter-spacing: -1.8px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .catalogo {
+        width: calc(100% - 28px);
+
+        padding: 55px 0 65px;
+    }
+
+    .cabecalho-catalogo {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .cabecalho-catalogo h2 {
+        font-size: 32px;
+    }
+
+    .filtros {
+        gap: 7px;
+
+        margin-bottom: 30px;
+    }
+
+    .filtro {
+        min-height: 38px;
+
+        padding: 0 13px;
+
+        font-size: 12px;
+    }
+
+    .produtos {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .produto {
+        min-height: 250px;
+
+        padding: 22px;
+    }
+
+    .cta {
+        margin-top: 55px;
+
+        padding: 45px 22px;
+    }
+
+}
+
+/* =========================================================
+   REDUÇÃO DE MOVIMENTO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a
+                href="{{ url_for('routes.index') }}"
+                class="logo"
+            >
+                ☕ Café & Sabor
+            </a>
+
+            <nav class="nav">
+
+                <a href="{{ url_for('routes.index') }}">
+                    Início
+                </a>
+
+                <a href="{{ url_for('routes.catalogo') }}">
+                    Cardápio
+                </a>
+
+                {% if session.get("tipo") == "cliente" %}
+
+                <a href="{{ url_for('routes.reserva') }}">
+                    Reservar mesa
+                </a>
+
+                <a href="{{ url_for('routes.minhas_reservas') }}">
+                    Minhas Reservas
+                </a>
+
+                <a href="{{ url_for('routes.meu_cadastro') }}">
+                    Meu cadastro
+                </a>
+
+                {% endif %}
+
+                {% if session.get("tipo") == "admin" %}
+
+                <a href="{{ url_for('routes.lista_reservas') }}">
+                    Ver reservas
+                </a>
+
+                {% endif %}
+
+                <a href="{{ url_for('routes.logout') }}">
+                    Sair
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                CAFÉ & SABOR
+            </span>
+
+            <h1>
+                Nosso Cardápio
+            </h1>
+
+            <p>
+                Sabores preparados com carinho para transformar
+                cada momento em uma experiência especial.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CATÁLOGO
+    ========================= -->
+
+    <main class="catalogo">
+
+        <div class="cabecalho-catalogo">
+
+            <div>
+
+                <h2>
+                    Escolha seu favorito
+                </h2>
+
+                <p>
+                    Cafés, doces, salgados e muito mais.
+                </p>
+
+            </div>
+
+            <div class="contador">
+                {{ produtos|length }} opções
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FILTROS
+        ========================= -->
+
+        <div class="filtros">
+
+            <button
+                class="filtro ativo"
+                onclick="filtrarProdutos('todos', this)"
+            >
+                Todos
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Cafés', this)"
+            >
+                ☕ Cafés
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Bebidas', this)"
+            >
+                🥤 Bebidas
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Sobremesas', this)"
+            >
+                🍰 Sobremesas
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Salgados', this)"
+            >
+                🥐 Salgados
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Lanches', this)"
+            >
+                🥪 Lanches
+            </button>
+
+            <button
+                class="filtro"
+                onclick="filtrarProdutos('Combos', this)"
+            >
+                ✨ Combos
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             PRODUTOS
+        ========================= -->
+
+        <div class="produtos">
+
+            {% for produto in produtos %}
+
+            <article
+                class="produto"
+                data-categoria="{{ produto.categoria }}"
+            >
+
+                <div class="icone-produto">
+
+                    {% if produto.categoria == "Cafés" %}
+                        ☕
+                    {% elif produto.categoria == "Bebidas" %}
+                        🥤
+                    {% elif produto.categoria == "Sobremesas" %}
+                        🍰
+                    {% elif produto.categoria == "Salgados" %}
+                        🥐
+                    {% elif produto.categoria == "Lanches" %}
+                        🥪
+                    {% elif produto.categoria == "Combos" %}
+                        ✨
+                    {% else %}
+                        🍽️
+                    {% endif %}
+
+                </div>
+
+                <h3>
+                    {{ produto.nome }}
+                </h3>
+
+                <p class="categoria">
+                    {{ produto.categoria }}
+                </p>
+
+                <div class="rodape-produto">
+
+                    <span class="preco">
+                        {{ produto.preco }}
+                    </span>
+
+                    <span class="mais">
+                        +
+                    </span>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- =========================
+             CTA
+        ========================= -->
+
+        {% if session.get("tipo") == "cliente" %}
+
+        <section class="cta">
+
+            <h2>
+                Gostou do nosso cardápio?
+            </h2>
+
+            <p>
+                Reserve sua mesa e venha aproveitar o Café & Sabor.
+            </p>
+
+            <a
+                href="{{ url_for('routes.reserva') }}"
+                class="botao"
+            >
+                Reservar uma mesa
+            </a>
+
+        </section>
+
+        {% endif %}
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <p>
+            © 2026 Café & Sabor — Todos os direitos reservados.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         FILTRO DOS PRODUTOS
+    ========================= -->
+
+    <script>
+
+        function filtrarProdutos(categoria, botao) {
+
+            const produtos =
+                document.querySelectorAll(".produto");
+
+            const botoes =
+                document.querySelectorAll(".filtro");
+
+
+            botoes.forEach(function(item) {
+
+                item.classList.remove("ativo");
+
+            });
+
+
+            botao.classList.add("ativo");
+
+
+            produtos.forEach(function(produto) {
+
+                if (
+                    categoria === "todos" ||
+                    produto.dataset.categoria === categoria
+                ) {
+
+                    produto.style.display = "block";
+
+                } else {
+
+                    produto.style.display = "none";
+
+                }
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
+
