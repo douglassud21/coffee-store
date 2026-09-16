@@ -395,3 +395,5 @@ Douglas Silva Nascimento    |22873              |"Backend Flask, gerenciamento d
 Allan Gabriel Sousa Palma   |22544              |"Desenvolvedor Frontend (HTML/CSS), estrutura de layouts e usabilidade das páginas."
 Vitória de Carvalho Esteves |21684              |"Arquitetura de software, diagramas, mapeamento de eventos do sistema e fluxos de comunicação."
 Gustavo Gomes Pecora        |22767              |"Gestão do repositório Git/GitHub, documentação do projeto, modelagem DER e testes."
+
+#Nome do Grupo: Coders
