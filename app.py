@@ -66,15 +66,27 @@ with app.app_context():
     inspector = inspect(db.engine)
     tabelas = inspector.get_table_names()
 
-    # Garante usuario_id na tabela reservas
+        # Garante que a tabela reservas tenha as colunas necessárias
     if "reservas" in tabelas:
         colunas_reservas = [
             coluna["name"] for coluna in inspector.get_columns("reservas")
         ]
+
+        # Adiciona usuario_id, caso ainda não exista
         if "usuario_id" not in colunas_reservas:
             with db.engine.begin() as connection:
                 connection.execute(
                     text("ALTER TABLE reservas ADD COLUMN usuario_id INTEGER")
+                )
+
+        # Adiciona ativo, caso ainda não exista
+        if "ativo" not in colunas_reservas:
+            with db.engine.begin() as connection:
+                connection.execute(
+                    text(
+                        "ALTER TABLE reservas "
+                        "ADD COLUMN ativo BOOLEAN NOT NULL DEFAULT 1"
+                    )
                 )
 
     # Cria Administrador Padrão
