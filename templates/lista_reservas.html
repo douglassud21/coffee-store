@@ -49,7 +49,7 @@
                     <h1>Gerenciar reservas</h1>
 
                     <p>
-                        Consulte, confirme, conclua ou exclua as reservas realizadas pelos clientes.
+                        Consulte, confirme, conclua ou inative as reservas realizadas pelos clientes.
                     </p>
                 </div>
             </div>
@@ -162,21 +162,19 @@
 
                                     <!-- EXCLUIR -->
 
+                                    <!-- INATIVAR RESERVA -->
+                                    
                                     <form
                                         method="POST"
                                         action="{{ url_for('routes.excluir_reserva', id=reserva.id) }}"
-                                        onsubmit="
-                                            return confirm(
-                                                'Tem certeza que deseja excluir esta reserva?'
-                                            );
-                                        "
+                                        onsubmit="return confirm('Tem certeza que deseja inativar esta reserva? Ela deixará de aparecer na lista, mas continuará armazenada no banco de dados.');"
                                     >
                                         <button
                                             type="submit"
                                             class="btn-excluir"
-                                            title="Excluir reserva"
+                                            title="Inativar reserva"
                                         >
-                                            Excluir
+                                            Inativar
                                         </button>
                                     </form>
                                 </div>
