@@ -779,6 +779,6 @@ def mudar_status(id):
 @admin_required
 def excluir_reserva(id):
     reserva = Reserva.query.get_or_404(id)
-    db.session.delete(reserva)
+    reserva.ativo = False
     db.session.commit()
     return redirect(url_for("routes.lista_reservas"))
