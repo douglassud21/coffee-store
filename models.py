@@ -40,6 +40,7 @@ class Reserva(db.Model):
     categoria_reserva = db.Column(db.String(100), nullable=False)
     observacoes = db.Column(db.Text, nullable=True)
     status = db.Column(db.String(20), nullable=False, default="Pendente")
+    ativo = db.Column(db.Boolean, default=True, nullable=False)
 
     # Usuário responsável pela reserva
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuarios.id"), nullable=True)
