@@ -735,6 +735,7 @@ def lista_reservas():
     if busca:
         reservas = (
             Reserva.query.filter(
+                Reserva.ativo.is_(True),
                 db.or_(
                     Reserva.nome_completo.ilike(f"%{busca}%"),
                     Reserva.telefone.ilike(f"%{busca}%"),
@@ -745,11 +746,17 @@ def lista_reservas():
             .all()
         )
     else:
-        reservas = Reserva.query.order_by(
-            Reserva.data.asc(), Reserva.horario.asc()
-        ).all()
+        reservas = (
+            Reserva.query.filter_by(ativo=True)
+            .order_by(Reserva.data.asc(), Reserva.horario.asc())
+            .all()
+        )
 
-    return render_template("lista_reservas.html", reservas=reservas, busca=busca)
+    return render_template(
+        "lista_reservas.html",
+        reservas=reservas,
+        busca=busca
+    )
 
 
 @routes.route("/mudar-status/<int:id>", methods=["POST"])
