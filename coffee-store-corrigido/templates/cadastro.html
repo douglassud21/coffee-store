@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Criar conta | Café & Sabor{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}" />
+{% endblock %}
+
+{% block body_class %}pagina-login{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
+        <main class="login-container">
+            <div class="login-card cadastro-card">
+                <!-- ==================================
+                 CABEÇALHO
+            =================================== -->
+
+                <div class="login-header">
+                    <div class="login-icon">☕</div>
+
+                    <span class="section-subtitle"> Café & Sabor </span>
+
+                    <h1>Criar minha conta</h1>
+
+                    <p>Cadastre seus dados para realizar suas reservas.</p>
+                </div>
+
+                <!-- ==================================
+                 MENSAGEM DE ERRO
+            =================================== -->
+
+                {% if erro %}
+
+                <div class="mensagem-erro">
+                    <span> ⚠ </span>
+
+                    <p>{{ erro }}</p>
+                </div>
+
+                {% endif %}
+
+                <!-- ==================================
+                 FORMULÁRIO
+            =================================== -->
+
+                <form method="POST" action="{{ url_for('routes.cadastro') }}" class="form-login">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                    <!-- NOME -->
+
+                    <div class="campo">
+                        <label for="nome"> Nome completo </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            autocomplete="name"
+                            value="{{ request.form.get('nome', '') }}"
+                            required
+                        />
+                    </div>
+
+                    <!-- E-MAIL -->
+
+                    <div class="campo">
+                        <label for="email"> E-mail </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                            value="{{ request.form.get('email', '') }}"
+                            required
+                        />
+                    </div>
+
+                    <!-- TELEFONE -->
+
+                    <div class="campo">
+                        <label for="telefone"> Telefone </label>
+
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(11) 99999-9999"
+                            autocomplete="tel"
+                            value="{{ request.form.get('telefone', '') }}"
+                            required
+                        />
+                    </div>
+
+                    <!-- SENHA -->
+
+                    <div class="campo">
+                        <label for="senha"> Senha </label>
+
+                        <input
+                            type="password"
+                            id="senha"
+                            name="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="new-password"
+                            required
+                        />
+
+                        <small class="campo-ajuda">
+                            A senha deve possuir pelo menos 6 caracteres.
+                        </small>
+                    </div>
+
+                    <!-- CONFIRMAR SENHA -->
+
+                    <div class="campo">
+                        <label for="confirmar_senha"> Confirmar senha </label>
+
+                        <input
+                            type="password"
+                            id="confirmar_senha"
+                            name="confirmar_senha"
+                            placeholder="Digite a senha novamente"
+                            autocomplete="new-password"
+                            required
+                        />
+                    </div>
+
+                    <!-- AVISO -->
+
+                    <div class="form-notice">
+                        <span> 🔒 </span>
+
+                        <p>
+                            Seus dados serão utilizados para identificar sua conta e suas reservas.
+                        </p>
+                    </div>
+
+                    <!-- BOTÃO -->
+
+                    <button type="submit" class="btn btn-reserva btn-login">
+                        Criar minha conta
+                    </button>
+                </form>
+
+                <!-- ==================================
+                 LOGIN
+            =================================== -->
+
+                <div class="login-cadastro">
+                    <p>Já possui uma conta?</p>
+
+                    <a href="{{ url_for('routes.login') }}" class="link-cadastro"> Fazer login </a>
+                </div>
+
+                <!-- ==================================
+                 VOLTAR
+            =================================== -->
+
+                <div class="login-voltar">
+                    <a href="{{ url_for('routes.login') }}" class="btn-voltar">
+                        ← Voltar para o login
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+{% endblock %}

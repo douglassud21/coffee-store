@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Reserva Confirmada - Café & Sabor{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='confirmacao.css') }}" />
+{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+     CONFIRMAÇÃO
+=========================================== -->
+
+        <main class="container pagina-confirmacao">
+            <div class="confirmacao-card">
+                <!-- ==================================
+             ÍCONE
+        =================================== -->
+
+                <div class="confirmacao-icone">✓</div>
+
+                <!-- ==================================
+             TÍTULO
+        =================================== -->
+
+                <div class="confirmacao-mensagem">
+                    <span class="titulo-secao"> Reserva realizada </span>
+
+                    <h1>Tudo certo!</h1>
+
+                    <p>Sua reserva foi registrada com sucesso.</p>
+
+                    <p>Aguarde a confirmação da equipe do Café & Sabor.</p>
+                </div>
+
+                <!-- ==================================
+             DETALHES
+        =================================== -->
+
+                <div class="confirmacao-detalhes">
+                    <div class="confirmacao-item">
+                        <span> Número da reserva </span>
+
+                        <strong> #{{ reserva.id }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Nome </span>
+
+                        <strong> {{ reserva.nome_completo }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Telefone </span>
+
+                        <strong> {{ reserva.telefone }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Data </span>
+
+                        <strong> {{ reserva.data.strftime('%d/%m/%Y') }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Horário </span>
+
+                        <strong> {{ reserva.horario.strftime('%H:%M') }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Pessoas </span>
+
+                        <strong> {{ reserva.quantidade_pessoas }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Categoria </span>
+
+                        <strong> {{ reserva.categoria_reserva }} </strong>
+                    </div>
+
+                    <div class="confirmacao-item">
+                        <span> Status </span>
+
+                        <strong class="status status-pendente"> {{ reserva.status }} </strong>
+                    </div>
+
+                    {% if reserva.observacoes %}
+
+                    <div class="confirmacao-observacoes">
+                        <span> Observações </span>
+
+                        <p>{{ reserva.observacoes }}</p>
+                    </div>
+
+                    {% endif %}
+                </div>
+
+                <!-- ==================================
+             AVISO
+        =================================== -->
+
+                <div class="form-notice">
+                    <strong> Aguarde a confirmação </strong>
+
+                    <p>
+                        Sua reserva está atualmente como
+                        <strong>Pendente</strong>. A equipe do Café & Sabor fará a confirmação da
+                        reserva.
+                    </p>
+                </div>
+
+                <!-- ==================================
+             BOTÕES
+        =================================== -->
+
+                <div class="form-actions">
+                    <a href="{{ url_for('routes.index') }}" class="btn-voltar">
+                        Voltar ao início
+                    </a>
+
+                    <a href="{{ url_for('routes.reserva') }}" class="btn-reserva"> Nova reserva </a>
+                </div>
+            </div>
+        </main>
+
+        <!-- ==========================================
+     FOOTER
+=========================================== -->
+{% endblock %}

@@ -1,0 +1,268 @@
+{% extends "base.html" %}
+
+{% block title %}Meu cadastro | Café & Sabor{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='meu_cadastro.css') }}" />
+{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+         CONTEÚDO PRINCIPAL
+    =========================================== -->
+
+        <main class="login-container">
+            <div class="login-card cadastro-card">
+                <!-- ==================================
+                 CABEÇALHO
+            =================================== -->
+
+                <div class="login-header">
+                    <div class="login-icon">👤</div>
+
+                    <span class="section-subtitle"> Minha conta </span>
+
+                    <h1>Meu cadastro</h1>
+
+                    <p>Atualize seus dados pessoais quando quiser.</p>
+                </div>
+
+                <!-- ==================================
+                 MENSAGEM DE ERRO
+            =================================== -->
+
+                {% if erro %}
+
+                <div class="mensagem-erro">
+                    <span> ⚠ </span>
+
+                    <p>{{ erro }}</p>
+                </div>
+
+                {% endif %}
+
+                <!-- ==================================
+                 MENSAGEM DE SUCESSO
+            =================================== -->
+
+                {% if sucesso %}
+
+                <div class="mensagem-sucesso">
+                    <span> ✓ </span>
+
+                    <p>{{ sucesso }}</p>
+                </div>
+
+                {% endif %}
+
+                {% with mensagens = get_flashed_messages(with_categories=true) %}
+                    {% if mensagens %}
+                        {% for categoria, mensagem in mensagens %}
+                            <div class="mensagem-{{ 'sucesso' if categoria == 'sucesso' else 'erro' }}">
+                                {{ mensagem }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <!-- ==================================
+                 FORMULÁRIO
+            =================================== -->
+
+                <form
+                    method="POST"
+                    action="{{ url_for('routes.meu_cadastro') }}"
+                    class="form-login"
+                    enctype="multipart/form-data"
+                >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+                <!-- FOTO DE PERFIL -->
+
+                    <div class="perfil-foto-container">
+
+                        <img
+                            id="preview-foto"
+                            src="{{ url_for('static', filename='uploads/' ~ (usuario.foto or 'padrao.png')) }}"
+                            alt="Foto de perfil"
+                            class="foto-perfil"
+                        >
+
+                        <h3>Foto de perfil</h3>
+
+                        <label for="campo_imagem" class="btn-alterar-foto">
+                            Escolher nova foto
+                        </label>
+
+                        <input
+                            type="file"
+                            id="campo_imagem"
+                            name="campo_imagem"
+                            accept="image/png,image/jpeg,image/webp"
+                            onchange="mostrarPreview(event)"
+                        >
+
+                        <label class="remover-foto">
+                            <input
+                                type="checkbox"
+                                name="remover_foto"
+                                value="1"
+                            >
+                            Remover foto atual
+                        </label>
+
+                        <small>Formatos: PNG, JPG, JPEG ou WEBP. Máximo de 5 MB.</small>
+
+                    </div>
+
+                    <!-- NOME -->
+
+                    <div class="campo">
+                        <label for="nome"> Nome completo </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Digite seu nome completo"
+                            autocomplete="name"
+                            value="{{ usuario.nome }}"
+                            required
+                        />
+                    </div>
+
+                    <!-- E-MAIL -->
+
+                    <div class="campo">
+                        <label for="email"> E-mail </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Digite seu e-mail"
+                            autocomplete="email"
+                            value="{{ usuario.email }}"
+                            required
+                        />
+                    </div>
+
+                    <!-- TELEFONE -->
+
+                    <div class="campo">
+                        <label for="telefone"> Telefone </label>
+
+                        <input
+                            type="tel"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="(11) 99999-9999"
+                            autocomplete="tel"
+                            value="{{ usuario.telefone }}"
+                        />
+                    </div>
+
+                    <!-- ==================================
+                     NOVA SENHA
+                =================================== -->
+
+                    <div class="form-section">
+                        <div class="form-section-header">
+                            <div class="form-section-icon">🔒</div>
+
+                            <div>
+                                <h2>Alterar senha</h2>
+
+                                <p>Deixe em branco caso não queira alterar.</p>
+                            </div>
+                        </div>
+
+                        <!-- NOVA SENHA -->
+
+                        <div class="campo">
+                            <label for="senha"> Nova senha </label>
+
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="Digite uma nova senha"
+                                autocomplete="new-password"
+                            />
+
+                            <small class="campo-ajuda">
+                                A senha deve possuir pelo menos 6 caracteres.
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- ==================================
+                     AVISO
+                =================================== -->
+
+                    <div class="form-notice">
+                        <span> ℹ️ </span>
+
+                        <p>
+                            Seus dados serão utilizados para identificar você e associar suas
+                            reservas à sua conta.
+                        </p>
+                    </div>
+
+                    <!-- ==================================
+                     AÇÕES
+                =================================== -->
+
+                    <div class="form-actions">
+                        <a href="{{ url_for('routes.index') }}" class="btn btn-voltar">
+                            Cancelar
+                        </a>
+
+                        <button type="submit" class="btn btn-reserva">Salvar alterações</button>
+                    </div>
+                </form>
+
+                <div class="excluir-conta-container">
+                    <h3>Excluir minha conta</h3>
+
+                    <p>
+                        Esta ação é permanente e não poderá ser desfeita.
+                    </p>
+
+                    <form
+                        action="{{ url_for('routes.excluir_minha_conta') }}"
+                        method="POST"
+                        onsubmit="return confirm('Tem certeza que deseja excluir sua conta permanentemente?');"
+                    >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                        <button type="submit" class="btn-excluir-conta">
+                            Excluir minha conta
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- ==========================================
+         RODAPÉ
+    =========================================== -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+            function mostrarPreview(event) {
+                const arquivo = event.target.files[0];
+                const preview = document.getElementById("preview-foto");
+
+                if (arquivo) {
+                    const urlTemporaria = URL.createObjectURL(arquivo);
+
+                    preview.onload = function () {
+                        URL.revokeObjectURL(urlTemporaria);
+                    };
+
+                    preview.src = urlTemporaria;
+                }
+            }
+        </script>
+{% endblock %}

@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+
+{% block title %}Reservar Mesa - Café & Sabor{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='reserva.css') }}">
+{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+     CONTEÚDO
+=========================================== -->
+
+<main class="container pagina-formulario">
+
+    <div class="formulario-header">
+
+        <span class="titulo-secao">
+            Reserva
+        </span>
+
+        <h1>
+            Reserve sua mesa
+        </h1>
+
+        <p>
+            Preencha os dados abaixo para realizar
+            sua reserva no Café & Sabor.
+        </p>
+
+    </div>
+
+
+    <!-- ======================================
+         ERRO
+    ======================================= -->
+
+    {% if erro %}
+
+    <div class="mensagem-erro">
+        {{ erro }}
+    </div>
+
+    {% endif %}
+
+
+    <!-- ======================================
+         FORMULÁRIO
+    ======================================= -->
+
+    <form action="{{ url_for('routes.confirmacao') }}"
+          method="POST"
+          class="formulario-reserva">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+
+        <!-- ==================================
+             DADOS DO CLIENTE
+        =================================== -->
+
+        <section class="form-section">
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    👤
+                </div>
+
+                <div>
+                    <h2>
+                        Seus dados
+                    </h2>
+
+                    <p>
+                        Confira suas informações.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- NOME -->
+
+            <div class="campo">
+
+                <label for="nome_completo">
+                    Nome completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nome_completo"
+                    name="nome_completo"
+                    value="{{ request.form.get('nome_completo', usuario.nome) }}"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TELEFONE -->
+
+            <div class="campo">
+
+                <label for="telefone">
+                    Telefone
+                </label>
+
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                    value="{{ request.form.get('telefone', usuario.telefone) }}"
+                    required
+                >
+
+                <small class="campo-ajuda">
+                    Informe seu telefone com DDD.
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             DADOS DA RESERVA
+        =================================== -->
+
+        <section class="form-section">
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    📅
+                </div>
+
+                <div>
+                    <h2>
+                        Dados da reserva
+                    </h2>
+
+                    <p>
+                        Escolha a data e o horário.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- DATA -->
+
+                <div class="campo">
+
+                    <label for="data">
+                        Data
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data"
+                        name="data"
+                        value="{{ request.form.get('data', '') }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- HORÁRIO -->
+
+                <div class="campo">
+
+                    <label for="horario">
+                        Horário
+                    </label>
+
+                    <input
+                        type="time"
+                        id="horario"
+                        name="horario"
+                        value="{{ request.form.get('horario', '') }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- QUANTIDADE -->
+
+                <div class="campo">
+
+                    <label for="quantidade_pessoas">
+                        Quantidade de pessoas
+                    </label>
+
+                    <input
+                        type="number"
+                        id="quantidade_pessoas"
+                        name="quantidade_pessoas"
+                        min="1"
+                        max="20"
+                        value="{{ request.form.get('quantidade_pessoas', '') }}"
+                        required
+                    >
+
+                    <small class="campo-ajuda">
+                        Máximo de 20 pessoas.
+                    </small>
+
+                </div>
+
+
+                <!-- CATEGORIA -->
+
+                <div class="campo">
+
+                    <label for="categoria_reserva">
+                        Categoria da reserva
+                    </label>
+
+                    <select
+                        id="categoria_reserva"
+                        name="categoria_reserva"
+                        required
+                    >
+
+                        <option value="">
+                            Selecione uma categoria
+                        </option>
+
+                        <option
+                            value="Aniversário"
+                            {% if request.form.get('categoria_reserva') == 'Aniversário' %}selected{% endif %}
+                        >
+                            Aniversário
+                        </option>
+
+                        <option
+                            value="Encontro"
+                            {% if request.form.get('categoria_reserva') == 'Encontro' %}selected{% endif %}
+                        >
+                            Encontro
+                        </option>
+
+                        <option
+                            value="Reunião"
+                            {% if request.form.get('categoria_reserva') == 'Reunião' %}selected{% endif %}
+                        >
+                            Reunião
+                        </option>
+
+                        <option
+                            value="Família"
+                            {% if request.form.get('categoria_reserva') == 'Família' %}selected{% endif %}
+                        >
+                            Família
+                        </option>
+
+                        <option
+                            value="Outro"
+                            {% if request.form.get('categoria_reserva') == 'Outro' %}selected{% endif %}
+                        >
+                            Outro
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             OBSERVAÇÕES
+        =================================== -->
+
+        <section class="form-section">
+
+            <div class="form-section-header">
+
+                <div class="form-section-icon">
+                    📝
+                </div>
+
+                <div>
+                    <h2>
+                        Observações
+                    </h2>
+
+                    <p>
+                        Alguma informação especial?
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="campo">
+
+                <label for="observacoes">
+                    Observações
+                </label>
+
+                <textarea
+                    id="observacoes"
+                    name="observacoes"
+                    rows="5"
+                    placeholder="Ex.: mesa próxima à janela, comemoração de aniversário..."
+                >{{ request.form.get('observacoes', '') }}</textarea>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================
+             AVISO
+        =================================== -->
+
+        <div class="form-notice">
+
+            <strong>
+                Importante
+            </strong>
+
+            <p>
+                Sua reserva será cadastrada como
+                <strong>Pendente</strong> e deverá ser
+                confirmada pela equipe do Café & Sabor.
+            </p>
+
+        </div>
+
+
+        <!-- ==================================
+             BOTÕES
+        =================================== -->
+
+        <div class="form-actions">
+
+            <a href="{{ url_for('routes.index') }}"
+               class="btn-voltar">
+                Voltar
+            </a>
+
+            <button type="submit"
+                    class="btn-reserva">
+                Confirmar reserva
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<!-- ==========================================
+     FOOTER
+=========================================== -->
+{% endblock %}

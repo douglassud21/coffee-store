@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}Reservas - Café & Sabor{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lista_reservas.css') }}" />
+{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+     CONTEÚDO
+=========================================== -->
+
+        <main class="container pagina-lista">
+            <!-- ======================================
+         CABEÇALHO
+    ======================================= -->
+
+            <div class="lista-header">
+                <div>
+                    <span class="titulo-secao"> Administração </span>
+
+                    <h1>Gerenciar reservas</h1>
+
+                    <p>
+                        Consulte, confirme, conclua ou inative as reservas realizadas pelos clientes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ======================================
+         BUSCA
+    ======================================= -->
+
+            <form method="GET" action="{{ url_for('routes.lista_reservas') }}" class="busca-form">
+                <div class="campo-busca">
+                    <input
+                        type="text"
+                        name="busca"
+                        value="{{ busca }}"
+                        placeholder="Buscar por nome, telefone ou categoria..."
+                    />
+
+                    <button type="submit">Buscar</button>
+                </div>
+            </form>
+
+            <!-- ======================================
+         RESULTADO
+    ======================================= -->
+
+            {% if reservas %}
+
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+
+                            <th>ID</th>
+
+                            <th>Nome</th>
+
+                            <th>Telefone</th>
+
+                            <th>Categoria</th>
+
+                            <th>Data</th>
+
+                            <th>Horário</th>
+
+                            <th>Pessoas</th>
+
+                            <th>Status</th>
+
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for reserva in reservas %}
+
+                        <tr>
+                            <td>
+                                <img
+                                    src="{{ url_for('static', filename='uploads/' ~ ((reserva.usuario.foto or 'padrao.png') if reserva.usuario else 'padrao.png')) }}"
+                                    alt="Foto do cliente"
+                                    class="foto-reserva"
+                                >
+                            </td>
+                            
+                            <td>#{{ reserva.id }}</td>
+
+                            <td>
+                                <strong> {{ reserva.nome_completo }} </strong>
+                            </td>
+
+                            <td>{{ reserva.telefone }}</td>
+
+                            <td>{{ reserva.categoria_reserva }}</td>
+
+                            <td>{{ reserva.data.strftime('%d/%m/%Y') }}</td>
+
+                            <td>{{ reserva.horario.strftime('%H:%M') }}</td>
+
+                            <td>{{ reserva.quantidade_pessoas }}</td>
+
+                            <td>
+                                {% if reserva.status == "Pendente" %}
+
+                                <span class="status status-pendente"> Pendente </span>
+
+                                {% elif reserva.status == "Confirmada" %}
+
+                                <span class="status status-confirmada"> Confirmada </span>
+
+                                {% else %}
+
+                                <span class="status status-concluida"> Concluída </span>
+
+                                {% endif %}
+                            </td>
+
+                            <!-- ======================
+                         AÇÕES
+                    ======================= -->
+
+                            <td>
+                                <div class="acoes-reserva">
+                                    <!-- ALTERAR STATUS -->
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('routes.mudar_status', id=reserva.id) }}"
+                                    >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <button
+                                            type="submit"
+                                            class="btn-status"
+                                            title="Alterar status"
+                                        >
+                                            {% if reserva.status == "Pendente" %} Confirmar {% elif
+                                            reserva.status == "Confirmada" %} Concluir {% else %}
+                                            Reabrir {% endif %}
+                                        </button>
+                                    </form>
+
+                                    <!-- EXCLUIR -->
+
+                                    <!-- INATIVAR RESERVA -->
+                                    
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('routes.excluir_reserva', id=reserva.id) }}"
+                                        onsubmit="return confirm('Tem certeza que deseja inativar esta reserva? Ela deixará de aparecer na lista, mas continuará armazenada no banco de dados.');"
+                                    >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                                        <button
+                                            type="submit"
+                                            class="btn-excluir"
+                                            title="Inativar reserva"
+                                        >
+                                            Inativar
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            {% else %}
+
+            <!-- ======================================
+         NENHUMA RESERVA
+    ======================================= -->
+
+            <div class="sem-reservas">
+                {% if busca %}
+
+                <h2>Nenhuma reserva encontrada</h2>
+
+                <p>Não encontramos reservas para "<strong>{{ busca }}</strong>".</p>
+
+                <a href="{{ url_for('routes.lista_reservas') }}" class="btn-voltar">
+                    Ver todas as reservas
+                </a>
+
+                {% else %}
+
+                <h2>Nenhuma reserva cadastrada</h2>
+
+                <p>Ainda não existem reservas no sistema.</p>
+
+                {% endif %}
+            </div>
+
+            {% endif %}
+        </main>
+
+        <!-- ==========================================
+     FOOTER
+=========================================== -->
+{% endblock %}
