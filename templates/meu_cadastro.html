@@ -1,44 +1,13 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% extends "base.html" %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Meu cadastro | Café & Sabor{% endblock %}
 
-        <title>Meu cadastro | Café & Sabor</title>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='meu_cadastro.css') }}" />
+{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='meu_cadastro.css') }}" />
-    </head>
-
-    <body>
-        <!-- ==========================================
-         CABEÇALHO
-    =========================================== -->
-
-        <header class="header">
-            <div class="container header-container">
-                <!-- LOGO -->
-
-                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
-
-                <!-- MENU -->
-
-                <nav class="nav">
-                    <a href="{{ url_for('routes.index') }}" class="nav-link"> Início </a>
-
-                    <a href="{{ url_for('routes.reserva') }}" class="nav-link"> Reservar mesa </a>
-
-                    <a href="{{ url_for('routes.meu_cadastro') }}" class="nav-link">
-                        Meu cadastro
-                    </a>
-
-                    <a href="{{ url_for('routes.logout') }}" class="nav-link"> Sair </a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
          CONTEÚDO PRINCIPAL
     =========================================== -->
 
@@ -106,6 +75,7 @@
                     class="form-login"
                     enctype="multipart/form-data"
                 >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
                 <!-- FOTO DE PERFIL -->
 
@@ -264,6 +234,7 @@
                         method="POST"
                         onsubmit="return confirm('Tem certeza que deseja excluir sua conta permanentemente?');"
                     >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                         <button type="submit" class="btn-excluir-conta">
                             Excluir minha conta
                         </button>
@@ -275,16 +246,10 @@
         <!-- ==========================================
          RODAPÉ
     =========================================== -->
+{% endblock %}
 
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-bottom">
-                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </footer>
-
-        <script>
+{% block scripts %}
+<script>
             function mostrarPreview(event) {
                 const arquivo = event.target.files[0];
                 const preview = document.getElementById("preview-foto");
@@ -300,5 +265,4 @@
                 }
             }
         </script>
-    </body>
-</html>
+{% endblock %}

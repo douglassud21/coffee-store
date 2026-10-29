@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Café & Sabor{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+        {% block head %}{% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        <header class="header">
+            <div class="container header-container">
+                <a href="{{ url_for('routes.index') if session.get('usuario_id') else url_for('routes.login') }}" class="logo">☕ Café & Sabor</a>
+
+                <nav class="nav">
+                    {% set ep = request.endpoint %}
+                    {% if session.get("usuario_id") %}
+                    <a href="{{ url_for('routes.index') }}" class="nav-link{{ ' active' if ep == 'routes.index' }}">Início</a>
+                    <a href="{{ url_for('routes.catalogo') }}" class="nav-link{{ ' active' if ep == 'routes.catalogo' }}">Cardápio</a>
+                    {% if session.get("tipo") == "cliente" %}
+                    <a href="{{ url_for('routes.reserva') }}" class="nav-link{{ ' active' if ep == 'routes.reserva' }}">Reservar mesa</a>
+                    <a href="{{ url_for('routes.minhas_reservas') }}" class="nav-link{{ ' active' if ep == 'routes.minhas_reservas' }}">Minhas reservas</a>
+                    <a href="{{ url_for('routes.meu_cadastro') }}" class="nav-link{{ ' active' if ep == 'routes.meu_cadastro' }}">Meu cadastro</a>
+                    {% elif session.get("tipo") == "admin" %}
+                    <a href="{{ url_for('routes.lista_reservas') }}" class="nav-link{{ ' active' if ep == 'routes.lista_reservas' }}">Ver reservas</a>
+                    {% endif %}
+                    <a href="{{ url_for('routes.logout') }}" class="nav-link">Sair</a>
+                    {% else %}
+                    <a href="{{ url_for('routes.catalogo') }}" class="nav-link">Cardápio</a>
+                    <a href="{{ url_for('routes.login') }}" class="nav-link">Entrar</a>
+                    {% endif %}
+                </nav>
+            </div>
+        </header>
+
+        {% block content %}{% endblock %}
+
+        {% block footer %}
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </footer>
+        {% endblock %}
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

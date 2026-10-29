@@ -1,81 +1,13 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% extends "base.html" %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Café & Sabor | Sistema de Reservas{% endblock %}
 
-        <title>Café & Sabor | Sistema de Reservas</title>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
-
-        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
-    </head>
-
-    <body>
-        <!-- ==========================================
-     CABEÇALHO
-=========================================== -->
-
-        <header class="header">
-            <div class="container header-container">
-                <!-- LOGO -->
-
-                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
-
-                <!-- MENU -->
-
-                <nav class="nav">
-                    <!-- INÍCIO - TODOS -->
-
-                    <a href="{{ url_for('routes.index') }}" class="nav-link"> Início </a>
-
-                    <!-- CATÁLOGO - TODOS -->
-
-                    <a href="{{ url_for('routes.catalogo') }}" class="nav-link">
-                        Cardápio
-                    </a>
-
-                    <!-- ==================================
-                 MENU DO CLIENTE
-            =================================== -->
-
-                    {% if session.get("tipo") == "cliente" %}
-
-                    <a href="{{ url_for('routes.reserva') }}" class="nav-link"> Reservar mesa </a>
-
-                    <a href="{{ url_for('routes.minhas_reservas') }}" class="nav-link">
-                        Minhas Reservas
-                    </a>
-
-                    <a href="{{ url_for('routes.meu_cadastro') }}" class="nav-link">
-                        Meu cadastro
-                    </a>
-
-                    {% endif %}
-
-                    <!-- ==================================
-                 MENU DO ADMINISTRADOR
-            =================================== -->
-
-                    {% if session.get("tipo") == "admin" %}
-
-                    <a href="{{ url_for('routes.lista_reservas') }}" class="nav-link">
-                        Ver reservas
-                    </a>
-
-                    {% endif %}
-
-                    <!-- ==================================
-                 SAIR
-            =================================== -->
-
-                    <a href="{{ url_for('routes.logout') }}" class="nav-link"> Sair </a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
      CONTEÚDO PRINCIPAL
 =========================================== -->
 
@@ -286,8 +218,10 @@
         <!-- ==========================================
      RODAPÉ
 =========================================== -->
+{% endblock %}
 
-        <footer class="footer">
+{% block footer %}
+<footer class="footer">
             <div class="container">
                 <div class="footer-content">
                     <!-- ==================================
@@ -353,5 +287,4 @@
                 </div>
             </div>
         </footer>
-    </body>
-</html>
+{% endblock %}

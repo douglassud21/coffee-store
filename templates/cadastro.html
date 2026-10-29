@@ -1,28 +1,15 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% extends "base.html" %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Criar conta | Café & Sabor{% endblock %}
 
-        <title>Criar conta | Café & Sabor</title>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}" />
+{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='cadastro.css') }}" />
-    </head>
+{% block body_class %}pagina-login{% endblock %}
 
-    <body class="pagina-login">
-        <!-- ==========================================
-         CABEÇALHO
-    =========================================== -->
-
-        <header class="header">
-            <div class="container header-container">
-                <a href="{{ url_for('routes.login') }}" class="logo"> Café & Sabor </a>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
          CONTEÚDO PRINCIPAL
     =========================================== -->
 
@@ -61,6 +48,7 @@
             =================================== -->
 
                 <form method="POST" action="{{ url_for('routes.cadastro') }}" class="form-login">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <!-- NOME -->
 
                     <div class="campo">
@@ -185,13 +173,4 @@
         <!-- ==========================================
          RODAPÉ
     =========================================== -->
-
-        <footer class="footer footer-login">
-            <div class="container">
-                <div class="footer-bottom">
-                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </footer>
-    </body>
-</html>
+{% endblock %}

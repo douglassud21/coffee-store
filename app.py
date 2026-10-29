@@ -1,5 +1,6 @@
 import logging
 import os
+import secrets
 from flask import Flask, request
 from flask_caching import Cache
 from sqlalchemy import inspect, text
@@ -31,7 +32,9 @@ os.makedirs(
 # CONFIGURAÇÕES DA APLICAÇÃO E CACHE
 # ==========================================
 
-app.config["SECRET_KEY"] = "chave-secreta-do-projeto"
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or secrets.token_hex(32)
+app.config["SESSION_COOKIE_HTTPONLY"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -126,7 +129,7 @@ with app.app_context():
             nome="Administrador",
             email="admin@cafeesabor.com",
             telefone="00000000000",
-            senha=generate_password_hash("Admin@123"),
+            senha=generate_password_hash(os.environ.get("ADMIN_PASSWORD", "Admin@123")),
             tipo="admin",
         )
         db.session.add(admin)
@@ -137,4 +140,4 @@ with app.app_context():
 # ==========================================
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=os.environ.get("FLASK_DEBUG") == "1")

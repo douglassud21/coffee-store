@@ -1,61 +1,12 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html lang="pt-BR">
+{% block title %}Reservar Mesa - Café & Sabor{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>Reservar Mesa - Café & Sabor</title>
-
-<link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+{% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='reserva.css') }}">
+{% endblock %}
 
-</head>
-
-<body>
-
-
-<!-- ==========================================
-     HEADER
-=========================================== -->
-
-<header class="header">
-
-    <div class="container header-content">
-
-        <a href="{{ url_for('routes.index') }}"
-           class="logo">
-            Café & Sabor
-        </a>
-
-        <nav class="nav">
-
-            <a href="{{ url_for('routes.index') }}">
-                Início
-            </a>
-
-            <a href="{{ url_for('routes.reserva') }}"
-               class="active">
-                Reservar mesa
-            </a>
-
-            <a href="{{ url_for('routes.meu_cadastro') }}">
-                Meu cadastro
-            </a>
-
-            <a href="{{ url_for('routes.logout') }}">
-                Sair
-            </a>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
+{% block content %}
 <!-- ==========================================
      CONTEÚDO
 =========================================== -->
@@ -100,6 +51,7 @@
     <form action="{{ url_for('routes.confirmacao') }}"
           method="POST"
           class="formulario-reserva">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 
         <!-- ==================================
@@ -412,20 +364,4 @@
 <!-- ==========================================
      FOOTER
 =========================================== -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <p>
-            © 2026 Café & Sabor. Todos os direitos reservados.
-        </p>
-
-    </div>
-
-</footer>
-
-
-</body>
-
-</html>
+{% endblock %}

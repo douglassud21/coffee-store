@@ -1,29 +1,15 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% extends "base.html" %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Login | Café & Sabor{% endblock %}
 
-        <title>Login | Café & Sabor</title>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
+{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+{% block body_class %}pagina-login{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}" />
-    </head>
-
-    <body class="pagina-login">
-        <!-- ==========================================
-         CABEÇALHO
-    =========================================== -->
-
-        <header class="header">
-            <div class="container header-container">
-                <a href="{{ url_for('routes.login') }}" class="logo"> Café & Sabor </a>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
          CONTEÚDO
     =========================================== -->
 
@@ -62,6 +48,7 @@
             =================================== -->
 
                 <form method="POST" action="{{ url_for('routes.login') }}" class="form-login">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                     <!-- E-MAIL -->
 
                     <div class="campo">
@@ -114,7 +101,7 @@
             =================================== -->
 
                 <div class="login-voltar">
-                    <a href="{{ url_for('routes.index') }}" class="btn-voltar"> ← Voltar </a>
+                    <a href="{{ url_for('routes.catalogo') }}" class="btn-voltar"> ← Ver cardápio </a>
                 </div>
             </div>
         </main>
@@ -122,13 +109,4 @@
         <!-- ==========================================
          RODAPÉ
     =========================================== -->
-
-        <footer class="footer footer-login">
-            <div class="container">
-                <div class="footer-bottom">
-                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </footer>
-    </body>
-</html>
+{% endblock %}

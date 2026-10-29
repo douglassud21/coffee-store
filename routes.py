@@ -1,7 +1,11 @@
 import os
 import uuid
 
-from flask import current_app, flash
+import hmac
+import secrets
+
+from flask import abort, current_app, flash
+from sqlalchemy.exc import IntegrityError
 from werkzeug.utils import secure_filename
 
 import time                        # Controle de tempo e pausas
@@ -23,6 +27,13 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from database import db
 from models import Reserva, Usuario
+from utils import (
+    CATEGORIAS,
+    email_valido,
+    nome_valido,
+    processar_imagem,
+    telefone_valido,
+)
 
 # Instância compartilhada de Cache
 cache = Cache()
@@ -37,46 +48,20 @@ EXTENSOES_PERMITIDAS = {"png", "jpg", "jpeg", "webp"}
 
 
 def extensao_permitida(nome_arquivo):
-    return (
-        "." in nome_arquivo
-        and nome_arquivo.rsplit(".", 1)[1].lower()
-        in EXTENSOES_PERMITIDAS
-    )
+    # usa o nome ORIGINAL: secure_filename("日本.png") vira "png" e perdia a extensão
+    return os.path.splitext(nome_arquivo)[1].lstrip(".").lower() in EXTENSOES_PERMITIDAS
 
 
 def salvar_foto(arquivo):
-    nome_original = secure_filename(arquivo.filename)
+    if not extensao_permitida(arquivo.filename or ""):
+        raise ValueError("Formato inválido! Envie PNG, JPG, JPEG ou WEBP.")
 
-    if not extensao_permitida(nome_original):
-        raise ValueError(
-            "Formato inválido! Envie PNG, JPG, JPEG ou WEBP."
-        )
-
-    # Verifica o conteúdo real da imagem
-    from PIL import Image, UnidentifiedImageError
-
-    try:
-        arquivo.stream.seek(0)
-        with Image.open(arquivo.stream) as imagem:
-            if imagem.format not in {"PNG", "JPEG", "WEBP"}:
-                raise ValueError("O arquivo não é uma imagem válida.")
-            imagem.verify()
-    except (UnidentifiedImageError, OSError):
-        raise ValueError("O arquivo não é uma imagem válida.")
-    finally:
-        arquivo.stream.seek(0)
-
-    extensao = nome_original.rsplit(".", 1)[1].lower()
-
+    # valida pelo conteúdo real, remove EXIF/GPS e reduz a imagem
+    dados, extensao = processar_imagem(arquivo.stream)
     nome_novo = f"{uuid.uuid4().hex}.{extensao}"
-
-    caminho = os.path.join(
-        current_app.config["UPLOAD_FOLDER"],
-        nome_novo
-    )
-
-    arquivo.save(caminho)
-
+    caminho = os.path.join(current_app.config["UPLOAD_FOLDER"], nome_novo)
+    with open(caminho, "wb") as f:
+        f.write(dados)
     return nome_novo
 
 
@@ -117,6 +102,56 @@ def enviar_notificacao_assincrona(tipo_evento, detalhes):
     thread = threading.Thread(target=worker)
     thread.daemon = True
     thread.start()
+
+
+def reserva_duplicada(usuario_id, data, horario, ignorar_id=None):
+    consulta = Reserva.query.filter(
+        Reserva.usuario_id == usuario_id,
+        Reserva.data == data,
+        Reserva.horario == horario,
+        Reserva.ativo.is_(True),
+        Reserva.status != "Cancelada",
+    )
+    if ignorar_id:
+        consulta = consulta.filter(Reserva.id != ignorar_id)
+    return consulta.first() is not None
+
+
+# ==========================================
+# PROTEÇÃO CSRF E TRATAMENTO DE ERROS
+# ==========================================
+
+
+def csrf_token():
+    if "_csrf" not in session:
+        session["_csrf"] = secrets.token_hex(16)
+    return session["_csrf"]
+
+
+@routes.app_context_processor
+def injetar_csrf():
+    return {"csrf_token": csrf_token}
+
+
+@routes.before_app_request
+def verificar_csrf():
+    if request.method == "POST":
+        enviado = request.form.get("csrf_token", "")
+        if not hmac.compare_digest(enviado, session.get("_csrf", "")):
+            abort(400)
+
+
+@routes.app_errorhandler(400)
+def requisicao_invalida(_e):
+    return "Sessão expirada ou requisição inválida. Volte e recarregue a página.", 400
+
+
+@routes.app_errorhandler(413)
+def arquivo_grande(_e):
+    flash("Arquivo muito grande. O limite é 5 MB.", "erro")
+    if "usuario_id" in session:
+        return redirect(url_for("routes.meu_cadastro"))
+    return redirect(url_for("routes.login"))
 
 
 # ==========================================
@@ -164,7 +199,10 @@ def admin_required(func):
 
 
 @routes.route("/catalogo")
-@cache.cached(timeout=60)  # Salva o resultado em cache por 60 segundos
+@cache.cached(
+    timeout=60,
+    make_cache_key=lambda: f"catalogo:{session.get('tipo', 'anonimo')}",
+)  # cache separado por perfil (o menu depende da sessão)
 def catalogo():
     """
     Exemplo de rota otimizada com Cache para consulta de catálogo/produtos.
@@ -496,11 +534,11 @@ def cadastro():
 
         telefone_limpo = "".join(c for c in telefone if c.isdigit())
 
-        if not nome or len(nome) < 2:
+        if not nome_valido(nome):
             erro = "O nome deve possuir pelo menos 2 caracteres."
-        elif not email or "@" not in email:
+        elif not email_valido(email):
             erro = "Informe um e-mail válido."
-        elif len(telefone_limpo) not in [10, 11]:
+        elif not telefone_valido(telefone_limpo):
             erro = "Informe um telefone válido."
         elif not senha or len(senha) < 6:
             erro = "A senha deve possuir pelo menos 6 caracteres."
@@ -517,7 +555,13 @@ def cadastro():
                 tipo="cliente",
             )
             db.session.add(novo_usuario)
-            db.session.commit()
+            try:
+                db.session.commit()
+            except IntegrityError:
+                db.session.rollback()
+                return render_template(
+                    "cadastro.html", erro="Este e-mail já está cadastrado."
+                )
 
             # Disparo Assíncrono de Boas-Vindas
             enviar_notificacao_assincrona("NOVO_USUARIO", f"Usuário {email} criado.")
@@ -543,10 +587,14 @@ def index():
     total_pessoas = 0
 
     if session.get("tipo") == "admin":
-        total_reservas = Reserva.query.count()
-        reservas_confirmadas = Reserva.query.filter_by(status="Confirmada").count()
+        ativas = Reserva.query.filter_by(ativo=True)
+        total_reservas = ativas.count()
+        reservas_confirmadas = ativas.filter_by(status="Confirmada").count()
         total_pessoas = (
-            db.session.query(db.func.sum(Reserva.quantidade_pessoas)).scalar() or 0
+            db.session.query(db.func.sum(Reserva.quantidade_pessoas))
+            .filter(Reserva.ativo.is_(True), Reserva.status != "Cancelada")
+            .scalar()
+            or 0
         )
 
     return render_template(
@@ -583,9 +631,9 @@ def confirmacao():
     telefone_limpo = "".join(c for c in telefone if c.isdigit())
     erro = None
 
-    if not nome_completo or len(nome_completo) < 2:
+    if not nome_valido(nome_completo):
         erro = "Informe um nome válido."
-    elif len(telefone_limpo) not in [10, 11]:
+    elif not telefone_valido(telefone_limpo):
         erro = "Informe um telefone válido."
 
     data = None
@@ -614,8 +662,11 @@ def confirmacao():
         except ValueError:
             erro = "A quantidade de pessoas deve ser um número."
 
-    if not erro and not categoria_reserva:
-        erro = "Selecione uma categoria de reserva."
+    if not erro and categoria_reserva not in CATEGORIAS:
+        erro = "Selecione uma categoria de reserva válida."
+
+    if not erro and reserva_duplicada(session["usuario_id"], data, horario):
+        erro = "Você já possui uma reserva para esta data e horário."
 
     if erro:
         usuario = Usuario.query.get(session["usuario_id"])
@@ -650,14 +701,24 @@ def confirmacao():
             erro="Não foi possível realizar a reserva. Tente novamente.",
         )
 
-    return render_template("confirmacao.html", reserva=nova_reserva)
+    # Post/Redirect/Get: F5 não recria a reserva
+    return redirect(url_for("routes.ver_confirmacao", id=nova_reserva.id))
+
+
+@routes.route("/confirmacao/<int:id>")
+@cliente_required
+def ver_confirmacao(id):
+    reserva = Reserva.query.filter_by(
+        id=id, usuario_id=session["usuario_id"], ativo=True
+    ).first_or_404()
+    return render_template("confirmacao.html", reserva=reserva)
 
 
 @routes.route("/minhas-reservas")
 @cliente_required
 def minhas_reservas():
     reservas = (
-        Reserva.query.filter_by(usuario_id=session["usuario_id"])
+        Reserva.query.filter_by(usuario_id=session["usuario_id"], ativo=True)
         .order_by(Reserva.data.asc(), Reserva.horario.asc())
         .all()
     )
@@ -671,7 +732,7 @@ def minhas_reservas():
 @cliente_required
 def editar_reserva(id):
     reserva = Reserva.query.filter_by(
-        id=id, usuario_id=session["usuario_id"]
+        id=id, usuario_id=session["usuario_id"], ativo=True
     ).first_or_404()
 
     if reserva.status != "Pendente":
@@ -689,9 +750,9 @@ def editar_reserva(id):
 
         telefone_limpo = "".join(c for c in telefone if c.isdigit())
 
-        if not nome_completo or len(nome_completo) < 2:
+        if not nome_valido(nome_completo):
             erro = "Informe um nome válido."
-        elif len(telefone_limpo) not in [10, 11]:
+        elif not telefone_valido(telefone_limpo):
             erro = "Informe um telefone válido."
 
         data, horario = None, None
@@ -713,6 +774,14 @@ def editar_reserva(id):
                     erro = "A quantidade deve ser entre 1 e 20."
             except ValueError:
                 erro = "Quantidade de pessoas inválida."
+
+        if not erro and categoria_reserva not in CATEGORIAS:
+            erro = "Selecione uma categoria de reserva válida."
+
+        if not erro and reserva_duplicada(
+            session["usuario_id"], data, horario, ignorar_id=reserva.id
+        ):
+            erro = "Você já possui uma reserva para esta data e horário."
 
         if not erro:
             try:
@@ -738,7 +807,7 @@ def editar_reserva(id):
 @cliente_required
 def cancelar_reserva(id):
     reserva = Reserva.query.filter_by(
-        id=id, usuario_id=session["usuario_id"]
+        id=id, usuario_id=session["usuario_id"], ativo=True
     ).first_or_404()
 
     if reserva.status == "Pendente":
@@ -773,13 +842,13 @@ def meu_cadastro():
         )
 
         # Validação dos dados
-        if not nome or len(nome) < 2:
+        if not nome_valido(nome):
             erro = "O nome deve possuir pelo menos 2 caracteres."
 
-        elif not email or "@" not in email:
+        elif not email_valido(email):
             erro = "Informe um e-mail válido."
 
-        elif len(telefone_limpo) not in [10, 11]:
+        elif not telefone_valido(telefone_limpo):
             erro = "Informe um telefone válido."
 
         if not erro:
@@ -796,9 +865,7 @@ def meu_cadastro():
 
         # Validação da foto
         if not erro and foto and foto.filename:
-            nome_seguro = secure_filename(foto.filename)
-
-            if not extensao_permitida(nome_seguro):
+            if not extensao_permitida(foto.filename):
                 erro = (
                     "Formato inválido! "
                     "Envie PNG, JPG, JPEG ou WEBP."
@@ -911,7 +978,7 @@ def lista_reservas():
 @routes.route("/mudar-status/<int:id>", methods=["POST"])
 @admin_required
 def mudar_status(id):
-    reserva = Reserva.query.get_or_404(id)
+    reserva = Reserva.query.filter_by(id=id, ativo=True).first_or_404()
 
     if reserva.status != "Cancelada":
         if reserva.status == "Pendente":

@@ -1,24 +1,9 @@
+{% extends "base.html" %}
 
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% block title %}Cardápio | Café & Sabor{% endblock %}
 
-<head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Conheça o cardápio do Café & Sabor."
-    >
-
-    <title>Cardápio | Café & Sabor</title>
-
-    <style>
+{% block head %}
+<style>
 
         
 /* =========================================================
@@ -1181,72 +1166,10 @@ footer {
 
 
     </style>
+{% endblock %}
 
-</head>
-
-<body>
-
-    <!-- =========================
-         HEADER
-    ========================= -->
-
-    <header class="header">
-
-        <div class="header-container">
-
-            <a
-                href="{{ url_for('routes.index') }}"
-                class="logo"
-            >
-                ☕ Café & Sabor
-            </a>
-
-            <nav class="nav">
-
-                <a href="{{ url_for('routes.index') }}">
-                    Início
-                </a>
-
-                <a href="{{ url_for('routes.catalogo') }}">
-                    Cardápio
-                </a>
-
-                {% if session.get("tipo") == "cliente" %}
-
-                <a href="{{ url_for('routes.reserva') }}">
-                    Reservar mesa
-                </a>
-
-                <a href="{{ url_for('routes.minhas_reservas') }}">
-                    Minhas Reservas
-                </a>
-
-                <a href="{{ url_for('routes.meu_cadastro') }}">
-                    Meu cadastro
-                </a>
-
-                {% endif %}
-
-                {% if session.get("tipo") == "admin" %}
-
-                <a href="{{ url_for('routes.lista_reservas') }}">
-                    Ver reservas
-                </a>
-
-                {% endif %}
-
-                <a href="{{ url_for('routes.logout') }}">
-                    Sair
-                </a>
-
-            </nav>
-
-        </div>
-
-    </header>
-
-
-    <!-- =========================
+{% block content %}
+<!-- =========================
          HERO
     ========================= -->
 
@@ -1450,17 +1373,10 @@ footer {
     <!-- =========================
          FOOTER
     ========================= -->
+{% endblock %}
 
-    <footer>
-
-        <p>
-            © 2026 Café & Sabor — Todos os direitos reservados.
-        </p>
-
-    </footer>
-
-
-    <!-- =========================
+{% block scripts %}
+<!-- =========================
          FILTRO DOS PRODUTOS
     ========================= -->
 
@@ -1505,8 +1421,4 @@ footer {
         }
 
     </script>
-
-</body>
-
-</html>
-
+{% endblock %}

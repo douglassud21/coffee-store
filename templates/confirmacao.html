@@ -1,39 +1,13 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% block title %}Reserva Confirmada - Café & Sabor{% endblock %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='confirmacao.css') }}" />
+{% endblock %}
 
-        <title>Reserva Confirmada - Café & Sabor</title>
-
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='confirmacao.css') }}" />
-    </head>
-
-    <body>
-        <!-- ==========================================
-     HEADER
-=========================================== -->
-
-        <header class="header">
-            <div class="container header-content">
-                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
-
-                <nav class="nav">
-                    <a href="{{ url_for('routes.index') }}"> Início </a>
-
-                    <a href="{{ url_for('routes.reserva') }}"> Reservar mesa </a>
-
-                    <a href="{{ url_for('routes.meu_cadastro') }}"> Meu cadastro </a>
-
-                    <a href="{{ url_for('routes.logout') }}"> Sair </a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
      CONFIRMAÇÃO
 =========================================== -->
 
@@ -154,11 +128,4 @@
         <!-- ==========================================
      FOOTER
 =========================================== -->
-
-        <footer class="footer">
-            <div class="container">
-                <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-    </body>
-</html>
+{% endblock %}

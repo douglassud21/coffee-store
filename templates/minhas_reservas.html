@@ -1,39 +1,15 @@
-<!doctype html>
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% extends "base.html" %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block title %}Minhas Reservas | Café & Sabor{% endblock %}
 
-        <title>Minhas Reservas | Café & Sabor</title>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='minhas_reservas.css') }}" />
+{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
+{% block body_class %}pagina-minhas-reservas{% endblock %}
 
-        <link rel="stylesheet" href="{{ url_for('static', filename='minhas_reservas.css') }}" />
-    </head>
-
-    <body class="pagina-minhas-reservas">
-        <header class="header">
-            <div class="container header-content">
-                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
-
-                <nav class="nav">
-                    <a href="{{ url_for('routes.index') }}"> Início </a>
-
-                    <a href="{{ url_for('routes.reserva') }}"> Reservar mesa </a>
-
-                    <a href="{{ url_for('routes.minhas_reservas') }}" class="active">
-                        Minhas reservas
-                    </a>
-
-                    <a href="{{ url_for('routes.meu_cadastro') }}"> Meu cadastro </a>
-
-                    <a href="{{ url_for('routes.logout') }}"> Sair </a>
-                </nav>
-            </div>
-        </header>
-
-        <main class="minhas-reservas-container">
+{% block content %}
+<main class="minhas-reservas-container">
             <div class="container">
                 <section class="reservas-header">
                     <span class="section-subtitle"> Área do cliente </span>
@@ -147,6 +123,7 @@
                                     return confirm('Tem certeza que deseja cancelar esta reserva?');
                                 "
                             >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                 <button type="submit" class="btn btn-cancelar">Cancelar</button>
                             </form>
 
@@ -160,13 +137,4 @@
                 {% endif %}
             </div>
         </main>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-bottom">
-                    <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-                </div>
-            </div>
-        </footer>
-    </body>
-</html>
+{% endblock %}

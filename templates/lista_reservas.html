@@ -1,39 +1,13 @@
-<!doctype html>
+{% extends "base.html" %}
 
-<html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8" />
+{% block title %}Reservas - Café & Sabor{% endblock %}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='lista_reservas.css') }}" />
+{% endblock %}
 
-        <title>Reservas - Café & Sabor</title>
-
-        <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename='lista_reservas.css') }}" />
-    </head>
-
-    <body>
-        <!-- ==========================================
-     HEADER
-=========================================== -->
-
-        <header class="header">
-            <div class="container header-content">
-                <a href="{{ url_for('routes.index') }}" class="logo"> Café & Sabor </a>
-
-                <nav class="nav">
-                    <a href="{{ url_for('routes.index') }}"> Início </a>
-
-                    <a href="{{ url_for('routes.lista_reservas') }}" class="active">
-                        Ver reservas
-                    </a>
-
-                    <a href="{{ url_for('routes.logout') }}"> Sair </a>
-                </nav>
-            </div>
-        </header>
-
-        <!-- ==========================================
+{% block content %}
+<!-- ==========================================
      CONTEÚDO
 =========================================== -->
 
@@ -159,6 +133,7 @@
                                         method="POST"
                                         action="{{ url_for('routes.mudar_status', id=reserva.id) }}"
                                     >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                         <button
                                             type="submit"
                                             class="btn-status"
@@ -179,6 +154,7 @@
                                         action="{{ url_for('routes.excluir_reserva', id=reserva.id) }}"
                                         onsubmit="return confirm('Tem certeza que deseja inativar esta reserva? Ela deixará de aparecer na lista, mas continuará armazenada no banco de dados.');"
                                     >
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
                                         <button
                                             type="submit"
                                             class="btn-excluir"
@@ -228,11 +204,4 @@
         <!-- ==========================================
      FOOTER
 =========================================== -->
-
-        <footer class="footer">
-            <div class="container">
-                <p>© 2026 Café & Sabor. Todos os direitos reservados.</p>
-            </div>
-        </footer>
-    </body>
-</html>
+{% endblock %}
